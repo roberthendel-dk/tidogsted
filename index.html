@@ -45,6 +45,7 @@ button.pri{background:var(--ink);color:var(--bg)}
 button.red{background:var(--red);border-color:var(--red);color:#fff}
 button.sm{min-height:36px;padding:4px 10px;font-size:14px}
 button:disabled{opacity:.4;cursor:default}
+.notefold>summary{cursor:pointer}
 .aimenu{position:relative;display:inline-flex;align-self:stretch}.aimenu>summary{height:100%;box-sizing:border-box}.aimenu>summary{list-style:none;font-size:15px;font-weight:650;min-height:44px;padding:10px 14px;border-radius:4px;border:1.5px solid var(--ink);cursor:pointer;display:inline-flex;align-items:center}.aimenu>summary::-webkit-details-marker{display:none}
 .aipanel{position:absolute;z-index:20;left:0;top:calc(100% + 4px);background:var(--bg);border:1.5px solid var(--ink);border-radius:4px;padding:6px;display:grid;gap:6px;min-width:250px;box-shadow:0 6px 20px rgba(0,0,0,.12)}.aipanel button{text-align:left}
 .knap{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -204,8 +205,8 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
     </section>
 
     <section>
-      <h3>Note</h3>
-      <div id="note" class="note"></div>
+      <details class="notefold"><summary><h3 style="display:inline">Note</h3> <span class="mut">(vis/skjul)</span></summary>
+      <div id="note" class="note"></div></details>
     </section>
   </section>
 </main>
@@ -371,6 +372,8 @@ let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:fals
 const AVISER=aviser(IDAG);
 let komId=ls.get('ts:kommune','naestved');
 let avis=ls.get('ts:avis:'+IDAG,AVISER[0]);if(!AVISER.includes(avis))avis=AVISER[0];
+/* manuelt valgt avis (gemmes, til man trykker "Til dags dato") */
+let avisManuel=ls.get('ts:avisManuel','');if(/^\d{4}-\d{2}-\d{2}$/.test(avisManuel)&&avisManuel>=add(IDAG,-60))avis=avisManuel;else avisManuel='';
 const kom=()=>CFG.kommuner.find(k=>k.id===komId)||CFG.kommuner[0];
 const lokKey=()=>'ts:'+komId+':'+avis;
 const L=()=>Object.assign({spalte:'',manuel:false,brugFund:true,raa:[],kn:[],raaTekst:''},ls.get(lokKey(),{}));
@@ -598,7 +601,8 @@ function renderHoved(){
   $('kom').innerHTML=CFG.kommuner.map(x=>`<option value="${esc(x.id)}"${x.id===komId?' selected':''}>${esc(x.navn)}</option>`).join('');
   const d=dageFor(avis);
   $('avisLinje').textContent=`${k.navn} · ${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]} – dækker ${DAGE[fra(d[0]).getDay()]} og ${DAGE[fra(d[1]).getDay()]}`;
-  $('avisValg').innerHTML=AVISER.length>1?`<div class="mut" style="margin-bottom:4px">Hvilken avis?</div><div class="radio">${AVISER.map(a=>`<label><input type="radio" name="avis" value="${a}"${a===avis?' checked':''}> ${avisNavn(a)} ${fra(a).getDate()}/${fra(a).getMonth()+1}</label>`).join('')}</div>`:`<div class="mut">Avis</div><div style="font-weight:750">${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]}</div>`;
+  const manuelt=avisManuel?`<div class="mut" style="margin-bottom:4px">Valgt avis</div><div style="font-weight:750">${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]}</div>`:'';
+  $('avisValg').innerHTML=(manuelt||(AVISER.length>1?`<div class="mut" style="margin-bottom:4px">Hvilken avis?</div><div class="radio">${AVISER.map(a=>`<label><input type="radio" name="avis" value="${a}"${a===avis?' checked':''}> ${avisNavn(a)} ${fra(a).getDate()}/${fra(a).getMonth()+1}</label>`).join('')}</div>`:`<div class="mut">Avis</div><div style="font-weight:750">${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]}</div>`))+`<div class="avisvaelg"><label class="mut" for="avisDato">Vælg en anden avis</label><div class="knap" style="margin:4px 0 0;flex-wrap:nowrap"><input id="avisDato" type="date" value="${avis}">${avisManuel?'<button type="button" class="sm pri" id="avisIdag">Til dags dato</button>':''}</div></div>`;
   $('knLink').href=knUrl(1);$('knLink').textContent='Browse KultuNaut for '+k.navn;
   $('stederTitel').textContent='Steder, som søgningen gennemgår i '+k.navn;
   $('spalteTitel').textContent='Spalten · '+avisNavn(avis);
@@ -939,7 +943,13 @@ window.addEventListener('hashchange',visVisning);visVisning();
 
 /* ---------- hændelser ---------- */
 $('kom').onchange=e=>{komId=e.target.value;ls.set('ts:kommune',komId);retter=null;urlRetter=null;stedRetter=null;render();opdater()};
-$('avisValg').onchange=e=>{if(e.target.name==='avis'){avis=e.target.value;ls.set('ts:avis:'+IDAG,avis);retter=null;render();opdater()}};
+const skiftAvis=a=>{avis=a;retter=null;redigerer=false;render();opdater()};
+$('avisValg').onchange=e=>{if(e.target.name==='avis'){ls.set('ts:avis:'+IDAG,e.target.value);skiftAvis(e.target.value)}
+  else if(e.target.id==='avisDato'){const d=e.target.value;if(!d)return;
+    if(fra(d).getDay()===0){toast('Der udkommer ingen avis om søndagen – vælg en anden dag');e.target.value=avis;return}
+    if(AVISER.includes(d)){avisManuel='';ls.set('ts:avisManuel','');ls.set('ts:avis:'+IDAG,d)}else{avisManuel=d;ls.set('ts:avisManuel',d)}
+    skiftAvis(d);toast('Viser '+avisNavn(d).toLowerCase()+' '+fra(d).getDate()+'. '+MDR[fra(d).getMonth()])}};
+$('avisValg').onclick=e=>{if(e.target.id!=='avisIdag')return;avisManuel='';ls.set('ts:avisManuel','');const a=ls.get('ts:avis:'+IDAG,AVISER[0]);skiftAvis(AVISER.includes(a)?a:AVISER[0]);toast('Tilbage til dags dato')};
 /* Søg med AI: kopierer opgaven og åbner den valgte tjeneste i en ny fane */
 const AI={claude:{navn:'Claude',url:'https://claude.ai/new'},chatgpt:{navn:'ChatGPT',url:'https://chatgpt.com/'},gemini:{navn:'Google Gemini',url:'https://gemini.google.com/app'},copilot:{navn:'Microsoft Copilot',url:'https://copilot.microsoft.com/'}};
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-ai]');
