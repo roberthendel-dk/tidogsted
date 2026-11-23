@@ -168,6 +168,11 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
       </form>
       <h3 style="margin-top:18px">Kommende</h3>
       <ul id="moedeListe" class="liste"></ul>
+      <details><summary>Indsæt mødeplan</summary>
+        <p class="mut">Indsæt årets datoer for byrådsmøder/kommunalbestyrelsesmøder fra kommunens mødeplan – én pr. linje eller adskilt af komma, fx "26-11-2026" eller "26. november". De kommer i spalten med fast tid og sted, så du kun skal gøre det én gang om året.</p>
+        <textarea id="planTekst" placeholder="26-11-2026&#10;15. december 2026&#10;26/1 2027"></textarea>
+        <div class="knap"><button id="planGem" class="pri">Tilføj møderne</button></div>
+      </details>
     </section>
 
     <section>
@@ -496,7 +501,7 @@ function renderStatus(){
 }
 function renderApi(){
   const el=$('apiStatus');
-  if(!API.svar){el.className='status ny';el.innerHTML='Siden kører uden Cloudflare-funktionen. OK\'er, rettelser, møder og egne steder gemmes kun i denne browser.';return}
+  if(!API.svar){el.className='status ny';el.innerHTML='Siden kan ikke nå Cloudflare-funktionen her. '+(safeUrl(CFG.site)?`Brug <a href="${esc(CFG.site)}">${esc(CFG.site.replace(/^https:\/\//,''))}</a>, hvor alt virker. `:'')+'Her gemmes OK\'er, rettelser, møder og egne steder kun i denne browser.';return}
   const dele=[API.kv?'Data gemmes i Cloudflare.':'KV-bindingen TS mangler – data gemmes kun i denne browser.',API.kode?(API.godkendt?'Koden er godkendt.':'Skriv koden for at kunne gemme.'):'Ingen kode sat – alle med adressen kan gemme.'];
   el.className='status '+(API.kv&&(API.godkendt||!API.kode)?'klar':'ny');el.textContent=dele.join(' ');
 }
@@ -678,13 +683,14 @@ $('saetApp').onclick=async()=>{const tekst=$('raa').value.trim();if(!tekst){toas
 let soeger=false;
 async function sogUdenClaude(){
   if(soeger)return;
-  if(!API.svar){toast('"Søg uden Claude" kræver, at siden kører på Cloudflare');return}
+  if(!API.svar){visForkertAdresse();toast('"Søg uden Claude" virker kun på '+(CFG.site||'Cloudflare-adressen').replace(/^https:\/\//,''));return}
   const L2=await hentLib(),fra=avis,til=add(avis,8),set=new Set(),kilder=[];
   const tilfoej=(navn,url)=>{url=String(url||'').trim();if(!/^https?:\/\//i.test(url)||set.has(url))return;set.add(url);kilder.push({navn,url})};
   fasteSteder(komId).filter(f=>!f.skjult&&f.type==='sted').forEach(f=>tilfoej(f.navn,f.url));
   urlListe(komId).filter(u=>u.aktiv).forEach(u=>tilfoej(u.sted||u.url,u.url));
   egneSteder().forEach(s2=>tilfoej(s2.navn,s2.url));
-  if(!kilder.length){toast('Der er ingen steder med URL at søge på');return}
+  const moedeKilder=fasteSteder(komId).filter(f=>!f.skjult&&f.type==='moede'&&/^https?:\/\//i.test(f.url));
+  if(!kilder.length&&!moedeKilder.length){toast('Der er ingen steder med URL at søge på');return}
   soeger=true;['sogApp','ugeApp'].forEach(i=>{$(i).disabled=true;$(i).textContent='Søger … 0/'+kilder.length});
   const fund=[],status=[];let n=0;
   const en=async k=>{try{const r=await fetch('/api/hent?url='+encodeURIComponent(k.url),{headers:store.hdr()});
@@ -697,10 +703,20 @@ async function sogUdenClaude(){
       status.push({...k,ok:true,antal:events.length});
     }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0})}
     finally{n++;['sogApp','ugeApp'].forEach(i=>$(i).textContent='Søger … '+n+'/'+kilder.length)}};
+  const moedeFund=[];
+  const enMoede=async k=>{try{const r=await fetch('/api/hent?url='+encodeURIComponent(k.url),{headers:store.hdr()});
+      if(r.status===401)throw new Error('kode');
+      const st=+r.headers.get('x-status')||0;
+      if(!r.ok||st>=400){status.push({...k,ok:false,fejl:st?'HTTP '+st:'Kunne ikke hentes',antal:0,moede:true});return}
+      const m=L2.moedeLinks(await r.text(),{ref:IDAG}).filter(x=>x.dato>=IDAG&&x.dato<=add(avis,60));
+      m.forEach(x=>moedeFund.push({...x,kilde:k.url}));status.push({...k,ok:true,antal:m.length,moede:true});
+    }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0,moede:true})}};
   try{for(let i=0;i<kilder.length;i+=4)await Promise.all(kilder.slice(i,i+4).map(en));
+    await Promise.all(moedeKilder.map(k=>enMoede({navn:k.navn,url:k.url})));
+    const nyeMoeder=await gemRaadsmoeder(moedeFund,'søgning');
     const doc={type:'app',kommune:komId,avis,dage:[...dageFor(avis),...ugeFor(avis)],opdateret:new Date().toISOString(),af:'app',arrangementer:fund,kilder:status};
     await store.put('fund',appId(),doc);
-    toast(fund.length+' arrangementer fundet på '+status.filter(x=>x.ok).length+' af '+kilder.length+' sider (alle [TJEK])');
+    toast(fund.length+' arrangementer og '+nyeMoeder+' nye møder fundet på '+status.filter(x=>x.ok).length+' af '+status.length+' sider (alle [TJEK])');
   }catch(e){toast(e.message==='kode'?'Forkert eller manglende kode – se Indstillinger':(e.message||'Søgningen fejlede'))}
   finally{soeger=false;$('sogApp').disabled=false;$('ugeApp').disabled=false;$('sogApp').textContent='Søg uden Claude';$('ugeApp').textContent='Søg uden Claude';render()}
 }
@@ -708,14 +724,36 @@ $('sogApp').onclick=sogUdenClaude;$('ugeApp').onclick=sogUdenClaude;
 function renderAppStatus(){const d=S.fund[appId()];const el=$('appStatus');if(!el)return;
   if(!d){el.textContent='';return}
   const ok=(d.kilder||[]).filter(k=>k.ok).length,fejl=(d.kilder||[]).filter(k=>!k.ok);
-  el.innerHTML=`<b>Søgning uden Claude ${esc(tidTekst(d.opdateret))}:</b> ${(d.arrangementer||[]).length} arrangementer fra ${ok} af ${(d.kilder||[]).length} sider.${fejl.length?' Kunne ikke læse: '+fejl.map(k=>esc(k.navn)).join(', ')+'.':''}`}
+  const mk=(d.kilder||[]).filter(k=>k.moede);const mOk=mk.filter(k=>k.ok);
+  el.innerHTML=`<b>Søgning uden Claude ${esc(tidTekst(d.opdateret))}:</b> ${(d.arrangementer||[]).length} arrangementer fra ${ok} af ${(d.kilder||[]).length} sider.${mk.length?(mOk.length?' Møder læst fra '+mOk.map(k=>esc(k.navn)).join(', ')+'.':' Mødekilderne kunne ikke læses – brug "Indsæt mødeplan" under Tilføj arrangementer og møder.'):''}${fejl.filter(k=>!k.moede).length?' Kunne ikke læse: '+fejl.filter(k=>!k.moede).map(k=>esc(k.navn)).join(', ')+'.':''}`}
+
+/* ---------- møder uden Claude ---------- */
+const harRaadsmoede=dato=>alleMoeder().some(x=>x.dato===dato&&(x.type==='raad'||/byrådsmøde|kommunalbestyrelsesmøde/i.test(x.titel||'')));
+async function gemRaadsmoeder(liste,af){
+  const k=kom();let n=0;
+  for(const m of liste){if(!m.dato||m.dato<IDAG||harRaadsmoede(m.dato))continue;
+    await store.put('moeder',komId+'_'+m.dato+'_raad',{kommune:komId,type:'raad',dato:m.dato,start:m.start||k.tid,slut:'',titel:k.raad,sted:k.sted,kilde:m.kilde||'',af,krydstjekket:af!=='søgning',oprettet:new Date().toISOString()});n++}
+  return n;
+}
+$('planGem').onclick=async()=>{
+  const tekst=$('planTekst').value.trim();if(!tekst){toast('Indsæt først datoerne');return}
+  const L2=await hentLib(),liste=[];
+  for(const del of tekst.split(/[\n,;]+/)){const d=L2.findDato(del.trim(),IDAG)||((del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/))&&{dato:del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/).slice(1).reverse().map((x,i)=>i?String(x).padStart(2,'0'):x).join('-')});
+    if(d&&d.dato&&!d.ugedag){const t=L2.findTid(del.replace(/\d{1,2}-\d{1,2}-\d{4}/,' '));liste.push({dato:d.dato,start:t?t.start:''})}}
+  if(!liste.length){toast('Fandt ingen datoer');return}
+  try{const n=await gemRaadsmoeder(liste,'manuel');$('planTekst').value='';toast(n+' møder tilføjet ('+(liste.length-n)+' fandtes allerede eller var passeret)');render()}catch(e){toast(e.message)}
+};
+function visForkertAdresse(){if($('forkert')||!safeUrl(CFG.site)||location.origin===new URL(CFG.site).origin)return;
+  const d=document.createElement('div');d.id='forkert';d.className='manuel';d.style.margin='0';
+  d.innerHTML=`<span>Du er på en kopi af appen, hvor "Søg uden Claude", "Tjek nu" og at gemme i Cloudflare ikke virker. Brug den rigtige adresse:</span><a class="knaplink" href="${esc(CFG.site)}">${esc(CFG.site.replace(/^https:\/\//,''))}</a>`;
+  document.body.prepend(d)}
 /* ---------- start ---------- */
 (async()=>{
   const [cfg,opg,st]=await Promise.all([hentJson('opgave/kommuner.json'),fetch('opgave/soegning.md',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>''),hentJson('/api/status')]);
   if(!cfg||!Array.isArray(cfg.kommuner)||!cfg.kommuner.length){$('avisLinje').textContent='Kunne ikke hente opgave/kommuner.json.';return}
   CFG=cfg;OPGAVE=opg;
   if(!CFG.kommuner.some(k=>k.id===komId))komId=CFG.kommuner[0].id;
-  if(st){API={...st,svar:true}}
+  if(st){API={...st,svar:true}}else visForkertAdresse();
   $('kode').value=ls.get('ts:kode','');
   $('mDato').value=dageFor(avis)[0];
   render();opdaterForm();
