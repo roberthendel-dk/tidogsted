@@ -362,7 +362,7 @@ function saml(dates,fd,fundSrc){
   if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
   const aktiveUrl=new Set([...urlListe(komId).filter(u=>u.aktiv).map(u=>u.id),...fasteSteder(komId).filter(f=>!f.skjult&&f.url).map(f=>urlId(komId,f.url))]);
-  S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>push(norm(e,'xl')));
+  S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>{const u=S.urler.urler.find(x=>x.id===e.urlId);push(norm({...e,kilde:fuldUrl(e.kilde,u&&u.url)},'xl'))});
   for(const[id,a]of Object.entries(S.urlApp))if(a.kommune===komId&&aktiveUrl.has(id))(a.fund||[]).forEach(e=>push(norm({...e,kilde:e.url||a.url},'xl')));
   const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.forEach(e=>push(norm(e,'app')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
@@ -558,12 +558,15 @@ function renderNote(){
   if(f&&Array.isArray(f.kilder)&&f.kilder.length)t+='\n\nKILDER\n'+f.kilder.map(x=>`- ${x.navn||''} ${x.url||''}`).join('\n');
   $('note').textContent=t;
 }
+function fuldUrl(u,base){u=String(u||'');if(/^https?:\/\//i.test(u)||!base)return u;try{return new URL(u,base).href}catch{return u}}
+function kildeLink(e){const k=String(e.kilde||'');if(/^https?:\/\//i.test(k))return k;if(/^kultunaut$/i.test(k))return knUrl(1);return''}
 const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek',app:'Uden Claude'}[s]||s);
 function renderVerif(){
   const ev=avisEvents(),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
   tb.innerHTML=ev.map(e=>{
-    const k=safeUrl(e.kilde)?`<a href="${esc(e.kilde)}" target="_blank" rel="noopener">${esc(e.kilde.replace(/^https:\/\/(www\.)?/,'').slice(0,34))}</a>`:esc(e.kilde||'–');
+    const lk=kildeLink(e),kt=lk?(/^kultunaut$/i.test(e.kilde)?'KultuNaut':lk.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'')):'';
+    const k=lk?`<a href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}" style="overflow-wrap:anywhere">${esc(kt.length>48?kt.slice(0,46)+'…':kt)}</a>`:esc(e.kilde||'–');
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
     const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'<span class="nej">[TJEK]</span>'}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret / verificér</button>`}</div></td></tr>`;
     const ret=retter===e.tid?`<tr><td colspan="7"><div class="retform"><label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label><label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
