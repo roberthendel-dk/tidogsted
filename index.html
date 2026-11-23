@@ -542,6 +542,8 @@ const site=()=>location.protocol==='https:'?location.origin:(CFG.site||'');
 
 /* ---------- opgavetekster (bygger på opgave/soegning.md) ---------- */
 function kommuneData(){const k=kom();return JSON.stringify({...k,moedekilder:fasteSteder(komId).filter(f=>f.type==='moede'&&!f.skjult).map(f=>({navn:f.navn,url:f.url})),steder:fasteSteder(komId).filter(f=>f.type==='sted'&&!f.skjult).map(f=>({navn:f.navn,url:f.url})),egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''})),ekstra_urler:urlListe(komId).filter(u=>u.aktiv).map(u=>({sted:u.sted,url:u.url,type:u.type||'',note:u.note||'',aendret_siden_sidst:!!u.aendret}))},null,1)}
+/* sidste linje i alle prompter, der kopieres */
+const PROMPT_SLUT='\n\nVis det som alm tekst';
 function soegeOpgave(kunUge){
   const k=kom(),d=dageFor(avis),u=ugeFor(avis);
   return`${kunUge?'LILLE SØGEOPGAVE – kun de næste syv dage (trin U og møderne i 1b)':'SØGEOPGAVE'} – "Tid & Sted", ${k.navn} Kommune (kommune-id: ${k.id})
@@ -555,7 +557,7 @@ KOMMUNENS DATA
 ${kommuneData()}
 
 ----------------------------------------
-${OPGAVE||'(Søgeopgaven opgave/soegning.md kunne ikke hentes.)'}`;
+${OPGAVE||'(Søgeopgaven opgave/soegning.md kunne ikke hentes.)'}${PROMPT_SLUT}`;
 }
 function verOpgave(ev){
   return`VERIFICERINGSOPGAVE – "Tid & Sted", ${kom().navn} Kommune, ${avisNavn(avis).toLowerCase()} ${avis}
@@ -568,12 +570,13 @@ ${ev.map(e=>`- id: ${e.tid}
 SVAR
 Giv resultatet i ÉN kodeblok med JSON, som jeg indsætter i appen under "Indsæt et resultat i hånden":
 {"tjek":[{"id":"<id>","status":"ok" (alt stemmer) | "rettet" (tid/sted rettet) | "fjernet" (aflyst eller findes ikke),"start":"HH:MM","slut":"HH:MM" eller "","sted":"…","kilde":"https://… (officiel side)","note":"kort begrundelse"}]}
-Kan du ikke afgøre et arrangement, så udelad det og nævn det i en kort opsummering.`;
+Kan du ikke afgøre et arrangement, så udelad det og nævn det i en kort opsummering.${PROMPT_SLUT}`;
 }
 
 /* ---------- Claude ---------- */
 let cdResolve=null;
 function claudeManuelt(prompt){
+  if(!prompt.endsWith(PROMPT_SLUT))prompt+=PROMPT_SLUT;
   return new Promise(res=>{cdResolve=res;$('cdSvar').value='';$('claudeDlg').classList.add('vis');kopier(prompt,'Opgaven er kopieret – sæt den ind i en Claude-chat');$('cdKopi').onclick=()=>kopier(prompt,'Opgaven er kopieret igen')});
 }
 $('cdOk').onclick=()=>{$('claudeDlg').classList.remove('vis');if(cdResolve){cdResolve($('cdSvar').value);cdResolve=null}};
