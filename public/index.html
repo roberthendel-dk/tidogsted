@@ -83,7 +83,7 @@ td .handl{display:flex;gap:6px;flex-wrap:wrap}
 .retform{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;background:var(--panel);padding:10px}
 .retform input{width:100%}.retform .knap{grid-column:1/-1;margin:0}
 .src{font-size:12px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--chip);white-space:nowrap}
-.ja{color:var(--ok);font-weight:700}.nej{color:var(--red);font-weight:700}
+.ja{color:var(--ok);font-weight:700}.adv{color:var(--warn);font-weight:700}.nej{color:var(--red);font-weight:700}
 .uge{border-top:6px solid var(--ink)}
 .ugegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:14px}
 .ugedag{border:1.5px solid var(--rule);border-top:4px solid var(--ink);padding:10px 12px;min-height:120px}
@@ -282,7 +282,7 @@ const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 
 /* ---------- tilstand ---------- */
 let CFG={site:'',kommuner:[]},OPGAVE='';
-const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{}};
+const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},urler:{urler:[],arrangementer:[]}};
 let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:false};
 const AVISER=aviser(IDAG);
 let komId=ls.get('ts:kommune','naestved');
@@ -307,8 +307,9 @@ async function hentJson(url){try{const r=await fetch(url,{cache:'no-store'});if(
 
 async function hentFiler(){
   const ids=[fundId(),ugeId()];
-  const [a,b,m]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json')]);
+  const [a,b,m,u]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json'),hentJson('data/urler.json')]);
   S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
+  if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],opdateret:u.opdateret||''};
 }
 async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder']){try{S[c]=await store.alle(c)}catch(e){dbNote(e.message)}}}
 async function opdater(besked){await Promise.all([hentFiler(),hentSamlinger()]);render();if(besked)toast(besked)}
@@ -342,6 +343,7 @@ function saml(dates,fd,fundSrc){
   const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato))return;const n=noegle(e);if(seen.has(n))return;seen.add(n);out.push(e)};
   if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
+  S.urler.arrangementer.filter(e=>e.kommune===komId).forEach(e=>push(norm(e,'xl')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
   (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
   for(const e of out){e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
@@ -390,12 +392,15 @@ let toastT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add(
 async function kopier(txt,besked){try{await navigator.clipboard.writeText(txt);toast(besked||'Kopieret');return true}catch{$('kopiTekst').value=txt;$('kopi').classList.add('vis');$('kopiTekst').select();return false}}
 $('kopiLuk').onclick=()=>$('kopi').classList.remove('vis');
 const dbNote=m=>$('dbNote').textContent=m;
+const xlUrler=()=>S.urler.urler.filter(u=>u.kommune===komId);
+const XL_REPO='https://github.com/roberthendel-dk/tidogsted';
+function xlStatus(u){if(u.aktiv===false)return['','slået fra'];if(u.fejl)return['nej','fejl: '+u.fejl];if(u.aendret)return['adv','ændret siden i går'];return['ja',u.antal?u.antal+' fund':'OK']}
 const egneSteder=()=>Object.entries(S.kilder).filter(([,k])=>k.kommune===komId).map(([id,k])=>({...k,id}));
 const knUrl=n=>'https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr='+n+'&Area='+encodeURIComponent(kom().navn)+'-storkommune&';
 const site=()=>location.protocol==='https:'?location.origin:(CFG.site||'');
 
 /* ---------- opgavetekster (bygger på public/opgave/soegning.md) ---------- */
-function kommuneData(){const k=kom();return JSON.stringify({...k,egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''}))},null,1)}
+function kommuneData(){const k=kom();return JSON.stringify({...k,egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''})),ekstra_urler:xlUrler().filter(u=>u.aktiv!==false).map(u=>({sted:u.sted,url:u.url,type:u.type||'',note:u.note||'',aendret_siden_sidst:!!u.aendret}))},null,1)}
 function soegeOpgave(kunUge){
   const k=kom(),d=dageFor(avis),u=ugeFor(avis);
   return`${kunUge?'LILLE SØGEOPGAVE – kun de næste syv dage (trin U og møderne i 1b)':'SØGEOPGAVE'} – "Tid & Sted", ${k.navn} Kommune (kommune-id: ${k.id})
@@ -482,6 +487,9 @@ function renderSteder(){
   const r=[...k.moedekilder.map(m=>`<li><span><b>${esc(m.navn)}</b> · møder</span>${safeUrl(m.url)?`<a href="${esc(m.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</li>`),
     ...k.steder.map(s=>`<li><span>${esc(s.navn)}</span>${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</li>`),
     ...egneSteder().map(s=>`<li><span>${esc(s.navn)} <span class="src">eget</span></span><span class="knap" style="margin:0">${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}<button class="sm" data-fjernsted="${esc(s.id)}">Fjern</button></span></li>`)];
+  const xl=xlUrler();
+  r.push(`<li style="display:block;padding-top:14px"><b>Fra Excel-arket</b> <span class="mut">(${xl.length} URL'er${S.urler.opdateret?' · tjekket '+esc(tidTekst(S.urler.opdateret)):''})</span><br><span class="mut"><a href="${XL_REPO}/raw/main/public/opgave/ekstra-urler.xlsx">Hent arket</a> · <a href="${XL_REPO}/upload/main/public/opgave" target="_blank" rel="noopener">Upload nyt ark</a> · <a href="${XL_REPO}/actions/workflows/tjek-urler.yml" target="_blank" rel="noopener">Kørsler</a></span></li>`);
+  for(const u of xl){const[k,t]=xlStatus(u);r.push(`<li><span>${esc(u.sted||u.url)} <span class="src">Excel</span>${u.note?'<br><span class="mut">'+esc(u.note)+'</span>':''}</span><span class="knap" style="margin:0"><span class="${k}" style="font-size:13px">${esc(t)}</span>${safeUrl(u.url)||/^http:\/\//.test(u.url)?`<a href="${esc(u.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</span></li>`)}
   $('stederListe').innerHTML=r.join('');
 }
 function renderMoeder(){
@@ -514,7 +522,7 @@ function renderNote(){
   if(f&&Array.isArray(f.kilder)&&f.kilder.length)t+='\n\nKILDER\n'+f.kilder.map(x=>`- ${x.navn||''} ${x.url||''}`).join('\n');
   $('note').textContent=t;
 }
-const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut'}[s]||s);
+const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'Excel-liste'}[s]||s);
 function renderVerif(){
   const ev=avisEvents(),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}

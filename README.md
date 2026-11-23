@@ -10,6 +10,8 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 |---|---|
 | `public/index.html` | Selve appen |
 | `public/opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
+| `public/opgave/ekstra-urler.xlsx` | **Dit Excel-ark med ekstra URL'er.** Det supplerer de faste steder. Tilføj, slet eller slå rækker fra (Aktiv = nej), og upload arket igen. |
+| `scripts/tjek-urler.mjs` + `.github/workflows/tjek-urler.yml` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `public/data/urler.json`. |
 | `public/opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
 | `public/data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
 | `public/data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
@@ -36,6 +38,19 @@ Uden KV virker appen stadig. OK'er, møder og egne steder gemmes så bare kun i 
 - **Automatisk søgning.** Den kører hver morgen og tages selv i brug i spalten. "Hent resultat igen" henter det nyeste.
 - **"Søg nu"** kopierer søgeopgaven til en ny Claude-chat med websøgning. Chatten giver en JSON-kodeblok, som du indsætter under "Indsæt et resultat i hånden". "Verificér alle med Claude" virker på samme måde.
 - **Spalteteksten, rå arrangementer og KultuNaut-fund** gemmes i browseren pr. kommune og avis.
+
+## Excel-arket med ekstra URL'er
+
+1. **Hent arket.** Brug linket "Hent arket" under "Steder" i appen, eller åbn `public/opgave/ekstra-urler.xlsx` på GitHub og vælg Download.
+2. **Ret på fanen URLer.** Du kan tilføje en række, slette en række eller sætte Aktiv til "nej". Kommune, Type og Aktiv har rullelister.
+3. **Upload arket.** Brug "Upload nyt ark" i appen, eller *Add file → Upload files* i mappen `public/opgave` på GitHub. Behold filnavnet `ekstra-urler.xlsx`, og tryk *Commit changes*.
+
+Scriptet tjekker for hver URL:
+- om siden svarer
+- om indholdet er ændret siden sidst
+- hvilke arrangementer siden viser de næste 10 dage, hvis den har dem i et standardformat (schema.org eller iCal)
+
+Fundene kommer ind i spalten og ugeoversigten som "Excel-liste" og er altid markeret [TJEK]. Claude-søgningerne gennemgår også alle aktive URL'er og krydstjekker fundene. Under "Kørsler" kan du se, om tjekket er gået godt.
 
 ## Ændringer
 

@@ -36,7 +36,7 @@ Format:
 
 ## C. Trin (brug websøgning og hent siderne)
 
-0. **Tjekliste.** Gennemgå kommunens steder og mødekilder én for én – også brugerens egne steder (se D.1) – og notér resultatet for hvert sted, også "intet på datoerne".
+0. **Tjekliste.** Gennemgå kommunens steder og mødekilder én for én – også brugerens egne steder (se D.1) og de ekstra URL'er fra Excel-arket (se D.1) – og notér resultatet for hvert sted, også "intet på datoerne".
 0b. **KultuNaut.** Læs listen for kommunen side for side, 12 arrangementer pr. side:
    `https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=<Kommunenavn>-storkommune&`, derefter startnr=13, 25, 37 … til datoerne er passeret. Tjek byen ved hvert arrangement – områdefilteret virker ikke altid. KultuNaut er kun et spor; krydstjek altid på stedets egen side.
 1. **Søg bredt** efter arrangementer på DAGE: koncerter, foredrag, teater, udstillingsåbninger, markeder, sport, foreningsarrangementer.
@@ -48,9 +48,10 @@ U. **De næste syv dage** (lettere søgning): stederne, KultuNaut og møderne fo
 
 ## D. Gem resultatet
 
-### D.1 Brugerens egne steder
+### D.1 Brugerens egne steder og ekstra URL'er
 
-Hent `<site>/api/data/kilder` (site står i kommuner.json). Det er et JSON-objekt; tag de poster med, hvor `kommune` er kommunens id. Kan siden ikke hentes, så fortsæt uden.
+- Hent `<site>/api/data/kilder` (site står i kommuner.json). Det er et JSON-objekt; tag de poster med, hvor `kommune` er kommunens id. Kan siden ikke hentes, så fortsæt uden.
+- Læs `public/data/urler.json` (i repoet, eller `<site>/data/urler.json`). Det er brugerens Excel-ark `public/opgave/ekstra-urler.xlsx`, tjekket af et script samme morgen. Tag de URL'er med, hvor `kommune` er kommunens id og `aktiv` ikke er false, og følg `note`. URL'er med `"aendret": true` er ændret siden i går – kig ekstra efter nye arrangementer dér. Arrangementerne under `arrangementer` er fundet automatisk og ikke krydstjekket: krydstjek dem og tag dem med i spalten, hvis de holder. Ved manuel kørsel står URL'erne allerede i kommunens data som `ekstra_urler`.
 
 ### D.2 Med adgang til repoet (de automatiske søgninger)
 
