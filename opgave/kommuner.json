@@ -24,15 +24,15 @@
       "steder": [
         {
           "navn": "Næstved Bibliotek",
-          "url": ""
+          "url": "https://www.naesbib.dk/arrangementer"
         },
         {
           "navn": "Næstved Museum",
-          "url": ""
+          "url": "https://www.museerne.dk/en/naestved-museum/"
         },
         {
           "navn": "Grønnegades Kaserne",
-          "url": ""
+          "url": "https://www.gkkultur.dk"
         },
         {
           "navn": "Herlufsholm",
@@ -40,23 +40,23 @@
         },
         {
           "navn": "Sankt Mortens Kirke (koncerter)",
-          "url": ""
+          "url": "https://www.sanktmortenskirke.dk"
         },
         {
           "navn": "Sankt Peders Kirke (koncerter)",
-          "url": ""
+          "url": "https://www.sct.pederskirke.dk"
         },
         {
-          "navn": "Næstved Arena",
-          "url": ""
+          "navn": "Arena Næstved",
+          "url": "https://www.arenanaestved.dk"
         },
         {
           "navn": "Holmegaard Værk, Fensmark",
-          "url": ""
+          "url": "https://www.holmegaardvaerk.dk"
         },
         {
           "navn": "Gavnø Slot",
-          "url": ""
+          "url": "https://www.gavnoe.dk"
         },
         {
           "navn": "Næstved Boldklub, JHH Park",
@@ -103,7 +103,7 @@
         },
         {
           "navn": "Geomuseum Faxe",
-          "url": ""
+          "url": "https://www.oesm.dk/en/events/kategori/geomuseum-faxe/"
         },
         {
           "navn": "Faxe Kalkbrud",
@@ -111,7 +111,7 @@
         },
         {
           "navn": "Haslev Kirke (koncerter)",
-          "url": ""
+          "url": "https://www.haslevkirke.dk"
         },
         {
           "navn": "Faxe Kirke (koncerter)",
@@ -142,7 +142,7 @@
       "steder": [
         {
           "navn": "Danmarks Borgcenter",
-          "url": ""
+          "url": "https://www.danmarksborgcenter.dk"
         },
         {
           "navn": "Vordingborg Bibliotek",
@@ -158,7 +158,7 @@
         },
         {
           "navn": "GeoCenter Møns Klint",
-          "url": ""
+          "url": "https://moensklint.dk/en/events-and-lectures/"
         },
         {
           "navn": "Møns Museum",
@@ -193,19 +193,19 @@
       "steder": [
         {
           "navn": "Slagelse Musikhus",
-          "url": ""
+          "url": "https://www.slagelse-musikhus.dk"
         },
         {
           "navn": "Slagelse Bibliotek",
-          "url": ""
+          "url": "https://www.slagelsebib.dk/arrangementer"
         },
         {
           "navn": "Korsør Bibliotek",
-          "url": ""
+          "url": "https://www.slagelsebib.dk/arrangementer"
         },
         {
           "navn": "Skælskør Bibliotek",
-          "url": ""
+          "url": "https://www.slagelsebib.dk/arrangementer"
         },
         {
           "navn": "Trelleborg (vikingeborgen)",
@@ -213,7 +213,7 @@
         },
         {
           "navn": "Slagelse Museum",
-          "url": ""
+          "url": "https://www.vestmuseum.dk"
         },
         {
           "navn": "Sankt Mikkels Kirke (koncerter)",
@@ -248,23 +248,23 @@
         },
         {
           "navn": "Sorø Klosterkirke (koncerter)",
-          "url": ""
+          "url": "https://www.soroeklosterkirke.dk"
         },
         {
           "navn": "Sorø Kunstmuseum",
-          "url": ""
+          "url": "https://xn--sorkunstmuseum-sqb.dk/"
         },
         {
           "navn": "Sorø Bibliotek",
-          "url": ""
+          "url": "https://www.soroebib.dk/arrangementer"
         },
         {
           "navn": "Dianalund Bibliotek",
-          "url": ""
+          "url": "https://www.soroebib.dk/arrangementer"
         },
         {
           "navn": "Stenlille Bibliotek",
-          "url": ""
+          "url": "https://www.soroebib.dk/arrangementer"
         }
       ],
       "ekstra": "",

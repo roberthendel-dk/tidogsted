@@ -297,7 +297,7 @@ const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 
 /* ---------- tilstand ---------- */
 let CFG={site:'',kommuner:[]},OPGAVE='';
-const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
+const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
 const nKey=c=>c==='urler'?'urlApp':c;
 let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:false};
 const AVISER=aviser(IDAG);
@@ -327,7 +327,7 @@ async function hentFiler(){
   S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
   if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],opdateret:u.opdateret||''};
 }
-async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','urler']){try{S[nKey(c)]=await store.alle(c)}catch(e){dbNote(e.message)}}}
+async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','urler','steder']){try{S[nKey(c)]=await store.alle(c)}catch(e){dbNote(e.message)}}}
 async function opdater(besked){await Promise.all([hentFiler(),hentSamlinger()]);render();if(besked)toast(besked)}
 /* nyeste af fil (automatisk søgning) og indsat resultat */
 function fundDoc(id){const a=S.fil[id],b=S.fund[id];if(a&&b)return String(b.opdateret||'')>String(a.opdateret||'')?b:a;return a||b||null}
@@ -359,7 +359,7 @@ function saml(dates,fd,fundSrc){
   const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato))return;const n=noegle(e);if(seen.has(n))return;seen.add(n);out.push(e)};
   if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
-  const aktiveUrl=new Set(urlListe(komId).filter(u=>u.aktiv).map(u=>u.id));
+  const aktiveUrl=new Set([...urlListe(komId).filter(u=>u.aktiv).map(u=>u.id),...fasteSteder(komId).filter(f=>!f.skjult&&f.url).map(f=>urlId(komId,f.url))]);
   S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>push(norm(e,'xl')));
   for(const[id,a]of Object.entries(S.urlApp))if(a.kommune===komId&&aktiveUrl.has(id))(a.fund||[]).forEach(e=>push(norm({...e,kilde:e.url||a.url},'xl')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
@@ -415,7 +415,7 @@ const knUrl=n=>'https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr='+n+'
 const site=()=>location.protocol==='https:'?location.origin:(CFG.site||'');
 
 /* ---------- opgavetekster (bygger på opgave/soegning.md) ---------- */
-function kommuneData(){const k=kom();return JSON.stringify({...k,egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''})),ekstra_urler:urlListe(komId).filter(u=>u.aktiv).map(u=>({sted:u.sted,url:u.url,type:u.type||'',note:u.note||'',aendret_siden_sidst:!!u.aendret}))},null,1)}
+function kommuneData(){const k=kom();return JSON.stringify({...k,moedekilder:fasteSteder(komId).filter(f=>f.type==='moede'&&!f.skjult).map(f=>({navn:f.navn,url:f.url})),steder:fasteSteder(komId).filter(f=>f.type==='sted'&&!f.skjult).map(f=>({navn:f.navn,url:f.url})),egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''})),ekstra_urler:urlListe(komId).filter(u=>u.aktiv).map(u=>({sted:u.sted,url:u.url,type:u.type||'',note:u.note||'',aendret_siden_sidst:!!u.aendret}))},null,1)}
 function soegeOpgave(kunUge){
   const k=kom(),d=dageFor(avis),u=ugeFor(avis);
   return`${kunUge?'LILLE SØGEOPGAVE – kun de næste syv dage (trin U og møderne i 1b)':'SØGEOPGAVE'} – "Tid & Sted", ${k.navn} Kommune (kommune-id: ${k.id})
@@ -497,13 +497,34 @@ function renderApi(){
   const dele=[API.kv?'Data gemmes i Cloudflare.':'KV-bindingen TS mangler – data gemmes kun i denne browser.',API.kode?(API.godkendt?'Koden er godkendt.':'Skriv koden for at kunne gemme.'):'Ingen kode sat – alle med adressen kan gemme.'];
   el.className='status '+(API.kv&&(API.godkendt||!API.kode)?'klar':'ny');el.textContent=dele.join(' ');
 }
+function fastId(kommune,type,navn){let h=5381;for(const c of String(navn).trim().toLowerCase())h=((h<<5)+h+c.codePointAt(0))|0;return kommune+'_'+type+'_'+(h>>>0).toString(36)}
+function fasteSteder(kid){
+  const k=CFG.kommuner.find(x=>x.id===kid);if(!k)return[];
+  return[...(k.moedekilder||[]).map(m=>['moede',m]),...(k.steder||[]).map(s=>['sted',s])].map(([type,o])=>{
+    const id=fastId(kid,type,o.navn),r=S.steder[id];
+    return{id,type,original:o.navn,origUrl:o.url||'',navn:(r&&r.navn)||o.navn,url:(r&&'url'in r?r.url:o.url)||'',rettet:!!(r&&!r.slettet),skjult:!!(r&&r.slettet)}});
+}
+let stedRetter=null;
+function fastStatus(f){if(!f.url)return['adv','mangler URL'];const u=S.urler.urler.find(x=>x.kommune===komId&&x.url===f.url);if(!u||!u.tjekket)return['mut','tjekkes i morgen tidlig'];if(u.fejl)return['nej','fejl: '+u.fejl];if(u.aendret)return['adv','ændret'+(u.antal?' · '+u.antal+' fund':'')];return['ja',u.antal?u.antal+' fund':'svarer']}
 function renderSteder(){
-  const k=kom();
-  const r=[...k.moedekilder.map(m=>`<li><span><b>${esc(m.navn)}</b> · møder</span>${safeUrl(m.url)?`<a href="${esc(m.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</li>`),
-    ...k.steder.map(s=>`<li><span>${esc(s.navn)}</span>${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</li>`),
-    ...egneSteder().map(s=>`<li><span>${esc(s.navn)} <span class="src">eget</span></span><span class="knap" style="margin:0">${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}<button class="sm" data-fjernsted="${esc(s.id)}">Fjern</button></span></li>`)];
+  const f=fasteSteder(komId);
+  const r=f.map(x=>{const[c,t]=fastStatus(x);
+    if(stedRetter===x.id)return`<li style="display:block"><div class="retform" style="grid-template-columns:minmax(0,1fr)"><label>Navn<input id="rfNavn" value="${esc(x.navn)}"></label><label>Officiel side (URL)<input id="rfUrl" type="url" placeholder="https://…" value="${esc(x.url)}"></label><div class="knap"><button class="sm pri" data-fgem="${x.id}">Gem</button><button class="sm" data-fannuller="1">Annullér</button></div></div></li>`;
+    return`<li style="display:block${x.skjult?';opacity:.5':''}"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span style="flex:1;min-width:12em">${x.type==='moede'?'<b>'+esc(x.navn)+'</b> · møder':esc(x.navn)}${x.rettet?' <span class="src">rettet</span>':''}${x.skjult?' <span class="src">fjernet</span>':''}${x.url?`<br><a href="${esc(/^https?:\/\//i.test(x.url)?x.url:'#')}" target="_blank" rel="noopener" style="font-size:13px;overflow-wrap:anywhere">${esc(x.url.replace(/^https?:\/\/(www\.)?/,''))}</a>`:''}${x.skjult?'':`<br><span class="${c}" style="font-size:13px">${esc(t)}</span>`}</span><span class="knap" style="margin:0;align-items:flex-start">${x.skjult?'':`<button class="sm" data-fret="${x.id}">Ret</button><button class="sm" data-ffjern="${x.id}">Fjern</button>`}${x.rettet||x.skjult?`<button class="sm" data-fnulstil="${x.id}">Nulstil</button>`:''}</span></div></li>`});
+  r.push(...egneSteder().map(s=>`<li><span>${esc(s.navn)} <span class="src">eget</span></span><span class="knap" style="margin:0">${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}<button class="sm" data-fjernsted="${esc(s.id)}">Fjern</button></span></li>`));
   $('stederListe').innerHTML=r.join('');
 }
+$('stederListe').addEventListener('click',async ev=>{const b=ev.target.closest('button');if(!b)return;const d=b.dataset;const fs=fasteSteder(komId);const x=fs.find(f=>f.id===(d.fret||d.fgem||d.ffjern||d.fnulstil));
+  if(d.fret){stedRetter=d.fret;renderSteder();return}
+  if(d.fannuller){stedRetter=null;renderSteder();return}
+  if(!x)return;
+  if(d.fgem){const navn=$('rfNavn').value.trim()||x.original,url=$('rfUrl').value.trim();if(url&&!/^https?:\/\/\S+$/i.test(url)){toast('URL\'en skal begynde med https://');return}
+    stedRetter=null;if(navn===x.original&&url===x.origUrl){await skriv(()=>store.del('steder',x.id),'Gemt');return}
+    await skriv(()=>store.put('steder',x.id,{kommune:komId,type:x.type,original:x.original,navn,url,rettet:new Date().toISOString()}),'Gemt – tjekkes i morgen tidlig');return}
+  if(d.ffjern){if(b.dataset.sikker!=='1'){b.dataset.sikker='1';b.textContent='Fjern – sikker?';b.classList.add('red');setTimeout(()=>{if(b.isConnected){b.dataset.sikker='';b.textContent='Fjern';b.classList.remove('red')}},4000);return}
+    await skriv(()=>store.put('steder',x.id,{kommune:komId,type:x.type,original:x.original,slettet:true}),'Fjernet – søgningerne springer stedet over');return}
+  if(d.fnulstil){await skriv(()=>store.del('steder',x.id),'Nulstillet til standard')}
+});
 function renderMoeder(){
   const m=alleMoeder().filter(x=>x.dato>=IDAG).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
   $('moedeListe').innerHTML=m.length?m.map(x=>`<li><span><b>${esc(kort(x.dato))}</b> ${normTid(x.start)?'kl. '+esc(ft(normTid(x.start))):'[TJEK]'} – ${esc(x.titel)}${x.sted?', '+esc(x.sted):''} ${x.af==='søgning'?'<span class="src">søgning</span>':''}</span><button class="sm" data-fjernmoede="${esc(x.id)}" data-fil="${x.fil?1:''}">Fjern</button></li>`).join(''):'<li class="mut">Ingen kommende møder eller arrangementer.</li>';
@@ -534,7 +555,7 @@ function renderNote(){
   if(f&&Array.isArray(f.kilder)&&f.kilder.length)t+='\n\nKILDER\n'+f.kilder.map(x=>`- ${x.navn||''} ${x.url||''}`).join('\n');
   $('note').textContent=t;
 }
-const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'Excel-liste'}[s]||s);
+const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek'}[s]||s);
 function renderVerif(){
   const ev=avisEvents(),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
@@ -561,7 +582,7 @@ const XL_REPO='https://github.com/roberthendel-dk/tidogsted';
 function urlId(kommune,url){let h=5381;for(const c of String(url).trim().toLowerCase())h=((h<<5)+h+c.codePointAt(0))|0;return kommune+'_'+(h>>>0).toString(36)}
 function urlListe(kid){
   const m=new Map();
-  for(const u of S.urler.urler)if(u.kommune===kid){const id=u.id||urlId(u.kommune,u.url);m.set(id,{...u,id,aktiv:u.aktiv!==false,kilde:u.kilde||'ark'})}
+  for(const u of S.urler.urler)if(u.kommune===kid&&u.kilde!=='fast'){const id=u.id||urlId(u.kommune,u.url);m.set(id,{...u,id,aktiv:u.aktiv!==false,kilde:u.kilde||'ark'})}
   for(const[id,a]of Object.entries(S.urlApp)){if(!a||a.kommune!==kid)continue;
     if(a.slettet){m.delete(id);continue}
     const b=m.get(id)||{id,kilde:'app'};
@@ -656,7 +677,7 @@ $('urlExcel').onclick=()=>{
 })();
 
 /* ---------- hændelser ---------- */
-$('kom').onchange=e=>{komId=e.target.value;ls.set('ts:kommune',komId);retter=null;urlRetter=null;render();opdater()};
+$('kom').onchange=e=>{komId=e.target.value;ls.set('ts:kommune',komId);retter=null;urlRetter=null;stedRetter=null;render();opdater()};
 $('avisValg').onchange=e=>{if(e.target.name==='avis'){avis=e.target.value;ls.set('ts:avis:'+IDAG,avis);retter=null;render();opdater()}};
 $('sogNu').onclick=()=>kopier(soegeOpgave(false),'Søgeopgaven er kopieret – sæt den ind i en ny Claude-chat med websøgning');
 $('ugeSog').onclick=()=>kopier(soegeOpgave(true),'Ugeopgaven er kopieret – sæt den ind i en ny Claude-chat');

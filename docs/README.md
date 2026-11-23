@@ -47,6 +47,15 @@ Uden KV virker appen stadig. OK'er, møder og egne steder gemmes så bare kun i 
 - **"Søg nu"** kopierer søgeopgaven til en ny Claude-chat med websøgning. Chatten giver en JSON-kodeblok, som du indsætter under "Indsæt et resultat i hånden". "Verificér alle med Claude" virker på samme måde.
 - **Spalteteksten, rå arrangementer og KultuNaut-fund** gemmes i browseren pr. kommune og avis.
 
+## De faste steder
+
+De faste steder og mødekilder for hver kommune står i `opgave/kommuner.json`. Under "Steder" i appen kan du:
+- **Ret:** ændre navn og URL, fx tilføje en URL, der mangler
+- **Fjern:** få søgningerne til at springe stedet over. Du skal klikke to gange for at bekræfte.
+- **Nulstil:** gå tilbage til det, der står i `kommuner.json`
+
+Rettelserne gemmes i Cloudflare. Søgningerne, "Søg nu" og morgentjekket bruger dem. Faste steder med en URL tjekkes også hver morgen, og deres status står ved stedet, fx "svarer", "3 fund", "ændret" eller "fejl".
+
 ## Ekstra URL'er – i appen eller i Excel
 
 Ekstra URL'er supplerer de faste steder. Du kan styre dem to steder, og listerne lægges sammen:

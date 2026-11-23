@@ -48,8 +48,9 @@ U. **De næste syv dage** (lettere søgning): stederne, KultuNaut og møderne fo
 
 ## D. Gem resultatet
 
-### D.1 Brugerens egne steder og ekstra URL'er
+### D.1 Brugerens egne steder, rettelser og ekstra URL'er
 
+- Hent `<site>/api/data/steder`. Det er brugerens rettelser til de faste steder og mødekilder i kommuner.json. Tag poster med kommunens id. `original` er navnet i kommuner.json; brug `navn` og `url` i stedet for det, der står dér, og spring stedet helt over, hvis `"slettet": true`. Ved manuel kørsel er rettelserne allerede indarbejdet i kommunens data. Kan siden ikke hentes, så brug kommuner.json, som den er.
 - Hent `<site>/api/data/kilder` (site står i kommuner.json). Det er et JSON-objekt; tag de poster med, hvor `kommune` er kommunens id. Kan siden ikke hentes, så fortsæt uden.
 - Læs `data/urler.json` (i repoet, eller `<site>/data/urler.json`). Det er brugerens ekstra URL'er – Excel-arket `opgave/ekstra-urler.xlsx` lagt sammen med den liste, brugeren retter i appen – tjekket af et script samme morgen. (URL'er tilføjet i appen efter tjekket står i `<site>/api/data/urler`; spring poster med `"slettet": true` over.) Tag de URL'er med, hvor `kommune` er kommunens id og `aktiv` ikke er false, og følg `note`. URL'er med `"aendret": true` er ændret siden i går – kig ekstra efter nye arrangementer dér. Arrangementerne under `arrangementer` er fundet automatisk og ikke krydstjekket: krydstjek dem og tag dem med i spalten, hvis de holder. Ved manuel kørsel står URL'erne allerede i kommunens data som `ekstra_urler`.
 

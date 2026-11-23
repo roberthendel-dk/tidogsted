@@ -1,6 +1,6 @@
 // Cloudflare Pages Function for "Tid & Sted".
 // Gemmer mine OK'er/rettelser (tjek), møder og arrangementer (moeder), egne steder (kilder),
-// ekstra URL'er (urler) og indsatte søgeresultater (fund) i Cloudflare KV.
+// ekstra URL'er (urler), rettelser til de faste steder (steder) og indsatte søgeresultater (fund) i Cloudflare KV.
 // /api/tjek?url=… tjekker én URL med det samme ("Tjek nu" i appen).
 //
 // Opsætning i Cloudflare (Pages-projektet > Settings):
@@ -9,7 +9,7 @@
 
 import { tjekUrl } from '../../lib/tjek.js';
 
-const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler'];
+const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler', 'steder'];
 
 const svar = (data, status = 200) =>
   new Response(JSON.stringify(data), {

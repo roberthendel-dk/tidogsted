@@ -3,6 +3,7 @@
 //   1. Excel-arket opgave/ekstra-urler.xlsx
 //   2. Listen, du retter i appen (gemt i Cloudflare, hentes fra <site>/api/data/urler).
 //      Den kan også slå rækker fra arket fra eller slette dem.
+//   3. De faste steder i opgave/kommuner.json, der har en URL (med dine rettelser fra appen).
 // Kører gratis via GitHub Actions (se .github/workflows/tjek-urler.yml) uden Claude og uden afhængigheder.
 //
 // Kør lokalt:  node scripts/tjek-urler.mjs
@@ -10,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { tjekUrl, iDag as idag, plus, urlId, afkod } from '../lib/tjek.js';
+import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod } from '../lib/tjek.js';
 
 const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
@@ -104,7 +105,29 @@ for (const [id, a] of Object.entries(appListe || {})) {
 }
 if (appListe) console.log(`${Object.keys(appListe).length} poster fra appen`);
 
-// 3. Tjek
+// 3. De faste steder fra kommuner.json (med rettelser fra appen) – kun dem med en URL
+let rettelser = {};
+if (cfg.site) {
+  try { const r = await fetch(cfg.site.replace(/\/$/, '') + '/api/data/steder', { signal: AbortSignal.timeout(20000) }); if (r.ok) rettelser = await r.json(); } catch {}
+}
+let faste = 0;
+for (const k of cfg.kommuner) {
+  for (const [type, liste] of [['sted', k.steder || []], ['moede', k.moedekilder || []]]) {
+    for (const s of liste) {
+      const ret = rettelser[fastId(k.id, type, s.navn)];
+      if (ret && ret.slettet) continue;
+      const navn = (ret && ret.navn) || s.navn, url = ((ret && 'url' in ret) ? ret.url : s.url) || '';
+      if (!/^https?:\/\//i.test(url)) continue;
+      const id = urlId(k.id, url);
+      if (samlet.has(id)) continue;
+      samlet.set(id, { id, kommune: k.id, sted: navn, url, type: type === 'moede' ? 'mødekilde' : 'fast sted', note: '', aktiv: true, kilde: 'fast' });
+      faste++;
+    }
+  }
+}
+console.log(`${faste} faste steder med URL`);
+
+// 4. Tjek
 const liste = [...samlet.values()];
 const urler = [], arrangementer = [];
 const aktive = liste.filter((r) => r.aktiv);
