@@ -7,7 +7,7 @@ on:
     - cron: "40 2 * * *"   # 02.40 UTC = 03.40 dansk vintertid (04.40 sommertid)
   push:
     branches: [main]
-    paths: ["opgave/ekstra-urler.xlsx", "docs/scripts/**", "docs/lib/**"]
+    paths: ["opgave/ekstra-urler.xlsx", "scripts/**", "lib/**"]
   workflow_dispatch: {}
 
 permissions:
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 20
       - name: Tjek URL'erne
-        run: node docs/scripts/tjek-urler.mjs
+        run: node scripts/tjek-urler.mjs
       - name: Gem resultatet
         run: |
           git config user.name "github-actions[bot]"

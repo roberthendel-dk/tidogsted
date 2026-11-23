@@ -7,7 +7,7 @@
 //   KV-binding:  TS  -> et KV-navnerum, fx "tidogsted"
 //   Secret:      TS_KODE           (valgfri, men anbefalet) – kode, der kræves for at gemme
 
-import { tjekUrl } from '../../docs/lib/tjek.js';
+import { tjekUrl } from '../../lib/tjek.js';
 
 const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler'];
 

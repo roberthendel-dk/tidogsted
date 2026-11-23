@@ -5,14 +5,14 @@
 //      Den kan også slå rækker fra arket fra eller slette dem.
 // Kører gratis via GitHub Actions (se .github/workflows/tjek-urler.yml) uden Claude og uden afhængigheder.
 //
-// Kør lokalt:  node docs/scripts/tjek-urler.mjs
+// Kør lokalt:  node scripts/tjek-urler.mjs
 
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { tjekUrl, iDag as idag, plus, urlId, afkod } from '../lib/tjek.js';
 
-const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
+const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
 const KOMMUNER = path.join(ROD, 'opgave/kommuner.json');
 const UD = path.join(ROD, 'data/urler.json');

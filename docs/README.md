@@ -8,11 +8,11 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 
 | Sti | Indhold |
 |---|---|
-| `docs/` | Det tekniske bag appen: denne vejledning, morgenscriptet og den fælles tjek-kode |
+| `docs/README.md` | Denne vejledning |
 | `index.html` | Selve appen – ligger i roden, så den åbnes direkte på repoets adresse |
 | `opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
 | `opgave/ekstra-urler.xlsx` | Excel-arket med ekstra URL'er. Det supplerer de faste steder og lægges sammen med listen, du retter i appen. |
-| `docs/scripts/tjek-urler.mjs` + `docs/lib/tjek.js` + `.github/workflows/tjek-urler.yml` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `data/urler.json`. |
+| `scripts/tjek-urler.mjs` + `lib/tjek.js` + `.github/workflows/tjek-urler.yml` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `data/urler.json`. |
 | `opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
 | `data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
 | `data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
