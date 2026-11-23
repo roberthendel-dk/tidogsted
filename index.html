@@ -505,7 +505,7 @@ function fasteSteder(kid){
     return{id,type,original:o.navn,origUrl:o.url||'',navn:(r&&r.navn)||o.navn,url:(r&&'url'in r?r.url:o.url)||'',rettet:!!(r&&!r.slettet),skjult:!!(r&&r.slettet)}});
 }
 let stedRetter=null;
-function fastStatus(f){if(!f.url)return['adv','mangler URL'];const u=S.urler.urler.find(x=>x.kommune===komId&&x.url===f.url);if(!u||!u.tjekket)return['mut','tjekkes i morgen tidlig'];if(u.fejl)return['nej','fejl: '+u.fejl];if(u.aendret)return['adv','ændret'+(u.antal?' · '+u.antal+' fund':'')];return['ja',u.antal?u.antal+' fund':'svarer']}
+function fastStatus(f){if(!f.url)return['adv','mangler URL'];const u=S.urler.urler.find(x=>x.kommune===komId&&x.url===f.url);if(!u||!u.tjekket)return['mut','tjekkes i morgen tidlig'];if(u.fejl)return f.type==='moede'?['mut','afviser automatisk tjek – søgningerne finder møderne via websøgning']:['nej','fejl: '+u.fejl];if(u.aendret)return['adv','ændret'+(u.antal?' · '+u.antal+' fund':'')];return['ja',u.antal?u.antal+' fund':'svarer']}
 function renderSteder(){
   const f=fasteSteder(komId);
   const r=f.map(x=>{const[c,t]=fastStatus(x);
