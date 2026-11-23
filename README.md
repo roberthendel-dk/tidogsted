@@ -10,8 +10,8 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 |---|---|
 | `public/index.html` | Selve appen |
 | `public/opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
-| `public/opgave/ekstra-urler.xlsx` | **Dit Excel-ark med ekstra URL'er.** Det supplerer de faste steder. Tilføj, slet eller slå rækker fra (Aktiv = nej), og upload arket igen. |
-| `scripts/tjek-urler.mjs` + `.github/workflows/tjek-urler.yml` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `public/data/urler.json`. |
+| `public/opgave/ekstra-urler.xlsx` | Excel-arket med ekstra URL'er. Det supplerer de faste steder og lægges sammen med listen, du retter i appen. |
+| `scripts/tjek-urler.mjs` + `.github/workflows/tjek-urler.yml` + `lib/tjek.js` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `public/data/urler.json`. |
 | `public/opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
 | `public/data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
 | `public/data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
@@ -39,18 +39,33 @@ Uden KV virker appen stadig. OK'er, møder og egne steder gemmes så bare kun i 
 - **"Søg nu"** kopierer søgeopgaven til en ny Claude-chat med websøgning. Chatten giver en JSON-kodeblok, som du indsætter under "Indsæt et resultat i hånden". "Verificér alle med Claude" virker på samme måde.
 - **Spalteteksten, rå arrangementer og KultuNaut-fund** gemmes i browseren pr. kommune og avis.
 
-## Excel-arket med ekstra URL'er
+## Ekstra URL'er – i appen eller i Excel
 
-1. **Hent arket.** Brug linket "Hent arket" under "Steder" i appen, eller åbn `public/opgave/ekstra-urler.xlsx` på GitHub og vælg Download.
-2. **Ret på fanen URLer.** Du kan tilføje en række, slette en række eller sætte Aktiv til "nej". Kommune, Type og Aktiv har rullelister.
-3. **Upload arket.** Brug "Upload nyt ark" i appen, eller *Add file → Upload files* i mappen `public/opgave` på GitHub. Behold filnavnet `ekstra-urler.xlsx`, og tryk *Commit changes*.
+Ekstra URL'er supplerer de faste steder. Du kan styre dem to steder, og listerne lægges sammen:
 
-Scriptet tjekker for hver URL:
+**I appen (nemmest).** Afsnittet "Ekstra URL'er" har disse funktioner:
+- **Tilføj og tjek:** lægger en ny URL ind og tjekker den med det samme.
+- **Tjek nu:** tjekker en URL igen.
+- **Slå fra / Slå til:** springer URL'en over uden at slette den.
+- **Ret:** ændrer sted, URL, type eller note.
+- **Slet:** fjerner URL'en. Du skal klikke to gange for at bekræfte.
+- **Download som Excel:** henter hele den samlede liste.
+
+Det, du ændrer i appen, gemmes i Cloudflare. Du kan også rette og slette rækker, der kommer fra Excel-arket.
+
+**I Excel-arket.** Arket er `public/opgave/ekstra-urler.xlsx`.
+1. Hent det med "Hent Excel-arket" i appen.
+2. Ret på fanen URLer.
+3. Upload det igen med "Upload nyt ark", eller med *Add file → Upload files* i `public/opgave` på GitHub. Behold filnavnet.
+
+Hver morgen ca. kl. 03.40 tjekker et script alle aktive URL'er gratis og uden Claude. Det kører også med det samme, når du uploader et nyt ark. For hver URL tjekker det:
 - om siden svarer
 - om indholdet er ændret siden sidst
 - hvilke arrangementer siden viser de næste 10 dage, hvis den har dem i et standardformat (schema.org eller iCal)
 
-Fundene kommer ind i spalten og ugeoversigten som "Excel-liste" og er altid markeret [TJEK]. Claude-søgningerne gennemgår også alle aktive URL'er og krydstjekker fundene. Under "Kørsler" kan du se, om tjekket er gået godt.
+Fundene kommer ind i spalten og ugeoversigten som "Excel-liste" og er altid markeret [TJEK]. Claude-søgningerne gennemgår også alle aktive URL'er og krydstjekker fundene.
+
+Appens del ("Tjek nu" og listen i Cloudflare) kræver, at Cloudflare er sat op. Uden Cloudflare kan du stadig bruge Excel-arket.
 
 ## Ændringer
 

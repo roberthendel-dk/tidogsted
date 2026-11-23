@@ -1,24 +1,22 @@
-// Tjekker URL'erne i public/opgave/ekstra-urler.xlsx og skriver resultatet til public/data/urler.json.
+// Tjekker de ekstra URL'er og skriver resultatet til public/data/urler.json.
+// URL'erne kommer fra to steder, som lægges sammen:
+//   1. Excel-arket public/opgave/ekstra-urler.xlsx
+//   2. Listen, du retter i appen (gemt i Cloudflare, hentes fra <site>/api/data/urler).
+//      Den kan også slå rækker fra arket fra eller slette dem.
 // Kører gratis via GitHub Actions (se .github/workflows/tjek-urler.yml) uden Claude og uden afhængigheder.
-//
-// For hver aktiv række: svarer siden, er indholdet ændret siden sidst, og – hvis siden har
-// arrangementer som schema.org-data (JSON-LD) eller iCal – hvilke arrangementer de næste 10 dage.
-// Alle fund markeres som ikke krydstjekket ([TJEK]).
 //
 // Kør lokalt:  node scripts/tjek-urler.mjs
 
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import crypto from 'node:crypto';
+import { tjekUrl, iDag as idag, plus, urlId, afkod } from '../lib/tjek.js';
 
 const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'public/opgave/ekstra-urler.xlsx');
 const KOMMUNER = path.join(ROD, 'public/opgave/kommuner.json');
 const UD = path.join(ROD, 'public/data/urler.json');
-const TZ = 'Europe/Copenhagen';
 const DAGE_FREM = 10;
-const UA = 'TidOgSted/1.0 (+https://github.com/roberthendel-dk/tidogsted)';
 
 /* ---------- lille xlsx-læser (zip + XML) ---------- */
 function unzip(buf) {
@@ -40,8 +38,6 @@ function unzip(buf) {
   }
   return filer;
 }
-const afkod = (s) => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'")
-  .replace(/&#(\d+);/g, (m, n) => String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi, (m, n) => String.fromCodePoint(parseInt(n, 16))).replace(/&amp;/g, '&');
 const tekstAf = (xml) => afkod([...xml.matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]).join(''));
 
 function laesArk(fil, arknavn) {
@@ -70,142 +66,60 @@ function laesArk(fil, arknavn) {
   return rækker;
 }
 
-/* ---------- datoer ---------- */
-const lokal = (d) => {
-  const p = Object.fromEntries(new Intl.DateTimeFormat('sv-SE', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(d).map((x) => [x.type, x.value]));
-  return { dato: `${p.year}-${p.month}-${p.day}`, tid: `${p.hour}:${p.minute}` };
-};
-const iDag = lokal(new Date()).dato;
-const plus = (iso, n) => { const d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
-const SLUT = plus(iDag, DAGE_FREM);
-function tidspunkt(v) {
-  if (!v) return null;
-  const s = String(v).trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return { dato: s, tid: '' };
-  // Uden tidszone: tolkes som dansk lokal tid
-  const m = s.match(/^(\d{4}-\d{2}-\d{2})[T ](\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?$/);
-  if (m) return { dato: m[1], tid: `${m[2]}:${m[3]}` };
-  const d = new Date(s);
-  return isNaN(d) ? null : lokal(d);
-}
-
-/* ---------- schema.org (JSON-LD) ---------- */
-function* knuder(x) {
-  if (Array.isArray(x)) { for (const y of x) yield* knuder(y); return; }
-  if (!x || typeof x !== 'object') return;
-  yield x;
-  if (x['@graph']) yield* knuder(x['@graph']);
-  for (const k of ['itemListElement', 'item', 'subEvent', 'event', 'events']) if (x[k]) yield* knuder(x[k]);
-}
-const typer = (n) => [].concat(n['@type'] || []).map(String);
-const navnAf = (v) => (typeof v === 'string' ? v : Array.isArray(v) ? navnAf(v[0]) : v && typeof v === 'object' ? v.name || '' : '');
-function jsonLdEvents(html) {
-  const ud = [];
-  for (const m of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
-    let data;
-    try { data = JSON.parse(m[1].trim()); } catch { continue; }
-    for (const n of knuder(data)) {
-      if (!typer(n).some((t) => /Event$/.test(t))) continue;
-      if (/Cancelled|Postponed/i.test(n.eventStatus || '')) continue;
-      const s = tidspunkt(n.startDate), e = tidspunkt(n.endDate);
-      if (!s) continue;
-      const tilbud = [].concat(n.offers || []);
-      ud.push({
-        dato: s.dato, start: s.tid, slut: e && e.dato === s.dato ? e.tid : '',
-        titel: afkod(String(n.name || '').replace(/<[^>]+>/g, '')).trim(),
-        sted: afkod(navnAf(n.location)).trim(),
-        url: typeof n.url === 'string' ? n.url : '',
-        udsolgt: tilbud.some((o) => /SoldOut/i.test((o && o.availability) || '')),
-      });
-    }
-  }
-  return ud;
-}
-
-/* ---------- iCal ---------- */
-function icalEvents(txt) {
-  const linjer = txt.replace(/\r?\n[ \t]/g, '').split(/\r?\n/);
-  const ud = []; let e = null;
-  const val = (l) => l.slice(l.indexOf(':') + 1).replace(/\\n/g, ' ').replace(/\\([,;\\])/g, '$1').trim();
-  const dt = (l) => {
-    const v = val(l), tz = (l.match(/TZID=([^:;]+)/) || [])[1];
-    const m = v.match(/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})(Z)?)?$/);
-    if (!m) return null;
-    if (!m[4]) return { dato: `${m[1]}-${m[2]}-${m[3]}`, tid: '' };
-    if (m[7]) return lokal(new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}Z`));
-    if (tz && tz !== TZ && !/Copenhagen|Romance|Europe\/(Berlin|Oslo|Stockholm)/i.test(tz)) return null;
-    return { dato: `${m[1]}-${m[2]}-${m[3]}`, tid: `${m[4]}:${m[5]}` };
-  };
-  for (const l of linjer) {
-    if (l === 'BEGIN:VEVENT') e = {};
-    else if (l === 'END:VEVENT') {
-      if (e && e.s && !e.aflyst) ud.push({ dato: e.s.dato, start: e.s.tid, slut: e.e && e.e.dato === e.s.dato ? e.e.tid : '', titel: e.titel || '', sted: e.sted || '', url: e.url || '', udsolgt: false });
-      e = null;
-    } else if (e) {
-      if (/^DTSTART[;:]/.test(l)) e.s = dt(l);
-      else if (/^DTEND[;:]/.test(l)) e.e = dt(l);
-      else if (/^SUMMARY[;:]/.test(l)) e.titel = val(l);
-      else if (/^LOCATION[;:]/.test(l)) e.sted = val(l);
-      else if (/^URL[;:]/.test(l)) e.url = val(l);
-      else if (/^STATUS:CANCELLED/.test(l)) e.aflyst = true;
-    }
-  }
-  return ud;
-}
-
-/* ---------- tjek én URL ---------- */
-const synligTekst = (html) => afkod(html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<noscript[\s\S]*?<\/noscript>/gi, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
-async function tjek(r) {
-  const res = { status: 0, ok: false, fejl: '', hash: '', events: [] };
-  try {
-    const svar = await fetch(r.url, { redirect: 'follow', headers: { 'user-agent': UA, accept: 'text/html,text/calendar,application/xhtml+xml,*/*' }, signal: AbortSignal.timeout(25000) });
-    res.status = svar.status; res.ok = svar.ok;
-    const txt = await svar.text();
-    if (!svar.ok) { res.fejl = 'HTTP ' + svar.status; return res; }
-    const ical = /text\/calendar/i.test(svar.headers.get('content-type') || '') || /^\s*BEGIN:VCALENDAR/.test(txt);
-    res.events = ical ? icalEvents(txt) : jsonLdEvents(txt);
-    res.hash = crypto.createHash('sha256').update(ical ? txt : synligTekst(txt)).digest('hex').slice(0, 16);
-  } catch (e) {
-    res.fejl = e.name === 'TimeoutError' ? 'Siden svarede ikke inden for 25 sekunder' : String(e.cause?.code || e.message || e);
-  }
-  return res;
-}
-
 /* ---------- hovedprogram ---------- */
+const iDag = idag(), SLUT = plus(iDag, DAGE_FREM);
 const cfg = JSON.parse(fs.readFileSync(KOMMUNER, 'utf8'));
 const kommuneId = (navn) => { const n = String(navn).trim().toLowerCase(); const k = cfg.kommuner.find((x) => x.navn.toLowerCase() === n || x.id === n); return k ? k.id : ''; };
 const før = fs.existsSync(UD) ? JSON.parse(fs.readFileSync(UD, 'utf8')) : { urler: [] };
-const førMap = new Map((før.urler || []).map((u) => [u.kommune + '|' + u.url, u]));
+const førMap = new Map((før.urler || []).map((u) => [u.id || urlId(u.kommune, u.url), u]));
 
-const rækker = laesArk(XLSX, 'URLer');
+// 1. Excel-arket
+const samlet = new Map();
+const rækker = fs.existsSync(XLSX) ? laesArk(XLSX, 'URLer') : [];
 const hoved = (rækker[0] || []).map((h) => h.toLowerCase());
-const kol = (navn) => hoved.indexOf(navn);
-const ki = { kommune: kol('kommune'), sted: kol('sted'), url: kol('url'), type: kol('type'), aktiv: kol('aktiv'), note: kol('note') };
-const set = new Set();
-const liste = rækker.slice(1).map((r, i) => ({
-  linje: i + 2, kommuneNavn: r[ki.kommune] || '', kommune: kommuneId(r[ki.kommune] || ''), sted: r[ki.sted] || '', url: (r[ki.url] || '').trim(),
-  type: r[ki.type] || '', aktiv: !/^nej$/i.test(r[ki.aktiv] || ''), note: r[ki.note] || '',
-})).filter((r) => r.url && /^https?:\/\//i.test(r.url) && r.kommune && !set.has(r.kommune + r.url) && set.add(r.kommune + r.url));
+const ki = Object.fromEntries(['kommune', 'sted', 'url', 'type', 'aktiv', 'note'].map((k) => [k, hoved.indexOf(k)]));
+for (const r of rækker.slice(1)) {
+  const kommune = kommuneId(r[ki.kommune] || ''), url = (r[ki.url] || '').trim();
+  if (!kommune || !/^https?:\/\//i.test(url)) continue;
+  const id = urlId(kommune, url);
+  if (!samlet.has(id)) samlet.set(id, { id, kommune, sted: r[ki.sted] || '', url, type: r[ki.type] || '', note: r[ki.note] || '', aktiv: !/^nej$/i.test(r[ki.aktiv] || ''), kilde: 'ark' });
+}
+console.log(`${samlet.size} URL'er i Excel-arket`);
 
+// 2. Listen fra appen (Cloudflare)
+let appListe = null;
+if (cfg.site) {
+  try {
+    const r = await fetch(cfg.site.replace(/\/$/, '') + '/api/data/urler', { signal: AbortSignal.timeout(20000) });
+    if (r.ok) appListe = await r.json();
+    else console.log(`Appens liste kunne ikke hentes (HTTP ${r.status}) – bruger kun arket`);
+  } catch (e) { console.log(`Appens liste kunne ikke hentes (${e.message}) – bruger kun arket`); }
+}
+for (const [id, a] of Object.entries(appListe || {})) {
+  if (!a || !a.kommune) continue;
+  if (a.slettet) { samlet.delete(id); continue; }
+  const gl = samlet.get(id);
+  if (!a.url && !gl) continue;
+  samlet.set(id, { id, kommune: a.kommune, sted: a.sted ?? gl?.sted ?? '', url: a.url || gl.url, type: a.type ?? gl?.type ?? '', note: a.note ?? gl?.note ?? '', aktiv: a.aktiv !== false, kilde: gl ? 'ark' : 'app', rettet: !!gl });
+}
+if (appListe) console.log(`${Object.keys(appListe).length} poster fra appen`);
+
+// 3. Tjek
+const liste = [...samlet.values()];
 const urler = [], arrangementer = [];
 const aktive = liste.filter((r) => r.aktiv);
 for (let i = 0; i < aktive.length; i += 4) {
-  const svar = await Promise.all(aktive.slice(i, i + 4).map(tjek));
+  const svar = await Promise.all(aktive.slice(i, i + 4).map((r) => tjekUrl(r.url, { fra: iDag, til: SLUT })));
   svar.forEach((res, j) => {
-    const r = aktive[i + j], gl = førMap.get(r.kommune + '|' + r.url);
+    const r = aktive[i + j], gl = førMap.get(r.id);
     const aendret = !!(gl && gl.hash && res.hash && gl.hash !== res.hash);
-    const fund = res.events.filter((e) => e.titel && e.dato >= iDag && e.dato <= SLUT);
-    urler.push({
-      kommune: r.kommune, sted: r.sted, url: r.url, type: r.type, note: r.note, aktiv: true,
-      status: res.status, ok: res.ok, fejl: res.fejl, hash: res.hash || (gl && gl.hash) || '',
-      aendret, sidstAendret: aendret ? new Date().toISOString() : (gl && gl.sidstAendret) || '',
-      antal: fund.length, tjekket: new Date().toISOString(),
-    });
-    for (const e of fund) arrangementer.push({ kommune: r.kommune, dato: e.dato, start: e.start, slut: e.slut, titel: e.titel, sted: e.sted || r.sted, kilde: e.url || r.url, udsolgt: e.udsolgt, krydstjekket: false, fra: r.sted });
-    console.log(`${res.ok ? 'OK ' : 'FEJL'} ${r.kommuneNavn} · ${r.sted} · ${fund.length} fund${aendret ? ' · ændret' : ''}${res.fejl ? ' · ' + res.fejl : ''}`);
+    urler.push({ ...r, status: res.status, ok: res.ok, fejl: res.fejl, hash: res.hash || (gl && gl.hash) || '',
+      aendret, sidstAendret: aendret ? new Date().toISOString() : (gl && gl.sidstAendret) || '', antal: res.events.length, tjekket: new Date().toISOString() });
+    for (const e of res.events) arrangementer.push({ kommune: r.kommune, dato: e.dato, start: e.start, slut: e.slut, titel: e.titel, sted: e.sted || r.sted, kilde: e.url || r.url, udsolgt: e.udsolgt, krydstjekket: false, fra: r.sted, urlId: r.id });
+    console.log(`${res.ok ? 'OK ' : 'FEJL'} ${r.kommune} · ${r.sted} · ${res.events.length} fund${aendret ? ' · ændret' : ''}${res.fejl ? ' · ' + res.fejl : ''}`);
   });
 }
-for (const r of liste.filter((x) => !x.aktiv)) urler.push({ kommune: r.kommune, sted: r.sted, url: r.url, type: r.type, note: r.note, aktiv: false });
+for (const r of liste.filter((x) => !x.aktiv)) urler.push(r);
 
 fs.mkdirSync(path.dirname(UD), { recursive: true });
 fs.writeFileSync(UD, JSON.stringify({ opdateret: new Date().toISOString(), fra: iDag, til: SLUT, urler, arrangementer }, null, 1) + '\n');

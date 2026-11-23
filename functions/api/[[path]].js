@@ -1,12 +1,15 @@
 // Cloudflare Pages Function for "Tid & Sted".
-// Gemmer mine OK'er/rettelser (tjek), møder og arrangementer (moeder),
-// egne steder (kilder) og indsatte søgeresultater (fund) i Cloudflare KV.
+// Gemmer mine OK'er/rettelser (tjek), møder og arrangementer (moeder), egne steder (kilder),
+// ekstra URL'er (urler) og indsatte søgeresultater (fund) i Cloudflare KV.
+// /api/tjek?url=… tjekker én URL med det samme ("Tjek nu" i appen).
 //
 // Opsætning i Cloudflare (Pages-projektet > Settings):
 //   KV-binding:  TS  -> et KV-navnerum, fx "tidogsted"
 //   Secret:      TS_KODE           (valgfri, men anbefalet) – kode, der kræves for at gemme
 
-const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund'];
+import { tjekUrl } from '../../lib/tjek.js';
+
+const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler'];
 
 const svar = (data, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -48,6 +51,13 @@ export async function onRequest({ request, env, params }) {
       return svar({ ok: true });
     }
     return svar({ fejl: 'Metoden understøttes ikke' }, 405);
+  }
+
+  if (dele[0] === 'tjek' && metode === 'GET') {
+    if (!godkendt) return svar({ fejl: 'Forkert kode' }, 401);
+    const url = new URL(request.url).searchParams.get('url') || '';
+    if (!/^https?:\/\/[^\s]+$/i.test(url)) return svar({ fejl: 'Ugyldig URL' }, 400);
+    return svar(await tjekUrl(url));
   }
 
   return svar({ fejl: 'Ikke fundet' }, 404);
