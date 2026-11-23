@@ -11,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod } from '../lib/tjek.js';
+import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod, udenforKommune } from '../lib/tjek.js';
 
 const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
@@ -138,7 +138,7 @@ for (let i = 0; i < aktive.length; i += 4) {
     const aendret = !!(gl && gl.hash && res.hash && gl.hash !== res.hash);
     urler.push({ ...r, status: res.status, ok: res.ok, fejl: res.fejl, hash: res.hash || (gl && gl.hash) || '',
       aendret, sidstAendret: aendret ? new Date().toISOString() : (gl && gl.sidstAendret) || '', antal: res.events.length, tjekket: new Date().toISOString() });
-    for (const e of res.events) arrangementer.push({ kommune: r.kommune, dato: e.dato, start: e.start, slut: e.slut, titel: e.titel, sted: e.sted || r.sted, kilde: e.url || r.url, udsolgt: e.udsolgt, krydstjekket: false, fra: r.sted, urlId: r.id });
+    for (const e of res.events) if (!udenforKommune(e.sted, r.kommune, cfg.kommuner)) arrangementer.push({ kommune: r.kommune, dato: e.dato, start: e.start, slut: e.slut, titel: e.titel, sted: e.sted || r.sted, kilde: e.url || r.url, udsolgt: e.udsolgt, krydstjekket: false, fra: r.sted, urlId: r.id });
     console.log(`${res.ok ? 'OK ' : 'FEJL'} ${r.kommune} · ${r.sted} · ${res.events.length} fund${aendret ? ' · ændret' : ''}${res.fejl ? ' · ' + res.fejl : ''}`);
   });
 }

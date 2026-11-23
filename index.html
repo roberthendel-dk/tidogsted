@@ -669,7 +669,7 @@ $('urlExcel').onclick=()=>{
 /* ---------- uden Claude ---------- */
 let LIB=null;const hentLib=async()=>LIB||(LIB=await import('./lib/tjek.js'));
 $('knApp').onclick=async()=>{const tekst=$('knTekst').value.trim();if(!tekst){toast('Indsæt først teksten fra KultuNaut');return}
-  const L2=await hentLib();tilfoejKn(L2.tekstEvents(tekst,{ref:IDAG,fra:avis}))};
+  const L2=await hentLib();tilfoejKn(L2.tekstEvents(tekst,{ref:IDAG,fra:avis}).filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)))};
 $('saetApp').onclick=async()=>{const tekst=$('raa').value.trim();if(!tekst){toast('Skriv først nogle arrangementer');return}
   const L2=await hentLib();const r=L2.tekstEvents(tekst,{ref:IDAG,fra:avis,standardDato:avis});if(!r.length){toast('Fandt ingen arrangementer – skriv dag, klokkeslæt og titel');return}saetRaa(r)};
 let soeger=false;
@@ -690,7 +690,7 @@ async function sogUdenClaude(){
       const st=+r.headers.get('x-status')||200,tekst=await r.text(),base=r.headers.get('x-url')||k.url;
       if(st>=400){status.push({...k,ok:false,fejl:'HTTP '+st,antal:0});return}
       const{events}=L2.laesSide(tekst,r.headers.get('x-type')||'',{fra,til});
-      for(const e of events){let kilde=k.url;try{if(e.url)kilde=new URL(e.url,base).href}catch{}fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted||k.navn,kilde,udsolgt:!!e.udsolgt,krydstjekket:false,fra:k.navn})}
+      for(const e of events){if(L2.udenforKommune(e.sted,komId,CFG.kommuner))continue;let kilde=k.url;try{if(e.url)kilde=new URL(e.url,base).href}catch{}fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted||k.navn,kilde,udsolgt:!!e.udsolgt,krydstjekket:false,fra:k.navn})}
       status.push({...k,ok:true,antal:events.length});
     }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0})}
     finally{n++;['sogApp','ugeApp'].forEach(i=>$(i).textContent='Søger … '+n+'/'+kilder.length)}};
