@@ -1,0 +1,274 @@
+{
+  "_forklaring": "Kommunernes faste data. Ret her for at ændre steder, faste mødetider, mødekilder eller byer. Appen og de automatiske søgninger læser filen.",
+  "site": "https://tidogsted.pages.dev",
+  "repo": "roberthendel-dk/tidogsted",
+  "kommuner": [
+    {
+      "id": "naestved",
+      "navn": "Næstved",
+      "raad": "Byrådsmøde",
+      "tid": "18:30",
+      "sted": "Byrådssalen, Næstved Rådhus",
+      "auto": "04.13",
+      "byer": "Næstved, Fensmark, Holme-Olstrup, Glumsø, Fuglebjerg, Karrebæksminde, Herlufmagle, Tappernøje, Mogenstrup, Hammer, Rislev, Brøderup",
+      "moedekilder": [
+        {
+          "navn": "Dagsordensportal",
+          "url": "https://dagsordener.naestved.dk/"
+        },
+        {
+          "navn": "Den politiske mødeplan",
+          "url": "https://www.naestved.dk/politik/byraad/den-politiske-moedeplan#byraadet-33"
+        }
+      ],
+      "steder": [
+        {
+          "navn": "Næstved Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Næstved Museum",
+          "url": ""
+        },
+        {
+          "navn": "Grønnegades Kaserne",
+          "url": ""
+        },
+        {
+          "navn": "Herlufsholm",
+          "url": ""
+        },
+        {
+          "navn": "Sankt Mortens Kirke (koncerter)",
+          "url": ""
+        },
+        {
+          "navn": "Sankt Peders Kirke (koncerter)",
+          "url": ""
+        },
+        {
+          "navn": "Næstved Arena",
+          "url": ""
+        },
+        {
+          "navn": "Holmegaard Værk, Fensmark",
+          "url": ""
+        },
+        {
+          "navn": "Gavnø Slot",
+          "url": ""
+        },
+        {
+          "navn": "Næstved Boldklub, JHH Park",
+          "url": "https://naestvedboldklub.dk/kommende-kamp-division/"
+        },
+        {
+          "navn": "Næstved HG (B-Ligaen for kvinder)",
+          "url": ""
+        }
+      ],
+      "ekstra": "Hjemmekampe: Næstved Boldklub (2. division, JHH Park, https://naestvedboldklub.dk/kommende-kamp-division/) og Næstved HG (B-Ligaen for kvinder).",
+      "moedenote": ""
+    },
+    {
+      "id": "faxe",
+      "navn": "Faxe",
+      "raad": "Byrådsmøde",
+      "tid": "18:30",
+      "sted": "Byrådssalen, Søndergade, Haslev",
+      "auto": "04.31",
+      "byer": "Haslev, Faxe, Faxe Ladeplads, Rønnede, Karise, Dalby, Terslev, Ulse, Bråby, Kongsted",
+      "moedekilder": [
+        {
+          "navn": "Dagsordensportal",
+          "url": "https://dagsordener.faxekommune.dk/"
+        },
+        {
+          "navn": "Byrådets dagsordener",
+          "url": "https://dagsordener.faxekommune.dk/?request.kriterie.udvalgId=a5dbffb1-c27c-442b-bc53-8ea3fa6ff889"
+        },
+        {
+          "navn": "Mødekalender byråd og udvalg",
+          "url": "https://www.faxekommune.dk/da/politik/byraad-udvalg/byraadet-2026-2029/moedekalender-byraad-udvalg"
+        }
+      ],
+      "steder": [
+        {
+          "navn": "Haslev Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Faxe Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Geomuseum Faxe",
+          "url": ""
+        },
+        {
+          "navn": "Faxe Kalkbrud",
+          "url": ""
+        },
+        {
+          "navn": "Haslev Kirke (koncerter)",
+          "url": ""
+        },
+        {
+          "navn": "Faxe Kirke (koncerter)",
+          "url": ""
+        }
+      ],
+      "ekstra": "",
+      "moedenote": "Mødeplanerne findes også som PDF. Dagsordenernes links har dato og tid i adressen, fx vis?Dagsorden-Byraadet-d.26-11-2026-kl.18.30"
+    },
+    {
+      "id": "vordingborg",
+      "navn": "Vordingborg",
+      "raad": "Kommunalbestyrelsesmøde",
+      "tid": "18:00",
+      "sted": "Byrådssalen, Vordingborg Rådhus",
+      "auto": "04.47",
+      "byer": "Vordingborg, Stege, Præstø, Kalvehave, Lundby, Nyråd, Stensved, Mern, Bogø, Klintholm Havn, Borre",
+      "moedekilder": [
+        {
+          "navn": "Dagsordensportal (stavet uden e)",
+          "url": "https://dagsordner.vordingborg.dk/"
+        },
+        {
+          "navn": "Mødekalender",
+          "url": "https://www.vordingborg.dk/politik/kommunalbestyrelsen/moedekalender"
+        }
+      ],
+      "steder": [
+        {
+          "navn": "Danmarks Borgcenter",
+          "url": ""
+        },
+        {
+          "navn": "Vordingborg Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Stege Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Præstø Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "GeoCenter Møns Klint",
+          "url": ""
+        },
+        {
+          "navn": "Møns Museum",
+          "url": ""
+        },
+        {
+          "navn": "Vor Frue Kirke, Vordingborg (koncerter)",
+          "url": ""
+        }
+      ],
+      "ekstra": "",
+      "moedenote": "Undtagelser fra fast tid og sted, fx eksterne møder, står i kommunens mødekalender."
+    },
+    {
+      "id": "slagelse",
+      "navn": "Slagelse",
+      "raad": "Byrådsmøde",
+      "tid": "18:00",
+      "sted": "Byrådssalen, Slagelse Rådhus",
+      "auto": "05.07",
+      "byer": "Slagelse, Korsør, Skælskør, Dalmose, Vemmelev, Boeslunde, Sørbymagle, Hashøj, Havrebjerg, Rude, Eggeslevmagle",
+      "moedekilder": [
+        {
+          "navn": "Dagsordensportal",
+          "url": "https://dagsordener.slagelse.dk/"
+        },
+        {
+          "navn": "Byrådsmøder og mødeplan",
+          "url": "https://www.slagelse.dk/da/demokrati-og-udvikling/politik/byraadet/byraadsmoeder-og-moedeplan/"
+        }
+      ],
+      "steder": [
+        {
+          "navn": "Slagelse Musikhus",
+          "url": ""
+        },
+        {
+          "navn": "Slagelse Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Korsør Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Skælskør Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Trelleborg (vikingeborgen)",
+          "url": ""
+        },
+        {
+          "navn": "Slagelse Museum",
+          "url": ""
+        },
+        {
+          "navn": "Sankt Mikkels Kirke (koncerter)",
+          "url": ""
+        }
+      ],
+      "ekstra": "",
+      "moedenote": ""
+    },
+    {
+      "id": "soroe",
+      "navn": "Sorø",
+      "raad": "Kommunalbestyrelsesmøde",
+      "tid": "17:00",
+      "sted": "Byrådssalen, Sorø Gamle Rådhus",
+      "auto": "05.23",
+      "byer": "Sorø, Dianalund, Ruds Vedby, Stenlille, Fjenneslev, Pedersborg, Munke Bjergby, Alsted",
+      "moedekilder": [
+        {
+          "navn": "Dagsordensportal",
+          "url": "https://dagsordener.soroe.dk/"
+        },
+        {
+          "navn": "Kommunalbestyrelsens møder",
+          "url": "https://soroe.dk/politik-og-indflydelse/politikere-raad-og-naevn/kommunalbestyrelsen/moeder"
+        }
+      ],
+      "steder": [
+        {
+          "navn": "Sorø Akademi",
+          "url": ""
+        },
+        {
+          "navn": "Sorø Klosterkirke (koncerter)",
+          "url": ""
+        },
+        {
+          "navn": "Sorø Kunstmuseum",
+          "url": ""
+        },
+        {
+          "navn": "Sorø Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Dianalund Bibliotek",
+          "url": ""
+        },
+        {
+          "navn": "Stenlille Bibliotek",
+          "url": ""
+        }
+      ],
+      "ekstra": "",
+      "moedenote": ""
+    }
+  ]
+}

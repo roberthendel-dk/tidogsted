@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tid & Sted</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: en redaktionel arbejdsbænk – præcis, rolig, hurtig at scanne
+   IDEA: en køreplan / et trykt spaltemanuskript med hængende klokkeslæt
+   PICTURE: selve spalten, sat som i avisen, med store hængende tider
+   COLOUR and TYPE: hvidt avispapir, sort tryk, ét signalrødt accent; Archivo bred + normal
+   LAYOUT: kontrolkolonne til venstre, spalten til højre, ugens bokse i bunden */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#0f0f0f);--ink:light-dark(#121212,#f1f1ef);--mut:light-dark(#5f5f5f,#a9a9a4);
+--rule:light-dark(#dcdcd8,#2c2c2a);--panel:light-dark(#f4f4f1,#181817);--red:light-dark(#d4001f,#ff5a6a);
+--ok:light-dark(#11643a,#6fd39a);--warn:light-dark(#8a5300,#f0b45a);--chip:light-dark(#ecece8,#262624)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Archivo,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(18px,3vw,40px) max(4vw,16px)}
+h1,h2,h3{font-stretch:112%;line-height:1.05;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:850;letter-spacing:-.01em}
+h2{font-size:20px;font-weight:800}
+h3{font-size:17px;font-weight:800}
+.mast{border-bottom:6px solid var(--ink);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:end;justify-content:space-between;padding-bottom:18px}
+.mast p{margin:6px 0 0;color:var(--mut)}
+.mast .amp{color:var(--red)}
+.ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end}
+label{display:grid;gap:4px;font-size:14px;color:var(--mut)}
+select,input,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--rule);border-radius:4px;padding:9px 10px;min-height:44px}
+textarea{width:100%;min-height:120px;resize:vertical;line-height:1.45}
+select:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+button{font:inherit;font-size:15px;font-weight:650;min-height:44px;padding:8px 14px;border-radius:4px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer}
+button.pri{background:var(--ink);color:var(--bg)}
+button.red{background:var(--red);border-color:var(--red);color:#fff}
+button.sm{min-height:36px;padding:4px 10px;font-size:14px}
+button:disabled{opacity:.4;cursor:default}
+.knap{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+a{color:inherit;text-decoration-color:var(--red);text-underline-offset:3px}
+a.knaplink{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1.5px dashed var(--ink);border-radius:4px;text-decoration:none;font-weight:650;font-size:15px}
+.radio{display:flex;gap:8px;flex-wrap:wrap}
+.radio label{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:15px;border:1.5px solid var(--rule);border-radius:4px;padding:8px 12px;min-height:44px;cursor:pointer}
+.radio input{min-height:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media(min-width:1000px){.grid{grid-template-columns:minmax(300px,400px) minmax(0,1fr)}}
+.venstre>section,.hoejre>section{border-top:2px solid var(--ink);padding:14px 0 22px}
+.venstre>section:first-child,.hoejre>section:first-child{border-top-width:4px}
+.mut{color:var(--mut);font-size:14px}
+.status{background:var(--panel);border-left:4px solid var(--rule);padding:10px 12px;margin-top:10px;font-size:15px}
+.status.klar{border-color:var(--ok)}.status.ny{border-color:var(--red)}
+ul.liste{list-style:none;margin:10px 0 0;padding:0}
+ul.liste li{display:flex;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding:7px 0;font-size:15px}
+ul.liste li>span:first-child{overflow-wrap:anywhere;flex:1}ul.liste li>button,ul.liste li>a,ul.liste li>.knap{flex:none}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.form .hel{grid-column:1/-1}
+.form input,.form select{width:100%}
+.hoved{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+/* the picture: the printed column */
+.spalte{margin-top:14px;padding:22px clamp(14px,3vw,30px);background:var(--panel);border-top:3px solid var(--red);min-height:300px}
+.spalte .dag{font-weight:850;font-stretch:112%;font-size:clamp(22px,2.6vw,28px);margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.spalte .dag:first-child{margin-top:0}
+.linje{display:grid;grid-template-columns:7.2em minmax(0,1fr);gap:4px 14px;padding:6px 0;font-size:17px}
+.linje .tid{font-weight:800;font-stretch:118%;font-size:19px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.linje .tid.mangler{color:var(--red)}
+.linje.moede .tid{color:var(--red)}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.tag.tjek{background:var(--red);color:#fff}.tag.uds{background:var(--ink);color:var(--bg)}
+.tom{color:var(--mut);font-style:italic;padding:6px 0}
+.manuel{background:light-dark(#fff3d6,#3a2c0c);color:var(--ink);padding:8px 12px;margin-top:10px;font-size:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+#spalteTekst{min-height:340px;font-size:15px;margin-top:14px}
+.check li{display:block}.check .fejl{color:var(--red);font-weight:700}.check .adv{color:var(--warn);font-weight:700}
+.godt{color:var(--ok);font-weight:700;margin-top:8px}
+.note{white-space:pre-wrap;background:var(--panel);padding:12px;font-size:14px;margin-top:10px;max-height:360px;overflow:auto}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;margin-top:10px}
+th,td{text-align:left;border-bottom:1px solid var(--rule);padding:7px 6px;vertical-align:top}
+th{font-size:13px;color:var(--mut);font-weight:700}
+td.t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums}
+tr.fjern td{opacity:.45;text-decoration:line-through}tr.fjern td:last-child{opacity:1;text-decoration:none}
+td .handl{display:flex;gap:6px;flex-wrap:wrap}
+.retform{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;background:var(--panel);padding:10px}
+.retform input{width:100%}.retform .knap{grid-column:1/-1;margin:0}
+.src{font-size:12px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--chip);white-space:nowrap}
+.ja{color:var(--ok);font-weight:700}.nej{color:var(--red);font-weight:700}
+.uge{border-top:6px solid var(--ink)}
+.ugegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:14px}
+.ugedag{border:1.5px solid var(--rule);border-top:4px solid var(--ink);padding:10px 12px;min-height:120px}
+.ugedag h3{font-size:16px;margin-bottom:6px}
+.ugedag li{font-size:14px;padding:5px 0;border-bottom:1px solid var(--rule);display:block}
+.ugedag b{font-variant-numeric:tabular-nums}
+details{margin-top:12px}summary{cursor:pointer;font-weight:650;font-size:15px;min-height:32px}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:4px;font-size:15px;max-width:90vw;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.vis{opacity:1}
+#kopi,.dlg{position:fixed;inset:0;background:#0008;display:none;place-items:center;padding:16px;z-index:9}
+#kopi.vis,.dlg.vis{display:grid}
+#kopi>div,.dlg>div{background:var(--bg);padding:18px;max-width:760px;width:100%;border-top:4px solid var(--red)}
+#kopi textarea{min-height:50vh;font-size:13px}.dlg textarea{min-height:30vh;font-size:14px}
+.dbnote{color:var(--red);font-size:14px;margin-top:6px}
+@media(max-width:600px){.linje{grid-template-columns:minmax(0,1fr)}.form,.retform{grid-template-columns:minmax(0,1fr)}
+table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mut)}.stack td:empty{display:none}}
+@media(prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<header class="mast band">
+  <div><h1>Tid <span class="amp">&amp;</span> Sted</h1><p id="avisLinje">Indlæser …</p><div id="dbNote" class="dbnote"></div></div>
+  <div class="ctrl">
+    <label for="kom">Kommune<select id="kom"></select></label>
+    <div id="avisValg"></div>
+  </div>
+</header>
+
+<main class="grid band">
+  <aside class="venstre">
+    <section>
+      <h2>Søgning</h2>
+      <div id="status" class="status">Ingen søgning gemt endnu.</div>
+      <div class="knap">
+        <button id="brugFund" class="pri">Brug den fundne spalte</button>
+        <button id="sogNu" class="red">Søg nu</button>
+        <button id="hentIgen">Hent resultat igen</button>
+      </div>
+      <div class="knap"><a id="knLink" class="knaplink" href="#" target="_blank" rel="noopener">Browse KultuNaut</a></div>
+      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg nu" kopierer den samme søgeopgave, hvis du vil køre den med det samme i en ny Claude-chat med websøgning.</p>
+      <details><summary>Indsæt et resultat i hånden (JSON)</summary>
+        <p class="mut">Indsæt den JSON-kodeblok, som søgechatten gav dig.</p>
+        <textarea id="jsonInd" placeholder='{"type":"spalte", …}'></textarea>
+        <div class="knap"><button id="jsonGem">Gem resultatet</button></div>
+      </details>
+    </section>
+
+    <section>
+      <h2>Hent arrangementer fra KultuNaut</h2>
+      <p class="mut">Kopiér teksten fra KultuNaut-listen og sæt den ind. Claude tager kun arrangementer i kommunen og i perioden med, alle markeret [TJEK].</p>
+      <textarea id="knTekst" placeholder="Indsæt kopieret tekst fra KultuNaut her"></textarea>
+      <div class="knap"><button id="knHent" class="pri">Hent arrangementer</button><button id="knFjern">Fjern KultuNaut-fund</button></div>
+      <p id="knInfo" class="mut"></p>
+    </section>
+
+    <section>
+      <h2>Rå arrangementer</h2>
+      <p class="mut">Skriv eller indsæt arrangementer i fri form. Claude sætter dem i spalten.</p>
+      <textarea id="raa" placeholder="Fx: Onsdag kl 19.30 koncert med Tina Dico i Grønnegades Kaserne – udsolgt"></textarea>
+      <div class="knap"><button id="saet" class="pri">Sæt spalten</button><button id="orddeling">Ret kun orddeling</button><button id="raaFjern">Fjern rå arrangementer</button></div>
+      <p id="raaInfo" class="mut"></p>
+    </section>
+
+    <section>
+      <h2>Tilføj arrangementer og møder</h2>
+      <form id="moedeForm" class="form">
+        <label class="hel">Type<select id="mType">
+          <option value="raad">Byrådsmøde / kommunalbestyrelsesmøde</option>
+          <option value="borger">Borgermøde</option>
+          <option value="hoering">Høringsmøde</option>
+          <option value="udvalg">Åbent udvalgsmøde</option>
+          <option value="arr">Arrangement</option>
+        </select></label>
+        <label>Dato<input id="mDato" type="date" required></label>
+        <label>Tid<input id="mTid" type="time"></label>
+        <label>Slut<input id="mSlut" type="time"></label>
+        <label id="mEmneL">Emne / titel<input id="mEmne" placeholder="Emne eller titel"></label>
+        <label class="hel">Sted<input id="mSted" placeholder="Sted"></label>
+        <div class="hel knap" style="margin:0"><button class="pri" type="submit">Tilføj</button></div>
+      </form>
+      <h3 style="margin-top:18px">Kommende</h3>
+      <ul id="moedeListe" class="liste"></ul>
+    </section>
+
+    <section>
+      <h2 id="stederTitel">Steder, som søgningen gennemgår</h2>
+      <ul id="stederListe" class="liste"></ul>
+      <form id="stedForm" class="form">
+        <label>Sted<input id="sNavn" required placeholder="Navn"></label>
+        <label>Officiel side<input id="sUrl" placeholder="https://…"></label>
+        <div class="hel knap" style="margin:0"><button type="submit">Tilføj sted</button></div>
+      </form>
+    </section>
+    <section>
+      <h2>Indstillinger</h2>
+      <div id="apiStatus" class="status">Tjekker forbindelsen …</div>
+      <form id="kodeForm" class="form">
+        <label class="hel">Kode til at gemme<input id="kode" type="password" autocomplete="current-password" placeholder="Koden fra Cloudflare (TS_KODE)"></label>
+        <div class="hel knap" style="margin:0"><button type="submit">Gem koden i denne browser</button></div>
+      </form>
+      <p class="mut">Søgeopgaven og kommunernes faste data ligger i repoet under <b>public/opgave/</b>. Ret dem dér, så følger appen og de automatiske søgninger med.</p>
+    </section>
+  </aside>
+
+  <section class="hoejre">
+    <section>
+      <div class="hoved">
+        <h2 id="spalteTitel">Spalten</h2>
+        <div class="knap" style="margin:0">
+          <button id="kopier" class="pri">Kopiér spalten</button>
+          <button id="rediger">Redigér teksten</button>
+        </div>
+      </div>
+      <div id="manuel"></div>
+      <div id="spalteVis" class="spalte"></div>
+      <textarea id="spalteTekst" hidden aria-label="Spaltens tekst"></textarea>
+    </section>
+
+    <section>
+      <div class="hoved"><h3>Tjek af formatet</h3><button id="retAuto" class="sm">Ret tankestreger og orddeling</button></div>
+      <ul id="check" class="liste check"></ul>
+    </section>
+
+    <section>
+      <h3>Note</h3>
+      <div id="note" class="note"></div>
+    </section>
+
+    <section>
+      <div class="hoved"><h3>Data til verificering</h3>
+        <div class="knap" style="margin:0">
+          <button id="verAlle" class="red sm">Verificér alle med Claude</button>
+          <button id="csv" class="sm">CSV</button><button id="json" class="sm">JSON</button>
+        </div>
+      </div>
+      <div class="scroll"><table class="stack" id="verTabel"><thead><tr><th>Dato</th><th>Tid</th><th>Arrangement</th><th>Sted</th><th>Kilde</th><th>Krydstjekket</th><th>Handling</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+</main>
+
+<section class="band uge">
+  <div class="hoved">
+    <div><h2>De næste syv dage</h2><p class="mut" id="ugeInfo">Ikke til tryk.</p></div>
+    <div class="knap" style="margin:0"><button id="ugeSog" class="red">Søg de næste syv dage</button><button id="ugeHent">Hent resultat igen</button></div>
+  </div>
+  <div id="ugeGrid" class="ugegrid"></div>
+</section>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="claudeDlg" class="dlg" role="dialog" aria-modal="true" aria-labelledby="cdTitel"><div>
+  <h3 id="cdTitel">Lad Claude læse teksten</h3>
+  <p class="mut">Claude er ikke koblet direkte på siden. Opgaven er kopieret – sæt den ind i en Claude-chat, og indsæt svaret (JSON) her.</p>
+  <textarea id="cdSvar" placeholder='{"arrangementer":[…]}'></textarea>
+  <div class="knap"><button id="cdOk" class="pri">Brug svaret</button><button id="cdKopi">Kopiér opgaven igen</button><button id="cdLuk">Annullér</button></div>
+</div></div>
+<div id="kopi" role="dialog" aria-modal="true" aria-labelledby="kopiTitel"><div>
+  <h3 id="kopiTitel">Kopiér teksten</h3>
+  <p class="mut">Browseren tillod ikke automatisk kopiering. Markér teksten og kopiér den selv.</p>
+  <textarea id="kopiTekst" readonly></textarea>
+  <div class="knap"><button id="kopiLuk" class="pri">Luk</button></div>
+</div></div>
+
+<script>
+{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^https:\/\//i.test(u||'')?u:'';
+
+/* ---------- datoer ---------- */
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const fra=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const add=(s,n)=>{const d=fra(s);d.setDate(d.getDate()+n);return iso(d)};
+const DAGE=['søndag','mandag','tirsdag','onsdag','torsdag','fredag','lørdag'];
+const MDR=['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'];
+const stort=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const overskrift=s=>{const d=fra(s);return stort(DAGE[d.getDay()])+' den '+d.getDate()+'. '+MDR[d.getMonth()]};
+const kort=s=>{const d=fra(s);return stort(DAGE[d.getDay()])+' '+d.getDate()+'. '+MDR[d.getMonth()].slice(0,3)+'.'};
+const IDAG=iso(new Date());
+function aviser(t){const w=fra(t).getDay();if(w>=1&&w<=4)return[add(t,1)];if(w===5)return[add(t,1),add(t,3)];if(w===6)return[add(t,2)];return[add(t,1)]}
+const avisNavn=a=>stort(DAGE[fra(a).getDay()])+'savisen';
+const dageFor=a=>[a,add(a,1)];
+const ugeFor=a=>[2,3,4,5,6,7,8].map(i=>add(a,i));
+
+/* ---------- tider og nøgler ---------- */
+function normTid(v){if(!v)return'';const s=String(v).trim().replace(/^kl\.?\s*/i,'');const m=s.match(/^(\d{1,2})(?:[.:](\d{2}))?$/);if(!m)return'';const h=+m[1];if(h>24)return'';return pad(h)+':'+(m[2]||'00')}
+const ft=t=>{const[h,m]=t.split(':');return pad(+h)+(m&&m!=='00'?'.'+m:'')};
+const normT=s=>String(s||'').toLowerCase().replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'aa').normalize('NFKD').replace(/[^a-z0-9]/g,'').slice(0,24);
+const hash=s=>{let h=5381;for(const c of s)h=((h<<5)+h+c.codePointAt(0))|0;return(h>>>0).toString(36)};
+const noegle=e=>e.dato+'|'+e.start+'|'+normT(e.titel);
+const nytId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+
+/* ---------- lokal lagring ---------- */
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+
+/* ---------- tilstand ---------- */
+let CFG={site:'',kommuner:[]},OPGAVE='';
+const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{}};
+let redigerer=false,retter=null,API={kv:false,claude:false,kode:false,godkendt:true,svar:false};
+const AVISER=aviser(IDAG);
+let komId=ls.get('ts:kommune','naestved');
+let avis=ls.get('ts:avis:'+IDAG,AVISER[0]);if(!AVISER.includes(avis))avis=AVISER[0];
+const kom=()=>CFG.kommuner.find(k=>k.id===komId)||CFG.kommuner[0];
+const lokKey=()=>'ts:'+komId+':'+avis;
+const L=()=>Object.assign({spalte:'',manuel:false,brugFund:true,raa:[],kn:[],raaTekst:''},ls.get(lokKey(),{}));
+const gemL=o=>ls.set(lokKey(),o);
+const fundId=()=>komId+'_'+avis;
+const ugeId=()=>komId+'_uge_'+avis;
+const autoTekst=()=>kom().auto?'Automatisk søgning for '+kom().navn+' kører mandag–lørdag kl. '+kom().auto+'.':'';
+
+/* ---------- datalag: Cloudflare KV, ellers denne browser ---------- */
+const store={
+  hdr(){const k=ls.get('ts:kode','');return k?{'x-kode':k}:{}},
+  async alle(col){if(API.kv){const r=await fetch('/api/data/'+col,{cache:'no-store'});if(!r.ok)throw new Error('Kunne ikke hente ('+r.status+')');return r.json()}return ls.get('ts:db:'+col,{})},
+  async put(col,id,data){if(API.kv){const r=await fetch('/api/data/'+col+'/'+encodeURIComponent(id),{method:'PUT',headers:{'content-type':'application/json',...this.hdr()},body:JSON.stringify(data)});if(r.status===401)throw new Error('Forkert eller manglende kode – se Indstillinger');if(!r.ok)throw new Error('Kunne ikke gemme ('+r.status+')')}else{const a=ls.get('ts:db:'+col,{});a[id]=data;ls.set('ts:db:'+col,a)}S[col][id]=data},
+  async del(col,id){if(API.kv){const r=await fetch('/api/data/'+col+'/'+encodeURIComponent(id),{method:'DELETE',headers:this.hdr()});if(r.status===401)throw new Error('Forkert eller manglende kode – se Indstillinger');if(!r.ok)throw new Error('Kunne ikke slette ('+r.status+')')}else{const a=ls.get('ts:db:'+col,{});delete a[id];ls.set('ts:db:'+col,a)}delete S[col][id]}
+};
+async function skriv(fn,ok){try{await fn();if(ok)toast(ok);render();return true}catch(e){toast(e.message||'Kunne ikke gemme');return false}}
+async function hentJson(url){try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return null;return await r.json()}catch{return null}}
+
+async function hentFiler(){
+  const ids=[fundId(),ugeId()];
+  const [a,b,m]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json')]);
+  S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
+}
+async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder']){try{S[c]=await store.alle(c)}catch(e){dbNote(e.message)}}}
+async function opdater(besked){await Promise.all([hentFiler(),hentSamlinger()]);render();if(besked)toast(besked)}
+/* nyeste af fil (automatisk søgning) og indsat resultat */
+function fundDoc(id){const a=S.fil[id],b=S.fund[id];if(a&&b)return String(b.opdateret||'')>String(a.opdateret||'')?b:a;return a||b||null}
+function alleMoeder(){
+  const ud=[],skjul=new Set(Object.entries(S.moeder).filter(([,m])=>m.skjult).map(([id])=>id));
+  for(const m of S.filMoeder[komId]||[]){const id=m.id||(komId+'_'+m.dato+'_'+normT(m.titel));if(!skjul.has(id))ud.push({...m,id,af:'søgning',fil:true})}
+  for(const[id,m]of Object.entries(S.moeder))if(!m.skjult&&m.kommune===komId)ud.push({...m,id});
+  return ud;
+}
+
+/* ---------- normalisering og sammenfletning ---------- */
+const ja=v=>v===true||/^ja$/i.test(v||'');
+function norm(e,src){
+  const ok=src==='fund'||src==='uge'?ja(e.krydstjekket):src==='moede'?(e.af==='søgning'?ja(e.krydstjekket):true):src==='raa'?!e.usikker:false;
+  return{dato:String(e.dato||''),start:normTid(e.start),slut:normTid(e.slut),titel:String(e.titel||'').trim(),sted:String(e.sted||'').trim(),kilde:String(e.kilde||e.url||(src==='kn'?'KultuNaut':'')),udsolgt:!!e.udsolgt,aflyst:!!e.aflyst,ok,src};
+}
+function parseSpalte(txt,dates){
+  const out=[];let dato=dates[0];
+  for(const r of String(txt||'').split('\n')){const l=r.trim();if(!l)continue;
+    const h=dates.find(d=>overskrift(d).toLowerCase()===l.toLowerCase());if(h){dato=h;continue}
+    const m=l.match(/^kl\.\s*([\d.:]+|\[TJEK\])(?:[–-]([\d.:]+))?\s*[–-]\s*(.+)$/);if(!m)continue;
+    let rest=m[3];const uds=/\[UDSOLGT\]/.test(rest),tj=/\[TJEK\]/.test(rest)||m[1]==='[TJEK]';rest=rest.replace(/\s*\[(UDSOLGT|TJEK)\]/g,'').trim();
+    const i=rest.indexOf(', ');out.push({dato,start:m[1]==='[TJEK]'?'':m[1],slut:m[2]||'',titel:i>0?rest.slice(0,i):rest,sted:i>0?rest.slice(i+2):'',udsolgt:uds,krydstjekket:!tj})}
+  return out;
+}
+const fundEvents=(f,dates)=>Array.isArray(f.arrangementer)&&f.arrangementer.length?f.arrangementer:parseSpalte(f.spalte,dates);
+function saml(dates,fd,fundSrc){
+  const lok=L(),seen=new Set(),out=[];
+  const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato))return;const n=noegle(e);if(seen.has(n))return;seen.add(n);out.push(e)};
+  if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
+  alleMoeder().forEach(m=>push(norm(m,'moede')));
+  (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
+  (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
+  for(const e of out){e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
+    if(t){if(t.status==='fjernet')e.fjernet=true;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde}e.ok=true}}}
+  return out.sort((a,b)=>a.dato.localeCompare(b.dato)||(a.start||'99').localeCompare(b.start||'99')||a.titel.localeCompare(b.titel,'da'));
+}
+const avisEvents=()=>saml(dageFor(avis),L().brugFund?fundDoc(fundId()):null,'fund');
+const ugeEvents=()=>saml(ugeFor(avis),fundDoc(ugeId()),'uge');
+
+function linje(e){
+  const tid=e.start?'kl. '+ft(e.start)+(e.slut?'–'+ft(e.slut):''):'kl. [TJEK]';
+  let l=tid+' – '+e.titel+(e.sted?', '+e.sted:'');
+  if(e.udsolgt)l+=' [UDSOLGT]';
+  if(e.start&&!e.ok)l+=' [TJEK]';
+  return l;
+}
+function bygTekst(){const ev=avisEvents().filter(e=>!e.fjernet);return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
+const spalteTekst=()=>{const l=L();return l.manuel&&l.spalte?l.spalte:bygTekst()};
+
+/* ---------- formattjek ---------- */
+function formatTjek(txt){
+  const res=[],linjer=txt.split('\n'),heads=dageFor(avis).map(overskrift);let n=0;const dagTael={};let cur=null;
+  linjer.forEach((r,i)=>{const l=r.trim();if(!l)return;const nr='Linje '+(i+1)+': ';
+    if(heads.includes(l)){cur=l;dagTael[l]=0;return}
+    if(/^(mandag|tirsdag|onsdag|torsdag|fredag|lørdag|søndag) den/i.test(l)){res.push(['fejl',nr+'dagsoverskriften passer ikke til avisens datoer: "'+l+'"']);return}
+    n++;if(cur)dagTael[cur]++;
+    if(!/^kl\. /.test(l))res.push(['fejl',nr+'starter ikke med "kl. "']);
+    if(/\d-\d/.test(l)||/ - /.test(l))res.push(['fejl',nr+'bindestreg i stedet for tankestreg (–)']);
+    if(/­/.test(l)||/\p{L}- \p{Ll}/u.test(l.replace(/\p{L}- (og|eller|samt|til)\b/gu,'')))res.push(['fejl',nr+'orddeling i teksten']);
+    if(/kl\. \[TJEK\]/.test(l))res.push(['adv',nr+'mangler tidspunkt']);
+    else if(/\[TJEK\]/.test(l))res.push(['adv',nr+'er ikke bekræftet [TJEK]']);
+    const t=l.match(/^kl\. (\d{1,2})(?:[.:](\d{2}))?/);if(t){if(t[1].length===1)res.push(['fejl',nr+'timetal skal have to cifre (kl. 0'+t[1]+')']);if(/^kl\. \d{1,2}:\d/.test(l))res.push(['fejl',nr+'brug punktum i klokkeslæt (kl. 10.10)']);if(t[2]==='00')res.push(['fejl',nr+'skriv "kl. '+pad(+t[1])+'" uden ".00"'])}
+    if(/\bkr\.|\bDKK\b|\d+,-|https?:|www\./i.test(l))res.push(['fejl',nr+'indeholder pris eller link']);
+    const ti=(l.split(' – ')[1]||'').split(',')[0].replace(/\s*\[.*$/,'').trim();
+    if(/^(koncert|foredrag|oplæg|forestilling|debat)$/i.test(ti))res.push(['fejl',nr+'titlen siger ikke, hvem der optræder ("'+ti+'")']);
+    if(!/, /.test(l.split(' – ').slice(1).join(' – ')))res.push(['adv',nr+'mangler sted']);
+  });
+  heads.forEach(h=>{if(!(h in dagTael))res.push(['fejl','Dagsoverskriften "'+h+'" mangler']);else if(!dagTael[h])res.push(['adv',h+': ingen arrangementer endnu'])});
+  return{res,n};
+}
+function retOrddeling(t){return String(t).replace(/­/g,'').replace(/(\p{Ll})-\s*\n\s*(\p{Ll}+)/gu,(m,a,b)=>a+b).replace(/(\p{L})- (\p{Ll}+)/gu,(m,a,b)=>['og','eller','samt','til','som'].includes(b)?m:a+b)}
+const retStreger=t=>t.replace(/(\d)\s*-\s*(\d)/g,'$1–$2').replace(/ - /g,' – ');
+
+/* ---------- små hjælpere ---------- */
+let toastT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('vis');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('vis'),3500)}
+async function kopier(txt,besked){try{await navigator.clipboard.writeText(txt);toast(besked||'Kopieret');return true}catch{$('kopiTekst').value=txt;$('kopi').classList.add('vis');$('kopiTekst').select();return false}}
+$('kopiLuk').onclick=()=>$('kopi').classList.remove('vis');
+const dbNote=m=>$('dbNote').textContent=m;
+const egneSteder=()=>Object.entries(S.kilder).filter(([,k])=>k.kommune===komId).map(([id,k])=>({...k,id}));
+const knUrl=n=>'https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr='+n+'&Area='+encodeURIComponent(kom().navn)+'-storkommune&';
+const site=()=>location.protocol==='https:'?location.origin:(CFG.site||'');
+
+/* ---------- opgavetekster (bygger på public/opgave/soegning.md) ---------- */
+function kommuneData(){const k=kom();return JSON.stringify({...k,egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''}))},null,1)}
+function soegeOpgave(kunUge){
+  const k=kom(),d=dageFor(avis),u=ugeFor(avis);
+  return`${kunUge?'LILLE SØGEOPGAVE – kun de næste syv dage (trin U og møderne i 1b)':'SØGEOPGAVE'} – "Tid & Sted", ${k.navn} Kommune (kommune-id: ${k.id})
+Kørsel: manuel fra appen. Du har ikke adgang til repoet – gem efter afsnit D.3 (én JSON-kodeblok${kunUge?' med "uge" og "moeder"':''}).
+Dags dato: ${IDAG}.
+AVIS: ${avis} (${avisNavn(avis)}). DAGE: ${d[0]} (${overskrift(d[0])}) og ${d[1]} (${overskrift(d[1])}). UGE: ${u[0]} … ${u[6]}.
+KultuNaut for kommunen: ${knUrl(1)}
+Brugerens egne steder er allerede taget med herunder (egne_steder) – du behøver ikke hente dem.
+
+KOMMUNENS DATA
+${kommuneData()}
+
+----------------------------------------
+${OPGAVE||'(Søgeopgaven public/opgave/soegning.md kunne ikke hentes.)'}`;
+}
+function verOpgave(ev){
+  return`VERIFICERINGSOPGAVE – "Tid & Sted", ${kom().navn} Kommune, ${avisNavn(avis).toLowerCase()} ${avis}
+Svar på dansk. Krydstjek hvert arrangement herunder på stedets egen officielle side (samlekalendere som KultuNaut og billetsider tæller ikke). Gæt aldrig et tidspunkt.
+
+${ev.map(e=>`- id: ${e.tid}
+  ${e.dato} · ${linje(e)}
+  nuværende kilde: ${e.kilde||'ingen'}`).join('\n')}
+
+SVAR
+Giv resultatet i ÉN kodeblok med JSON, som jeg indsætter i appen under "Indsæt et resultat i hånden":
+{"tjek":[{"id":"<id>","status":"ok" (alt stemmer) | "rettet" (tid/sted rettet) | "fjernet" (aflyst eller findes ikke),"start":"HH:MM","slut":"HH:MM" eller "","sted":"…","kilde":"https://… (officiel side)","note":"kort begrundelse"}]}
+Kan du ikke afgøre et arrangement, så udelad det og nævn det i en kort opsummering.`;
+}
+
+/* ---------- Claude ---------- */
+let cdResolve=null;
+function claudeManuelt(prompt){
+  return new Promise(res=>{cdResolve=res;$('cdSvar').value='';$('claudeDlg').classList.add('vis');kopier(prompt,'Opgaven er kopieret – sæt den ind i en Claude-chat');$('cdKopi').onclick=()=>kopier(prompt,'Opgaven er kopieret igen')});
+}
+$('cdOk').onclick=()=>{$('claudeDlg').classList.remove('vis');if(cdResolve){cdResolve($('cdSvar').value);cdResolve=null}};
+$('cdLuk').onclick=()=>{$('claudeDlg').classList.remove('vis');if(cdResolve){cdResolve(null);cdResolve=null}};
+function parseJson(t){if(!t)return null;const m=String(t).match(/```(?:json)?\s*([\s\S]*?)```/);const s=(m?m[1]:String(t)).trim();try{return JSON.parse(s)}catch{const i=s.indexOf('{'),j=s.lastIndexOf('}');if(i>=0&&j>i){try{return JSON.parse(s.slice(i,j+1))}catch{}}return null}}
+async function spoergClaude(prompt){
+  if(API.claude){try{const r=await fetch('/api/claude',{method:'POST',headers:{'content-type':'application/json',...store.hdr()},body:JSON.stringify({prompt})});const d=await r.json();if(r.ok)return d.text;toast(d.fejl||'Claude svarede ikke')}catch{toast('Claude svarede ikke')}}
+  return claudeManuelt(prompt);
+}
+const SKEMA='Returnér KUN gyldig JSON: {"arrangementer":[{"dato":"YYYY-MM-DD","start":"HH:MM" eller "","slut":"HH:MM" eller "","titel":"…","sted":"…","udsolgt":false,"usikker":false}]}';
+async function udtraek(tekst,dates,ekstra){
+  const k=kom();
+  const p=`Du hjælper med avisspalten "Tid & Sted" i et dansk dagblad. Skriv på dansk.
+Kommune: ${k.navn} (byer bl.a.: ${k.byer}). I dag er ${IDAG}.
+Gyldige datoer: ${dates.map(d=>overskrift(d)+' = '+d).join('; ')}.
+Udtræk arrangementer fra teksten, der finder sted i ${k.navn} Kommune på de gyldige datoer. Alt andet udelades.
+Regler: Aflyste arrangementer udelades helt. Almindelige gudstjenester og almindelige biografforestillinger udelades. Gæt aldrig et tidspunkt – står der ingen tid, så start "". Titlen skal sige, hvem der optræder eller holder oplægget (fx "Koncert med …", "Foredrag ved …") – aldrig "Koncert" eller "Foredrag" alene. Ingen priser, beskrivelser eller links. Sted kort: "Navn, by" hvis byen ikke fremgår af navnet. udsolgt=true ved udsolgt. usikker=true hvis dato, tid eller sted er uklar.${ekstra||''}
+${SKEMA}
+
+TEKST:
+${tekst}`;
+  const svar=await spoergClaude(p);if(svar==null)return null;
+  const r=parseJson(svar);if(!r){toast('Svaret var ikke gyldig JSON');return null}
+  return Array.isArray(r)?r:(Array.isArray(r.arrangementer)?r.arrangementer:[]);
+}
+
+/* ---------- rendering ---------- */
+function renderHoved(){
+  const k=kom();
+  $('kom').innerHTML=CFG.kommuner.map(x=>`<option value="${esc(x.id)}"${x.id===komId?' selected':''}>${esc(x.navn)}</option>`).join('');
+  const d=dageFor(avis);
+  $('avisLinje').textContent=`${k.navn} · ${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]} – dækker ${DAGE[fra(d[0]).getDay()]} og ${DAGE[fra(d[1]).getDay()]}`;
+  $('avisValg').innerHTML=AVISER.length>1?`<div class="mut" style="margin-bottom:4px">Hvilken avis?</div><div class="radio">${AVISER.map(a=>`<label><input type="radio" name="avis" value="${a}"${a===avis?' checked':''}> ${avisNavn(a)} ${fra(a).getDate()}/${fra(a).getMonth()+1}</label>`).join('')}</div>`:`<div class="mut">Avis</div><div style="font-weight:750">${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]}</div>`;
+  $('knLink').href=knUrl(1);$('knLink').textContent='Browse KultuNaut for '+k.navn;
+  $('stederTitel').textContent='Steder, som søgningen gennemgår i '+k.navn;
+  $('spalteTitel').textContent='Spalten · '+avisNavn(avis);
+}
+const tidTekst=s=>{const t=new Date(s);return isNaN(t)?'':t.toLocaleString('da-DK',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})};
+function renderStatus(){
+  const f=fundDoc(fundId()),l=L(),el=$('status');
+  if(!f){el.className='status';el.innerHTML='Ingen søgning gemt endnu for '+esc(avisNavn(avis).toLowerCase())+'.<br>'+esc(autoTekst())+' Vil du ikke vente, så tryk "Søg nu".';$('brugFund').disabled=true;return}
+  const ev=fundEvents(f,dageFor(avis)),kt=ev.filter(e=>ja(e.krydstjekket)).length;
+  el.className='status '+(l.brugFund?'klar':'ny');
+  el.innerHTML=`<b>${f.af==='automatisk'?'Automatisk søgning':'Søgning'} gemt ${esc(tidTekst(f.opdateret))}</b><br>${ev.length} arrangementer, ${kt} krydstjekket. ${l.brugFund?'Bruges i spalten.':'Ikke taget i brug.'}<br><span class="mut">${esc(autoTekst())}</span>`;
+  $('brugFund').disabled=false;$('brugFund').textContent=l.brugFund?'Brug den fundne spalte igen':'Brug den fundne spalte';
+}
+function renderApi(){
+  const el=$('apiStatus');
+  if(!API.svar){el.className='status ny';el.innerHTML='Siden kører uden Cloudflare-funktionen. OK\'er, rettelser, møder og egne steder gemmes kun i denne browser.';return}
+  const dele=[API.kv?'Data gemmes i Cloudflare.':'KV-bindingen TS mangler – data gemmes kun i denne browser.',API.claude?'Claude er koblet på (Sæt spalten og KultuNaut kører direkte).':'Claude er ikke koblet på – "Sæt spalten" og KultuNaut-udtræk går via en Claude-chat.',API.kode?(API.godkendt?'Koden er godkendt.':'Skriv koden for at kunne gemme.'):'Ingen kode sat – alle med adressen kan gemme.'];
+  el.className='status '+(API.kv&&(API.godkendt||!API.kode)?'klar':'ny');el.textContent=dele.join(' ');
+}
+function renderSteder(){
+  const k=kom();
+  const r=[...k.moedekilder.map(m=>`<li><span><b>${esc(m.navn)}</b> · møder</span>${safeUrl(m.url)?`<a href="${esc(m.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</li>`),
+    ...k.steder.map(s=>`<li><span>${esc(s.navn)}</span>${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}</li>`),
+    ...egneSteder().map(s=>`<li><span>${esc(s.navn)} <span class="src">eget</span></span><span class="knap" style="margin:0">${safeUrl(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">Åbn</a>`:''}<button class="sm" data-fjernsted="${esc(s.id)}">Fjern</button></span></li>`)];
+  $('stederListe').innerHTML=r.join('');
+}
+function renderMoeder(){
+  const m=alleMoeder().filter(x=>x.dato>=IDAG).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
+  $('moedeListe').innerHTML=m.length?m.map(x=>`<li><span><b>${esc(kort(x.dato))}</b> ${normTid(x.start)?'kl. '+esc(ft(normTid(x.start))):'[TJEK]'} – ${esc(x.titel)}${x.sted?', '+esc(x.sted):''} ${x.af==='søgning'?'<span class="src">søgning</span>':''}</span><button class="sm" data-fjernmoede="${esc(x.id)}" data-fil="${x.fil?1:''}">Fjern</button></li>`).join(''):'<li class="mut">Ingen kommende møder eller arrangementer.</li>';
+}
+function renderSpalte(){
+  const l=L(),txt=spalteTekst();
+  $('manuel').innerHTML=l.manuel?`<div class="manuel"><span>Spalten er redigeret i hånden. Nye fund og rettelser kommer først med, når du bygger den igen.</span><button class="sm" id="bygIgen">Byg spalten igen</button></div>`:'';
+  const ta=$('spalteTekst');if(document.activeElement!==ta)ta.value=txt;
+  ta.hidden=!redigerer;$('spalteVis').hidden=redigerer;$('rediger').textContent=redigerer?'Vis spalten':'Redigér teksten';
+  const heads=dageFor(avis).map(overskrift);let html='';
+  for(const r of txt.split('\n')){const s=r.trim();if(!s)continue;
+    if(heads.includes(s)||/^(mandag|tirsdag|onsdag|torsdag|fredag|lørdag|søndag) den/i.test(s)){html+=`<div class="dag">${esc(s)}</div>`;continue}
+    const m=s.match(/^(kl\.\s*\S+?)\s+–\s+(.*)$/);
+    if(!m){html+=`<div class="linje"><span class="tid"></span><span>${esc(s)}</span></div>`;continue}
+    const tags=[];const rest=m[2].replace(/\s*\[(UDSOLGT|TJEK)\]/g,(x,t)=>{tags.push(t);return''});
+    const moede=/møde/i.test(rest.split(',')[0]);
+    html+=`<div class="linje${moede?' moede':''}"><span class="tid${/TJEK/.test(m[1])?' mangler':''}">${esc(m[1])}</span><span>${esc(rest)}${tags.map(t=>`<span class="tag ${t==='TJEK'?'tjek':'uds'}">${t}</span>`).join('')}</span></div>`;
+  }
+  $('spalteVis').innerHTML=html.replace(/(<div class="dag">[^<]*<\/div>)(?=<div class="dag">|$)/g,'$1<div class="tom">Ingen arrangementer endnu</div>');
+  const {res,n}=formatTjek(txt);const fejl=res.some(r=>r[0]==='fejl');
+  $('check').innerHTML=res.map(([k,m])=>`<li class="${k}">${k==='fejl'?'Fejl':'Bemærk'}: ${esc(m)}</li>`).join('')+`<li class="${fejl?'mut':'godt'}">${n} linjer i spalten.${fejl?'':' Formatet ser fint ud.'}</li>`;
+}
+function renderNote(){
+  const f=fundDoc(fundId()),ev=avisEvents();let t='';
+  if(f&&f.note)t+=String(f.note).trim()+'\n\n';
+  t+='KRYDSTJEK I SPALTEN NU\n'+(ev.filter(e=>!e.fjernet).map(e=>`${kort(e.dato)} · ${e.titel}${e.sted?', '+e.sted:''} – Krydstjekket: ${e.ok?'ja':'nej'}${e.t?' ('+(e.t.af==='claude'?'Claude':'mig')+': '+e.t.status+')':''} · ${e.kilde||'ingen kilde'}`).join('\n')||'Ingen arrangementer endnu.');
+  if(f&&Array.isArray(f.tjekliste)&&f.tjekliste.length)t+='\n\nTJEKLISTE PR. STED\n'+f.tjekliste.map(x=>`- ${x.sted}: ${x.resultat}`).join('\n');
+  if(f&&Array.isArray(f.kilder)&&f.kilder.length)t+='\n\nKILDER\n'+f.kilder.map(x=>`- ${x.navn||''} ${x.url||''}`).join('\n');
+  $('note').textContent=t;
+}
+const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut'}[s]||s);
+function renderVerif(){
+  const ev=avisEvents(),tb=$('verTabel').tBodies[0];
+  if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
+  tb.innerHTML=ev.map(e=>{
+    const k=safeUrl(e.kilde)?`<a href="${esc(e.kilde)}" target="_blank" rel="noopener">${esc(e.kilde.replace(/^https:\/\/(www\.)?/,'').slice(0,34))}</a>`:esc(e.kilde||'–');
+    const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
+    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'<span class="nej">[TJEK]</span>'}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret / verificér</button>`}</div></td></tr>`;
+    const ret=retter===e.tid?`<tr><td colspan="7"><div class="retform"><label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label><label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
+    return row+ret}).join('');
+}
+function renderUge(){
+  const u=ugeFor(avis),ev=ugeEvents().filter(e=>!e.fjernet),f=fundDoc(ugeId());
+  $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
+  $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.map(e=>`<li><b>${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'[TJEK]'}</b> ${esc(e.titel)}${e.sted?', '+esc(e.sted):''} <span class="src">${srcNavn(e.src)}</span>${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
+}
+function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderApi();renderSteder();renderMoeder();renderSpalte();renderNote();renderVerif();renderUge();
+  const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
+  if(document.activeElement!==$('raa'))$('raa').value=l.raaTekst||'';
+}
+
+/* ---------- start ---------- */
+(async()=>{
+  const [cfg,opg,st]=await Promise.all([hentJson('opgave/kommuner.json'),fetch('opgave/soegning.md',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>''),hentJson('/api/status')]);
+  if(!cfg||!Array.isArray(cfg.kommuner)||!cfg.kommuner.length){$('avisLinje').textContent='Kunne ikke hente opgave/kommuner.json.';return}
+  CFG=cfg;OPGAVE=opg;
+  if(!CFG.kommuner.some(k=>k.id===komId))komId=CFG.kommuner[0].id;
+  if(st){API={...st,svar:true}}
+  $('kode').value=ls.get('ts:kode','');
+  $('mDato').value=dageFor(avis)[0];
+  render();opdaterForm();
+  await opdater();
+  setInterval(()=>{if(!document.hidden)opdater()},5*60*1000);
+})();
+
+/* ---------- hændelser ---------- */
+$('kom').onchange=e=>{komId=e.target.value;ls.set('ts:kommune',komId);retter=null;render();opdater()};
+$('avisValg').onchange=e=>{if(e.target.name==='avis'){avis=e.target.value;ls.set('ts:avis:'+IDAG,avis);retter=null;render();opdater()}};
+$('sogNu').onclick=()=>kopier(soegeOpgave(false),'Søgeopgaven er kopieret – sæt den ind i en ny Claude-chat med websøgning');
+$('ugeSog').onclick=()=>kopier(soegeOpgave(true),'Ugeopgaven er kopieret – sæt den ind i en ny Claude-chat');
+$('hentIgen').onclick=()=>opdater('Resultatet er hentet igen');
+$('ugeHent').onclick=()=>opdater('Resultatet er hentet igen');
+$('brugFund').onclick=()=>{const l=L();l.brugFund=true;l.manuel=false;gemL(l);toast('Den fundne spalte er taget i brug');render()};
+$('kodeForm').onsubmit=async e=>{e.preventDefault();ls.set('ts:kode',$('kode').value.trim());const st=await hentJson('/api/status');if(st){API={...API,...st}}
+  if(API.kode){const r=await fetch('/api/data/kilder/_kodetest',{method:'DELETE',headers:store.hdr()}).catch(()=>null);API.godkendt=!!(r&&r.ok);toast(API.godkendt?'Koden er godkendt':'Koden passer ikke')}else toast('Koden er gemt');render()};
+$('jsonGem').onclick=async()=>{
+  const o=parseJson($('jsonInd').value);if(!o){toast('Det er ikke gyldig JSON');return}
+  const job=[];const nu=new Date().toISOString();
+  const fund=o.fund||(o.type==='spalte'?o:null),uge=o.uge||(o.type==='uge'?o:null);
+  if(fund)job.push(()=>store.put('fund',fundId(),{...fund,type:'spalte',kommune:komId,avis,opdateret:fund.opdateret||nu,af:'manuel'}));
+  if(uge)job.push(()=>store.put('fund',ugeId(),{...uge,type:'uge',kommune:komId,avis,opdateret:uge.opdateret||nu,af:'manuel'}));
+  for(const m of Array.isArray(o.moeder)?o.moeder:[]){if(!m||!m.dato||!m.titel)continue;const id=String(m.id||(komId+'_'+m.dato+'_'+normT(m.titel))).toLowerCase().replace(/[^a-z0-9._-]/g,'-').slice(0,150);job.push(()=>store.put('moeder',id,{...m,kommune:komId,af:'søgning'}))}
+  for(const t of Array.isArray(o.tjek)?o.tjek:[]){if(!t||!t.id||!['ok','rettet','fjernet'].includes(t.status))continue;job.push(()=>store.put('tjek',String(t.id),{...t,kommune:komId,noegle:t.id,af:'claude',tid:nu}))}
+  if(!job.length){toast('Fandt intet at gemme i JSON\'en');return}
+  try{for(const j of job)await j();$('jsonInd').value='';if(fund){const l=L();l.brugFund=true;l.manuel=false;gemL(l)}toast(job.length+' dokumenter gemt');render()}catch(e){toast(e.message)}
+};
+$('knHent').onclick=async e=>{
+  const tekst=$('knTekst').value.trim();if(!tekst){toast('Indsæt først teksten fra KultuNaut');return}
+  const b=e.target;b.disabled=true;b.textContent='Claude læser …';
+  const dates=[...dageFor(avis),...ugeFor(avis)];
+  const r=await udtraek(tekst,dates,' Teksten er kopieret fra KultuNaut: tjek byen ved hvert arrangement, da områdefilteret ikke altid virker.');
+  b.disabled=false;b.textContent='Hent arrangementer';if(!r)return;
+  const l=L(),kendte=new Set([...saml(dageFor(avis),fundDoc(fundId()),'fund'),...saml(ugeFor(avis),fundDoc(ugeId()),'uge')].map(noegle));
+  let ny=0;for(const x of r){const n=norm(x,'kn');if(!dates.includes(n.dato)||!n.titel)continue;const k=noegle(n);if(kendte.has(k))continue;kendte.add(k);l.kn.push({dato:n.dato,start:n.start,slut:n.slut,titel:n.titel,sted:n.sted,udsolgt:n.udsolgt,kilde:'KultuNaut'});ny++}
+  gemL(l);$('knTekst').value='';toast(ny+' nye KultuNaut-fund (alle [TJEK])');render();
+};
+$('knFjern').onclick=()=>{const l=L();const n=l.kn.length;l.kn=[];gemL(l);toast(n+' KultuNaut-fund fjernet');render()};
+$('raa').oninput=e=>{const l=L();l.raaTekst=e.target.value;gemL(l)};
+$('saet').onclick=async e=>{
+  const tekst=$('raa').value.trim();if(!tekst){toast('Skriv først nogle arrangementer');return}
+  const b=e.target;b.disabled=true;b.textContent='Claude sætter …';
+  const r=await udtraek(tekst,dageFor(avis),' Står der ingen dato ved et arrangement, så brug '+avis+' og sæt usikker=true.');
+  b.disabled=false;b.textContent='Sæt spalten';if(!r)return;
+  const l=L();l.raa=r.map(x=>({...x,dato:x.dato||avis})).filter(x=>dageFor(avis).includes(x.dato));l.manuel=false;gemL(l);toast(l.raa.length+' arrangementer sat i spalten');render();
+};
+$('raaFjern').onclick=()=>{const l=L();l.raa=[];gemL(l);toast('Rå arrangementer fjernet fra spalten');render()};
+$('orddeling').onclick=()=>{const l=L();const f=$('raa').value,ny=retOrddeling(f);$('raa').value=ny;l.raaTekst=ny;let n=+(f!==ny);
+  if(l.manuel){const s=retOrddeling(l.spalte);n+=+(s!==l.spalte);l.spalte=s}gemL(l);toast(n?'Orddeling rettet':'Ingen orddeling fundet');render()};
+$('retAuto').onclick=()=>{const l=L(),t=spalteTekst(),ny=retStreger(retOrddeling(t));if(ny===t){toast('Intet at rette');return}l.spalte=ny;l.manuel=true;gemL(l);toast('Tankestreger og orddeling rettet');render()};
+$('rediger').onclick=()=>{redigerer=!redigerer;render();if(redigerer)$('spalteTekst').focus()};
+$('spalteTekst').oninput=e=>{const l=L();l.spalte=e.target.value;l.manuel=true;gemL(l);renderSpalte()};
+$('spalteTekst').onblur=()=>render();
+$('manuel').onclick=e=>{if(e.target.id==='bygIgen'){const l=L();l.manuel=false;l.spalte='';gemL(l);toast('Spalten er bygget igen');render()}};
+$('kopier').onclick=()=>kopier(spalteTekst(),'Spalten er kopieret');
+
+/* møder */
+function opdaterForm(){if(!CFG.kommuner.length)return;const k=kom(),t=$('mType').value;
+  $('mEmneL').firstChild.textContent=t==='raad'?'Titel':t==='arr'?'Titel (hvem optræder)':t==='udvalg'?'Udvalg':'Emne';
+  if(t==='raad'){$('mTid').value=k.tid;$('mSted').value=k.sted;$('mEmne').value=k.raad}else if($('mEmne').value===k.raad)$('mEmne').value=''}
+$('mType').onchange=opdaterForm;
+$('moedeForm').onsubmit=async e=>{e.preventDefault();const k=kom(),t=$('mType').value,emne=$('mEmne').value.trim();
+  const titel=t==='raad'?(emne||k.raad):t==='borger'?'Borgermøde om '+emne:t==='hoering'?'Høringsmøde om '+emne:t==='udvalg'?'Åbent møde i '+emne:emne;
+  if(!$('mDato').value||(t!=='raad'&&!emne)){toast('Udfyld dato og emne/titel');return}
+  const d={kommune:komId,type:t,dato:$('mDato').value,start:$('mTid').value,slut:$('mSlut').value,titel,sted:$('mSted').value.trim(),kilde:'Manuelt',af:'manuel',krydstjekket:true,oprettet:new Date().toISOString()};
+  if(await skriv(()=>store.put('moeder',komId+'_'+nytId(),d),'Tilføjet')){['mEmne','mTid','mSlut','mSted'].forEach(i=>$(i).value='');opdaterForm()}};
+$('moedeListe').onclick=e=>{const b=e.target.closest('button');const id=b&&b.dataset.fjernmoede;if(!id)return;
+  if(b.dataset.fil)skriv(()=>store.put('moeder',id,{skjult:true,kommune:komId}),'Fjernet');else skriv(()=>store.del('moeder',id),'Fjernet')};
+/* steder */
+$('stedForm').onsubmit=async e=>{e.preventDefault();const n=$('sNavn').value.trim(),u=$('sUrl').value.trim();if(!n)return;
+  if(await skriv(()=>store.put('kilder',komId+'_'+nytId(),{kommune:komId,navn:n,url:u,oprettet:new Date().toISOString()}),'Stedet er tilføjet')){$('sNavn').value='';$('sUrl').value=''}};
+$('stederListe').onclick=e=>{const id=e.target.dataset.fjernsted;if(id)skriv(()=>store.del('kilder',id),'Stedet er fjernet')};
+/* verificering */
+const find=id=>avisEvents().find(e=>e.tid===id);
+const tjekDoc=(e,x)=>({kommune:komId,noegle:e.tid,dato:e.dato,titel:e.titel,af:'mig',tid:new Date().toISOString(),...x});
+$('verTabel').onclick=async ev=>{const b=ev.target.closest('button');if(!b)return;const ds=b.dataset;
+  if(ds.ok){const e=find(ds.ok);if(e)await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,{status:'ok'})),'Markeret som tjekket')}
+  else if(ds.ret){retter=ds.ret;renderVerif()}
+  else if(ds.annuller){retter=null;renderVerif()}
+  else if(ds.gemret){const e=find(ds.gemret);if(!e)return;const x={status:'rettet',start:$('rStart').value,slut:$('rSlut').value,sted:$('rSted').value.trim(),kilde:$('rKilde').value.trim()};retter=null;await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,x)),'Rettet og verificeret')}
+  else if(ds.fjernev){const e=find(ds.fjernev);retter=null;if(e)await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'})),'Fjernet fra spalten')}
+  else if(ds.fortryd){await skriv(()=>store.del('tjek',ds.fortryd),'Fortrudt')}
+};
+$('verAlle').onclick=()=>{const ev=avisEvents().filter(e=>!e.fjernet&&!e.ok);if(!ev.length){toast('Ingen [TJEK]-linjer at verificere');return}kopier(verOpgave(ev),ev.length+' [TJEK]-linjer – opgaven er kopieret. Indsæt svaret under "Indsæt et resultat i hånden"')};
+function eksport(){return avisEvents().map(e=>({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted,kilde:e.kilde,krydstjekket:e.ok?'ja':'nej',status:e.fjernet?'fjernet':e.t?e.t.status:'',kildetype:srcNavn(e.src),udsolgt:e.udsolgt?'ja':'nej'}))}
+function gemFil(navn,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type}));a.download=navn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
+const KOL=['dato','start','slut','titel','sted','kilde','krydstjekket','status','kildetype','udsolgt'];
+$('csv').onclick=()=>{const c=v=>'"'+String(v??'').replace(/"/g,'""')+'"';gemFil(`tid-og-sted_${komId}_${avis}.csv`,'﻿'+[KOL.join(';'),...eksport().map(x=>KOL.map(k=>c(x[k])).join(';'))].join('\n'),'text/csv;charset=utf-8')};
+$('json').onclick=()=>gemFil(`tid-og-sted_${komId}_${avis}.json`,JSON.stringify({kommune:kom().navn,avis,dage:dageFor(avis),arrangementer:eksport()},null,2),'application/json');
+}
+</script>
+
+</body>
+</html>
