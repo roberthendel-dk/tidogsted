@@ -544,6 +544,10 @@ async function kopier(txt,besked){try{await navigator.clipboard.writeText(txt);t
 $('kopiLuk').onclick=()=>$('kopi').classList.remove('vis');
 const dbNote=m=>$('dbNote').textContent=m;
 const egneSteder=()=>Object.entries(S.kilder).filter(([,k])=>k.kommune===komId).map(([id,k])=>({...k,id}));
+/* KultuNauts søgning for en periode – KultuNaut vil have æøå som latin-1 (N%E6stved) */
+const latin1=t=>[...String(t)].map(c=>c.charCodeAt(0)<128?encodeURIComponent(c):c.charCodeAt(0)<256?'%'+c.charCodeAt(0).toString(16).toUpperCase().padStart(2,'0'):encodeURIComponent(c)).join('');
+const knDato=d=>{const[y,m,dd]=d.split('-');return dd+'%2F'+m+'+'+y};
+const knPeriode=(fraD,tilD,k=kom())=>'https://www.kultunaut.dk/perl/arrlist/type-nynaut?showmap=&Area='+latin1(k.navn)+'-storkommune&nearmeradius=2000&ArrStartdato='+knDato(fraD)+'&ArrSlutdato='+knDato(tilD);
 const knUrl=n=>'https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr='+n+'&Area='+encodeURIComponent(kom().navn)+'-storkommune&';
 const site=()=>location.protocol==='https:'?location.origin:(CFG.site||'');
 
@@ -615,7 +619,7 @@ function renderHoved(){
   $('avisLinje').textContent=`${k.navn} · ${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]} – dækker ${DAGE[fra(d[0]).getDay()]} og ${DAGE[fra(d[1]).getDay()]}`;
   const manuelt=avisManuel?`<div class="mut" style="margin-bottom:4px">Valgt avis</div><div style="font-weight:750">${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]}</div>`:'';
   $('avisValg').innerHTML=(manuelt||(AVISER.length>1?`<div class="mut" style="margin-bottom:4px">Hvilken avis?</div><div class="radio">${AVISER.map(a=>`<label><input type="radio" name="avis" value="${a}"${a===avis?' checked':''}> ${avisNavn(a)} ${fra(a).getDate()}/${fra(a).getMonth()+1}</label>`).join('')}</div>`:`<div class="mut">Avis</div><div style="font-weight:750">${avisNavn(avis)} ${fra(avis).getDate()}. ${MDR[fra(avis).getMonth()]}</div>`))+`<div class="avisvaelg"><label class="mut" for="avisDato">Vælg en anden avis</label><div class="knap" style="margin:4px 0 0;flex-wrap:nowrap"><input id="avisDato" type="date" value="${avis}">${avisManuel?'<button type="button" class="sm pri" id="avisIdag">Til dags dato</button>':''}</div></div>`;
-  $('knLink').href=knUrl(1);$('knLink').textContent='Browse KultuNaut for '+k.navn;
+  $('knLink').href=knPeriode(dageFor(avis)[0],dageFor(avis)[1]);$('knLink').textContent='Browse KultuNaut for '+k.navn;
   $('stederTitel').textContent='Steder, som søgningen gennemgår i '+k.navn;
   $('spalteTitel').textContent='Spalten · '+avisNavn(avis);
 }
@@ -720,7 +724,7 @@ function renderNote(){
   $('note').textContent=t;
 }
 function fuldUrl(u,base){u=String(u||'');if(/^https?:\/\//i.test(u)||!base)return u;try{return new URL(u,base).href}catch{return u}}
-function kildeLink(e){const k=String(e.kilde||'');if(/^https?:\/\//i.test(k))return k;if(/^kultunaut$/i.test(k))return knUrl(1);return''}
+function kildeLink(e){const k=String(e.kilde||'');if(e.src==='kn'||/^kultunaut$/i.test(k)||/kultunaut\.dk\/perl\/arrlist2/i.test(k))return knPeriode(e.dato,add(e.dato,1));if(/^https?:\/\//i.test(k))return k;return''}
 const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek',app:'Uden Claude'}[s]||s);
 function renderVerif(){
   const ev=samlGange(avisEvents()),tb=$('verTabel').tBodies[0];
