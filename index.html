@@ -412,7 +412,13 @@ function parseSpalte(txt,dates){
 const fundEvents=(f,dates)=>Array.isArray(f.arrangementer)&&f.arrangementer.length?f.arrangementer:parseSpalte(f.spalte,dates);
 function saml(dates,fd,fundSrc){
   const lok=L(),seen=new Set(),out=[];
-  const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato))return;const n=noegle(e);if(seen.has(n))return;seen.add(n);out.push(e)};
+  /* krydskilder: samme dag, samme starttid og lignende titel fra en anden kilde tæller som verificeret */
+  const vaert=e=>{const k=String(e.kilde||'');if(/^kultunaut$/i.test(k)||/kultunaut\.dk/i.test(k))return'kultunaut';try{return new URL(k).hostname.replace(/^www\./,'')}catch{return e.src+':'+k}};
+  const ord=t=>new Set(normT(t).split(/\s+/).filter(w=>w.length>3));
+  const ligner=(a,b)=>{const x=normT(a),y=normT(b);if(!x||!y)return false;if(x===y||x.includes(y)||y.includes(x))return true;const A=ord(a),B=ord(b);let f=0;for(const w of A)if(B.has(w))f++;return f>=2||(f>=1&&Math.min(A.size,B.size)===1)};
+  const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato))return;const n=noegle(e);if(seen.has(n)){const o=out.find(x=>noegle(x)===n);if(o)o.kilder.push(e);return}
+    const o=e.start?out.find(x=>x.dato===e.dato&&x.start===e.start&&ligner(x.titel,e.titel)):null;if(o){o.kilder.push(e);return}
+    seen.add(n);e.kilder=[e];out.push(e)};
   if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
   const aktiveUrl=new Set([...urlListe(komId).filter(u=>u.aktiv).map(u=>u.id),...fasteSteder(komId).filter(f=>!f.skjult&&f.url).map(f=>urlId(komId,f.url))]);
@@ -421,7 +427,8 @@ function saml(dates,fd,fundSrc){
   const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.forEach(e=>push(norm(e,'app')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
   (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
-  for(const e of out){e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
+  for(const e of out){const v=new Set(e.kilder.map(vaert));e.krydskilder=v.size>=2?[...v]:null;if(e.krydskilder)e.ok=true;delete e.kilder;
+    e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
     if(t){if(t.status==='fjernet')e.fjernet=true;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde}e.ok=true}}}
   return out.sort((a,b)=>a.dato.localeCompare(b.dato)||(a.start||'99').localeCompare(b.start||'99')||a.titel.localeCompare(b.titel,'da'));
 }
@@ -455,7 +462,7 @@ function linje(e){
   if(e.start&&!e.ok)l+=' [TJEK]';
   return l;
 }
-function bygTekst(){const ev=samlGange(avisEvents().filter(e=>!e.fjernet));return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
+function bygTekst(){const ev=samlGange(avisEvents().filter(e=>!e.fjernet&&e.ok&&e.start));return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
 const spalteTekst=()=>{const l=L();return l.manuel&&l.spalte?l.spalte:bygTekst()};
 
 /* ---------- formattjek ---------- */
@@ -624,7 +631,8 @@ function renderMoeder(){
 }
 function renderSpalte(){
   const l=L(),txt=spalteTekst();
-  $('manuel').innerHTML=l.manuel?`<div class="manuel"><span>Spalten er redigeret i hånden. Nye fund og rettelser kommer først med, når du bygger den igen.</span><button class="sm" id="bygIgen">Byg spalten igen</button></div>`:'';
+  const venter=avisEvents().filter(e=>!e.fjernet&&(!e.ok||!e.start)).length;
+  $('manuel').innerHTML=(venter&&!l.manuel?`<div class="manuel"><span>${venter} arrangementer venter på verificering og er ikke med i spalten. Tryk OK i "Data til verificering", når du har tjekket dem – eller "Verificér alle med Claude".</span></div>`:'')+(l.manuel?`<div class="manuel"><span>Spalten er redigeret i hånden. Nye fund og rettelser kommer først med, når du bygger den igen.</span><button class="sm" id="bygIgen">Byg spalten igen</button></div>`:'');
   const ta=$('spalteTekst');if(document.activeElement!==ta)ta.value=txt;
   ta.hidden=!redigerer;$('spalteVis').hidden=redigerer;$('rediger').textContent=redigerer?'Vis spalten':'Redigér teksten';
   const heads=dageFor(avis).map(overskrift);let html='';
@@ -658,7 +666,7 @@ function renderVerif(){
     const lk=kildeLink(e),kt=lk?(/^kultunaut$/i.test(e.kilde)?'KultuNaut':lk.replace(/^https?:\/\/(www\.)?/,'').split(/[/?#]/)[0]):'';
     const k=lk?`<a class="kildelink" href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}">${esc(kt)} ↗</a>`:esc(e.kilde||'–');
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
-    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.gange?(e.tjekAlle?`<button class="sm" data-fortryd="${e.tids.join(',')}">Fortryd</button>`:`<button class="sm" data-ok="${e.tids.join(',')}">OK</button><button class="sm" data-fjernalle="${e.tids.join(',')}">Fjern</button>`):e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button>`}</div></td></tr>`;
+    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>'+(e.krydskilder&&!e.t?'<br><span class="mut">krydskilder: '+esc(e.krydskilder.join(', '))+'</span>':''):'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.gange?(e.tjekAlle?`<button class="sm" data-fortryd="${e.tids.join(',')}">Fortryd</button>`:`<button class="sm" data-ok="${e.tids.join(',')}">OK</button><button class="sm" data-fjernalle="${e.tids.join(',')}">Fjern</button>`):e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button>`}</div></td></tr>`;
     const ret=retter===e.tid?`<tr><td colspan="7"><div class="retform"><label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label><label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
     return row+ret}).join('');
 }
@@ -764,11 +772,11 @@ let LIB=null;const hentLib=async()=>LIB||(LIB=await import('./lib/tjek.js'));
 /* KultuNaut hentes direkte gennem Cloudflare (kun på worker-adressen) */
 async function hentKultunaut(L2,fra,til){
   const fund=[];let ok=0,fejl='',url=knUrl(1);
-  for(const n of [1,21,41,61,81]){
+  for(let n=1,side=0;side<15;side++){
     try{const r=await fetch('/api/hent?url='+encodeURIComponent(knUrl(n)),{headers:store.hdr()});if(r.status===401)throw new Error('kode');const st=+(r.headers.get('x-status')||r.status);
       if(!r.ok||st>=400){fejl='KultuNaut svarede '+(st||'ikke');break}
-      ok++;const ev=L2.kultunautEvents(await r.text(),{ref:IDAG,fra});
-      fund.push(...ev.filter(e=>e.dato>=fra&&e.dato<=til));if(!ev.length||ev.every(e=>e.dato>til))break;
+      ok++;const html=await r.text(),raa=L2.kultunautAntal(html);if(!raa)break;const ev=L2.kultunautEvents(html,{ref:IDAG,fra});
+      fund.push(...ev.filter(e=>e.dato>=fra&&e.dato<=til));if(ev.some(e=>e.dato>til))break;n+=raa;
     }catch(e){if(e.message==='kode')throw e;fejl='KultuNaut kunne ikke hentes';break}}
   return{events:fund.filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)),ok,fejl,url};
 }
