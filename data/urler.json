@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-23T18:27:15.337Z",
+ "opdateret": "2026-11-23T18:29:57.160Z",
  "fra": "2026-11-23",
  "til": "2026-12-03",
  "urler": [
@@ -16,10 +16,10 @@
    "ok": true,
    "fejl": "",
    "hash": "a4bb0f403291b7d9",
-   "aendret": true,
+   "aendret": false,
    "sidstAendret": "2026-11-23T18:27:15.337Z",
    "antal": 0,
-   "tjekket": "2026-11-23T18:27:15.337Z"
+   "tjekket": "2026-11-23T18:29:57.160Z"
   }
  ],
  "arrangementer": []
