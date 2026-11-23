@@ -256,6 +256,17 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
       <p class="mut" id="kildeOverblikInfo"></p>
     </section>
     <section>
+      <h2>Undtagelser</h2>
+      <p class="mut">Steder eller ord i titlen, der aldrig skal med – fx biografer. Gælder alle kilder, også KultuNaut.</p>
+      <ul id="undtagListe" class="liste"></ul>
+      <form id="undtagForm" class="form">
+        <label>Tekst<input id="uTekst" required placeholder="Fx Nordisk Film Biografer"></label>
+        <label>Se efter i<select id="uFelt"><option value="sted">Stedet</option><option value="titel">Titlen</option><option value="begge">Sted eller titel</option></select></label>
+        <label>Kommune<select id="uKom"><option value="">Alle kommuner</option></select></label>
+        <div class="knap"><button class="pri">Tilføj undtagelse</button></div>
+      </form>
+    </section>
+    <section>
       <h2 id="stederTitel">Steder, som søgningen gennemgår</h2>
       <ul id="stederListe" class="liste"></ul>
       <form id="stedForm" class="form">
@@ -330,6 +341,7 @@ const ugeFor=a=>[2,3,4,5,6,7,8].map(i=>add(a,i));
 /* ---------- tider og nøgler ---------- */
 function normTid(v){if(!v)return'';const s=String(v).trim().replace(/^kl\.?\s*/i,'');const m=s.match(/^(\d{1,2})(?:[.:](\d{2}))?$/);if(!m)return'';const h=+m[1];if(h>24)return'';return pad(h)+':'+(m[2]||'00')}
 const ft=t=>{const[h,m]=t.split(':');return pad(+h)+(m&&m!=='00'?'.'+m:'')};
+const normU=s=>String(s||'').toLowerCase().replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'aa').normalize('NFKD').replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
 const normT=s=>String(s||'').toLowerCase().replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'aa').normalize('NFKD').replace(/[^a-z0-9]/g,'').slice(0,24);
 const hash=s=>{let h=5381;for(const c of s)h=((h<<5)+h+c.codePointAt(0))|0;return(h>>>0).toString(36)};
 const noegle=e=>e.dato+'|'+e.start+'|'+normT(e.titel);
@@ -340,7 +352,7 @@ const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 
 /* ---------- tilstand ---------- */
 let CFG={site:'',kommuner:[]},OPGAVE='';
-const S={faste:[],fasteOpdateret:'',fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
+const S={undtag:{},faste:[],fasteOpdateret:'',fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
 const nKey=c=>c==='urler'?'urlApp':c;
 let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:false};
 const AVISER=aviser(IDAG);
@@ -370,9 +382,9 @@ async function hentFiler(){
   const [a,b,m,u,f]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json'),hentJson('data/urler.json'),hentJson('data/faste.json')]);
   if(f&&Array.isArray(f.rows)){S.faste=f.rows;S.fasteOpdateret=f.opdateret||''}
   S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
-  if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],opdateret:u.opdateret||''};
+  if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],kultunaut:Array.isArray(u.kultunaut)?u.kultunaut:[],opdateret:u.opdateret||''};
 }
-async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','urler','steder']){try{S[nKey(c)]=await store.alle(c)}catch(e){dbNote(e.message)}}}
+async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','urler','steder','undtag']){try{S[nKey(c)]=await store.alle(c)}catch(e){dbNote(e.message)}}}
 async function opdater(besked){await Promise.all([hentFiler(),hentSamlinger()]);render();if(besked)toast(besked)}
 /* nyeste af fil (automatisk søgning) og indsat resultat */
 function fundDoc(id){const a=S.fil[id],b=S.fund[id];if(a&&b)return String(b.opdateret||'')>String(a.opdateret||'')?b:a;return a||b||null}
@@ -398,7 +410,9 @@ function alleMoeder(){const fra=add(IDAG,-1),til=add(IDAG,120);return fasteBase(
 const ja=v=>v===true||/^ja$/i.test(v||'');
 function norm(e,src){
   const ok=src==='fund'||src==='uge'?ja(e.krydstjekket):src==='moede'?(e.af==='søgning'?ja(e.krydstjekket):true):src==='raa'?!e.usikker:false;
-  return{dato:String(e.dato||''),start:normTid(e.start),slut:normTid(e.slut),titel:String(e.titel||'').trim(),sted:String(e.sted||'').trim(),kilde:String(e.kilde||e.url||(src==='kn'?'KultuNaut':'')),udsolgt:!!e.udsolgt,aflyst:!!e.aflyst,ok,src};
+  const sted=String(e.sted||'').trim();let titel=String(e.titel||'').split(/\s+[·|]\s+/)[0].trim();
+  if(sted){const i=titel.toLowerCase().lastIndexOf(' på '+sted.toLowerCase());if(i>0&&i+4+sted.length===titel.length)titel=titel.slice(0,i).trim()}
+  return{dato:String(e.dato||''),start:normTid(e.start),slut:normTid(e.slut),titel,sted,kilde:String(e.kilde||e.url||(src==='kn'?'KultuNaut':'')),udsolgt:!!e.udsolgt,aflyst:!!e.aflyst,ok,src};
 }
 function parseSpalte(txt,dates){
   const out=[];let dato=dates[0];
@@ -410,14 +424,24 @@ function parseSpalte(txt,dates){
   return out;
 }
 const fundEvents=(f,dates)=>Array.isArray(f.arrangementer)&&f.arrangementer.length?f.arrangementer:parseSpalte(f.spalte,dates);
+/* ---------- undtagelser: steder eller titler, der aldrig skal med (fx Nordisk Film Biografer) ---------- */
+function undtagelser(){
+  const ud=[];(CFG.undtagelser||[]).forEach((u,i)=>{const id='std_'+i,o=S.undtag[id];if(!(o&&o.skjult))ud.push({...u,id,standard:true})});
+  for(const[id,u]of Object.entries(S.undtag||{}))if(!u.skjult&&u.tekst)ud.push({...u,id});
+  return ud;
+}
+function undtaget(e,kid=komId){const sted=normU(e.sted||''),titel=normU(e.titel||'');
+  return undtagelser().some(u=>{if(u.kommune&&u.kommune!==kid)return false;const t=normU(u.tekst);if(!t)return false;
+    return(u.felt!=='titel'&&sted.includes(t))||(u.felt!=='sted'&&titel.includes(t))})}
 function saml(dates,fd,fundSrc){
   const lok=L(),seen=new Set(),out=[];
   /* krydskilder: samme dag, samme starttid og lignende titel fra en anden kilde tæller som verificeret */
   const vaert=e=>{const k=String(e.kilde||'');if(/^kultunaut$/i.test(k)||/kultunaut\.dk/i.test(k))return'kultunaut';try{return new URL(k).hostname.replace(/^www\./,'')}catch{return e.src+':'+k}};
-  const ord=t=>new Set(normT(t).split(/\s+/).filter(w=>w.length>3));
-  const ligner=(a,b)=>{const x=normT(a),y=normT(b);if(!x||!y)return false;if(x===y||x.includes(y)||y.includes(x))return true;const A=ord(a),B=ord(b);let f=0;for(const w of A)if(B.has(w))f++;return f>=2||(f>=1&&Math.min(A.size,B.size)===1)};
-  const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato))return;const n=noegle(e);if(seen.has(n)){const o=out.find(x=>noegle(x)===n);if(o)o.kilder.push(e);return}
-    const o=e.start?out.find(x=>x.dato===e.dato&&x.start===e.start&&ligner(x.titel,e.titel)):null;if(o){o.kilder.push(e);return}
+  const ord=t=>new Set(normU(t).split(' ').filter(w=>w.length>3));
+  const ligner=(a,b)=>{const x=normU(a),y=normU(b);if(!x||!y)return false;if(x===y||x.includes(y)||y.includes(x))return true;const A=ord(a),B=ord(b);let f=0;for(const w of A)if(B.has(w))f++;return f>=2||(f>=1&&Math.min(A.size,B.size)===1)};
+  const push=e=>{if(!e.titel||e.aflyst||!dates.includes(e.dato)||undtaget(e))return;const n=noegle(e);if(seen.has(n)){const o=out.find(x=>noegle(x)===n);if(o)o.kilder.push(e);return}
+    const o=out.find(x=>x.dato===e.dato&&(x.start===e.start||!x.start||!e.start)&&ligner(x.titel,e.titel));
+    if(o){o.kilder.push(e);if(!o.start&&e.start){o.start=e.start;o.slut=e.slut}if(e.titel.length<o.titel.length)o.titel=e.titel;return}
     seen.add(n);e.kilder=[e];out.push(e)};
   if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
@@ -622,6 +646,16 @@ function renderKildeOverblik(){
 $('kildeOverblik').onclick=e=>{const b=e.target.closest('[data-viskom]');if(!b)return;komId=b.dataset.viskom;ls.set('ts:kommune',komId);$('kom').value=komId;retter=null;urlRetter=null;stedRetter=null;render();opdater();$('stederTitel').scrollIntoView({behavior:'smooth'})};
 $('rydSoegning').onclick=async()=>{const m=fasteBase().filter(x=>x.af==='søgning');if(!m.length){toast('Ingen automatisk fundne møder i '+kom().navn);return}
   await skriv(async()=>{for(const x of m){if(x.fil)await store.put('moeder',x.id,{skjult:true,kommune:komId});else await store.del('moeder',x.id)}},m.length+' fundne møder fjernet i '+kom().navn)};
+function renderUndtag(){
+  const el=$('undtagListe');if(!el)return;const u=undtagelser();
+  if($('uKom').options.length<2)CFG.kommuner.forEach(k=>$('uKom').add(new Option(k.navn,k.id)));
+  const felt={sted:'stedet',titel:'titlen',begge:'sted eller titel'};
+  el.innerHTML=u.length?u.map(x=>`<li><span><b>${esc(x.tekst)}</b> <span class="mut">– i ${felt[x.felt]||'stedet'}, ${x.kommune?esc((CFG.kommuner.find(k=>k.id===x.kommune)||{}).navn||x.kommune):'alle kommuner'}</span>${x.standard?' <span class="src">standard</span>':''}</span><button class="sm" data-fjernundtag="${esc(x.id)}">Fjern</button></li>`).join(''):'<li class="mut">Ingen undtagelser.</li>';
+}
+$('undtagForm').onsubmit=async e=>{e.preventDefault();const tekst=$('uTekst').value.trim();if(!tekst)return;
+  if(await skriv(()=>store.put('undtag','u_'+nytId(),{tekst,felt:$('uFelt').value,kommune:$('uKom').value,oprettet:new Date().toISOString()}),'"'+tekst+'" kommer ikke længere med'))$('uTekst').value=''};
+$('undtagListe').onclick=async e=>{const b=e.target.closest('[data-fjernundtag]');if(!b)return;const id=b.dataset.fjernundtag;
+  await skriv(()=>id.startsWith('std_')?store.put('undtag',id,{skjult:true}):store.del('undtag',id),'Undtagelsen er fjernet')};
 function renderMoeder(){
   const gl=x=>x.gentag?(x.gentag==='14dage'?'hver 2. uge':'hver uge')+(x.til?' til '+kort(x.til):''):'';
   const m=fasteBase().filter(x=>(x.gentag?(x.til||'9999')>=IDAG:x.dato>=IDAG)).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
@@ -675,7 +709,7 @@ function renderUge(){
   $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
   $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.sort((a,b)=>(a.start||'99').localeCompare(b.start||'99')).map(e=>`<li><span class="tid">${esc(tidFor(e))}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span></li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
-function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderKildeOverblik();renderSpalte();renderNote();renderVerif();renderUge();
+function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderKildeOverblik();renderUndtag();renderSpalte();renderNote();renderVerif();renderUge();
   const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
   if(document.activeElement!==$('raa'))$('raa').value=l.raaTekst||'';
 }

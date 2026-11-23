@@ -10,7 +10,7 @@
 
 import { tjekUrl, laesTekst } from '../../lib/tjek.js';
 
-const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler', 'steder'];
+const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler', 'steder', 'undtag'];
 
 const svar = (data, status = 200) =>
   new Response(JSON.stringify(data), {

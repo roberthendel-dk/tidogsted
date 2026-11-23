@@ -65,6 +65,10 @@ Rettelserne gemmes i Cloudflare. Søgningerne, "Søg nu" og morgentjekket bruger
 
 I `opgave/kommuner.json` kan hver kommune have `"raadDag"` (fx `"torsdag"` for Faxe). Møder, som søgningen uden Claude finder på en anden ugedag, bliver så sorteret fra som fejllæsninger. Møder, du selv har tastet ind eller lagt i Excel-arket, bliver aldrig sorteret fra.
 
+## Undtagelser
+
+Under Kilder og byer → Undtagelser kan du skrive steder eller ord i titlen, der aldrig skal med (fx Nordisk Film Biografer). De gælder alle kilder. Standardlisten står i `opgave/kommuner.json` under `"undtagelser"`.
+
 ## Menuen
 
 Forsiden ("Spalten") viser kun det daglige: søgning, KultuNaut, rå arrangementer, spalten og de næste syv dage. Resten ligger i menuen øverst:

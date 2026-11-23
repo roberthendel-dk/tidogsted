@@ -98,3 +98,8 @@ Giv hele resultatet i ÉN kodeblok med JSON, som brugeren indsætter i appen und
 ## E. Slut
 
 Afslut med en kort opsummering: avis(er), antal arrangementer, antal krydstjekket, møder fundet, og hvad der mangler. Gik noget galt med at gemme, så skriv det tydeligt øverst.
+
+
+## Undtagelser
+
+Tag aldrig arrangementer med, hvis stedet (eller titlen) matcher en undtagelse. Undtagelserne står i `opgave/kommuner.json` under `"undtagelser"` og i appens liste: `<site>/api/data/undtag` (poster med `"skjult": true` er slået fra). Fx: Nordisk Film Biografer.
