@@ -69,6 +69,10 @@ I `opgave/kommuner.json` kan hver kommune have `"raadDag"` (fx `"torsdag"` for F
 
 Under Kilder og byer → Undtagelser kan du skrive steder eller ord i titlen, der aldrig skal med (fx Nordisk Film Biografer). De gælder alle kilder. Standardlisten står i `opgave/kommuner.json` under `"undtagelser"`.
 
+## Søg med AI
+
+"Søg med AI" kopierer søgeopgaven og åbner Claude, ChatGPT, Google Gemini eller Microsoft Copilot i en ny fane. Sæt opgaven ind, slå websøgning til, og indsæt svaret (JSON-kodeblokken) under "Indsæt et resultat i hånden". "Søg forfra" smider de gamle fund fra "Søg uden Claude" og KultuNaut væk og søger igen.
+
 ## Menuen
 
 Forsiden ("Spalten") viser kun det daglige: søgning, KultuNaut, rå arrangementer, spalten og de næste syv dage. Resten ligger i menuen øverst:

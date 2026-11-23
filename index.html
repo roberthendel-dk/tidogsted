@@ -45,6 +45,8 @@ button.pri{background:var(--ink);color:var(--bg)}
 button.red{background:var(--red);border-color:var(--red);color:#fff}
 button.sm{min-height:36px;padding:4px 10px;font-size:14px}
 button:disabled{opacity:.4;cursor:default}
+.aimenu{position:relative;display:inline-flex;align-self:stretch}.aimenu>summary{height:100%;box-sizing:border-box}.aimenu>summary{list-style:none;font-size:15px;font-weight:650;min-height:44px;padding:10px 14px;border-radius:4px;border:1.5px solid var(--ink);cursor:pointer;display:inline-flex;align-items:center}.aimenu>summary::-webkit-details-marker{display:none}
+.aipanel{position:absolute;z-index:20;left:0;top:calc(100% + 4px);background:var(--bg);border:1.5px solid var(--ink);border-radius:4px;padding:6px;display:grid;gap:6px;min-width:250px;box-shadow:0 6px 20px rgba(0,0,0,.12)}.aipanel button{text-align:left}
 .knap{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 a{color:inherit;text-decoration-color:var(--red);text-underline-offset:3px}
 a.knaplink{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1.5px dashed var(--ink);border-radius:4px;text-decoration:none;font-weight:650;font-size:15px}
@@ -134,11 +136,17 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
       <div class="knap">
         <button id="brugFund" class="pri">Brug den fundne spalte</button>
         <button id="sogApp" class="red">Søg uden Claude</button>
-        <button id="sogNu">Søg med Claude</button>
+        <details class="aimenu"><summary>Søg med AI ▾</summary><div class="aipanel">
+          <button type="button" data-ai="claude">Søg med Claude</button>
+          <button type="button" data-ai="chatgpt">Søg med ChatGPT</button>
+          <button type="button" data-ai="gemini">Søg med Google Gemini</button>
+          <button type="button" data-ai="copilot">Søg med Microsoft Copilot</button>
+        </div></details>
+        <button id="forfra">Søg forfra</button>
         <button id="hentIgen">Hent resultat igen</button>
       </div>
       <div class="knap"><a id="knLink" class="knaplink" href="#" target="_blank" rel="noopener">Browse KultuNaut</a></div>
-      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg uden Claude" henter og læser de faste steders sider og dine ekstra URL'er med det samme. "Søg med Claude" kopierer søgeopgaven til en ny Claude-chat med websøgning – den finder mere og krydstjekker.</p><p id="appStatus" class="mut"></p>
+      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg uden Claude" henter og læser de faste steders sider og dine ekstra URL'er med det samme. "Søg med AI" kopierer søgeopgaven og åbner Claude, ChatGPT, Gemini eller Copilot – sæt opgaven ind, og indsæt svaret under "Indsæt et resultat i hånden". "Søg forfra" smider de gamle fund uden AI væk og søger igen.</p><p id="appStatus" class="mut"></p>
       <details><summary>Indsæt et resultat i hånden (JSON)</summary>
         <p class="mut">Indsæt den JSON-kodeblok, som søgechatten gav dig.</p>
         <textarea id="jsonInd" placeholder='{"type":"spalte", …}'></textarea>
@@ -205,7 +213,12 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
 <section class="band uge">
   <div class="hoved">
     <div><h2>De næste syv dage</h2><p class="mut" id="ugeInfo">Ikke til tryk.</p></div>
-    <div class="knap" style="margin:0"><button id="ugeApp" class="red">Søg uden Claude</button><button id="ugeSog">Søg med Claude</button><button id="ugeHent">Hent resultat igen</button></div>
+    <div class="knap" style="margin:0"><button id="ugeApp" class="red">Søg uden Claude</button><details class="aimenu"><summary>Søg med AI ▾</summary><div class="aipanel">
+          <button type="button" data-ai="claude" data-uge="1">Søg med Claude</button>
+          <button type="button" data-ai="chatgpt" data-uge="1">Søg med ChatGPT</button>
+          <button type="button" data-ai="gemini" data-uge="1">Søg med Google Gemini</button>
+          <button type="button" data-ai="copilot" data-uge="1">Søg med Microsoft Copilot</button>
+        </div></details><button id="ugeHent">Hent resultat igen</button></div>
   </div>
   <div id="ugeGrid" class="ugegrid"></div>
 </section>
@@ -927,8 +940,20 @@ window.addEventListener('hashchange',visVisning);visVisning();
 /* ---------- hændelser ---------- */
 $('kom').onchange=e=>{komId=e.target.value;ls.set('ts:kommune',komId);retter=null;urlRetter=null;stedRetter=null;render();opdater()};
 $('avisValg').onchange=e=>{if(e.target.name==='avis'){avis=e.target.value;ls.set('ts:avis:'+IDAG,avis);retter=null;render();opdater()}};
-$('sogNu').onclick=()=>kopier(soegeOpgave(false),'Søgeopgaven er kopieret – sæt den ind i en ny Claude-chat med websøgning');
-$('ugeSog').onclick=()=>kopier(soegeOpgave(true),'Ugeopgaven er kopieret – sæt den ind i en ny Claude-chat');
+/* Søg med AI: kopierer opgaven og åbner den valgte tjeneste i en ny fane */
+const AI={claude:{navn:'Claude',url:'https://claude.ai/new'},chatgpt:{navn:'ChatGPT',url:'https://chatgpt.com/'},gemini:{navn:'Google Gemini',url:'https://gemini.google.com/app'},copilot:{navn:'Microsoft Copilot',url:'https://copilot.microsoft.com/'}};
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-ai]');
+  document.querySelectorAll('.aimenu[open]').forEach(d=>{if(!d.contains(e.target))d.open=false});if(!b)return;
+  const a=AI[b.dataset.ai],uge=!!b.dataset.uge;b.closest('details').open=false;
+  window.open(a.url,'_blank','noopener');
+  await kopier(soegeOpgave(uge),(uge?'Ugeopgaven':'Søgeopgaven')+' er kopieret – sæt den ind i '+a.navn+' og slå websøgning til. Indsæt svaret under "Indsæt et resultat i hånden".')});
+$('forfra').onclick=async()=>{
+  if(!confirm2())return;
+  const l=L();l.kn=[];gemL(l);
+  try{if(S.fund[appId()])await store.del('fund',appId());delete S.fund[appId()]}catch(e){toast(e.message);return}
+  render();sogUdenClaude()};
+function confirm2(){const b=$('forfra');if(b.dataset.sikker){delete b.dataset.sikker;b.textContent='Søg forfra';return true}
+  b.dataset.sikker='1';b.textContent='Tryk igen for at søge forfra';setTimeout(()=>{if(b.dataset.sikker){delete b.dataset.sikker;b.textContent='Søg forfra'}},4000);return false}
 $('hentIgen').onclick=()=>opdater('Resultatet er hentet igen');
 $('ugeHent').onclick=()=>opdater('Resultatet er hentet igen');
 $('brugFund').onclick=()=>{const l=L();l.brugFund=true;l.manuel=false;gemL(l);toast('Den fundne spalte er taget i brug');render()};
