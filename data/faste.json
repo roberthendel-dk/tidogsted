@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-23T20:37:22.409Z",
+ "opdateret": "2026-11-23T20:42:47.882Z",
  "rows": [
   {
    "id": "naestved_2026-12-08_xl_raad_byrådsmøde",
@@ -14,6 +14,22 @@
    "til": "",
    "aktiv": false,
    "note": "Eksempel – sæt Aktiv til ja for at bruge rækken",
+   "kilde": "Excel: faste-arrangementer.xlsx",
+   "krydstjekket": true
+  },
+  {
+   "id": "faxe_2026-11-26_xl_raad_byrådsmøde",
+   "kommune": "faxe",
+   "type": "raad",
+   "titel": "Byrådsmøde",
+   "dato": "2026-11-26",
+   "start": "18:30",
+   "slut": "",
+   "sted": "Byrådssalen, Søndergade, Haslev",
+   "gentag": "",
+   "til": "",
+   "aktiv": true,
+   "note": "Torsdag – fra Faxe Kommunes dagsordensportal",
    "kilde": "Excel: faste-arrangementer.xlsx",
    "krydstjekket": true
   }
