@@ -31,6 +31,12 @@ h3{font-size:17px;font-weight:800}
 .menu{flex-basis:100%;display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:4px}
 .menu a{text-decoration:none;font-weight:700;font-size:15px;padding:8px 0;border-bottom:3px solid transparent;min-height:40px;display:inline-flex;align-items:center}
 .menu a[aria-current=page]{border-bottom-color:var(--red)}
+.tema{margin-left:auto;display:inline-flex;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden;align-self:center}
+.tema button{min-height:32px;padding:3px 10px;font-size:13px;border:0;border-radius:0}.tema button+button{border-left:1.5px solid var(--ink)}
+.tema button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+#spalteVis{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:18px;align-content:start}
+#spalteVis>*{grid-column:1/-1}
+#spalteVis>.linje{display:grid;grid-template-columns:subgrid;column-gap:18px}
 #andre{max-width:900px}
 #andre>div>section{border-top:4px solid var(--ink);padding:14px 0 26px}
 .mast p{margin:6px 0 0;color:var(--mut)}
@@ -115,11 +121,12 @@ details{margin-top:12px}summary{cursor:pointer;font-weight:650;font-size:15px;mi
 #kopi>div,.dlg>div{background:var(--bg);padding:18px;max-width:760px;width:100%;border-top:4px solid var(--red)}
 #kopi textarea{min-height:50vh;font-size:13px}.dlg textarea{min-height:30vh;font-size:14px}
 .dbnote{color:var(--red);font-size:14px;margin-top:6px}
-@media(max-width:600px){.linje{grid-template-columns:minmax(0,1fr)}.form,.retform{grid-template-columns:minmax(0,1fr)}
+@media(max-width:600px){.linje,#spalteVis>.linje{grid-template-columns:minmax(0,1fr)}#spalteVis{display:block}.form,.retform{grid-template-columns:minmax(0,1fr)}
 table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mut)}.stack td:empty{display:none}}
 @media(prefers-reduced-motion:reduce){#toast{transition:none}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+<script>try{var t=JSON.parse(localStorage.getItem('ts:tema')||'"auto"');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <header class="mast band">
@@ -128,7 +135,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
     <label for="kom">Kommune<select id="kom"></select></label>
     <div id="avisValg"></div>
   </div>
-  <nav class="menu" aria-label="Menu"><a href="#" data-menu="">Spalten</a><a href="#faste" data-menu="faste">Faste arrangementer</a><a href="#steder" data-menu="steder">Kilder og byer</a><a href="#indstillinger" data-menu="indstillinger">Indstillinger</a></nav>
+  <nav class="menu" aria-label="Menu"><a href="#" data-menu="">Spalten</a><a href="#faste" data-menu="faste">Faste arrangementer</a><a href="#steder" data-menu="steder">Kilder og byer</a><a href="#indstillinger" data-menu="indstillinger">Indstillinger</a><span class="tema" role="group" aria-label="Tema"><button type="button" data-tema="auto">Auto</button><button type="button" data-tema="light">Lys</button><button type="button" data-tema="dark">Mørk</button></span></nav>
 </header>
 
 <main class="grid band">
@@ -925,6 +932,10 @@ $('fasteExcel').onclick=()=>{
   for(const k of CFG.kommuner)for(const x of fasteBase(k.id).filter(x=>x.af!=='søgning'||x.type==='raad'))rk.push([k.navn,TYPE[x.type]||x.type||'Arrangement',x.titel||'',dk(x.dato),normTid(x.start)?ft(normTid(x.start)):'',normTid(x.slut)?ft(normTid(x.slut)):'',x.sted||'',x.gentag==='ugentlig'?'hver uge':x.gentag==='14dage'?'hver 2. uge':'',dk(x.til),'ja',x.note||'']);
   const a2=document.createElement('a');a2.href=URL.createObjectURL(lavXlsx(rk,[14,22,40,12,8,8,40,12,12,8,30]).slice(0,undefined,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'));a2.download='faste-arrangementer.xlsx';document.body.appendChild(a2);a2.click();setTimeout(()=>{URL.revokeObjectURL(a2.href);a2.remove()},1000);
   toast((rk.length-1)+' faste arrangementer hentet som Excel');};
+/* ---------- lys / mørk / auto ---------- */
+function visTema(){const t=ls.get('ts:tema','auto');if(t==='auto')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
+  document.querySelectorAll('[data-tema]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tema===t)))}
+document.querySelectorAll('[data-tema]').forEach(b=>b.onclick=()=>{ls.set('ts:tema',b.dataset.tema);visTema()});visTema();
 /* ---------- menu ---------- */
 function visVisning(){
   const v=(location.hash||'').slice(1),gyldig=['faste','steder','indstillinger'].includes(v)?v:'';
