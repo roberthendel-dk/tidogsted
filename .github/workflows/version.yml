@@ -5,7 +5,7 @@ name: Versionsnummer
 on:
   push:
     branches: [main]
-    paths: ["index.html", "lib/**", "functions/**", "worker.js"]
+    paths: ["index.html", "lib/**", "functions/**", "worker.js", "version-basis.json"]
   workflow_dispatch: {}
 
 permissions:
@@ -25,7 +25,9 @@ jobs:
       - name: Tæl opdateringer
         run: |
           n=$(git rev-list --count HEAD -- index.html lib functions worker.js)
-          printf '{"version":"%s","opdateret":"%s","commit":"%s"}\n' "$n" "$(date -u +%FT%TZ)" "$(git rev-parse --short HEAD)" > version.json
+          hoved=$(jq -r '.hoved // 1' version-basis.json); fra=$(jq -r '.fra // 0' version-basis.json)
+          v="$hoved.$((n - fra))"
+          printf '{"version":"%s","opdateringer":%s,"opdateret":"%s","commit":"%s"}\n' "$v" "$n" "$(date -u +%FT%TZ)" "$(git rev-parse --short HEAD)" > version.json
           cat version.json
       - name: Gem
         run: |
