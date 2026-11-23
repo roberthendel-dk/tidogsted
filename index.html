@@ -135,7 +135,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
 </head>
 <body>
 <header class="mast band">
-  <div><h1>Tid <span class="amp">&amp;</span> Sted</h1><p class="kredit">Version 4.2, udviklet af RH 🤓</p><p id="avisLinje">Indlæser …</p><div id="dbNote" class="dbnote"></div></div>
+  <div><h1>Tid <span class="amp">&amp;</span> Sted</h1><p class="kredit" id="kredit">Version 43, udviklet af RH 🤓</p><p id="avisLinje">Indlæser …</p><div id="dbNote" class="dbnote"></div></div>
   <div class="ctrl">
     <label for="kom">Kommune<select id="kom"></select></label>
     <div id="avisValg"></div>
@@ -973,6 +973,8 @@ $('fasteExcel').onclick=()=>{
   for(const k of CFG.kommuner)for(const x of fasteBase(k.id).filter(x=>x.af!=='søgning'||x.type==='raad'))rk.push([k.navn,TYPE[x.type]||x.type||'Arrangement',x.titel||'',dk(x.dato),normTid(x.start)?ft(normTid(x.start)):'',normTid(x.slut)?ft(normTid(x.slut)):'',x.sted||'',x.gentag==='ugentlig'?'hver uge':x.gentag==='14dage'?'hver 2. uge':'',dk(x.til),'ja',x.note||'']);
   const a2=document.createElement('a');a2.href=URL.createObjectURL(lavXlsx(rk,[14,22,40,12,8,8,40,12,12,8,30]).slice(0,undefined,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'));a2.download='faste-arrangementer.xlsx';document.body.appendChild(a2);a2.click();setTimeout(()=>{URL.revokeObjectURL(a2.href);a2.remove()},1000);
   toast((rk.length-1)+' faste arrangementer hentet som Excel');};
+/* ---------- versionsnummer (skrives af GitHub ved hver opdatering) ---------- */
+fetch('version.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(v=>{if(v&&v.version)$('kredit').textContent='Version '+v.version+', udviklet af RH 🤓'}).catch(()=>{});
 /* ---------- lys / mørk / auto ---------- */
 function visTema(){const t=ls.get('ts:tema','auto');if(t==='auto')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
   document.querySelectorAll('[data-tema]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tema===t)))}

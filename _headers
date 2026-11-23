@@ -8,3 +8,5 @@
   Cache-Control: no-cache
 /lib/*
   Cache-Control: no-cache
+/version.json
+  Cache-Control: no-store
