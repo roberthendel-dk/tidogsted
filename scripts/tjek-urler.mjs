@@ -211,6 +211,20 @@ for (const k of cfg.kommuner) {
   console.log(`KultuNaut ${k.navn}: ${sider} sider, ${antal} fund${fejl ? ' · ' + fejl : ''}`);
 }
 
+// Undtagelser (fx Nordisk Film Biografer): standardlisten i kommuner.json + appens liste
+{
+  let undtag = (cfg.undtagelser || []).map((u, i) => ({ ...u, id: 'std_' + i }));
+  try {
+    const r = await fetch(cfg.site.replace(/\/$/, '') + '/api/data/undtag', { signal: AbortSignal.timeout(20000) });
+    if (r.ok) { const app = await r.json(); undtag = undtag.filter((u) => !(app[u.id] && app[u.id].skjult)); for (const [id, u] of Object.entries(app)) if (!u.skjult && u.tekst) undtag.push({ ...u, id }); }
+  } catch {}
+  const nu = (t) => String(t || '').toLowerCase().normalize('NFKD').replace(/[^a-zæøå0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const ude = (e) => undtag.some((u) => (!u.kommune || u.kommune === e.kommune) && nu(u.tekst) && ((u.felt !== 'titel' && nu(e.sted).includes(nu(u.tekst))) || (u.felt !== 'sted' && nu(e.titel).includes(nu(u.tekst)))));
+  const før = arrangementer.length;
+  for (let i = arrangementer.length - 1; i >= 0; i--) if (ude(arrangementer[i])) arrangementer.splice(i, 1);
+  console.log(`Undtagelser: ${undtag.map((u) => u.tekst).join(', ') || 'ingen'} – ${før - arrangementer.length} arrangementer sorteret fra`);
+}
+
 fs.mkdirSync(path.dirname(UD), { recursive: true });
 fs.writeFileSync(UD, JSON.stringify({ opdateret: new Date().toISOString(), fra: iDag, til: SLUT, urler, kultunaut, arrangementer }, null, 1) + '\n');
 console.log(`${urler.length} URL'er, ${arrangementer.length} arrangementer → data/urler.json`);

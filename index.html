@@ -842,7 +842,7 @@ async function sogUdenClaude(){
       const st=+r.headers.get('x-status')||200,tekst=await r.text(),base=r.headers.get('x-url')||k.url;
       if(st>=400){status.push({...k,ok:false,fejl:'HTTP '+st,antal:0});return}
       const{events}=L2.laesSide(tekst,r.headers.get('x-type')||'',{fra,til});
-      for(const e of events){if(L2.udenforKommune(e.sted,komId,CFG.kommuner))continue;let kilde=k.url;try{if(e.url)kilde=new URL(e.url,base).href}catch{}fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted||k.navn,kilde,udsolgt:!!e.udsolgt,krydstjekket:false,fra:k.navn})}
+      for(const e of events){if(L2.udenforKommune(e.sted,komId,CFG.kommuner)||undtaget(e))continue;let kilde=k.url;try{if(e.url)kilde=new URL(e.url,base).href}catch{}fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted||k.navn,kilde,udsolgt:!!e.udsolgt,krydstjekket:false,fra:k.navn})}
       status.push({...k,ok:true,antal:events.length});
     }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0})}
     finally{n++;['sogApp','ugeApp'].forEach(i=>$(i).textContent='Søger … '+n+'/'+kilder.length)}};
@@ -856,7 +856,7 @@ async function sogUdenClaude(){
     }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0,moede:true})}};
   try{for(let i=0;i<kilder.length;i+=4)await Promise.all(kilder.slice(i,i+4).map(en));
     await Promise.all(moedeKilder.map(k=>enMoede({navn:k.navn,url:k.url})));
-    try{const kn=await hentKultunaut(L2,fra,til);kn.events.forEach(e=>fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted,kilde:kn.url,udsolgt:!!e.udsolgt,krydstjekket:false,fra:'KultuNaut'}));status.push({navn:'KultuNaut',url:kn.url,ok:!!kn.ok,antal:kn.events.length,fejl:kn.fejl})}catch(e){if(e.message==='kode')throw e}
+    try{const kn=await hentKultunaut(L2,fra,til);kn.events.filter(e=>!undtaget(e)).forEach(e=>fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted,kilde:kn.url,udsolgt:!!e.udsolgt,krydstjekket:false,fra:'KultuNaut'}));status.push({navn:'KultuNaut',url:kn.url,ok:!!kn.ok,antal:kn.events.length,fejl:kn.fejl})}catch(e){if(e.message==='kode')throw e}
     const nyeMoeder=await gemRaadsmoeder(moedeFund,'søgning');
     const doc={type:'app',kommune:komId,avis,dage:[...dageFor(avis),...ugeFor(avis)],opdateret:new Date().toISOString(),af:'app',arrangementer:fund,kilder:status};
     await store.put('fund',appId(),doc);
