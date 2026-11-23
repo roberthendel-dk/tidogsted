@@ -1,0 +1,24 @@
+{
+ "opdateret": "2026-11-23T17:52:36.643Z",
+ "fra": "2026-11-23",
+ "til": "2026-12-03",
+ "urler": [
+  {
+   "kommune": "naestved",
+   "sted": "Næstved Boldklub, JHH Park",
+   "url": "https://naestvedboldklub.dk/kommende-kamp-division/",
+   "type": "kalender",
+   "note": "Eksempel – hjemmekampe i 2. division",
+   "aktiv": true,
+   "status": 200,
+   "ok": true,
+   "fejl": "",
+   "hash": "56584ff9fcd7bb8a",
+   "aendret": false,
+   "sidstAendret": "",
+   "antal": 0,
+   "tjekket": "2026-11-23T17:52:36.642Z"
+  }
+ ],
+ "arrangementer": []
+}
