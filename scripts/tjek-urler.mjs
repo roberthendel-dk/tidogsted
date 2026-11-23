@@ -195,7 +195,7 @@ for (const k of cfg.kommuner) {
       if (!r.ok) { fejl = 'HTTP ' + r.status; break; }
       sider++;
       const html = await laesTekst(r);
-      if (n === 1 && k.id === 'faxe') fs.writeFileSync(path.join(ROD, 'data/kultunaut-eksempel.txt'), htmlTilLinjer(html).slice(0, 400).join('\n') + '\n');
+      if (n === 1 && k.id === 'faxe') { const lj = htmlTilLinjer(html); const i0 = Math.max(0, lj.findIndex((l) => /^(man|tir|ons|tor|fre|lør|søn)[a-zæøå]*\.?\s+\d{1,2}\./i.test(l) || /\d{1,2}\.\s*nov/i.test(l) && /kl/i.test(l)) - 20); fs.writeFileSync(path.join(ROD, 'data/kultunaut-eksempel.txt'), lj.slice(i0, i0 + 160).join('\n') + '\n'); }
       const ev = kultunautEvents(html, { ref: iDag, fra: iDag });
       if (!ev.length) break;
       for (const e of ev) {
