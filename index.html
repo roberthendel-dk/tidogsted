@@ -20,6 +20,7 @@
 --ok:light-dark(#11643a,#6fd39a);--warn:light-dark(#8a5300,#f0b45a);--chip:light-dark(#ecece8,#262624)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Archivo,system-ui,sans-serif;overflow-x:clip}
 .band{padding:clamp(18px,3vw,40px) max(4vw,16px)}
 h1,h2,h3{font-stretch:112%;line-height:1.05;margin:0}
@@ -27,6 +28,11 @@ h1{font-size:clamp(34px,5vw,52px);font-weight:850;letter-spacing:-.01em}
 h2{font-size:20px;font-weight:800}
 h3{font-size:17px;font-weight:800}
 .mast{border-bottom:6px solid var(--ink);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:end;justify-content:space-between;padding-bottom:18px}
+.menu{flex-basis:100%;display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:4px}
+.menu a{text-decoration:none;font-weight:700;font-size:15px;padding:8px 0;border-bottom:3px solid transparent;min-height:40px;display:inline-flex;align-items:center}
+.menu a[aria-current=page]{border-bottom-color:var(--red)}
+#andre{max-width:900px}
+#andre>div>section{border-top:4px solid var(--ink);padding:14px 0 26px}
 .mast p{margin:6px 0 0;color:var(--mut)}
 .mast .amp{color:var(--red)}
 .ctrl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end}
@@ -81,16 +87,20 @@ th,td{text-align:left;border-bottom:1px solid var(--rule);padding:7px 6px;vertic
 th{font-size:13px;color:var(--mut);font-weight:700}
 td.t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums}
 tr.fjern td{opacity:.45;text-decoration:line-through}tr.fjern td:last-child{opacity:1;text-decoration:none}
-td .handl{display:flex;gap:6px;flex-wrap:wrap}
+td .handl{display:flex;gap:6px;flex-wrap:nowrap}td .handl button{white-space:nowrap}
+.kildelink{white-space:nowrap}
 .retform{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;background:var(--panel);padding:10px}
 .retform input{width:100%}.retform .knap{grid-column:1/-1;margin:0}
 .src{font-size:12px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--chip);white-space:nowrap}
 .ja{color:var(--ok);font-weight:700}.adv{color:var(--warn);font-weight:700}.nej{color:var(--red);font-weight:700}
 .uge{border-top:6px solid var(--ink)}
-.ugegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:14px}
-.ugedag{border:1.5px solid var(--rule);border-top:4px solid var(--ink);padding:10px 12px;min-height:120px}
+.ugegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-top:14px;align-items:start}
+.ugedag{border:1.5px solid var(--rule);border-top:4px solid var(--ink);padding:10px 12px}
 .ugedag h3{font-size:16px;margin-bottom:6px}
-.ugedag li{font-size:14px;padding:5px 0;border-bottom:1px solid var(--rule);display:block}
+.ugedag ul.liste li{display:grid;grid-template-columns:62px minmax(0,1fr);gap:8px;align-items:start;justify-content:stretch;font-size:14px;line-height:1.35;padding:7px 0}
+.ugedag ul.liste li:last-child{border-bottom:0}.ugedag ul.liste li.mut{display:block}
+.ugedag .tid{font-weight:700;font-variant-numeric:tabular-nums;font-size:13px;padding-top:1px}
+.ugedag .txt{overflow-wrap:anywhere}.ugedag .sted{color:var(--mut)}.ugedag .tag{margin-left:4px;font-size:11px}
 .ugedag b{font-variant-numeric:tabular-nums}
 details{margin-top:12px}summary{cursor:pointer;font-weight:650;font-size:15px;min-height:32px}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:4px;font-size:15px;max-width:90vw;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -113,6 +123,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
     <label for="kom">Kommune<select id="kom"></select></label>
     <div id="avisValg"></div>
   </div>
+  <nav class="menu" aria-label="Menu"><a href="#" data-menu="">Spalten</a><a href="#faste" data-menu="faste">Faste arrangementer</a><a href="#steder" data-menu="steder">Steder og URL'er</a><a href="#indstillinger" data-menu="indstillinger">Indstillinger</a></nav>
 </header>
 
 <main class="grid band">
@@ -137,8 +148,8 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
 
     <section>
       <h2>Hent arrangementer fra KultuNaut</h2>
-      <p class="mut">Kopiér teksten fra KultuNaut-listen og sæt den ind. Appen eller Claude tager arrangementerne i perioden med, alle markeret [TJEK].</p>
-      <textarea id="knTekst" placeholder="Indsæt kopieret tekst fra KultuNaut her"></textarea>
+      <p class="mut">Tryk "Læs uden Claude" med tomt felt, så henter appen KultuNaut-listen selv gennem Cloudflare. Virker det ikke, så kopiér teksten fra KultuNaut-listen og sæt den ind. Alle fund markeres [TJEK].</p>
+      <textarea id="knTekst" placeholder="Lad feltet stå tomt for at hente direkte – eller indsæt kopieret tekst fra KultuNaut her"></textarea>
       <div class="knap"><button id="knApp" class="pri">Læs uden Claude</button><button id="knHent">Læs med Claude</button><button id="knFjern">Fjern KultuNaut-fund</button></div>
       <p id="knInfo" class="mut"></p>
     </section>
@@ -151,65 +162,8 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
       <p id="raaInfo" class="mut"></p>
     </section>
 
-    <section>
-      <h2>Tilføj arrangementer og møder</h2>
-      <form id="moedeForm" class="form">
-        <label class="hel">Type<select id="mType">
-          <option value="raad">Byrådsmøde / kommunalbestyrelsesmøde</option>
-          <option value="borger">Borgermøde</option>
-          <option value="hoering">Høringsmøde</option>
-          <option value="udvalg">Åbent udvalgsmøde</option>
-          <option value="arr">Arrangement</option>
-        </select></label>
-        <label>Dato<input id="mDato" type="date" required></label>
-        <label>Tid<input id="mTid" type="time"></label>
-        <label>Slut<input id="mSlut" type="time"></label>
-        <label id="mEmneL">Emne / titel<input id="mEmne" placeholder="Emne eller titel"></label>
-        <label class="hel">Sted<input id="mSted" placeholder="Sted"></label>
-        <div class="hel knap" style="margin:0"><button class="pri" type="submit">Tilføj</button></div>
-      </form>
-      <h3 style="margin-top:18px">Kommende</h3>
-      <ul id="moedeListe" class="liste"></ul>
-      <details><summary>Indsæt mødeplan</summary>
-        <p class="mut">Indsæt datoerne for byrådsmøder/kommunalbestyrelsesmøder – fx "26-11-2026" eller "26. november", én pr. linje. Du kan også markere og kopiere hele siden fra dagsordensportalen eller mødeplanen og sætte den ind: står der "Byrådet" eller "Kommunalbestyrelsen", tager appen kun de møder og springer udvalgsmøderne over.</p>
-        <textarea id="planTekst" placeholder="26-11-2026&#10;15. december 2026&#10;26/1 2027"></textarea>
-        <div class="knap"><button id="planGem" class="pri">Tilføj møderne</button></div>
-      </details>
-    </section>
 
-    <section>
-      <h2 id="stederTitel">Steder, som søgningen gennemgår</h2>
-      <ul id="stederListe" class="liste"></ul>
-      <form id="stedForm" class="form">
-        <label>Sted<input id="sNavn" required placeholder="Navn"></label>
-        <label>Officiel side<input id="sUrl" placeholder="https://…"></label>
-        <div class="hel knap" style="margin:0"><button type="submit">Tilføj sted</button></div>
-      </form>
-    </section>
-    <section>
-      <h2 id="urlTitel">Ekstra URL'er</h2>
-      <p class="mut">Sider, der skal tjekkes ud over de faste steder. De tjekkes hver morgen uden Claude, og fund kommer i spalten som [TJEK]. Listen deles med Excel-arket.</p>
-      <ul id="urlListe" class="liste"></ul>
-      <form id="urlForm" class="form">
-        <label>Sted<input id="uSted" required placeholder="Fx Sorø Musikhus"></label>
-        <label>Type<select id="uType"><option>kalender</option><option>mødekalender</option><option>dagsorden</option><option>andet</option></select></label>
-        <label class="hel">URL<input id="uUrl" type="url" required placeholder="https://…" inputmode="url"></label>
-        <label class="hel">Note (valgfri)<input id="uNote" placeholder="Fx kun koncerter, tjek byen"></label>
-        <div class="hel knap" style="margin:0"><button class="pri" type="submit">Tilføj og tjek</button></div>
-      </form>
-      <div class="knap"><button id="urlExcel" type="button">Download som Excel</button></div>
-      <p class="mut" id="urlInfo"></p>
-    </section>
 
-    <section>
-      <h2>Indstillinger</h2>
-      <div id="apiStatus" class="status">Tjekker forbindelsen …</div>
-      <form id="kodeForm" class="form">
-        <label class="hel">Kode til at gemme<input id="kode" type="password" autocomplete="current-password" placeholder="Koden fra Cloudflare (TS_KODE)"></label>
-        <div class="hel knap" style="margin:0"><button type="submit">Gem koden i denne browser</button></div>
-      </form>
-      <p class="mut">Søgeopgaven og kommunernes faste data ligger i repoet i mappen <b>opgave/</b>. Ret dem dér, så følger appen og de automatiske søgninger med.</p>
-    </section>
   </aside>
 
   <section class="hoejre">
@@ -256,6 +210,80 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
   <div id="ugeGrid" class="ugegrid"></div>
 </section>
 
+
+<main id="andre" class="band" hidden>
+  <div data-vis="faste">
+    <section>
+      <h2>Faste arrangementer og møder</h2>
+      <p class="mut">Byrådsmøder, borgermøder og andre faste arrangementer, der skal i spalten. De kommer med på de rigtige datoer – også i de kommende uger. Du kan tilføje dem her, indsætte en mødeplan eller bruge Excel-arket.</p>
+      <form id="moedeForm" class="form">
+        <label class="hel">Type<select id="mType">
+          <option value="raad">Byrådsmøde / kommunalbestyrelsesmøde</option>
+          <option value="borger">Borgermøde</option>
+          <option value="hoering">Høringsmøde</option>
+          <option value="udvalg">Åbent udvalgsmøde</option>
+          <option value="arr">Arrangement</option>
+        </select></label>
+        <label>Dato<input id="mDato" type="date" required></label>
+        <label>Tid<input id="mTid" type="time"></label>
+        <label>Slut<input id="mSlut" type="time"></label>
+        <label id="mEmneL">Emne / titel<input id="mEmne" placeholder="Emne eller titel"></label>
+        <label class="hel">Sted<input id="mSted" placeholder="Sted"></label>
+        <label>Gentag<select id="mGentag"><option value="">Ingen</option><option value="ugentlig">Hver uge</option><option value="14dage">Hver 2. uge</option></select></label>
+        <label>Til og med<input id="mTil" type="date"></label>
+        <div class="hel knap" style="margin:0"><button class="pri" type="submit">Tilføj</button></div>
+      </form>
+      <h3 style="margin-top:18px">Kommende i <span id="fasteKom"></span></h3>
+      <ul id="moedeListe" class="liste"></ul>
+      <details><summary>Indsæt mødeplan</summary>
+        <p class="mut">Indsæt datoerne for byrådsmøder/kommunalbestyrelsesmøder – fx "26-11-2026" eller "26. november", én pr. linje. Du kan også markere og kopiere hele siden fra dagsordensportalen eller mødeplanen og sætte den ind: står der "Byrådet" eller "Kommunalbestyrelsen", tager appen kun de møder og springer udvalgsmøderne over.</p>
+        <textarea id="planTekst" placeholder="26-11-2026&#10;15. december 2026&#10;26/1 2027"></textarea>
+        <div class="knap"><button id="planGem" class="pri">Tilføj møderne</button></div>
+      </details>
+      <details><summary>Excel-arket med faste arrangementer</summary>
+        <p class="mut">Arket <b>opgave/faste-arrangementer.xlsx</b> supplerer listen herover. Hent det, ret på fanen "Faste", og upload det igen med samme navn – så kommer rækkerne med i løbet af et par minutter. Rækker fra arket kan også rettes og slettes her i appen.</p>
+        <div class="knap"><button id="fasteExcel" type="button">Download listen som Excel</button></div>
+        <p class="mut" id="fasteInfo"></p>
+      </details>
+    </section>
+  </div>
+  <div data-vis="steder">
+    <section>
+      <h2 id="stederTitel">Steder, som søgningen gennemgår</h2>
+      <ul id="stederListe" class="liste"></ul>
+      <form id="stedForm" class="form">
+        <label>Sted<input id="sNavn" required placeholder="Navn"></label>
+        <label>Officiel side<input id="sUrl" placeholder="https://…"></label>
+        <div class="hel knap" style="margin:0"><button type="submit">Tilføj sted</button></div>
+      </form>
+    </section>
+    <section>
+      <h2 id="urlTitel">Ekstra URL'er</h2>
+      <p class="mut">Sider, der skal tjekkes ud over de faste steder. De tjekkes hver morgen uden Claude, og fund kommer i spalten som [TJEK]. Listen deles med Excel-arket.</p>
+      <ul id="urlListe" class="liste"></ul>
+      <form id="urlForm" class="form">
+        <label>Sted<input id="uSted" required placeholder="Fx Sorø Musikhus"></label>
+        <label>Type<select id="uType"><option>kalender</option><option>mødekalender</option><option>dagsorden</option><option>andet</option></select></label>
+        <label class="hel">URL<input id="uUrl" type="url" required placeholder="https://…" inputmode="url"></label>
+        <label class="hel">Note (valgfri)<input id="uNote" placeholder="Fx kun koncerter, tjek byen"></label>
+        <div class="hel knap" style="margin:0"><button class="pri" type="submit">Tilføj og tjek</button></div>
+      </form>
+      <div class="knap"><button id="urlExcel" type="button">Download som Excel</button></div>
+      <p class="mut" id="urlInfo"></p>
+    </section>
+  </div>
+  <div data-vis="indstillinger">
+    <section>
+      <h2>Indstillinger</h2>
+      <div id="apiStatus" class="status">Tjekker forbindelsen …</div>
+      <form id="kodeForm" class="form">
+        <label class="hel">Kode til at gemme<input id="kode" type="password" autocomplete="current-password" placeholder="Koden fra Cloudflare (TS_KODE)"></label>
+        <div class="hel knap" style="margin:0"><button type="submit">Gem koden i denne browser</button></div>
+      </form>
+      <p class="mut">Søgeopgaven og kommunernes faste data ligger i repoet i mappen <b>opgave/</b>. Ret dem dér, så følger appen og de automatiske søgninger med.</p>
+    </section>
+  </div>
+</main>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="claudeDlg" class="dlg" role="dialog" aria-modal="true" aria-labelledby="cdTitel"><div>
   <h3 id="cdTitel">Lad Claude læse teksten</h3>
@@ -305,7 +333,7 @@ const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 
 /* ---------- tilstand ---------- */
 let CFG={site:'',kommuner:[]},OPGAVE='';
-const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
+const S={faste:[],fasteOpdateret:'',fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
 const nKey=c=>c==='urler'?'urlApp':c;
 let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:false};
 const AVISER=aviser(IDAG);
@@ -332,7 +360,8 @@ async function hentJson(url){try{const r=await fetch(url,{cache:'no-store'});if(
 
 async function hentFiler(){
   const ids=[fundId(),ugeId()];
-  const [a,b,m,u]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json'),hentJson('data/urler.json')]);
+  const [a,b,m,u,f]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json'),hentJson('data/urler.json'),hentJson('data/faste.json')]);
+  if(f&&Array.isArray(f.rows)){S.faste=f.rows;S.fasteOpdateret=f.opdateret||''}
   S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
   if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],opdateret:u.opdateret||''};
 }
@@ -340,12 +369,22 @@ async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','u
 async function opdater(besked){await Promise.all([hentFiler(),hentSamlinger()]);render();if(besked)toast(besked)}
 /* nyeste af fil (automatisk søgning) og indsat resultat */
 function fundDoc(id){const a=S.fil[id],b=S.fund[id];if(a&&b)return String(b.opdateret||'')>String(a.opdateret||'')?b:a;return a||b||null}
-function alleMoeder(){
-  const ud=[],skjul=new Set(Object.entries(S.moeder).filter(([,m])=>m.skjult).map(([id])=>id));
-  for(const m of S.filMoeder[komId]||[]){const id=m.id||(komId+'_'+m.dato+'_'+normT(m.titel));if(!skjul.has(id))ud.push({...m,id,af:'søgning',fil:true})}
-  for(const[id,m]of Object.entries(S.moeder))if(!m.skjult&&m.kommune===komId)ud.push({...m,id});
+/* faste arrangementer og møder: appens liste (Cloudflare) + Excel-arket + møder fundet af søgningerne */
+function fasteBase(kid=komId){
+  const ud=[],app=S.moeder;
+  for(const r of S.faste||[]){if(r.kommune!==kid||r.aktiv===false)continue;const o=app[r.id];if(o&&o.skjult)continue;ud.push(o&&!o.skjult?{...r,...o,id:r.id,kilde_ark:true}:{...r,af:'excel',kilde_ark:true})}
+  const arkIds=new Set((S.faste||[]).map(r=>r.id));
+  for(const m of S.filMoeder[kid]||[]){const id=m.id||(kid+'_'+m.dato+'_'+normT(m.titel));if(!(app[id]&&app[id].skjult))ud.push({...m,id,af:'søgning',fil:true})}
+  for(const[id,m]of Object.entries(app))if(!m.skjult&&m.kommune===kid&&!arkIds.has(id))ud.push({...m,id});
   return ud;
 }
+function gentagelser(m,fra,til){
+  if(!m.gentag||!m.dato)return[m];
+  const skridt=m.gentag==='14dage'?14:7,slut=m.til&&m.til<til?m.til:til,ud=[];
+  for(let d=m.dato,i=0;d<=slut&&i<400;d=add(d,skridt),i++)if(d>=fra)ud.push({...m,dato:d,gentagelse:true});
+  return ud;
+}
+function alleMoeder(){const fra=add(IDAG,-1),til=add(IDAG,120);return fasteBase().flatMap(m=>gentagelser(m,fra,til))}
 
 /* ---------- normalisering og sammenfletning ---------- */
 const ja=v=>v===true||/^ja$/i.test(v||'');
@@ -536,8 +575,11 @@ $('stederListe').addEventListener('click',async ev=>{const b=ev.target.closest('
   if(d.fnulstil){await skriv(()=>store.del('steder',x.id),'Nulstillet til standard')}
 });
 function renderMoeder(){
-  const m=alleMoeder().filter(x=>x.dato>=IDAG).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
-  $('moedeListe').innerHTML=m.length?m.map(x=>`<li><span><b>${esc(kort(x.dato))}</b> ${normTid(x.start)?'kl. '+esc(ft(normTid(x.start))):'[TJEK]'} – ${esc(x.titel)}${x.sted?', '+esc(x.sted):''} ${x.af==='søgning'?'<span class="src">søgning</span>':''}</span><button class="sm" data-fjernmoede="${esc(x.id)}" data-fil="${x.fil?1:''}">Fjern</button></li>`).join(''):'<li class="mut">Ingen kommende møder eller arrangementer.</li>';
+  const gl=x=>x.gentag?(x.gentag==='14dage'?'hver 2. uge':'hver uge')+(x.til?' til '+kort(x.til):''):'';
+  const m=fasteBase().filter(x=>(x.gentag?(x.til||'9999')>=IDAG:x.dato>=IDAG)).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
+  $('moedeListe').innerHTML=m.length?m.map(x=>`<li><span><b>${esc(kort(x.dato))}</b> ${normTid(x.start)?'kl. '+esc(ft(normTid(x.start))):'[TJEK]'} – ${esc(x.titel)}${x.sted?', '+esc(x.sted):''}${x.gentag?' <span class="src">'+esc(gl(x))+'</span>':''} ${x.af==='søgning'?'<span class="src">søgning</span>':''}${x.kilde_ark?'<span class="src">Excel</span>':''}</span><button class="sm" data-fjernmoede="${esc(x.id)}" data-fil="${x.fil||x.kilde_ark?1:''}">Fjern</button></li>`).join(''):'<li class="mut">Ingen kommende møder eller faste arrangementer.</li>';
+  if($('fasteKom'))$('fasteKom').textContent=kom().navn;
+  if($('fasteInfo'))$('fasteInfo').textContent=(S.faste||[]).length?`Excel-arket: ${(S.faste||[]).length} rækker${S.fasteOpdateret?', indlæst '+tidTekst(S.fasteOpdateret):''}.`:'Excel-arket er tomt eller ikke indlæst endnu.';
 }
 function renderSpalte(){
   const l=L(),txt=spalteTekst();
@@ -572,17 +614,17 @@ function renderVerif(){
   const ev=avisEvents(),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
   tb.innerHTML=ev.map(e=>{
-    const lk=kildeLink(e),kt=lk?(/^kultunaut$/i.test(e.kilde)?'KultuNaut':lk.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'')):'';
-    const k=lk?`<a href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}" style="overflow-wrap:anywhere">${esc(kt.length>48?kt.slice(0,46)+'…':kt)}</a>`:esc(e.kilde||'–');
+    const lk=kildeLink(e),kt=lk?(/^kultunaut$/i.test(e.kilde)?'KultuNaut':lk.replace(/^https?:\/\/(www\.)?/,'').split(/[/?#]/)[0]):'';
+    const k=lk?`<a class="kildelink" href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}">${esc(kt)} ↗</a>`:esc(e.kilde||'–');
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
-    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'<span class="nej">[TJEK]</span>'}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret / verificér</button>`}</div></td></tr>`;
+    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'<span class="nej">[TJEK]</span>'}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button>`}</div></td></tr>`;
     const ret=retter===e.tid?`<tr><td colspan="7"><div class="retform"><label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label><label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
     return row+ret}).join('');
 }
 function renderUge(){
   const u=ugeFor(avis),ev=ugeEvents().filter(e=>!e.fjernet),f=fundDoc(ugeId());
   $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
-  $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.map(e=>`<li><b>${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'[TJEK]'}</b> ${esc(e.titel)}${e.sted?', '+esc(e.sted):''} <span class="src">${srcNavn(e.src)}</span>${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
+  $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.sort((a,b)=>(a.start||'99').localeCompare(b.start||'99')).map(e=>`<li><span class="tid">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'[TJEK]'}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span></li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
 function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderSpalte();renderNote();renderVerif();renderUge();
   const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
@@ -678,8 +720,21 @@ $('urlExcel').onclick=()=>{
 
 /* ---------- uden Claude ---------- */
 let LIB=null;const hentLib=async()=>LIB||(LIB=await import('./lib/tjek.js'));
-$('knApp').onclick=async()=>{const tekst=$('knTekst').value.trim();if(!tekst){toast('Indsæt først teksten fra KultuNaut');return}
-  const L2=await hentLib();tilfoejKn(L2.tekstEvents(tekst,{ref:IDAG,fra:avis}).filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)))};
+$('knApp').onclick=async()=>{const tekst=$('knTekst').value.trim();const L2=await hentLib();
+  if(tekst){tilfoejKn(L2.tekstEvents(tekst,{ref:IDAG,fra:avis}).filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)));return}
+  if(!API.svar){visForkertAdresse();toast('Indsæt teksten fra KultuNaut – direkte hentning virker kun på Cloudflare-adressen');return}
+  /* hent KultuNaut-listen direkte gennem Cloudflare og læs den som tekst */
+  const til=add(avis,8),fund=[];let ok=0,fejl='';
+  for(const n of [1,21,41,61,81]){
+    try{const r=await fetch('/api/hent?url='+encodeURIComponent(knUrl(n)),{headers:store.hdr()});const st=+(r.headers.get('x-status')||r.status);
+      if(!r.ok||st>=400){fejl='KultuNaut svarede '+st;break}
+      const html=await r.text();ok++;
+      const ev=L2.tekstEvents(L2.htmlTilLinjer(html).join('\n'),{ref:IDAG,fra:avis}).filter(e=>e.dato<=til);
+      fund.push(...ev);if(!ev.length)break;
+    }catch(e){fejl='Kunne ikke hente KultuNaut ('+e.message+')';break}}
+  const egne=fund.filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner));
+  $('knInfo').textContent=ok?`KultuNaut hentet direkte: ${ok} side(r), ${egne.length} arrangementer i perioden.${fejl?' '+fejl+'.':''}`:(fejl||'Intet hentet')+' – brug i stedet "Browse KultuNaut", kopiér listen og sæt den ind.';
+  if(egne.length)tilfoejKn(egne);else toast(ok?'Fandt ingen arrangementer på KultuNaut-listen':'KultuNaut kunne ikke hentes – kopiér listen i stedet');};
 $('saetApp').onclick=async()=>{const tekst=$('raa').value.trim();if(!tekst){toast('Skriv først nogle arrangementer');return}
   const L2=await hentLib();const r=L2.tekstEvents(tekst,{ref:IDAG,fra:avis,standardDato:avis});if(!r.length){toast('Fandt ingen arrangementer – skriv dag, klokkeslæt og titel');return}saetRaa(r)};
 let soeger=false;
@@ -750,6 +805,22 @@ function visForkertAdresse(){if($('forkert')||!safeUrl(CFG.site)||location.origi
   const d=document.createElement('div');d.id='forkert';d.className='manuel';d.style.margin='0';
   d.innerHTML=`<span>Du er på en kopi af appen, hvor "Søg uden Claude", "Tjek nu" og at gemme i Cloudflare ikke virker. Brug den rigtige adresse:</span><a class="knaplink" href="${esc(CFG.site)}">${esc(CFG.site.replace(/^https:\/\//,''))}</a>`;
   document.body.prepend(d)}
+$('fasteExcel').onclick=()=>{
+  const TYPE={raad:'Byrådsmøde',borger:'Borgermøde',hoering:'Høringsmøde',udvalg:'Åbent udvalgsmøde',arr:'Arrangement'};
+  const dk=d=>d?d.split('-').reverse().join('-'):'';
+  const rk=[['Kommune','Type','Titel','Dato','Start','Slut','Sted','Gentag','Til og med','Aktiv','Note']];
+  for(const k of CFG.kommuner)for(const x of fasteBase(k.id).filter(x=>x.af!=='søgning'||x.type==='raad'))rk.push([k.navn,TYPE[x.type]||x.type||'Arrangement',x.titel||'',dk(x.dato),normTid(x.start)?ft(normTid(x.start)):'',normTid(x.slut)?ft(normTid(x.slut)):'',x.sted||'',x.gentag==='ugentlig'?'hver uge':x.gentag==='14dage'?'hver 2. uge':'',dk(x.til),'ja',x.note||'']);
+  const a2=document.createElement('a');a2.href=URL.createObjectURL(lavXlsx(rk,[14,22,40,12,8,8,40,12,12,8,30]).slice(0,undefined,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'));a2.download='faste-arrangementer.xlsx';document.body.appendChild(a2);a2.click();setTimeout(()=>{URL.revokeObjectURL(a2.href);a2.remove()},1000);
+  toast((rk.length-1)+' faste arrangementer hentet som Excel');};
+/* ---------- menu ---------- */
+function visVisning(){
+  const v=(location.hash||'').slice(1),gyldig=['faste','steder','indstillinger'].includes(v)?v:'';
+  document.querySelector('main.grid').hidden=!!gyldig;document.querySelector('section.uge').hidden=!!gyldig;$('andre').hidden=!gyldig;
+  document.querySelectorAll('#andre [data-vis]').forEach(d=>d.hidden=d.dataset.vis!==gyldig);
+  document.querySelectorAll('.menu a').forEach(a3=>{if(a3.dataset.menu===gyldig)a3.setAttribute('aria-current','page');else a3.removeAttribute('aria-current')});
+  if(gyldig)window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',visVisning);visVisning();
 /* ---------- start ---------- */
 (async()=>{
   const [cfg,opg,st]=await Promise.all([hentJson('opgave/kommuner.json'),fetch('opgave/soegning.md',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>''),hentJson('/api/status')]);
@@ -824,8 +895,9 @@ $('mType').onchange=opdaterForm;
 $('moedeForm').onsubmit=async e=>{e.preventDefault();const k=kom(),t=$('mType').value,emne=$('mEmne').value.trim();
   const titel=t==='raad'?(emne||k.raad):t==='borger'?'Borgermøde om '+emne:t==='hoering'?'Høringsmøde om '+emne:t==='udvalg'?'Åbent møde i '+emne:emne;
   if(!$('mDato').value||(t!=='raad'&&!emne)){toast('Udfyld dato og emne/titel');return}
-  const d={kommune:komId,type:t,dato:$('mDato').value,start:$('mTid').value,slut:$('mSlut').value,titel,sted:$('mSted').value.trim(),kilde:'Manuelt',af:'manuel',krydstjekket:true,oprettet:new Date().toISOString()};
-  if(await skriv(()=>store.put('moeder',komId+'_'+nytId(),d),'Tilføjet')){['mEmne','mTid','mSlut','mSted'].forEach(i=>$(i).value='');opdaterForm()}};
+  const gentag=$('mGentag').value,til=$('mTil').value;if(gentag&&til&&til<$('mDato').value){toast('"Til og med" ligger før datoen');return}
+  const d={kommune:komId,type:t,dato:$('mDato').value,start:$('mTid').value,slut:$('mSlut').value,titel,sted:$('mSted').value.trim(),gentag,til:gentag?til:'',kilde:'Manuelt',af:'manuel',krydstjekket:true,oprettet:new Date().toISOString()};
+  if(await skriv(()=>store.put('moeder',komId+'_'+nytId(),d),'Tilføjet')){['mEmne','mTid','mSlut','mSted','mTil'].forEach(i=>$(i).value='');$('mGentag').value='';opdaterForm()}};
 $('moedeListe').onclick=e=>{const b=e.target.closest('button');const id=b&&b.dataset.fjernmoede;if(!id)return;
   if(b.dataset.fil)skriv(()=>store.put('moeder',id,{skjult:true,kommune:komId}),'Fjernet');else skriv(()=>store.del('moeder',id),'Fjernet')};
 /* steder */

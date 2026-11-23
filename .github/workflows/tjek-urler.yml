@@ -7,7 +7,7 @@ on:
     - cron: "40 2 * * *"   # 02.40 UTC = 03.40 dansk vintertid (04.40 sommertid)
   push:
     branches: [main]
-    paths: ["opgave/ekstra-urler.xlsx", "scripts/**", "lib/**"]
+    paths: ["opgave/ekstra-urler.xlsx", "opgave/faste-arrangementer.xlsx", "scripts/**", "lib/**"]
   workflow_dispatch: {}
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/urler.json
+          git add data/urler.json data/faste.json
           if git diff --cached --quiet; then echo "Ingen ændringer"; exit 0; fi
           git commit -m "URL-tjek $(date -u +%F)"
           for i in 1 2 3; do

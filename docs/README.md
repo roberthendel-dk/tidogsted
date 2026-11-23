@@ -11,6 +11,7 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 | `docs/README.md` | Denne vejledning |
 | `index.html` | Selve appen – ligger i roden, så den åbnes direkte på repoets adresse |
 | `opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
+| `opgave/faste-arrangementer.xlsx` | Excel-arket med byrådsmøder og andre faste arrangementer (kan gentages hver uge eller hver 2. uge). Lægges sammen med listen under menupunktet "Faste arrangementer". |
 | `opgave/ekstra-urler.xlsx` | Excel-arket med ekstra URL'er. Det supplerer de faste steder og lægges sammen med listen, du retter i appen. |
 | `scripts/tjek-urler.mjs` + `lib/tjek.js` + `.github/workflows/tjek-urler.yml` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `data/urler.json`. |
 | `opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
@@ -59,6 +60,24 @@ De faste steder og mødekilder for hver kommune står i `opgave/kommuner.json`. 
 - **Nulstil:** gå tilbage til det, der står i `kommuner.json`
 
 Rettelserne gemmes i Cloudflare. Søgningerne, "Søg nu" og morgentjekket bruger dem. Faste steder med en URL tjekkes også hver morgen, og deres status står ved stedet, fx "svarer", "3 fund", "ændret" eller "fejl".
+
+## Menuen
+
+Forsiden ("Spalten") viser kun det daglige: søgning, KultuNaut, rå arrangementer, spalten og de næste syv dage. Resten ligger i menuen øverst:
+
+- **Faste arrangementer** – byrådsmøder, borgermøder og andre faste arrangementer, mødeplanen og Excel-arket.
+- **Steder og URL'er** – de faste steder og de ekstra URL'er.
+- **Indstillinger** – adgangskode og forbindelse.
+
+## Faste arrangementer – i appen eller i Excel
+
+**I appen.** Menu → Faste arrangementer. Udfyld type, dato, tid, sted og evt. "Gentag" (hver uge / hver 2. uge) og "Til og med". Fjern skjuler også rækker fra Excel-arket.
+
+**I Excel-arket.** Arket er `opgave/faste-arrangementer.xlsx`, fanen "Faste": Kommune, Type, Titel, Dato (dd-mm-åååå), Start, Slut, Sted, Gentag, Til og med, Aktiv, Note. Ved byrådsmøder må Titel, Start og Sted stå tomme – så bruges kommunens standard. Upload arket på GitHub (Add file → Upload files, samme navn); så læses det automatisk inden for få minutter og lægges i `data/faste.json`. Knappen "Download listen som Excel" i appen giver dig hele den samlede liste som et ark, du kan rette i og uploade igen.
+
+## KultuNaut
+
+Tryk "Læs uden Claude" med tomt tekstfelt, så henter appen KultuNaut-listen for kommunen direkte gennem Cloudflare (kun på worker-adressen). Afviser KultuNaut hentningen, står det under knapperne – så kopierer du listen fra "Browse KultuNaut" og sætter den ind som før.
 
 ## Ekstra URL'er – i appen eller i Excel
 

@@ -4,6 +4,7 @@
 //   2. Listen, du retter i appen (gemt i Cloudflare, hentes fra <site>/api/data/urler).
 //      Den kan også slå rækker fra arket fra eller slette dem.
 //   3. De faste steder i opgave/kommuner.json, der har en URL (med dine rettelser fra appen).
+// Læser desuden opgave/faste-arrangementer.xlsx (byrådsmøder og andre faste arrangementer) → data/faste.json.
 // Kører gratis via GitHub Actions (se .github/workflows/tjek-urler.yml) uden Claude og uden afhængigheder.
 //
 // Kør lokalt:  node scripts/tjek-urler.mjs
@@ -17,6 +18,8 @@ const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
 const KOMMUNER = path.join(ROD, 'opgave/kommuner.json');
 const UD = path.join(ROD, 'data/urler.json');
+const FASTE_XLSX = path.join(ROD, 'opgave/faste-arrangementer.xlsx');
+const FASTE_UD = path.join(ROD, 'data/faste.json');
 const DAGE_FREM = 10;
 
 /* ---------- lille xlsx-læser (zip + XML) ---------- */
@@ -74,6 +77,44 @@ const kommuneId = (navn) => { const n = String(navn).trim().toLowerCase(); const
 const før = fs.existsSync(UD) ? JSON.parse(fs.readFileSync(UD, 'utf8')) : { urler: [] };
 const førMap = new Map((før.urler || []).map((u) => [u.id || urlId(u.kommune, u.url), u]));
 
+
+// 0. Faste arrangementer (byrådsmøder m.m.) fra opgave/faste-arrangementer.xlsx → data/faste.json
+{
+  const TYPER = { 'byrådsmøde': 'raad', 'byraadsmoede': 'raad', 'raad': 'raad', 'borgermøde': 'borger', 'borger': 'borger', 'høringsmøde': 'hoering', 'hoering': 'hoering', 'åbent udvalgsmøde': 'udvalg', 'udvalgsmøde': 'udvalg', 'udvalg': 'udvalg', 'arrangement': 'arr', 'arr': 'arr' };
+  const p2 = (n) => String(n).padStart(2, '0');
+  const dato = (v) => {
+    v = String(v || '').trim(); if (!v) return '';
+    if (/^\d+(\.\d+)?$/.test(v)) { const d = new Date(Date.UTC(1899, 11, 30) + Math.floor(+v) * 864e5); return d.toISOString().slice(0, 10); }
+    let m = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if (m) return `${m[1]}-${p2(m[2])}-${p2(m[3])}`;
+    m = v.match(/^(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2,4})$/); if (m) return `${m[3].length === 2 ? '20' + m[3] : m[3]}-${p2(m[2])}-${p2(m[1])}`;
+    return '';
+  };
+  const tid = (v) => {
+    v = String(v || '').trim(); if (!v) return '';
+    if (/^0?\.\d+$|^0$/.test(v)) { const min = Math.round(+v * 1440); return `${p2(Math.floor(min / 60))}:${p2(min % 60)}`; }
+    const m = v.match(/^(\d{1,2})[.:](\d{2})/) || v.match(/^(\d{1,2})$/); return m ? `${p2(m[1])}:${m[2] || '00'}` : '';
+  };
+  const rk = fs.existsSync(FASTE_XLSX) ? laesArk(FASTE_XLSX, 'Faste') : [];
+  const h = (rk[0] || []).map((x) => x.toLowerCase());
+  const col = (...navne) => h.findIndex((x) => navne.some((n) => x.startsWith(n)));
+  const C = { kom: col('kommune'), type: col('type'), titel: col('titel'), dato: col('dato'), start: col('start'), slut: col('slut'), sted: col('sted'), gentag: col('gentag'), til: col('til'), aktiv: col('aktiv'), note: col('note') };
+  const rows = [], brugt = new Set();
+  for (const r of rk.slice(1)) {
+    const g = (k) => (C[k] >= 0 ? r[C[k]] || '' : '');
+    const kid = kommuneId(g('kom')), d = dato(g('dato'));
+    if (!kid || !d) { if (r.some(Boolean)) console.log('Springer række over i faste-arrangementer.xlsx (mangler kommune eller dato):', r.join(' | ')); continue; }
+    const k = cfg.kommuner.find((x) => x.id === kid), type = TYPER[g('type').toLowerCase()] || 'arr';
+    const gt = g('gentag').toLowerCase(), gentag = /2|14/.test(gt) ? '14dage' : /uge|week/.test(gt) ? 'ugentlig' : '';
+    const titel = g('titel') || (type === 'raad' ? k.raad || 'Byrådsmøde' : '');
+    if (!titel) continue;
+    let id = `${kid}_${d}_xl_${type}_${titel.toLowerCase().replace(/[^a-zæøå0-9]+/g, '').slice(0, 24)}`;
+    while (brugt.has(id)) id += 'x'; brugt.add(id);
+    rows.push({ id, kommune: kid, type, titel, dato: d, start: tid(g('start')) || (type === 'raad' ? k.tid || '' : ''), slut: tid(g('slut')), sted: g('sted') || (type === 'raad' ? k.sted || '' : ''), gentag, til: gentag ? dato(g('til')) : '', aktiv: !/^n/i.test(g('aktiv')), note: g('note'), kilde: 'Excel: faste-arrangementer.xlsx', krydstjekket: true });
+  }
+  fs.mkdirSync(path.dirname(FASTE_UD), { recursive: true });
+  fs.writeFileSync(FASTE_UD, JSON.stringify({ opdateret: new Date().toISOString(), rows }, null, 1) + '\n');
+  console.log(`${rows.length} faste arrangementer → data/faste.json`);
+}
 // 1. Excel-arket
 const samlet = new Map();
 const rækker = fs.existsSync(XLSX) ? laesArk(XLSX, 'URLer') : [];
