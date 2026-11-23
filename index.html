@@ -46,6 +46,8 @@ button.red{background:var(--red);border-color:var(--red);color:#fff}
 button.sm{min-height:36px;padding:4px 10px;font-size:14px}
 button:disabled{opacity:.4;cursor:default}
 .notefold>summary{cursor:pointer}
+tr.datorad td{background:var(--ink);color:var(--bg);font-weight:800;font-size:15px;padding:9px 10px;border:0}tr.datorad td span{font-weight:500;opacity:.75;font-size:13px;margin-left:6px}
+tr.datorad+tr td{border-top:0}
 .aimenu{position:relative;display:inline-flex;align-self:stretch}.aimenu>summary{height:100%;box-sizing:border-box}.aimenu>summary{list-style:none;font-size:15px;font-weight:650;min-height:44px;padding:10px 14px;border-radius:4px;border:1.5px solid var(--ink);cursor:pointer;display:inline-flex;align-items:center}.aimenu>summary::-webkit-details-marker{display:none}
 .aipanel{position:absolute;z-index:20;left:0;top:calc(100% + 4px);background:var(--bg);border:1.5px solid var(--ink);border-radius:4px;padding:6px;display:grid;gap:6px;min-width:250px;box-shadow:0 6px 20px rgba(0,0,0,.12)}.aipanel button{text-align:left}
 .knap{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -713,13 +715,15 @@ const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',
 function renderVerif(){
   const ev=samlGange(avisEvents()),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
+  let forrige='';
   tb.innerHTML=ev.map(e=>{
+    const hoved=e.dato!==forrige?(forrige=e.dato,`<tr class="datorad"><td colspan="7">${esc(overskrift(e.dato))} <span>${ev.filter(x=>x.dato===e.dato).length} arrangementer</span></td></tr>`):'';
     const lk=kildeLink(e),kt=lk?(/^kultunaut$/i.test(e.kilde)?'KultuNaut':lk.replace(/^https?:\/\/(www\.)?/,'').split(/[/?#]/)[0]):'';
     const k=lk?`<a class="kildelink" href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}">${esc(kt)} ↗</a>`:esc(e.kilde||'–');
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
     const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>'+(e.krydskilder&&!e.t?'<br><span class="mut">krydskilder: '+esc(e.krydskilder.join(', '))+'</span>':''):'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.gange?(e.tjekAlle?`<button class="sm" data-fortryd="${e.tids.join(',')}">Fortryd</button>`:`<button class="sm" data-ok="${e.tids.join(',')}">OK</button><button class="sm" data-fjernalle="${e.tids.join(',')}">Fjern</button>`):e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button>`}</div></td></tr>`;
     const ret=retter===e.tid?`<tr><td colspan="7"><div class="retform"><label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label><label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
-    return row+ret}).join('');
+    return hoved+row+ret}).join('');
 }
 function renderUge(){
   const u=ugeFor(avis),ev=samlGange(ugeEvents().filter(e=>!e.fjernet)),f=fundDoc(ugeId());
