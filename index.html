@@ -486,7 +486,8 @@ function saml(dates,fd,fundSrc){
   (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
   for(const e of out){const v=new Set(e.kilder.map(vaert));e.krydskilder=v.size>=2?[...v]:null;if(e.krydskilder)e.ok=true;delete e.kilder;
     e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
-    if(t){if(t.status==='fjernet')e.fjernet=true;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde}e.ok=true}}}
+    e.autoOk=!!e.ok;
+    if(t){if(t.status==='fjernet')e.fjernet=true;else if(t.status==='afvist')e.ok=false;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde}e.ok=true}}}
   return out.sort((a,b)=>a.dato.localeCompare(b.dato)||(a.start||'99').localeCompare(b.start||'99')||a.titel.localeCompare(b.titel,'da'));
 }
 const avisEvents=()=>saml(dageFor(avis),L().brugFund?fundDoc(fundId()):null,'fund');
@@ -499,8 +500,8 @@ function samlGange(list){
     if(e.fjernet||!e.start){ud.push(e);continue}
     const k=e.dato+'|'+normT(e.titel)+'|'+normT(e.sted||'');
     const g=grp.get(k);
-    if(g){g.gange.push({start:e.start,slut:e.slut});g.tids.push(e.tid);g.ok=g.ok&&!!e.ok;g.udsolgt=g.udsolgt&&!!e.udsolgt;g.tjekAlle=g.tjekAlle&&!!e.t;continue}
-    const n={...e,gange:[{start:e.start,slut:e.slut}],tids:[e.tid],ok:!!e.ok,udsolgt:!!e.udsolgt,tjekAlle:!!e.t};grp.set(k,n);ud.push(n);
+    if(g){g.gange.push({start:e.start,slut:e.slut});g.tids.push(e.tid);g.ok=g.ok&&!!e.ok;g.autoOk=g.autoOk&&!!e.autoOk;g.rettet=g.rettet||!!(e.t&&e.t.status==='rettet');g.udsolgt=g.udsolgt&&!!e.udsolgt;g.tjekAlle=g.tjekAlle&&!!e.t;continue}
+    const n={...e,gange:[{start:e.start,slut:e.slut}],tids:[e.tid],ok:!!e.ok,autoOk:!!e.autoOk,rettet:!!(e.t&&e.t.status==='rettet'),udsolgt:!!e.udsolgt,tjekAlle:!!e.t};grp.set(k,n);ud.push(n);
   }
   for(const n of grp.values()){if(n.gange.length<2){delete n.gange;n.tids=[n.tid];continue}
     n.gange.sort((a,b)=>a.start.localeCompare(b.start));n.start=n.gange[0].start;const sidst=n.gange[n.gange.length-1];n.slut=sidst.slut||sidst.start}
@@ -752,6 +753,13 @@ function renderNote(){
 function fuldUrl(u,base){u=String(u||'');if(/^https?:\/\//i.test(u)||!base)return u;try{return new URL(u,base).href}catch{return u}}
 function kildeLink(e){const k=String(e.kilde||'');if(e.src==='kn'||/^kultunaut$/i.test(k)||/kultunaut\.dk\/perl\/arrlist2/i.test(k))return knPeriode(e.dato,add(e.dato,1));if(/^https?:\/\//i.test(k))return k;return''}
 const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek',app:'Uden Claude'}[s]||s);
+/* knapper pr. række: er arrangementet verificeret (også automatisk), står OK som trykket ind */
+function knapper(e){const ids=(e.tids||[e.tid]).join(','),rettet=e.gange?e.rettet:!!(e.t&&e.t.status==='rettet');
+  const ret=`<button class="sm" data-ret="${e.tid}">Ret</button>`,fjern=`<button class="sm" data-fjernalle="${ids}" title="Fjern – irrelevant">Fjern</button>`;
+  if(e.fjernet)return`<button class="sm" data-fortryd="${ids}">Fortryd</button>${ret}`;
+  if(rettet)return`<button class="sm" data-fortryd="${ids}">Fortryd</button>${ret}${fjern}`;
+  if(e.ok)return`<button class="sm pri" aria-pressed="true" data-okaf="${ids}" title="${e.autoOk?'Verificeret automatisk – tryk for at fjerne markeringen':'Tryk for at fortryde'}">OK ✓</button>${ret}${fjern}`;
+  return`<button class="sm" data-ok="${ids}">OK</button>${ret}${fjern}`}
 function renderVerif(){
   const ev=samlGange(avisEvents()),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="8" class="mut">Ingen arrangementer endnu.</td></tr>';return}
@@ -762,7 +770,7 @@ function renderVerif(){
     const k=lk?`<a class="kildelink" href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}">${esc(kt)} ↗</a>`:esc(e.kilde||'–');
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
     const ids=(e.tids||[e.tid]).join(',');
-    const row=`<tr class="${e.fjernet?'fjern':''}${valgt.has(ids)?' valgt':''}"><td class="vk"><input type="checkbox" class="vaelg" data-ids="${esc(ids)}" data-dato="${e.dato}"${valgt.has(ids)?' checked':''} aria-label="Vælg ${esc(e.titel)}"></td><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>'+(e.krydskilder&&!e.t?'<br><span class="mut">krydskilder: '+esc(e.krydskilder.join(', '))+'</span>':''):'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.gange?(e.tjekAlle?`<button class="sm" data-fortryd="${e.tids.join(',')}">Fortryd</button><button class="sm" data-ret="${e.tid}">Ret</button><button class="sm" data-fjernalle="${e.tids.join(',')}">Fjern</button>`:`<button class="sm" data-ok="${e.tids.join(',')}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button><button class="sm" data-fjernalle="${e.tids.join(',')}">Fjern</button>`):e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button><button class="sm" data-ret="${e.tid}">Ret</button>${e.fjernet?'':`<button class="sm" data-fjernev="${e.tid}" title="Fjern – irrelevant">Fjern</button>`}`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button><button class="sm" data-fjernev="${e.tid}" title="Fjern – irrelevant">Fjern</button>`}</div></td></tr>`;
+    const row=`<tr class="${e.fjernet?'fjern':''}${valgt.has(ids)?' valgt':''}"><td class="vk"><input type="checkbox" class="vaelg" data-ids="${esc(ids)}" data-dato="${e.dato}"${valgt.has(ids)?' checked':''} aria-label="Vælg ${esc(e.titel)}"></td><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>'+(e.krydskilder&&!e.t?'<br><span class="mut">krydskilder: '+esc(e.krydskilder.join(', '))+'</span>':''):'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${knapper(e)}</div></td></tr>`;
     const ret=retter===e.tid?`<tr><td colspan="8"><div class="retform">${e.gange?`<label style="grid-column:1/-1">Starttider (adskilt med komma)<input id="rTider" value="${esc(e.gange.map(g=>ft(g.start)).join(', '))}"></label>`:`<label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label>`}<label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
     return hoved+row+ret}).join('');
   const findes=new Set([...tb.querySelectorAll('.vaelg')].map(c=>c.dataset.ids));for(const x of[...valgt])if(!findes.has(x))valgt.delete(x);visMasse();
@@ -1100,6 +1108,8 @@ $('ugeGrid').onclick=async ev=>{const b=ev.target.closest('[data-fjernuge]');if(
   await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'}))}},'Fjernet')};
 $('verTabel').onclick=async ev=>{const b=ev.target.closest('button');if(!b)return;const ds=b.dataset;
   if(ds.ok){const ids=ds.ok.split(',');await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'ok'}))}},'Markeret som tjekket')}
+  else if(ds.okaf){const ids=ds.okaf.split(',');await skriv(async()=>{for(const id of ids){const e=find(id);if(!e)continue;
+      if(e.autoOk)await store.put('tjek',e.tid,tjekDoc(e,{status:'afvist'}));else if(S.tjek[e.tid])await store.del('tjek',e.tid)}},'Ikke længere markeret som tjekket')}
   else if(ds.fjernalle){const ids=ds.fjernalle.split(',');await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'}))}},'Fjernet fra spalten')}
   else if(ds.ret){retter=ds.ret;renderVerif()}
   else if(ds.annuller){retter=null;renderVerif()}
