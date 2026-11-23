@@ -147,7 +147,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
         <button id="hentIgen">Hent resultat igen</button>
       </div>
       <div class="knap"><a id="knLink" class="knaplink" href="#" target="_blank" rel="noopener">Browse KultuNaut</a></div>
-      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg uden Claude" henter og læser de faste steders sider og dine ekstra URL'er med det samme. "Søg med AI" kopierer søgeopgaven og åbner Claude, ChatGPT, Gemini eller Copilot – sæt opgaven ind, og indsæt svaret under "Indsæt et resultat i hånden". "Søg forfra" smider de gamle fund uden AI væk og søger igen.</p><p id="appStatus" class="mut"></p>
+      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg uden Claude" henter og læser de faste steders sider og dine ekstra URL'er med det samme. "Søg med AI" kopierer søgeopgaven til Claude, ChatGPT, Gemini eller Copilot – sæt den ind i en ny chat, og indsæt svaret under "Indsæt et resultat i hånden". "Søg forfra" smider de gamle fund uden AI væk og søger igen.</p><p id="appStatus" class="mut"></p>
       <details><summary>Indsæt et resultat i hånden (JSON)</summary>
         <p class="mut">Indsæt den JSON-kodeblok, som søgechatten gav dig.</p>
         <textarea id="jsonInd" placeholder='{"type":"spalte", …}'></textarea>
@@ -950,13 +950,12 @@ $('avisValg').onchange=e=>{if(e.target.name==='avis'){ls.set('ts:avis:'+IDAG,e.t
     if(AVISER.includes(d)){avisManuel='';ls.set('ts:avisManuel','');ls.set('ts:avis:'+IDAG,d)}else{avisManuel=d;ls.set('ts:avisManuel',d)}
     skiftAvis(d);toast('Viser '+avisNavn(d).toLowerCase()+' '+fra(d).getDate()+'. '+MDR[fra(d).getMonth()])}};
 $('avisValg').onclick=e=>{if(e.target.id!=='avisIdag')return;avisManuel='';ls.set('ts:avisManuel','');const a=ls.get('ts:avis:'+IDAG,AVISER[0]);skiftAvis(AVISER.includes(a)?a:AVISER[0]);toast('Tilbage til dags dato')};
-/* Søg med AI: kopierer opgaven og åbner den valgte tjeneste i en ny fane */
+/* Søg med AI: kopierer opgaven til den valgte tjeneste (åbner ikke noget) */
 const AI={claude:{navn:'Claude',url:'https://claude.ai/new'},chatgpt:{navn:'ChatGPT',url:'https://chatgpt.com/'},gemini:{navn:'Google Gemini',url:'https://gemini.google.com/app'},copilot:{navn:'Microsoft Copilot',url:'https://copilot.microsoft.com/'}};
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-ai]');
   document.querySelectorAll('.aimenu[open]').forEach(d=>{if(!d.contains(e.target))d.open=false});if(!b)return;
   const a=AI[b.dataset.ai],uge=!!b.dataset.uge;b.closest('details').open=false;
-  window.open(a.url,'_blank','noopener');
-  await kopier(soegeOpgave(uge),(uge?'Ugeopgaven':'Søgeopgaven')+' er kopieret – sæt den ind i '+a.navn+' og slå websøgning til. Indsæt svaret under "Indsæt et resultat i hånden".')});
+  await kopier(soegeOpgave(uge),(uge?'Ugeopgaven':'Søgeopgaven')+' er kopieret – sæt den ind i en ny chat i '+a.navn+' med websøgning. Indsæt svaret under "Indsæt et resultat i hånden".')});
 $('forfra').onclick=async()=>{
   if(!confirm2())return;
   const l=L();l.kn=[];gemL(l);

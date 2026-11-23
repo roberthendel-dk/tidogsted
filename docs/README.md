@@ -71,7 +71,7 @@ Under Kilder og byer → Undtagelser kan du skrive steder eller ord i titlen, de
 
 ## Søg med AI
 
-"Søg med AI" kopierer søgeopgaven og åbner Claude, ChatGPT, Google Gemini eller Microsoft Copilot i en ny fane. Sæt opgaven ind, slå websøgning til, og indsæt svaret (JSON-kodeblokken) under "Indsæt et resultat i hånden". "Søg forfra" smider de gamle fund fra "Søg uden Claude" og KultuNaut væk og søger igen.
+"Søg med AI" kopierer søgeopgaven. Sæt den ind i en ny chat i Claude, ChatGPT, Google Gemini eller Microsoft Copilot, slå websøgning til, og indsæt svaret (JSON-kodeblokken) under "Indsæt et resultat i hånden". "Søg forfra" smider de gamle fund fra "Søg uden Claude" og KultuNaut væk og søger igen.
 
 ## Menuen
 
