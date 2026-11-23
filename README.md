@@ -8,21 +8,28 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 
 | Sti | Indhold |
 |---|---|
-| `public/index.html` | Selve appen |
-| `public/opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
-| `public/opgave/ekstra-urler.xlsx` | Excel-arket med ekstra URL'er. Det supplerer de faste steder og lægges sammen med listen, du retter i appen. |
-| `scripts/tjek-urler.mjs` + `.github/workflows/tjek-urler.yml` + `lib/tjek.js` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `public/data/urler.json`. |
-| `public/opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
-| `public/data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
-| `public/data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
+| `index.html` | Selve appen – ligger i roden, så den åbnes direkte på repoets adresse |
+| `opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
+| `opgave/ekstra-urler.xlsx` | Excel-arket med ekstra URL'er. Det supplerer de faste steder og lægges sammen med listen, du retter i appen. |
+| `scripts/tjek-urler.mjs` + `.github/workflows/tjek-urler.yml` + `lib/tjek.js` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `data/urler.json`. |
+| `opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
+| `data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
+| `data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
 | `functions/api/[[path]].js` | Cloudflare-funktion. Gemmer dine OK'er og rettelser, egne møder og steder og indsatte resultater i Cloudflare KV. |
+
+## Adresser
+
+- **GitHub Pages:** https://roberthendel-dk.github.io/tidogsted/, hvis Pages er sat op fra roden af `main`. Her virker alt undtagen det, der skal gemmes i Cloudflare. OK'er, møder og URL'er, du tilføjer i appen, gemmes kun i den browser, du bruger.
+- **Cloudflare Pages:** https://tidogsted.pages.dev. Her virker alt.
+
+Filen `.nojekyll` sørger for, at GitHub Pages viser filerne, som de er.
 
 ## Opsætning på Cloudflare (gratis)
 
 1. **Opret Pages-projektet.** I Cloudflare: *Workers & Pages → Create → Pages → Connect to Git*. Vælg repoet `roberthendel-dk/tidogsted`.
-   - Projektnavn: `tidogsted`, så adressen bliver https://tidogsted.pages.dev. Hvis du vælger et andet navn, så ret `site` i `public/opgave/kommuner.json`.
+   - Projektnavn: `tidogsted`, så adressen bliver https://tidogsted.pages.dev. Hvis du vælger et andet navn, så ret `site` i `opgave/kommuner.json`.
    - Build command: *(tom)*
-   - Build output directory: `public`
+   - Build output directory: `/` (roden)
 2. **Opret KV.** Gå til *Storage & Databases → KV → Create*, og opret et navnerum, fx `tidogsted`.
 3. **Forbind KV.** Åbn Pages-projektet og vælg *Settings → Bindings → Add → KV namespace*. Variabelnavnet skal være `TS`, og navnerummet er `tidogsted`.
 4. **Sæt en kode.** Under *Settings → Variables and Secrets* tilføjer du secret'en `TS_KODE`, som er koden, der skal til for at gemme. Skriv samme kode i appen under *Indstillinger*.
@@ -53,10 +60,10 @@ Ekstra URL'er supplerer de faste steder. Du kan styre dem to steder, og listerne
 
 Det, du ændrer i appen, gemmes i Cloudflare. Du kan også rette og slette rækker, der kommer fra Excel-arket.
 
-**I Excel-arket.** Arket er `public/opgave/ekstra-urler.xlsx`.
+**I Excel-arket.** Arket er `opgave/ekstra-urler.xlsx`.
 1. Hent det med "Hent Excel-arket" i appen.
 2. Ret på fanen URLer.
-3. Upload det igen med "Upload nyt ark", eller med *Add file → Upload files* i `public/opgave` på GitHub. Behold filnavnet.
+3. Upload det igen med "Upload nyt ark", eller med *Add file → Upload files* i `opgave` på GitHub. Behold filnavnet.
 
 Hver morgen ca. kl. 03.40 tjekker et script alle aktive URL'er gratis og uden Claude. Det kører også med det samme, når du uploader et nyt ark. For hver URL tjekker det:
 - om siden svarer
@@ -69,8 +76,8 @@ Appens del ("Tjek nu" og listen i Cloudflare) kræver, at Cloudflare er sat op. 
 
 ## Ændringer
 
-- **Søgningen ændres** i `public/opgave/soegning.md`.
-- **Steder, mødetider og byer ændres** i `public/opgave/kommuner.json`.
+- **Søgningen ændres** i `opgave/soegning.md`.
+- **Steder, mødetider og byer ændres** i `opgave/kommuner.json`.
 - **Egne steder** kan også tilføjes direkte i appen. De gemmes i Cloudflare og bliver læst af søgningerne.
 - **Tidspunktet for de automatiske søgninger** ændres under scheduled tasks i Claude. Ret også `auto` i `kommuner.json`, så appen viser det rigtige tidspunkt.
 

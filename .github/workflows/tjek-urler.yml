@@ -1,4 +1,4 @@
-# Tjekker URL'erne i public/opgave/ekstra-urler.xlsx – gratis, uden Claude.
+# Tjekker URL'erne i opgave/ekstra-urler.xlsx – gratis, uden Claude.
 # Kører hver morgen før Claude-søgningerne, og med det samme når du uploader et nyt ark.
 name: Tjek URL'er
 
@@ -7,7 +7,7 @@ on:
     - cron: "40 2 * * *"   # 02.40 UTC = 03.40 dansk vintertid (04.40 sommertid)
   push:
     branches: [main]
-    paths: ["public/opgave/ekstra-urler.xlsx", "scripts/tjek-urler.mjs"]
+    paths: ["opgave/ekstra-urler.xlsx", "scripts/tjek-urler.mjs"]
   workflow_dispatch: {}
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/urler.json
+          git add data/urler.json
           if git diff --cached --quiet; then echo "Ingen ændringer"; exit 0; fi
           git commit -m "URL-tjek $(date -u +%F)"
           for i in 1 2 3; do

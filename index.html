@@ -200,7 +200,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
         <label class="hel">Kode til at gemme<input id="kode" type="password" autocomplete="current-password" placeholder="Koden fra Cloudflare (TS_KODE)"></label>
         <div class="hel knap" style="margin:0"><button type="submit">Gem koden i denne browser</button></div>
       </form>
-      <p class="mut">Søgeopgaven og kommunernes faste data ligger i repoet under <b>public/opgave/</b>. Ret dem dér, så følger appen og de automatiske søgninger med.</p>
+      <p class="mut">Søgeopgaven og kommunernes faste data ligger i repoet i mappen <b>opgave/</b>. Ret dem dér, så følger appen og de automatiske søgninger med.</p>
     </section>
   </aside>
 
@@ -414,7 +414,7 @@ const egneSteder=()=>Object.entries(S.kilder).filter(([,k])=>k.kommune===komId).
 const knUrl=n=>'https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr='+n+'&Area='+encodeURIComponent(kom().navn)+'-storkommune&';
 const site=()=>location.protocol==='https:'?location.origin:(CFG.site||'');
 
-/* ---------- opgavetekster (bygger på public/opgave/soegning.md) ---------- */
+/* ---------- opgavetekster (bygger på opgave/soegning.md) ---------- */
 function kommuneData(){const k=kom();return JSON.stringify({...k,egne_steder:egneSteder().map(s=>({navn:s.navn,url:s.url||''})),ekstra_urler:urlListe(komId).filter(u=>u.aktiv).map(u=>({sted:u.sted,url:u.url,type:u.type||'',note:u.note||'',aendret_siden_sidst:!!u.aendret}))},null,1)}
 function soegeOpgave(kunUge){
   const k=kom(),d=dageFor(avis),u=ugeFor(avis);
@@ -429,7 +429,7 @@ KOMMUNENS DATA
 ${kommuneData()}
 
 ----------------------------------------
-${OPGAVE||'(Søgeopgaven public/opgave/soegning.md kunne ikke hentes.)'}`;
+${OPGAVE||'(Søgeopgaven opgave/soegning.md kunne ikke hentes.)'}`;
 }
 function verOpgave(ev){
   return`VERIFICERINGSOPGAVE – "Tid & Sted", ${kom().navn} Kommune, ${avisNavn(avis).toLowerCase()} ${avis}
@@ -577,7 +577,7 @@ function renderUrler(){
   $('urlListe').innerHTML=l.length?l.map(u=>{const[c,t]=urlStatus(u);
     const ret=urlRetter===u.id?`<li style="display:block"><div class="retform" style="grid-template-columns:repeat(2,minmax(0,1fr))"><label>Sted<input id="ruSted" value="${esc(u.sted)}"></label><label>Type<select id="ruType">${['kalender','mødekalender','dagsorden','andet'].map(x=>`<option${x===u.type?' selected':''}>${x}</option>`).join('')}</select></label><label style="grid-column:1/-1">URL<input id="ruUrl" type="url" value="${esc(u.url)}"></label><label style="grid-column:1/-1">Note<input id="ruNote" value="${esc(u.note||'')}"></label><div class="knap"><button class="sm pri" data-ugem="${esc(u.id)}">Gem</button><button class="sm" data-uannuller="1">Annullér</button></div></div></li>`:'';
     return`<li style="display:block${u.aktiv?'':';opacity:.6'}"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span style="flex:1;min-width:12em"><b>${esc(u.sted||'Uden navn')}</b> <span class="src">${u.kilde==='ark'?'Excel':'app'}</span>${u.type?' <span class="mut">'+esc(u.type)+'</span>':''}<br><a href="${esc(/^https?:\/\//i.test(u.url)?u.url:'#')}" target="_blank" rel="noopener" style="font-size:13px;overflow-wrap:anywhere">${esc(u.url.replace(/^https?:\/\/(www\.)?/,''))}</a>${u.note?'<br><span class="mut">'+esc(u.note)+'</span>':''}<br><span class="${c}" style="font-size:13px">${esc(t)}</span>${u.tjekket?' <span class="mut" style="font-size:12px">· '+esc(tidTekst(u.tjekket))+'</span>':''}</span><span class="knap" style="margin:0;align-items:flex-start"><button class="sm" data-utjek="${esc(u.id)}">Tjek nu</button><button class="sm" data-uaktiv="${esc(u.id)}">${u.aktiv?'Slå fra':'Slå til'}</button><button class="sm" data-uret="${esc(u.id)}">Ret</button><button class="sm" data-uslet="${esc(u.id)}">Slet</button></span></div></li>`+ret}).join(''):'<li class="mut">Ingen ekstra URL\'er for kommunen endnu.</li>';
-  $('urlInfo').innerHTML=`${S.urler.opdateret?'Sidste morgentjek: '+esc(tidTekst(S.urler.opdateret))+' · ':''}<a href="${XL_REPO}/raw/main/public/opgave/ekstra-urler.xlsx">Hent Excel-arket</a> · <a href="${XL_REPO}/upload/main/public/opgave" target="_blank" rel="noopener">Upload nyt ark</a> · <a href="${XL_REPO}/actions/workflows/tjek-urler.yml" target="_blank" rel="noopener">Kørsler</a>`;
+  $('urlInfo').innerHTML=`${S.urler.opdateret?'Sidste morgentjek: '+esc(tidTekst(S.urler.opdateret))+' · ':''}<a href="${XL_REPO}/raw/main/opgave/ekstra-urler.xlsx">Hent Excel-arket</a> · <a href="${XL_REPO}/upload/main/opgave" target="_blank" rel="noopener">Upload nyt ark</a> · <a href="${XL_REPO}/actions/workflows/tjek-urler.yml" target="_blank" rel="noopener">Kørsler</a>`;
 }
 const findUrl=id=>urlListe(komId).find(u=>u.id===id);
 const urlFelter=u=>({kommune:komId,sted:u.sted||'',url:u.url,type:u.type||'',note:u.note||'',aktiv:u.aktiv!==false});

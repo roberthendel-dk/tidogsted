@@ -1,6 +1,6 @@
-// Tjekker de ekstra URL'er og skriver resultatet til public/data/urler.json.
+// Tjekker de ekstra URL'er og skriver resultatet til data/urler.json.
 // URL'erne kommer fra to steder, som lægges sammen:
-//   1. Excel-arket public/opgave/ekstra-urler.xlsx
+//   1. Excel-arket opgave/ekstra-urler.xlsx
 //   2. Listen, du retter i appen (gemt i Cloudflare, hentes fra <site>/api/data/urler).
 //      Den kan også slå rækker fra arket fra eller slette dem.
 // Kører gratis via GitHub Actions (se .github/workflows/tjek-urler.yml) uden Claude og uden afhængigheder.
@@ -13,9 +13,9 @@ import zlib from 'node:zlib';
 import { tjekUrl, iDag as idag, plus, urlId, afkod } from '../lib/tjek.js';
 
 const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const XLSX = path.join(ROD, 'public/opgave/ekstra-urler.xlsx');
-const KOMMUNER = path.join(ROD, 'public/opgave/kommuner.json');
-const UD = path.join(ROD, 'public/data/urler.json');
+const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
+const KOMMUNER = path.join(ROD, 'opgave/kommuner.json');
+const UD = path.join(ROD, 'data/urler.json');
 const DAGE_FREM = 10;
 
 /* ---------- lille xlsx-læser (zip + XML) ---------- */
@@ -123,4 +123,4 @@ for (const r of liste.filter((x) => !x.aktiv)) urler.push(r);
 
 fs.mkdirSync(path.dirname(UD), { recursive: true });
 fs.writeFileSync(UD, JSON.stringify({ opdateret: new Date().toISOString(), fra: iDag, til: SLUT, urler, arrangementer }, null, 1) + '\n');
-console.log(`${urler.length} URL'er, ${arrangementer.length} arrangementer → public/data/urler.json`);
+console.log(`${urler.length} URL'er, ${arrangementer.length} arrangementer → data/urler.json`);

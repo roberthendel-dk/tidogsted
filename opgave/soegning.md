@@ -2,7 +2,7 @@
 
 Denne fil er den fælles søgeopgave. Den bruges både af de automatiske morgensøgninger og af knappen "Søg nu" i appen. Ret i filen for at ændre, hvordan der søges.
 
-Skriv alt på dansk. Kommunens faste data (navn, byer, steder, mødekilder, fast tid og sted for byrådsmøder) står i `public/opgave/kommuner.json` – eller er sat ind over denne tekst.
+Skriv alt på dansk. Kommunens faste data (navn, byer, steder, mødekilder, fast tid og sted for byrådsmøder) står i `opgave/kommuner.json` – eller er sat ind over denne tekst.
 
 ## A. Find avisen
 
@@ -51,13 +51,13 @@ U. **De næste syv dage** (lettere søgning): stederne, KultuNaut og møderne fo
 ### D.1 Brugerens egne steder og ekstra URL'er
 
 - Hent `<site>/api/data/kilder` (site står i kommuner.json). Det er et JSON-objekt; tag de poster med, hvor `kommune` er kommunens id. Kan siden ikke hentes, så fortsæt uden.
-- Læs `public/data/urler.json` (i repoet, eller `<site>/data/urler.json`). Det er brugerens ekstra URL'er – Excel-arket `public/opgave/ekstra-urler.xlsx` lagt sammen med den liste, brugeren retter i appen – tjekket af et script samme morgen. (URL'er tilføjet i appen efter tjekket står i `<site>/api/data/urler`; spring poster med `"slettet": true` over.) Tag de URL'er med, hvor `kommune` er kommunens id og `aktiv` ikke er false, og følg `note`. URL'er med `"aendret": true` er ændret siden i går – kig ekstra efter nye arrangementer dér. Arrangementerne under `arrangementer` er fundet automatisk og ikke krydstjekket: krydstjek dem og tag dem med i spalten, hvis de holder. Ved manuel kørsel står URL'erne allerede i kommunens data som `ekstra_urler`.
+- Læs `data/urler.json` (i repoet, eller `<site>/data/urler.json`). Det er brugerens ekstra URL'er – Excel-arket `opgave/ekstra-urler.xlsx` lagt sammen med den liste, brugeren retter i appen – tjekket af et script samme morgen. (URL'er tilføjet i appen efter tjekket står i `<site>/api/data/urler`; spring poster med `"slettet": true` over.) Tag de URL'er med, hvor `kommune` er kommunens id og `aktiv` ikke er false, og følg `note`. URL'er med `"aendret": true` er ændret siden i går – kig ekstra efter nye arrangementer dér. Arrangementerne under `arrangementer` er fundet automatisk og ikke krydstjekket: krydstjek dem og tag dem med i spalten, hvis de holder. Ved manuel kørsel står URL'erne allerede i kommunens data som `ekstra_urler`.
 
 ### D.2 Med adgang til repoet (de automatiske søgninger)
 
 Repoet er `roberthendel-dk/tidogsted`. Skriv disse filer (kommune-id fx `naestved`):
 
-1. `public/data/fund/<id>_<AVIS>.json` – spalten:
+1. `data/fund/<id>_<AVIS>.json` – spalten:
 
 ```json
 {"type":"spalte","kommune":"<id>","avis":"<AVIS>","dage":["<dag1>","<dag2>"],"opdateret":"<ISO-tid>","af":"automatisk",
@@ -68,14 +68,14 @@ Repoet er `roberthendel-dk/tidogsted`. Skriv disse filer (kommune-id fx `naestve
  "kilder":[{"navn":"…","url":"https://…"}]}
 ```
 
-2. `public/data/fund/<id>_uge_<AVIS>.json` – de næste syv dage:
+2. `data/fund/<id>_uge_<AVIS>.json` – de næste syv dage:
 
 ```json
 {"type":"uge","kommune":"<id>","avis":"<AVIS>","dage":["…7 datoer…"],"opdateret":"<ISO-tid>","af":"automatisk",
  "arrangementer":[{"dato":"…","start":"…","slut":"…","titel":"…","sted":"…","kilde":"…","krydstjekket":false,"udsolgt":false}]}
 ```
 
-3. `public/data/moeder/<id>.json` – kommunens politiske møder. Læs filen, hvis den findes. Fjern møder før i dag, og erstat/tilføj møderne fra denne søgning (samme `id` = samme møde):
+3. `data/moeder/<id>.json` – kommunens politiske møder. Læs filen, hvis den findes. Fjern møder før i dag, og erstat/tilføj møderne fra denne søgning (samme `id` = samme møde):
 
 ```json
 {"kommune":"<id>","opdateret":"<ISO-tid>",
