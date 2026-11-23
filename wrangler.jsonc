@@ -1,0 +1,9 @@
+// Opsætning af Cloudflare-workeren "red-math-5293" (https://red-math-5293.robert-hendel.workers.dev).
+{
+  "name": "red-math-5293",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./", "binding": "ASSETS" }
+  // Lagerpladsen (KV) tilføjes her, når dens id kendes:
+  // "kv_namespaces": [{ "binding": "TS", "id": "<id>" }]
+}

@@ -2,7 +2,7 @@
 
 Værktøj til avisspalten "Tid & Sted" for Næstved, Faxe, Vordingborg, Slagelse og Sorø. Spalten viser arrangementer for "i dag og i morgen" set fra læserens dag.
 
-Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude-opgave pr. kommune søgningen og lægger resultatet her i repoet. Cloudflare Pages udgiver så siden igen.
+Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude-opgave pr. kommune søgningen og lægger resultatet her i repoet. Cloudflare udgiver så siden igen.
 
 ## Hvad ligger hvor
 
@@ -16,29 +16,21 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 | `opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
 | `data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
 | `data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
-| `functions/api/[[path]].js` (skal ligge i roden) | Cloudflare-funktion. Gemmer dine OK'er og rettelser, egne møder og steder og indsatte resultater i Cloudflare KV. |
+| `worker.js`, `wrangler.jsonc`, `.assetsignore` | Opsætningen af Cloudflare-workeren |
+| `functions/api/[[path]].js` | Cloudflare-funktion. Gemmer dine OK'er og rettelser, egne møder og steder og indsatte resultater i Cloudflare KV. |
 
-## Adresser
+## Adresse
 
-- **GitHub Pages:** https://roberthendel-dk.github.io/tidogsted/, hvis Pages er sat op fra roden af `main`. Her virker alt undtagen det, der skal gemmes i Cloudflare. OK'er, møder og URL'er, du tilføjer i appen, gemmes kun i den browser, du bruger.
-- **Cloudflare Pages:** https://tidogsted.pages.dev. Her virker alt.
+Appen kører på **https://red-math-5293.robert-hendel.workers.dev** (en Cloudflare Worker). Opsætningen står i `wrangler.jsonc` og `worker.js` i roden af repoet.
 
-Filen `.nojekyll` sørger for, at GitHub Pages viser filerne, som de er.
+## Opsætning på Cloudflare (gratis, én gang)
 
-## Opsætning på Cloudflare (gratis)
+1. **Kobl workeren til repoet.** Gå til Workers & Pages og åbn red-math-5293. Vælg Settings, find Build, og klik Connect. Vælg GitHub og repoet tidogsted, og brug branch main. Lad Build command stå tom, og lad Deploy command være `npx wrangler deploy`. Klik Save. Herefter udgives siden automatisk ved hver ændring i repoet.
+2. **Opret lagerpladsen.** Gå til Storage & Databases → Workers KV, klik Create, og kald den tidogsted. Kopiér dens **ID** og indsæt den i `wrangler.jsonc` (eller giv den til Claude).
+3. **Vælg en kode.** Åbn red-math-5293 og gå til Settings → Variables and Secrets → Add. Vælg Type: Secret, skriv navnet `TS_KODE`, og skriv din kode som værdi. Klik Deploy eller Save.
+4. **Skriv koden på siden.** Åbn siden, og skriv koden under Indstillinger. Står der "Data gemmes i Cloudflare. Koden er godkendt.", er du færdig.
 
-1. **Opret Pages-projektet.** I Cloudflare: *Workers & Pages → Create → Pages → Connect to Git*. Vælg repoet `roberthendel-dk/tidogsted`.
-   - Projektnavn: `tidogsted`, så adressen bliver https://tidogsted.pages.dev. Hvis du vælger et andet navn, så ret `site` i `opgave/kommuner.json`.
-   - Build command: *(tom)*
-   - Build output directory: `/` (roden)
-2. **Opret KV.** Gå til *Storage & Databases → KV → Create*, og opret et navnerum, fx `tidogsted`.
-3. **Forbind KV.** Åbn Pages-projektet og vælg *Settings → Bindings → Add → KV namespace*. Variabelnavnet skal være `TS`, og navnerummet er `tidogsted`.
-4. **Sæt en kode.** Under *Settings → Variables and Secrets* tilføjer du secret'en `TS_KODE`, som er koden, der skal til for at gemme. Skriv samme kode i appen under *Indstillinger*.
-5. Deploy igen, så bindingerne virker.
-
-Alt kører på gratisniveauerne. Der bruges ikke noget betalt Claude-API: "Sæt spalten" og "Hent arrangementer fra KultuNaut" kopierer opgaven til en almindelig Claude-chat, og du indsætter svaret.
-
-Uden KV virker appen stadig. OK'er, møder og egne steder gemmes så bare kun i den browser, du bruger.
+Indtil lagerpladsen er sat op, virker siden stadig. OK'er, møder og URL'er gemmes så kun i den browser, du bruger.
 
 ## Sådan bruges den
 
@@ -82,7 +74,7 @@ Hver morgen ca. kl. 03.40 tjekker et script alle aktive URL'er gratis og uden Cl
 
 Fundene kommer ind i spalten og ugeoversigten som "Excel-liste" og er altid markeret [TJEK]. Claude-søgningerne gennemgår også alle aktive URL'er og krydstjekker fundene.
 
-Appens del ("Tjek nu" og listen i Cloudflare) kræver, at Cloudflare er sat op. Uden Cloudflare kan du stadig bruge Excel-arket.
+Appens del ("Tjek nu" og listen i Cloudflare) kræver, at lagerpladsen er sat op. Uden Cloudflare kan du stadig bruge Excel-arket.
 
 ## Ændringer
 

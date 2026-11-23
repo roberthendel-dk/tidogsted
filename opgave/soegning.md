@@ -85,7 +85,7 @@ Repoet er `roberthendel-dk/tidogsted`. Skriv disse filer (kommune-id fx `naestve
 
 Filnavne og id'er: kun a–z, 0–9, `-`, `_` og `.` (ingen æ, ø, å). Rør ikke andre filer.
 
-Skriv og push spalten (fil 1) og møderne (fil 3), så snart de er klar – før ugesøgningen – så de er gemt, selv hvis resten fejler. Commit på `main` med en besked som "Søgning: Næstved, avis 2026-11-24". Før push: `git pull --rebase origin main`. Afvises push, så pull igen og prøv op til tre gange. Cloudflare Pages udgiver automatisk siden igen efter hvert push.
+Skriv og push spalten (fil 1) og møderne (fil 3), så snart de er klar – før ugesøgningen – så de er gemt, selv hvis resten fejler. Commit på `main` med en besked som "Søgning: Næstved, avis 2026-11-24". Før push: `git pull --rebase origin main`. Afvises push, så pull igen og prøv op til tre gange. Cloudflare udgiver automatisk siden igen efter hvert push.
 
 ### D.3 Uden adgang til repoet (knappen "Søg nu" i en almindelig chat)
 
