@@ -459,6 +459,9 @@ function undtagelser(){
 function undtaget(e,kid=komId){const sted=normU(e.sted||''),titel=normU(e.titel||'');
   return undtagelser().some(u=>{if(u.kommune&&u.kommune!==kid)return false;const t=normU(u.tekst);if(!t)return false;
     return(u.felt!=='titel'&&sted.includes(t))||(u.felt!=='sted'&&titel.includes(t))})}
+/* "09.30 og 11" i starttiden (fx fra en AI-søgning) bliver til to arrangementer */
+function delTider(e){const st=String(e.start||'');if(!/\d\s*(og|,|&)\s*\d/i.test(st))return[e];
+  return st.split(/\s*(?:og|,|&)\s*/i).map(x=>normTid(x.replace(/[-–].*$/,''))).filter(Boolean).map((t,i)=>({...e,start:t,slut:i?'':e.slut}))}
 function saml(dates,fd,fundSrc){
   const lok=L(),seen=new Set(),out=[];
   /* krydskilder: samme dag, samme starttid og lignende titel fra en anden kilde tæller som verificeret */
@@ -469,12 +472,12 @@ function saml(dates,fd,fundSrc){
     const o=out.find(x=>x.dato===e.dato&&(x.start===e.start||!x.start||!e.start)&&ligner(x.titel,e.titel));
     if(o){o.kilder.push(e);if(!o.start&&e.start){o.start=e.start;o.slut=e.slut}if(e.titel.length<o.titel.length)o.titel=e.titel;return}
     seen.add(n);e.kilder=[e];out.push(e)};
-  if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
+  if(fd)fundEvents(fd,dates).flatMap(delTider).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
   const aktiveUrl=new Set([...urlListe(komId).filter(u=>u.aktiv).map(u=>u.id),...fasteSteder(komId).filter(f=>!f.skjult&&f.url).map(f=>urlId(komId,f.url))]);
   S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>{const u=S.urler.urler.find(x=>x.id===e.urlId);push(norm({...e,kilde:fuldUrl(e.kilde,u&&u.url)},e.fra==='KultuNaut'?'kn':'xl'))});
   for(const[id,a]of Object.entries(S.urlApp))if(a.kommune===komId&&aktiveUrl.has(id))(a.fund||[]).forEach(e=>push(norm({...e,kilde:e.url||a.url},'xl')));
-  const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.forEach(e=>push(norm(e,'app')));
+  const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.flatMap(delTider).forEach(e=>push(norm(e,'app')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
   (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
   for(const e of out){const v=new Set(e.kilder.map(vaert));e.krydskilder=v.size>=2?[...v]:null;if(e.krydskilder)e.ok=true;delete e.kilder;
