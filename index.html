@@ -171,7 +171,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
       <h3 style="margin-top:18px">Kommende</h3>
       <ul id="moedeListe" class="liste"></ul>
       <details><summary>Indsæt mødeplan</summary>
-        <p class="mut">Indsæt årets datoer for byrådsmøder/kommunalbestyrelsesmøder fra kommunens mødeplan – én pr. linje eller adskilt af komma, fx "26-11-2026" eller "26. november". De kommer i spalten med fast tid og sted, så du kun skal gøre det én gang om året.</p>
+        <p class="mut">Indsæt datoerne for byrådsmøder/kommunalbestyrelsesmøder – fx "26-11-2026" eller "26. november", én pr. linje. Du kan også markere og kopiere hele siden fra dagsordensportalen eller mødeplanen og sætte den ind: står der "Byrådet" eller "Kommunalbestyrelsen", tager appen kun de møder og springer udvalgsmøderne over.</p>
         <textarea id="planTekst" placeholder="26-11-2026&#10;15. december 2026&#10;26/1 2027"></textarea>
         <div class="knap"><button id="planGem" class="pri">Tilføj møderne</button></div>
       </details>
@@ -727,7 +727,7 @@ function renderAppStatus(){const d=S.fund[appId()];const el=$('appStatus');if(!e
   if(!d){el.textContent='';return}
   const ok=(d.kilder||[]).filter(k=>k.ok).length,fejl=(d.kilder||[]).filter(k=>!k.ok);
   const mk=(d.kilder||[]).filter(k=>k.moede);const mOk=mk.filter(k=>k.ok);
-  el.innerHTML=`<b>Søgning uden Claude ${esc(tidTekst(d.opdateret))}:</b> ${(d.arrangementer||[]).length} arrangementer fra ${ok} af ${(d.kilder||[]).length} sider.${mk.length?(mOk.length?' Møder læst fra '+mOk.map(k=>esc(k.navn)).join(', ')+'.':' Mødekilderne kunne ikke læses – brug "Indsæt mødeplan" under Tilføj arrangementer og møder.'):''}${fejl.filter(k=>!k.moede).length?' Kunne ikke læse: '+fejl.filter(k=>!k.moede).map(k=>esc(k.navn)).join(', ')+'.':''}`}
+  el.innerHTML=`<b>Søgning uden Claude ${esc(tidTekst(d.opdateret))}:</b> ${(d.arrangementer||[]).length} arrangementer fra ${ok} af ${(d.kilder||[]).length} sider.${mk.length?'<br><b>Møder</b> – '+mk.map(k=>esc(k.navn)+': '+(k.ok?(k.antal?k.antal+' møder':'hentet, men ingen møder fundet'):'kunne ikke hentes'+(k.fejl?' ('+esc(k.fejl)+')':''))).join('; ')+'.'+(mk.some(k=>k.ok&&k.antal)?'':' Brug "Indsæt mødeplan" under Tilføj arrangementer og møder.')+'<br>':''}${fejl.filter(k=>!k.moede).length?' Kunne ikke læse: '+fejl.filter(k=>!k.moede).map(k=>esc(k.navn)).join(', ')+'.':''}`}
 
 /* ---------- møder uden Claude ---------- */
 const harRaadsmoede=dato=>alleMoeder().some(x=>x.dato===dato&&(x.type==='raad'||/byrådsmøde|kommunalbestyrelsesmøde/i.test(x.titel||'')));
@@ -739,8 +739,9 @@ async function gemRaadsmoeder(liste,af){
 }
 $('planGem').onclick=async()=>{
   const tekst=$('planTekst').value.trim();if(!tekst){toast('Indsæt først datoerne');return}
-  const L2=await hentLib(),liste=[];
-  for(const del of tekst.split(/[\n,;]+/)){const d=L2.findDato(del.trim(),IDAG)||((del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/))&&{dato:del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/).slice(1).reverse().map((x,i)=>i?String(x).padStart(2,'0'):x).join('-')});
+  const L2=await hentLib();let liste=[];
+  if(/byr(å|aa)d|kommunalbestyrelse/i.test(tekst)){const html=tekst.split('\n').map(x=>'<div>'+x.replace(/</g,' ')+'</div>').join('');liste=L2.moedeLinks(html,{ref:IDAG})}
+  if(!liste.length)for(const del of tekst.split(/[\n,;]+/)){const d=L2.findDato(del.trim(),IDAG)||((del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/))&&{dato:del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/).slice(1).reverse().map((x,i)=>i?String(x).padStart(2,'0'):x).join('-')});
     if(d&&d.dato&&!d.ugedag){const t=L2.findTid(del.replace(/\d{1,2}-\d{1,2}-\d{4}/,' '));liste.push({dato:d.dato,start:t?t.start:''})}}
   if(!liste.length){toast('Fandt ingen datoer');return}
   try{const n=await gemRaadsmoeder(liste,'manuel');$('planTekst').value='';toast(n+' møder tilføjet ('+(liste.length-n)+' fandtes allerede eller var passeret)');render()}catch(e){toast(e.message)}
