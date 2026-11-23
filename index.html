@@ -511,8 +511,26 @@ function linje(e){
   if(e.start&&!e.ok)l+=' [TJEK]';
   return l;
 }
-function bygTekst(){const ev=samlGange(avisEvents().filter(e=>!e.fjernet&&e.ok&&e.start));return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
-const spalteTekst=()=>{const l=L();return l.manuel&&l.spalte?l.spalte:bygTekst()};
+function bygTekst(){const ev=klarTilSpalte();return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
+/* verificerede arrangementer (OK eller krydskilder), som spalten skal have */
+const klarTilSpalte=()=>samlGange(avisEvents().filter(e=>!e.fjernet&&e.ok&&e.start));
+/* Er spalten rettet i hånden, sættes nye verificerede arrangementer automatisk ind under den rigtige dag.
+   Linjer, du selv har slettet, kommer ikke igen (kendte = de arrangementer, spalten allerede har set). */
+function flet(l){
+  const kendte=new Set(l.kendte||[]),nye=klarTilSpalte().filter(e=>!(e.tids||[e.tid]).every(t=>kendte.has(t)));
+  if(!nye.length)return l.spalte;
+  let linjer=l.spalte.split('\n');
+  for(const e of nye){
+    const h=linjer.findIndex(x=>x.trim().toLowerCase()===overskrift(e.dato).toLowerCase());
+    const ny=linje(e);(e.tids||[e.tid]).forEach(t=>kendte.add(t));
+    if(h<0||linjer.some(x=>x.includes(' – '+e.titel)))continue;
+    let i=h+1;while(i<linjer.length&&linjer[i].trim()&&!/den \d+\./.test(linjer[i])){const m=linjer[i].match(/^kl\.\s*(\d{1,2})(?:[.:](\d{2}))?/);if(m&&pad(+m[1])+':'+(m[2]||'00')>e.start)break;i++}
+    linjer.splice(i,0,ny);
+  }
+  l.spalte=linjer.join('\n');l.kendte=[...kendte];gemL(l);return l.spalte;
+}
+const kendteNu=()=>klarTilSpalte().flatMap(e=>e.tids||[e.tid]);
+const spalteTekst=()=>{const l=L();return l.manuel&&l.spalte?flet(l):bygTekst()};
 
 /* ---------- formattjek ---------- */
 function formatTjek(txt){
@@ -699,7 +717,7 @@ function renderMoeder(){
 function renderSpalte(){
   const l=L(),txt=spalteTekst();
   const venter=avisEvents().filter(e=>!e.fjernet&&(!e.ok||!e.start)).length;
-  $('manuel').innerHTML=(venter&&!l.manuel?`<div class="manuel"><span>${venter} arrangementer venter på verificering og er ikke med i spalten. Tryk OK i "Data til verificering", når du har tjekket dem – eller "Verificér alle med Claude".</span></div>`:'')+(l.manuel?`<div class="manuel"><span>Spalten er redigeret i hånden. Nye fund og rettelser kommer først med, når du bygger den igen.</span><button class="sm" id="bygIgen">Byg spalten igen</button></div>`:'');
+  $('manuel').innerHTML=(venter&&!l.manuel?`<div class="manuel"><span>${venter} arrangementer venter på verificering og er ikke med i spalten. Tryk OK i "Data til verificering", når du har tjekket dem – eller "Verificér alle med Claude".</span></div>`:'')+(l.manuel?`<div class="manuel"><span>Spalten er redigeret i hånden. Nye verificerede arrangementer sættes automatisk ind; rettelser af tid og sted kommer først med, når du bygger den igen.</span><button class="sm" id="bygIgen">Byg spalten igen</button></div>`:'');
   const ta=$('spalteTekst');if(document.activeElement!==ta)ta.value=txt;
   ta.hidden=!redigerer;$('spalteVis').hidden=redigerer;$('rediger').textContent=redigerer?'Vis spalten':'Redigér teksten';
   const heads=dageFor(avis).map(overskrift);let html='';
@@ -1025,9 +1043,9 @@ function saetRaa(r){
 $('raaFjern').onclick=()=>{const l=L();l.raa=[];gemL(l);toast('Rå arrangementer fjernet fra spalten');render()};
 $('orddeling').onclick=()=>{const l=L();const f=$('raa').value,ny=retOrddeling(f);$('raa').value=ny;l.raaTekst=ny;let n=+(f!==ny);
   if(l.manuel){const s=retOrddeling(l.spalte);n+=+(s!==l.spalte);l.spalte=s}gemL(l);toast(n?'Orddeling rettet':'Ingen orddeling fundet');render()};
-$('retAuto').onclick=()=>{const l=L(),t=spalteTekst(),ny=retStreger(retOrddeling(t));if(ny===t){toast('Intet at rette');return}l.spalte=ny;l.manuel=true;gemL(l);toast('Tankestreger og orddeling rettet');render()};
+$('retAuto').onclick=()=>{const l=L(),t=spalteTekst(),ny=retStreger(retOrddeling(t));if(ny===t){toast('Intet at rette');return}l.spalte=ny;if(!l.manuel)l.kendte=kendteNu();l.manuel=true;gemL(l);toast('Tankestreger og orddeling rettet');render()};
 $('rediger').onclick=()=>{redigerer=!redigerer;render();if(redigerer)$('spalteTekst').focus()};
-$('spalteTekst').oninput=e=>{const l=L();l.spalte=e.target.value;l.manuel=true;gemL(l);renderSpalte()};
+$('spalteTekst').oninput=e=>{const l=L();l.spalte=e.target.value;if(!l.manuel)l.kendte=kendteNu();l.manuel=true;gemL(l);renderSpalte()};
 $('spalteTekst').onblur=()=>render();
 $('manuel').onclick=e=>{if(e.target.id==='bygIgen'){const l=L();l.manuel=false;l.spalte='';gemL(l);toast('Spalten er bygget igen');render()}};
 $('kopier').onclick=()=>kopier(spalteTekst(),'Spalten er kopieret');
