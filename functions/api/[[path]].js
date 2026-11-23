@@ -2,6 +2,7 @@
 // Gemmer mine OK'er/rettelser (tjek), møder og arrangementer (moeder), egne steder (kilder),
 // ekstra URL'er (urler), rettelser til de faste steder (steder) og indsatte søgeresultater (fund) i Cloudflare KV.
 // /api/tjek?url=… tjekker én URL med det samme ("Tjek nu" i appen).
+// /api/hent?url=… henter en side til "Søg uden Claude", som appen selv læser.
 //
 // Opsætning i Cloudflare (Pages-projektet > Settings):
 //   KV-binding:  TS  -> et KV-navnerum, fx "tidogsted"
@@ -51,6 +52,20 @@ export async function onRequest({ request, env, params }) {
       return svar({ ok: true });
     }
     return svar({ fejl: 'Metoden understøttes ikke' }, 405);
+  }
+
+  if (dele[0] === 'hent' && metode === 'GET') {
+    // Henter en side for appen ("Søg uden Claude"), så browseren selv kan læse arrangementerne.
+    if (!godkendt) return svar({ fejl: 'Forkert kode' }, 401);
+    const url = new URL(request.url).searchParams.get('url') || '';
+    if (!/^https?:\/\/[^\s]+$/i.test(url)) return svar({ fejl: 'Ugyldig URL' }, 400);
+    try {
+      const r = await fetch(url, { redirect: 'follow', headers: { 'user-agent': 'Mozilla/5.0 (compatible; TidOgSted/1.0; +https://github.com/roberthendel-dk/tidogsted)', accept: 'text/html,text/calendar,application/xhtml+xml,*/*' }, signal: AbortSignal.timeout(25000) });
+      const tekst = (await r.text()).slice(0, 3000000);
+      return new Response(tekst, { status: 200, headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-status': String(r.status), 'x-type': r.headers.get('content-type') || '', 'x-url': r.url || url } });
+    } catch (e) {
+      return svar({ fejl: (e && e.name === 'TimeoutError') ? 'Siden svarede ikke inden for 25 sekunder' : 'Siden kunne ikke hentes' }, 502);
+    }
   }
 
   if (dele[0] === 'tjek' && metode === 'GET') {

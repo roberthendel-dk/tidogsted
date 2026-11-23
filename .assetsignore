@@ -1,7 +1,6 @@
 .git
 .github
 functions
-lib
 scripts
 docs
 worker.js

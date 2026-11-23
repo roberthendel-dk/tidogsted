@@ -32,6 +32,18 @@ Appen kører på **https://tidogsted.robert-hendel.workers.dev** (en Cloudflare 
 
 Indtil lagerpladsen er sat op, virker siden stadig. OK'er, møder og URL'er gemmes så kun i den browser, du bruger.
 
+## Med og uden Claude
+
+Appen kan køre begge veje. Knapperne findes i to udgaver:
+
+| Opgave | Uden Claude (gratis, med det samme) | Med Claude (finder mere, krydstjekker) |
+|---|---|---|
+| Søg | **Søg uden Claude**: henter de faste steders sider, dine egne steder og de ekstra URL'er og læser arrangementerne ud | **Søg med Claude**: kopierer søgeopgaven til en Claude-chat. Derudover kører der automatiske Claude-søgninger hver morgen |
+| KultuNaut-tekst | **Læs uden Claude** | **Læs med Claude** |
+| Rå arrangementer | **Sæt spalten uden Claude**: skriv gerne én pr. linje, fx "Onsdag kl. 19.30 Koncert med X, Grønnegades Kaserne" | **Sæt spalten med Claude** |
+
+Alt, hvad appen finder uden Claude, er markeret [TJEK]. Uden Claude læser appen sider, der viser arrangementer i et kendt format: kalenderfiler (iCal), schema.org eller kort med dato, klokkeslæt og titel som på bibliotekernes lister. Sider uden sådan en opbygning kan den ikke læse. De står under "Kunne ikke læse" efter søgningen, og dem tager Claude-søgningen sig af. Politiske møder finder appen ikke selv. Dem tilføjer du i formularen, eller også finder Claude-søgningen dem.
+
 ## Sådan bruges den
 
 - **Kommune og avis.** Appen vælger selv den næste avis ud fra dags dato. Kun om fredagen kan du vælge mellem lørdags- og mandagsavisen.

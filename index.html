@@ -120,11 +120,12 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
       <div id="status" class="status">Ingen søgning gemt endnu.</div>
       <div class="knap">
         <button id="brugFund" class="pri">Brug den fundne spalte</button>
-        <button id="sogNu" class="red">Søg nu</button>
+        <button id="sogApp" class="red">Søg uden Claude</button>
+        <button id="sogNu">Søg med Claude</button>
         <button id="hentIgen">Hent resultat igen</button>
       </div>
       <div class="knap"><a id="knLink" class="knaplink" href="#" target="_blank" rel="noopener">Browse KultuNaut</a></div>
-      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg nu" kopierer den samme søgeopgave, hvis du vil køre den med det samme i en ny Claude-chat med websøgning.</p>
+      <p class="mut">Søgningen kører automatisk hver morgen mandag–lørdag og lægger resultatet ind på siden. "Søg uden Claude" henter og læser de faste steders sider og dine ekstra URL'er med det samme. "Søg med Claude" kopierer søgeopgaven til en ny Claude-chat med websøgning – den finder mere og krydstjekker.</p><p id="appStatus" class="mut"></p>
       <details><summary>Indsæt et resultat i hånden (JSON)</summary>
         <p class="mut">Indsæt den JSON-kodeblok, som søgechatten gav dig.</p>
         <textarea id="jsonInd" placeholder='{"type":"spalte", …}'></textarea>
@@ -134,17 +135,17 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
 
     <section>
       <h2>Hent arrangementer fra KultuNaut</h2>
-      <p class="mut">Kopiér teksten fra KultuNaut-listen og sæt den ind. Claude tager kun arrangementer i kommunen og i perioden med, alle markeret [TJEK].</p>
+      <p class="mut">Kopiér teksten fra KultuNaut-listen og sæt den ind. Appen eller Claude tager arrangementerne i perioden med, alle markeret [TJEK].</p>
       <textarea id="knTekst" placeholder="Indsæt kopieret tekst fra KultuNaut her"></textarea>
-      <div class="knap"><button id="knHent" class="pri">Hent arrangementer</button><button id="knFjern">Fjern KultuNaut-fund</button></div>
+      <div class="knap"><button id="knApp" class="pri">Læs uden Claude</button><button id="knHent">Læs med Claude</button><button id="knFjern">Fjern KultuNaut-fund</button></div>
       <p id="knInfo" class="mut"></p>
     </section>
 
     <section>
       <h2>Rå arrangementer</h2>
-      <p class="mut">Skriv eller indsæt arrangementer i fri form. Claude sætter dem i spalten.</p>
+      <p class="mut">Skriv eller indsæt arrangementer, gerne én pr. linje med dag, klokkeslæt, titel og sted – fx "Onsdag kl. 19.30 Koncert med X, Grønnegades Kaserne".</p>
       <textarea id="raa" placeholder="Fx: Onsdag kl 19.30 koncert med Tina Dico i Grønnegades Kaserne – udsolgt"></textarea>
-      <div class="knap"><button id="saet" class="pri">Sæt spalten</button><button id="orddeling">Ret kun orddeling</button><button id="raaFjern">Fjern rå arrangementer</button></div>
+      <div class="knap"><button id="saetApp" class="pri">Sæt spalten uden Claude</button><button id="saet">Sæt spalten med Claude</button><button id="orddeling">Ret kun orddeling</button><button id="raaFjern">Fjern rå arrangementer</button></div>
       <p id="raaInfo" class="mut"></p>
     </section>
 
@@ -243,7 +244,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
 <section class="band uge">
   <div class="hoved">
     <div><h2>De næste syv dage</h2><p class="mut" id="ugeInfo">Ikke til tryk.</p></div>
-    <div class="knap" style="margin:0"><button id="ugeSog" class="red">Søg de næste syv dage</button><button id="ugeHent">Hent resultat igen</button></div>
+    <div class="knap" style="margin:0"><button id="ugeApp" class="red">Søg uden Claude</button><button id="ugeSog">Søg med Claude</button><button id="ugeHent">Hent resultat igen</button></div>
   </div>
   <div id="ugeGrid" class="ugegrid"></div>
 </section>
@@ -309,6 +310,7 @@ const L=()=>Object.assign({spalte:'',manuel:false,brugFund:true,raa:[],kn:[],raa
 const gemL=o=>ls.set(lokKey(),o);
 const fundId=()=>komId+'_'+avis;
 const ugeId=()=>komId+'_uge_'+avis;
+const appId=()=>komId+'_app_'+avis;
 const autoTekst=()=>kom().auto?'Automatisk søgning for '+kom().navn+' kører mandag–lørdag kl. '+kom().auto+'.':'';
 
 /* ---------- datalag: Cloudflare KV, ellers denne browser ---------- */
@@ -362,6 +364,7 @@ function saml(dates,fd,fundSrc){
   const aktiveUrl=new Set([...urlListe(komId).filter(u=>u.aktiv).map(u=>u.id),...fasteSteder(komId).filter(f=>!f.skjult&&f.url).map(f=>urlId(komId,f.url))]);
   S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>push(norm(e,'xl')));
   for(const[id,a]of Object.entries(S.urlApp))if(a.kommune===komId&&aktiveUrl.has(id))(a.fund||[]).forEach(e=>push(norm({...e,kilde:e.url||a.url},'xl')));
+  const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.forEach(e=>push(norm(e,'app')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
   (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
   for(const e of out){e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
@@ -555,7 +558,7 @@ function renderNote(){
   if(f&&Array.isArray(f.kilder)&&f.kilder.length)t+='\n\nKILDER\n'+f.kilder.map(x=>`- ${x.navn||''} ${x.url||''}`).join('\n');
   $('note').textContent=t;
 }
-const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek'}[s]||s);
+const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek',app:'Uden Claude'}[s]||s);
 function renderVerif(){
   const ev=avisEvents(),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
@@ -571,7 +574,7 @@ function renderUge(){
   $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
   $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.map(e=>`<li><b>${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'[TJEK]'}</b> ${esc(e.titel)}${e.sted?', '+esc(e.sted):''} <span class="src">${srcNavn(e.src)}</span>${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
-function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderSpalte();renderNote();renderVerif();renderUge();
+function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderSpalte();renderNote();renderVerif();renderUge();
   const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
   if(document.activeElement!==$('raa'))$('raa').value=l.raaTekst||'';
 }
@@ -662,6 +665,47 @@ $('urlExcel').onclick=()=>{
   for(const k of CFG.kommuner)for(const u of urlListe(k.id))rk.push([k.navn,u.sted||'',u.url,u.type||'',u.aktiv?'ja':'nej',u.note||'']);
   const a=document.createElement('a');a.href=URL.createObjectURL(lavXlsx(rk,[14,34,60,16,8,40]));a.download='ekstra-urler.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
   toast((rk.length-1)+" URL'er hentet som Excel");};
+
+/* ---------- uden Claude ---------- */
+let LIB=null;const hentLib=async()=>LIB||(LIB=await import('./lib/tjek.js'));
+$('knApp').onclick=async()=>{const tekst=$('knTekst').value.trim();if(!tekst){toast('Indsæt først teksten fra KultuNaut');return}
+  const L2=await hentLib();tilfoejKn(L2.tekstEvents(tekst,{ref:IDAG,fra:avis}))};
+$('saetApp').onclick=async()=>{const tekst=$('raa').value.trim();if(!tekst){toast('Skriv først nogle arrangementer');return}
+  const L2=await hentLib();const r=L2.tekstEvents(tekst,{ref:IDAG,fra:avis,standardDato:avis});if(!r.length){toast('Fandt ingen arrangementer – skriv dag, klokkeslæt og titel');return}saetRaa(r)};
+let soeger=false;
+async function sogUdenClaude(){
+  if(soeger)return;
+  if(!API.svar){toast('"Søg uden Claude" kræver, at siden kører på Cloudflare');return}
+  const L2=await hentLib(),fra=avis,til=add(avis,8),set=new Set(),kilder=[];
+  const tilfoej=(navn,url)=>{url=String(url||'').trim();if(!/^https?:\/\//i.test(url)||set.has(url))return;set.add(url);kilder.push({navn,url})};
+  fasteSteder(komId).filter(f=>!f.skjult&&f.type==='sted').forEach(f=>tilfoej(f.navn,f.url));
+  urlListe(komId).filter(u=>u.aktiv).forEach(u=>tilfoej(u.sted||u.url,u.url));
+  egneSteder().forEach(s2=>tilfoej(s2.navn,s2.url));
+  if(!kilder.length){toast('Der er ingen steder med URL at søge på');return}
+  soeger=true;['sogApp','ugeApp'].forEach(i=>{$(i).disabled=true;$(i).textContent='Søger … 0/'+kilder.length});
+  const fund=[],status=[];let n=0;
+  const en=async k=>{try{const r=await fetch('/api/hent?url='+encodeURIComponent(k.url),{headers:store.hdr()});
+      if(r.status===401)throw new Error('kode');
+      if(!r.ok){let f='Kunne ikke hentes';try{f=(await r.json()).fejl||f}catch{}status.push({...k,ok:false,fejl:f,antal:0});return}
+      const st=+r.headers.get('x-status')||200,tekst=await r.text(),base=r.headers.get('x-url')||k.url;
+      if(st>=400){status.push({...k,ok:false,fejl:'HTTP '+st,antal:0});return}
+      const{events}=L2.laesSide(tekst,r.headers.get('x-type')||'',{fra,til});
+      for(const e of events){let kilde=k.url;try{if(e.url)kilde=new URL(e.url,base).href}catch{}fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted||k.navn,kilde,udsolgt:!!e.udsolgt,krydstjekket:false,fra:k.navn})}
+      status.push({...k,ok:true,antal:events.length});
+    }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0})}
+    finally{n++;['sogApp','ugeApp'].forEach(i=>$(i).textContent='Søger … '+n+'/'+kilder.length)}};
+  try{for(let i=0;i<kilder.length;i+=4)await Promise.all(kilder.slice(i,i+4).map(en));
+    const doc={type:'app',kommune:komId,avis,dage:[...dageFor(avis),...ugeFor(avis)],opdateret:new Date().toISOString(),af:'app',arrangementer:fund,kilder:status};
+    await store.put('fund',appId(),doc);
+    toast(fund.length+' arrangementer fundet på '+status.filter(x=>x.ok).length+' af '+kilder.length+' sider (alle [TJEK])');
+  }catch(e){toast(e.message==='kode'?'Forkert eller manglende kode – se Indstillinger':(e.message||'Søgningen fejlede'))}
+  finally{soeger=false;$('sogApp').disabled=false;$('ugeApp').disabled=false;$('sogApp').textContent='Søg uden Claude';$('ugeApp').textContent='Søg uden Claude';render()}
+}
+$('sogApp').onclick=sogUdenClaude;$('ugeApp').onclick=sogUdenClaude;
+function renderAppStatus(){const d=S.fund[appId()];const el=$('appStatus');if(!el)return;
+  if(!d){el.textContent='';return}
+  const ok=(d.kilder||[]).filter(k=>k.ok).length,fejl=(d.kilder||[]).filter(k=>!k.ok);
+  el.innerHTML=`<b>Søgning uden Claude ${esc(tidTekst(d.opdateret))}:</b> ${(d.arrangementer||[]).length} arrangementer fra ${ok} af ${(d.kilder||[]).length} sider.${fejl.length?' Kunne ikke læse: '+fejl.map(k=>esc(k.navn)).join(', ')+'.':''}`}
 /* ---------- start ---------- */
 (async()=>{
   const [cfg,opg,st]=await Promise.all([hentJson('opgave/kommuner.json'),fetch('opgave/soegning.md',{cache:'no-store'}).then(r=>r.ok?r.text():'').catch(()=>''),hentJson('/api/status')]);
@@ -702,20 +746,22 @@ $('knHent').onclick=async e=>{
   const b=e.target;b.disabled=true;b.textContent='Claude læser …';
   const dates=[...dageFor(avis),...ugeFor(avis)];
   const r=await udtraek(tekst,dates,' Teksten er kopieret fra KultuNaut: tjek byen ved hvert arrangement, da områdefilteret ikke altid virker.');
-  b.disabled=false;b.textContent='Hent arrangementer';if(!r)return;
+  b.disabled=false;b.textContent='Læs med Claude';if(!r)return;tilfoejKn(r);};
+function tilfoejKn(r){const dates=[...dageFor(avis),...ugeFor(avis)];
   const l=L(),kendte=new Set([...saml(dageFor(avis),fundDoc(fundId()),'fund'),...saml(ugeFor(avis),fundDoc(ugeId()),'uge')].map(noegle));
   let ny=0;for(const x of r){const n=norm(x,'kn');if(!dates.includes(n.dato)||!n.titel)continue;const k=noegle(n);if(kendte.has(k))continue;kendte.add(k);l.kn.push({dato:n.dato,start:n.start,slut:n.slut,titel:n.titel,sted:n.sted,udsolgt:n.udsolgt,kilde:'KultuNaut'});ny++}
   gemL(l);$('knTekst').value='';toast(ny+' nye KultuNaut-fund (alle [TJEK])');render();
-};
+}
 $('knFjern').onclick=()=>{const l=L();const n=l.kn.length;l.kn=[];gemL(l);toast(n+' KultuNaut-fund fjernet');render()};
 $('raa').oninput=e=>{const l=L();l.raaTekst=e.target.value;gemL(l)};
 $('saet').onclick=async e=>{
   const tekst=$('raa').value.trim();if(!tekst){toast('Skriv først nogle arrangementer');return}
   const b=e.target;b.disabled=true;b.textContent='Claude sætter …';
   const r=await udtraek(tekst,dageFor(avis),' Står der ingen dato ved et arrangement, så brug '+avis+' og sæt usikker=true.');
-  b.disabled=false;b.textContent='Sæt spalten';if(!r)return;
+  b.disabled=false;b.textContent='Sæt spalten med Claude';if(!r)return;saetRaa(r)};
+function saetRaa(r){
   const l=L();l.raa=r.map(x=>({...x,dato:x.dato||avis})).filter(x=>dageFor(avis).includes(x.dato));l.manuel=false;gemL(l);toast(l.raa.length+' arrangementer sat i spalten');render();
-};
+}
 $('raaFjern').onclick=()=>{const l=L();l.raa=[];gemL(l);toast('Rå arrangementer fjernet fra spalten');render()};
 $('orddeling').onclick=()=>{const l=L();const f=$('raa').value,ny=retOrddeling(f);$('raa').value=ny;l.raaTekst=ny;let n=+(f!==ny);
   if(l.manuel){const s=retOrddeling(l.spalte);n+=+(s!==l.spalte);l.spalte=s}gemL(l);toast(n?'Orddeling rettet':'Ingen orddeling fundet');render()};
