@@ -189,7 +189,7 @@ for (const r of liste.filter((x) => !x.aktiv)) urler.push(r);
 const kultunaut = [];
 for (const k of cfg.kommuner) {
   let antal = 0, sider = 0, fejl = '';
-  for (let n = 1, side = 0; side < 25; side++) {
+  for (let n = 1, side = 0; side < 40; side++) {
     try {
       const r = await fetch(kultunautUrl(k.navn, n), { headers: { 'user-agent': 'TidOgSted/1.0 (+https://github.com/roberthendel-dk/tidogsted)', 'accept-language': 'da' }, signal: AbortSignal.timeout(20000) });
       if (!r.ok) { fejl = 'HTTP ' + r.status; break; }
@@ -203,7 +203,7 @@ for (const k of cfg.kommuner) {
         arrangementer.push({ kommune: k.id, dato: e.dato, start: e.start, slut: e.slut, titel: e.titel, sted: e.sted, kilde: kultunautUrl(k.navn, n), udsolgt: e.udsolgt, krydstjekket: false, fra: 'KultuNaut' });
         antal++;
       }
-      if (ev.some((e) => e.dato > SLUT)) break;
+      if (ev.length && ev.filter((e) => e.dato > SLUT).length >= ev.length / 2) break;
       n += raa;
     } catch (e) { fejl = e.message; break; }
   }

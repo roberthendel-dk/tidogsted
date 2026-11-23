@@ -776,7 +776,7 @@ async function hentKultunaut(L2,fra,til){
     try{const r=await fetch('/api/hent?url='+encodeURIComponent(knUrl(n)),{headers:store.hdr()});if(r.status===401)throw new Error('kode');const st=+(r.headers.get('x-status')||r.status);
       if(!r.ok||st>=400){fejl='KultuNaut svarede '+(st||'ikke');break}
       ok++;const html=await r.text(),raa=L2.kultunautAntal(html);if(!raa)break;const ev=L2.kultunautEvents(html,{ref:IDAG,fra});
-      fund.push(...ev.filter(e=>e.dato>=fra&&e.dato<=til));if(ev.some(e=>e.dato>til))break;n+=raa;
+      fund.push(...ev.filter(e=>e.dato>=fra&&e.dato<=til));if(ev.length&&ev.filter(e=>e.dato>til).length>=ev.length/2)break;n+=raa;
     }catch(e){if(e.message==='kode')throw e;fejl='KultuNaut kunne ikke hentes';break}}
   return{events:fund.filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)),ok,fejl,url};
 }
