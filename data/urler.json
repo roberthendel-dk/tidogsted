@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-23T20:32:24.992Z",
+ "opdateret": "2026-11-23T20:37:51.095Z",
  "fra": "2026-11-23",
  "til": "2026-12-03",
  "urler": [
@@ -19,7 +19,7 @@
    "aendret": false,
    "sidstAendret": "2026-11-23T18:27:15.337Z",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:48.037Z"
+   "tjekket": "2026-11-23T20:37:25.036Z"
   },
   {
    "id": "naestved_806eku",
@@ -37,7 +37,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 19,
-   "tjekket": "2026-11-23T20:31:48.037Z"
+   "tjekket": "2026-11-23T20:37:25.036Z"
   },
   {
    "id": "naestved_bil89z",
@@ -55,7 +55,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:48.042Z"
+   "tjekket": "2026-11-23T20:37:25.039Z"
   },
   {
    "id": "naestved_1myv3w9",
@@ -73,7 +73,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:48.042Z"
+   "tjekket": "2026-11-23T20:37:25.039Z"
   },
   {
    "id": "naestved_oa8pzz",
@@ -91,7 +91,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:50.249Z"
+   "tjekket": "2026-11-23T20:37:26.636Z"
   },
   {
    "id": "naestved_1uicdw1",
@@ -102,14 +102,14 @@
    "note": "",
    "aktiv": true,
    "kilde": "fast",
-   "status": 200,
-   "ok": true,
-   "fejl": "",
+   "status": 0,
+   "ok": false,
+   "fejl": "ECONNRESET",
    "hash": "e73fa1e0cd0f8f3f",
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:50.249Z"
+   "tjekket": "2026-11-23T20:37:26.636Z"
   },
   {
    "id": "naestved_1cz9p7l",
@@ -127,7 +127,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:50.249Z"
+   "tjekket": "2026-11-23T20:37:26.637Z"
   },
   {
    "id": "naestved_17ewm19",
@@ -145,7 +145,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 4,
-   "tjekket": "2026-11-23T20:31:50.249Z"
+   "tjekket": "2026-11-23T20:37:26.637Z"
   },
   {
    "id": "naestved_1wm588w",
@@ -163,7 +163,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:54.528Z"
+   "tjekket": "2026-11-23T20:37:30.943Z"
   },
   {
    "id": "naestved_f7p8tu",
@@ -181,7 +181,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:54.528Z"
+   "tjekket": "2026-11-23T20:37:30.943Z"
   },
   {
    "id": "naestved_1emls8i",
@@ -199,7 +199,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:54.528Z"
+   "tjekket": "2026-11-23T20:37:30.943Z"
   },
   {
    "id": "faxe_8refl1",
@@ -217,7 +217,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:31:54.528Z"
+   "tjekket": "2026-11-23T20:37:30.943Z"
   },
   {
    "id": "faxe_19l4vqx",
@@ -235,7 +235,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:11.573Z"
+   "tjekket": "2026-11-23T20:37:35.467Z"
   },
   {
    "id": "faxe_1veuu7s",
@@ -253,7 +253,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:11.573Z"
+   "tjekket": "2026-11-23T20:37:35.467Z"
   },
   {
    "id": "faxe_equgnm",
@@ -271,7 +271,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:11.573Z"
+   "tjekket": "2026-11-23T20:37:35.467Z"
   },
   {
    "id": "faxe_h5n9po",
@@ -289,7 +289,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:11.574Z"
+   "tjekket": "2026-11-23T20:37:35.467Z"
   },
   {
    "id": "vordingborg_d91am4",
@@ -307,7 +307,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:15.299Z"
+   "tjekket": "2026-11-23T20:37:40.241Z"
   },
   {
    "id": "vordingborg_7m2ptm",
@@ -325,7 +325,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:15.299Z"
+   "tjekket": "2026-11-23T20:37:40.242Z"
   },
   {
    "id": "vordingborg_14t7x06",
@@ -343,7 +343,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:15.299Z"
+   "tjekket": "2026-11-23T20:37:40.242Z"
   },
   {
    "id": "vordingborg_1et7dsg",
@@ -361,7 +361,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:15.299Z"
+   "tjekket": "2026-11-23T20:37:40.242Z"
   },
   {
    "id": "slagelse_x7p192",
@@ -379,7 +379,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:19.570Z"
+   "tjekket": "2026-11-23T20:37:44.974Z"
   },
   {
    "id": "slagelse_10o9j",
@@ -397,7 +397,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 9,
-   "tjekket": "2026-11-23T20:32:19.570Z"
+   "tjekket": "2026-11-23T20:37:44.974Z"
   },
   {
    "id": "slagelse_scfcpq",
@@ -415,7 +415,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 1,
-   "tjekket": "2026-11-23T20:32:19.573Z"
+   "tjekket": "2026-11-23T20:37:44.976Z"
   },
   {
    "id": "slagelse_1airovc",
@@ -433,7 +433,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:19.573Z"
+   "tjekket": "2026-11-23T20:37:44.976Z"
   },
   {
    "id": "slagelse_dh66xn",
@@ -451,7 +451,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:20.646Z"
+   "tjekket": "2026-11-23T20:37:46.261Z"
   },
   {
    "id": "soroe_v5r7qa",
@@ -469,7 +469,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:20.647Z"
+   "tjekket": "2026-11-23T20:37:46.261Z"
   },
   {
    "id": "soroe_juwbdg",
@@ -487,7 +487,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:20.647Z"
+   "tjekket": "2026-11-23T20:37:46.261Z"
   },
   {
    "id": "soroe_1kmk3rj",
@@ -505,7 +505,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 15,
-   "tjekket": "2026-11-23T20:32:20.647Z"
+   "tjekket": "2026-11-23T20:37:46.261Z"
   },
   {
    "id": "soroe_dw8wow",
@@ -523,7 +523,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:24.992Z"
+   "tjekket": "2026-11-23T20:37:51.095Z"
   },
   {
    "id": "soroe_1ip3rlx",
@@ -541,7 +541,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-23T20:32:24.992Z"
+   "tjekket": "2026-11-23T20:37:51.095Z"
   }
  ],
  "arrangementer": [
