@@ -236,7 +236,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="claudeDlg" class="dlg" role="dialog" aria-modal="true" aria-labelledby="cdTitel"><div>
   <h3 id="cdTitel">Lad Claude læse teksten</h3>
-  <p class="mut">Claude er ikke koblet direkte på siden. Opgaven er kopieret – sæt den ind i en Claude-chat, og indsæt svaret (JSON) her.</p>
+  <p class="mut">Opgaven er kopieret. Sæt den ind i en Claude-chat, og indsæt svaret (JSON) her.</p>
   <textarea id="cdSvar" placeholder='{"arrangementer":[…]}'></textarea>
   <div class="knap"><button id="cdOk" class="pri">Brug svaret</button><button id="cdKopi">Kopiér opgaven igen</button><button id="cdLuk">Annullér</button></div>
 </div></div>
@@ -283,7 +283,7 @@ const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 /* ---------- tilstand ---------- */
 let CFG={site:'',kommuner:[]},OPGAVE='';
 const S={fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{}};
-let redigerer=false,retter=null,API={kv:false,claude:false,kode:false,godkendt:true,svar:false};
+let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:false};
 const AVISER=aviser(IDAG);
 let komId=ls.get('ts:kommune','naestved');
 let avis=ls.get('ts:avis:'+IDAG,AVISER[0]);if(!AVISER.includes(avis))avis=AVISER[0];
@@ -433,10 +433,7 @@ function claudeManuelt(prompt){
 $('cdOk').onclick=()=>{$('claudeDlg').classList.remove('vis');if(cdResolve){cdResolve($('cdSvar').value);cdResolve=null}};
 $('cdLuk').onclick=()=>{$('claudeDlg').classList.remove('vis');if(cdResolve){cdResolve(null);cdResolve=null}};
 function parseJson(t){if(!t)return null;const m=String(t).match(/```(?:json)?\s*([\s\S]*?)```/);const s=(m?m[1]:String(t)).trim();try{return JSON.parse(s)}catch{const i=s.indexOf('{'),j=s.lastIndexOf('}');if(i>=0&&j>i){try{return JSON.parse(s.slice(i,j+1))}catch{}}return null}}
-async function spoergClaude(prompt){
-  if(API.claude){try{const r=await fetch('/api/claude',{method:'POST',headers:{'content-type':'application/json',...store.hdr()},body:JSON.stringify({prompt})});const d=await r.json();if(r.ok)return d.text;toast(d.fejl||'Claude svarede ikke')}catch{toast('Claude svarede ikke')}}
-  return claudeManuelt(prompt);
-}
+const spoergClaude=prompt=>claudeManuelt(prompt);
 const SKEMA='Returnér KUN gyldig JSON: {"arrangementer":[{"dato":"YYYY-MM-DD","start":"HH:MM" eller "","slut":"HH:MM" eller "","titel":"…","sted":"…","udsolgt":false,"usikker":false}]}';
 async function udtraek(tekst,dates,ekstra){
   const k=kom();
@@ -477,7 +474,7 @@ function renderStatus(){
 function renderApi(){
   const el=$('apiStatus');
   if(!API.svar){el.className='status ny';el.innerHTML='Siden kører uden Cloudflare-funktionen. OK\'er, rettelser, møder og egne steder gemmes kun i denne browser.';return}
-  const dele=[API.kv?'Data gemmes i Cloudflare.':'KV-bindingen TS mangler – data gemmes kun i denne browser.',API.claude?'Claude er koblet på (Sæt spalten og KultuNaut kører direkte).':'Claude er ikke koblet på – "Sæt spalten" og KultuNaut-udtræk går via en Claude-chat.',API.kode?(API.godkendt?'Koden er godkendt.':'Skriv koden for at kunne gemme.'):'Ingen kode sat – alle med adressen kan gemme.'];
+  const dele=[API.kv?'Data gemmes i Cloudflare.':'KV-bindingen TS mangler – data gemmes kun i denne browser.',API.kode?(API.godkendt?'Koden er godkendt.':'Skriv koden for at kunne gemme.'):'Ingen kode sat – alle med adressen kan gemme.'];
   el.className='status '+(API.kv&&(API.godkendt||!API.kode)?'klar':'ny');el.textContent=dele.join(' ');
 }
 function renderSteder(){

@@ -13,7 +13,7 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 | `public/opgave/kommuner.json` | Kommunernes faste data: steder, mødekilder, fast tid og sted for byrådsmøder, byer og tidspunktet for den automatiske søgning |
 | `public/data/fund/` | Søgeresultater. `<kommune>_<avisdato>.json` er spalten, og `<kommune>_uge_<avisdato>.json` er de næste syv dage. Skrives af de automatiske søgninger. |
 | `public/data/moeder/<kommune>.json` | Politiske møder, som søgningerne har fundet |
-| `functions/api/[[path]].js` | Cloudflare-funktion. Gemmer dine OK'er og rettelser, egne møder og steder og indsatte resultater i Cloudflare KV. Den kan også spørge Claude. |
+| `functions/api/[[path]].js` | Cloudflare-funktion. Gemmer dine OK'er og rettelser, egne møder og steder og indsatte resultater i Cloudflare KV. |
 
 ## Opsætning på Cloudflare (gratis)
 
@@ -24,8 +24,9 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 2. **Opret KV.** Gå til *Storage & Databases → KV → Create*, og opret et navnerum, fx `tidogsted`.
 3. **Forbind KV.** Åbn Pages-projektet og vælg *Settings → Bindings → Add → KV namespace*. Variabelnavnet skal være `TS`, og navnerummet er `tidogsted`.
 4. **Sæt en kode.** Under *Settings → Variables and Secrets* tilføjer du secret'en `TS_KODE`, som er koden, der skal til for at gemme. Skriv samme kode i appen under *Indstillinger*.
-5. **Valgfrit: Claude direkte i appen.** Tilføj secret'en `ANTHROPIC_API_KEY`. Så kører "Sæt spalten" og "Hent arrangementer fra KultuNaut" direkte i appen. Det koster API-forbrug. Uden nøglen kopierer appen opgaven til en Claude-chat, og du indsætter svaret.
-6. Deploy igen, så bindingerne virker.
+5. Deploy igen, så bindingerne virker.
+
+Alt kører på gratisniveauerne. Der bruges ikke noget betalt Claude-API: "Sæt spalten" og "Hent arrangementer fra KultuNaut" kopierer opgaven til en almindelig Claude-chat, og du indsætter svaret.
 
 Uden KV virker appen stadig. OK'er, møder og egne steder gemmes så bare kun i den browser, du bruger.
 
