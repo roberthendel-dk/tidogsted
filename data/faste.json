@@ -1,0 +1,21 @@
+{
+ "opdateret": "2026-11-23T20:31:45.387Z",
+ "rows": [
+  {
+   "id": "naestved_2026-12-08_xl_raad_byrådsmøde",
+   "kommune": "naestved",
+   "type": "raad",
+   "titel": "Byrådsmøde",
+   "dato": "2026-12-08",
+   "start": "18:30",
+   "slut": "",
+   "sted": "Byrådssalen, Næstved Rådhus",
+   "gentag": "",
+   "til": "",
+   "aktiv": false,
+   "note": "Eksempel – sæt Aktiv til ja for at bruge rækken",
+   "kilde": "Excel: faste-arrangementer.xlsx",
+   "krydstjekket": true
+  }
+ ]
+}
