@@ -12,7 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod, udenforKommune } from '../lib/tjek.js';
+import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod, udenforKommune, kultunautUrl, kultunautEvents } from '../lib/tjek.js';
 
 const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
@@ -185,6 +185,29 @@ for (let i = 0; i < aktive.length; i += 4) {
 }
 for (const r of liste.filter((x) => !x.aktiv)) urler.push(r);
 
+// KultuNaut for hver kommune (samlekalender – alt markeres [TJEK])
+const kultunaut = [];
+for (const k of cfg.kommuner) {
+  let antal = 0, sider = 0, fejl = '';
+  for (const n of [1, 21, 41, 61, 81, 101]) {
+    try {
+      const r = await fetch(kultunautUrl(k.navn, n), { headers: { 'user-agent': 'TidOgSted/1.0 (+https://github.com/roberthendel-dk/tidogsted)', 'accept-language': 'da' }, signal: AbortSignal.timeout(20000) });
+      if (!r.ok) { fejl = 'HTTP ' + r.status; break; }
+      sider++;
+      const ev = kultunautEvents(await r.text(), { ref: iDag, fra: iDag });
+      if (!ev.length) break;
+      for (const e of ev) {
+        if (e.dato < iDag || e.dato > SLUT || udenforKommune(e.sted, k.id, cfg.kommuner)) continue;
+        arrangementer.push({ kommune: k.id, dato: e.dato, start: e.start, slut: e.slut, titel: e.titel, sted: e.sted, kilde: kultunautUrl(k.navn, n), udsolgt: e.udsolgt, krydstjekket: false, fra: 'KultuNaut' });
+        antal++;
+      }
+      if (ev.every((e) => e.dato > SLUT)) break;
+    } catch (e) { fejl = e.message; break; }
+  }
+  kultunaut.push({ kommune: k.id, ok: sider > 0, sider, antal, fejl, tjekket: new Date().toISOString() });
+  console.log(`KultuNaut ${k.navn}: ${sider} sider, ${antal} fund${fejl ? ' · ' + fejl : ''}`);
+}
+
 fs.mkdirSync(path.dirname(UD), { recursive: true });
-fs.writeFileSync(UD, JSON.stringify({ opdateret: new Date().toISOString(), fra: iDag, til: SLUT, urler, arrangementer }, null, 1) + '\n');
+fs.writeFileSync(UD, JSON.stringify({ opdateret: new Date().toISOString(), fra: iDag, til: SLUT, urler, kultunaut, arrangementer }, null, 1) + '\n');
 console.log(`${urler.length} URL'er, ${arrangementer.length} arrangementer → data/urler.json`);

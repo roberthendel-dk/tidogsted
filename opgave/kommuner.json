@@ -95,11 +95,11 @@
       "steder": [
         {
           "navn": "Haslev Bibliotek",
-          "url": ""
+          "url": "https://www.faxebibliotek.dk/arrangementer"
         },
         {
           "navn": "Faxe Bibliotek",
-          "url": ""
+          "url": "https://www.faxebibliotek.dk/arrangementer"
         },
         {
           "navn": "Geomuseum Faxe",
@@ -119,7 +119,8 @@
         }
       ],
       "ekstra": "",
-      "moedenote": "Mødeplanerne findes også som PDF. Dagsordenernes links har dato og tid i adressen, fx vis?Dagsorden-Byraadet-d.26-11-2026-kl.18.30"
+      "moedenote": "Mødeplanerne findes også som PDF. Dagsordenernes links har dato og tid i adressen, fx vis?Dagsorden-Byraadet-d.26-11-2026-kl.18.30",
+      "raadDag": "torsdag"
     },
     {
       "id": "vordingborg",
@@ -146,15 +147,15 @@
         },
         {
           "navn": "Vordingborg Bibliotek",
-          "url": ""
+          "url": "https://www.vordingborgbibliotekerne.dk/arrangementer"
         },
         {
           "navn": "Stege Bibliotek",
-          "url": ""
+          "url": "https://www.vordingborgbibliotekerne.dk/arrangementer"
         },
         {
           "navn": "Præstø Bibliotek",
-          "url": ""
+          "url": "https://www.vordingborgbibliotekerne.dk/arrangementer"
         },
         {
           "navn": "GeoCenter Møns Klint",

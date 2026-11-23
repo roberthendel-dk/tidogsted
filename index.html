@@ -123,7 +123,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
     <label for="kom">Kommune<select id="kom"></select></label>
     <div id="avisValg"></div>
   </div>
-  <nav class="menu" aria-label="Menu"><a href="#" data-menu="">Spalten</a><a href="#faste" data-menu="faste">Faste arrangementer</a><a href="#steder" data-menu="steder">Steder og URL'er</a><a href="#indstillinger" data-menu="indstillinger">Indstillinger</a></nav>
+  <nav class="menu" aria-label="Menu"><a href="#" data-menu="">Spalten</a><a href="#faste" data-menu="faste">Faste arrangementer</a><a href="#steder" data-menu="steder">Kilder og byer</a><a href="#indstillinger" data-menu="indstillinger">Indstillinger</a></nav>
 </header>
 
 <main class="grid band">
@@ -248,6 +248,12 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
     </section>
   </div>
   <div data-vis="steder">
+    <section>
+      <h2>Kilder i alle fem kommuner</h2>
+      <p class="mut">Hvad nattens tjek fandt i hver kommune, og hvilke sider der ikke kunne læses. Tryk på en kommune for at se og rette dens steder og URL'er herunder.</p>
+      <div class="scroll"><table id="kildeOverblik"><thead><tr><th>Kommune</th><th>Sider med URL</th><th>Læst i nat</th><th>Fund fra siderne</th><th>KultuNaut</th><th>Kunne ikke læses</th></tr></thead><tbody></tbody></table></div>
+      <p class="mut" id="kildeOverblikInfo"></p>
+    </section>
     <section>
       <h2 id="stederTitel">Steder, som søgningen gennemgår</h2>
       <ul id="stederListe" class="liste"></ul>
@@ -374,9 +380,10 @@ function fasteBase(kid=komId){
   const ud=[],app=S.moeder;
   for(const r of S.faste||[]){if(r.kommune!==kid||r.aktiv===false)continue;const o=app[r.id];if(o&&o.skjult)continue;ud.push(o&&!o.skjult?{...r,...o,id:r.id,kilde_ark:true}:{...r,af:'excel',kilde_ark:true})}
   const arkIds=new Set((S.faste||[]).map(r=>r.id));
+  const kk=CFG.kommuner.find(x=>x.id===kid);
   for(const m of S.filMoeder[kid]||[]){const id=m.id||(kid+'_'+m.dato+'_'+normT(m.titel));if(!(app[id]&&app[id].skjult))ud.push({...m,id,af:'søgning',fil:true})}
   for(const[id,m]of Object.entries(app))if(!m.skjult&&m.kommune===kid&&!arkIds.has(id))ud.push({...m,id});
-  return ud;
+  return ud.filter(m=>ugedagOk(m,kk));
 }
 function gentagelser(m,fra,til){
   if(!m.gentag||!m.dato)return[m];
@@ -408,7 +415,7 @@ function saml(dates,fd,fundSrc){
   if(fd)fundEvents(fd,dates).forEach(e=>push(norm(e,fundSrc)));
   alleMoeder().forEach(m=>push(norm(m,'moede')));
   const aktiveUrl=new Set([...urlListe(komId).filter(u=>u.aktiv).map(u=>u.id),...fasteSteder(komId).filter(f=>!f.skjult&&f.url).map(f=>urlId(komId,f.url))]);
-  S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>{const u=S.urler.urler.find(x=>x.id===e.urlId);push(norm({...e,kilde:fuldUrl(e.kilde,u&&u.url)},'xl'))});
+  S.urler.arrangementer.filter(e=>e.kommune===komId&&(!e.urlId||aktiveUrl.has(e.urlId))).forEach(e=>{const u=S.urler.urler.find(x=>x.id===e.urlId);push(norm({...e,kilde:fuldUrl(e.kilde,u&&u.url)},e.fra==='KultuNaut'?'kn':'xl'))});
   for(const[id,a]of Object.entries(S.urlApp))if(a.kommune===komId&&aktiveUrl.has(id))(a.fund||[]).forEach(e=>push(norm({...e,kilde:e.url||a.url},'xl')));
   const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.forEach(e=>push(norm(e,'app')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
@@ -594,6 +601,17 @@ $('stederListe').addEventListener('click',async ev=>{const b=ev.target.closest('
     await skriv(()=>store.put('steder',x.id,{kommune:komId,type:x.type,original:x.original,slettet:true}),'Fjernet – søgningerne springer stedet over');return}
   if(d.fnulstil){await skriv(()=>store.del('steder',x.id),'Nulstillet til standard')}
 });
+function renderKildeOverblik(){
+  const tb=$('kildeOverblik');if(!tb)return;const U=S.urler||{},ul=U.urler||[],ar=U.arrangementer||[],kn=U.kultunaut||[];
+  tb.tBodies[0].innerHTML=CFG.kommuner.map(k=>{
+    const sider=new Set([...fasteSteder(k.id).filter(f=>!f.skjult&&f.url).map(f=>f.url),...urlListe(k.id).filter(u=>u.aktiv).map(u=>u.url)]);
+    const tjek=ul.filter(u=>u.kommune===k.id&&u.aktiv!==false),ok=tjek.filter(u=>u.ok),fejl=tjek.filter(u=>!u.ok);
+    const fs=ar.filter(e=>e.kommune===k.id&&e.fra!=='KultuNaut').length,kf=ar.filter(e=>e.kommune===k.id&&e.fra==='KultuNaut').length,ks=kn.find(x=>x.kommune===k.id);
+    const navn=u=>{try{return(u.sted||new URL(u.url).hostname.replace(/^www\./,''))}catch{return u.url}};
+    return`<tr${k.id===komId?' style="background:var(--panel)"':''}><td><button class="sm" data-visKom="${esc(k.id)}">${esc(k.navn)}</button></td><td>${sider.size}</td><td>${tjek.length?ok.length+' af '+tjek.length:'–'}</td><td><b>${fs}</b></td><td>${ks?(ks.ok?'<b>'+kf+'</b> fund':'<span class="nej">'+esc(ks.fejl||'kunne ikke hentes')+'</span>'):'<span class="mut">ikke kørt endnu</span>'}</td><td>${fejl.length?fejl.map(u=>`<a href="${esc(u.url)}" target="_blank" rel="noopener">${esc(navn(u))}</a>`).join(', '):'<span class="mut">–</span>'}</td></tr>`}).join('');
+  $('kildeOverblikInfo').textContent=U.opdateret?'Nattens tjek kørte '+tidTekst(U.opdateret)+'. Sider uden fund kan stadig være i orden – de har måske bare ingen arrangementer i de næste 10 dage, eller de viser dem på en måde, appen ikke kan læse (så finder "Søg med Claude" dem).':'Nattens tjek har ikke kørt endnu.';
+}
+$('kildeOverblik').onclick=e=>{const b=e.target.closest('[data-viskom]');if(!b)return;komId=b.dataset.viskom;ls.set('ts:kommune',komId);$('kom').value=komId;retter=null;urlRetter=null;stedRetter=null;render();opdater();$('stederTitel').scrollIntoView({behavior:'smooth'})};
 function renderMoeder(){
   const gl=x=>x.gentag?(x.gentag==='14dage'?'hver 2. uge':'hver uge')+(x.til?' til '+kort(x.til):''):'';
   const m=fasteBase().filter(x=>(x.gentag?(x.til||'9999')>=IDAG:x.dato>=IDAG)).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
@@ -646,7 +664,7 @@ function renderUge(){
   $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
   $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.sort((a,b)=>(a.start||'99').localeCompare(b.start||'99')).map(e=>`<li><span class="tid">${esc(tidFor(e))}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span></li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
-function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderSpalte();renderNote();renderVerif();renderUge();
+function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderKildeOverblik();renderSpalte();renderNote();renderVerif();renderUge();
   const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
   if(document.activeElement!==$('raa'))$('raa').value=l.raaTekst||'';
 }
@@ -740,21 +758,24 @@ $('urlExcel').onclick=()=>{
 
 /* ---------- uden Claude ---------- */
 let LIB=null;const hentLib=async()=>LIB||(LIB=await import('./lib/tjek.js'));
-$('knApp').onclick=async()=>{const tekst=$('knTekst').value.trim();const L2=await hentLib();
-  if(tekst){tilfoejKn(L2.tekstEvents(tekst,{ref:IDAG,fra:avis}).filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)));return}
-  if(!API.svar){visForkertAdresse();toast('Indsæt teksten fra KultuNaut – direkte hentning virker kun på Cloudflare-adressen');return}
-  /* hent KultuNaut-listen direkte gennem Cloudflare og læs den som tekst */
-  const til=add(avis,8),fund=[];let ok=0,fejl='';
+/* KultuNaut hentes direkte gennem Cloudflare (kun på worker-adressen) */
+async function hentKultunaut(L2,fra,til){
+  const fund=[];let ok=0,fejl='',url=knUrl(1);
   for(const n of [1,21,41,61,81]){
-    try{const r=await fetch('/api/hent?url='+encodeURIComponent(knUrl(n)),{headers:store.hdr()});const st=+(r.headers.get('x-status')||r.status);
-      if(!r.ok||st>=400){fejl='KultuNaut svarede '+st;break}
-      const html=await r.text();ok++;
-      const ev=L2.tekstEvents(L2.htmlTilLinjer(html).join('\n'),{ref:IDAG,fra:avis}).filter(e=>e.dato<=til);
-      fund.push(...ev);if(!ev.length)break;
-    }catch(e){fejl='Kunne ikke hente KultuNaut ('+e.message+')';break}}
-  const egne=fund.filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner));
-  $('knInfo').textContent=ok?`KultuNaut hentet direkte: ${ok} side(r), ${egne.length} arrangementer i perioden.${fejl?' '+fejl+'.':''}`:(fejl||'Intet hentet')+' – brug i stedet "Browse KultuNaut", kopiér listen og sæt den ind.';
-  if(egne.length)tilfoejKn(egne);else toast(ok?'Fandt ingen arrangementer på KultuNaut-listen':'KultuNaut kunne ikke hentes – kopiér listen i stedet');};
+    try{const r=await fetch('/api/hent?url='+encodeURIComponent(knUrl(n)),{headers:store.hdr()});if(r.status===401)throw new Error('kode');const st=+(r.headers.get('x-status')||r.status);
+      if(!r.ok||st>=400){fejl='KultuNaut svarede '+(st||'ikke');break}
+      ok++;const ev=L2.kultunautEvents(await r.text(),{ref:IDAG,fra});
+      fund.push(...ev.filter(e=>e.dato>=fra&&e.dato<=til));if(!ev.length||ev.every(e=>e.dato>til))break;
+    }catch(e){if(e.message==='kode')throw e;fejl='KultuNaut kunne ikke hentes';break}}
+  return{events:fund.filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)),ok,fejl,url};
+}
+$('knApp').onclick=async()=>{const tekst=$('knTekst').value.trim();const L2=await hentLib();
+  if(tekst){tilfoejKn(L2.kultunautEvents(tekst,{ref:IDAG,fra:avis}).filter(e=>!L2.udenforKommune(e.sted,komId,CFG.kommuner)));return}
+  if(!API.svar){visForkertAdresse();toast('Indsæt teksten fra KultuNaut – direkte hentning virker kun på Cloudflare-adressen');return}
+  try{const r=await hentKultunaut(L2,avis,add(avis,8));
+    $('knInfo').textContent=r.ok?`KultuNaut hentet direkte: ${r.ok} side(r), ${r.events.length} arrangementer i perioden.${r.fejl?' '+r.fejl+'.':''}`:(r.fejl||'Intet hentet')+' – brug i stedet "Browse KultuNaut", kopiér listen og sæt den ind.';
+    if(r.events.length)tilfoejKn(r.events);else toast(r.ok?'Fandt ingen arrangementer på KultuNaut-listen':'KultuNaut kunne ikke hentes – kopiér listen i stedet')}
+  catch(e){toast(e.message==='kode'?'Forkert eller manglende kode – se Indstillinger':e.message)}};
 $('saetApp').onclick=async()=>{const tekst=$('raa').value.trim();if(!tekst){toast('Skriv først nogle arrangementer');return}
   const L2=await hentLib();const r=L2.tekstEvents(tekst,{ref:IDAG,fra:avis,standardDato:avis});if(!r.length){toast('Fandt ingen arrangementer – skriv dag, klokkeslæt og titel');return}saetRaa(r)};
 let soeger=false;
@@ -790,6 +811,7 @@ async function sogUdenClaude(){
     }catch(e){if(e.message==='kode')throw e;status.push({...k,ok:false,fejl:'Kunne ikke hentes',antal:0,moede:true})}};
   try{for(let i=0;i<kilder.length;i+=4)await Promise.all(kilder.slice(i,i+4).map(en));
     await Promise.all(moedeKilder.map(k=>enMoede({navn:k.navn,url:k.url})));
+    try{const kn=await hentKultunaut(L2,fra,til);kn.events.forEach(e=>fund.push({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted,kilde:kn.url,udsolgt:!!e.udsolgt,krydstjekket:false,fra:'KultuNaut'}));status.push({navn:'KultuNaut',url:kn.url,ok:!!kn.ok,antal:kn.events.length,fejl:kn.fejl})}catch(e){if(e.message==='kode')throw e}
     const nyeMoeder=await gemRaadsmoeder(moedeFund,'søgning');
     const doc={type:'app',kommune:komId,avis,dage:[...dageFor(avis),...ugeFor(avis)],opdateret:new Date().toISOString(),af:'app',arrangementer:fund,kilder:status};
     await store.put('fund',appId(),doc);
@@ -805,10 +827,12 @@ function renderAppStatus(){const d=S.fund[appId()];const el=$('appStatus');if(!e
   el.innerHTML=`<b>Søgning uden Claude ${esc(tidTekst(d.opdateret))}:</b> ${(d.arrangementer||[]).length} arrangementer fra ${ok} af ${(d.kilder||[]).length} sider.${mk.length?'<br><b>Møder</b> – '+mk.map(k=>esc(k.navn)+': '+(k.ok?(k.antal?k.antal+' møder':'hentet, men ingen møder fundet'):'kunne ikke hentes'+(k.fejl?' ('+esc(k.fejl)+')':''))).join('; ')+'.'+(mk.some(k=>k.ok&&k.antal)?'':' Brug "Indsæt mødeplan" under Tilføj arrangementer og møder.')+'<br>':''}${fejl.filter(k=>!k.moede).length?' Kunne ikke læse: '+fejl.filter(k=>!k.moede).map(k=>esc(k.navn)).join(', ')+'.':''}`}
 
 /* ---------- møder uden Claude ---------- */
+/* byrådet mødes altid på samme ugedag (raadDag i kommuner.json) – møder fundet af søgningen på en anden dag er forkert læst */
+const ugedagOk=(m,k=kom())=>!(k&&k.raadDag&&m.type==='raad'&&m.af==='søgning'&&m.dato&&['søndag','mandag','tirsdag','onsdag','torsdag','fredag','lørdag'][new Date(m.dato+'T12:00:00Z').getUTCDay()]!==k.raadDag);
 const harRaadsmoede=dato=>alleMoeder().some(x=>x.dato===dato&&(x.type==='raad'||/byrådsmøde|kommunalbestyrelsesmøde/i.test(x.titel||'')));
 async function gemRaadsmoeder(liste,af){
   const k=kom();let n=0;
-  for(const m of liste){if(!m.dato||m.dato<IDAG||harRaadsmoede(m.dato))continue;
+  for(const m of liste){if(!m.dato||m.dato<IDAG||harRaadsmoede(m.dato)||!ugedagOk({...m,type:'raad',af},k))continue;
     await store.put('moeder',komId+'_'+m.dato+'_raad',{kommune:komId,type:'raad',dato:m.dato,start:m.start||k.tid,slut:'',titel:k.raad,sted:k.sted,kilde:m.kilde||'',af,krydstjekket:af!=='søgning',oprettet:new Date().toISOString()});n++}
   return n;
 }

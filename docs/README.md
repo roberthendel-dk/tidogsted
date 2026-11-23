@@ -61,12 +61,16 @@ De faste steder og mødekilder for hver kommune står i `opgave/kommuner.json`. 
 
 Rettelserne gemmes i Cloudflare. Søgningerne, "Søg nu" og morgentjekket bruger dem. Faste steder med en URL tjekkes også hver morgen, og deres status står ved stedet, fx "svarer", "3 fund", "ændret" eller "fejl".
 
+## Byrådets mødedag
+
+I `opgave/kommuner.json` kan hver kommune have `"raadDag"` (fx `"torsdag"` for Faxe). Møder, som søgningen uden Claude finder på en anden ugedag, bliver så sorteret fra som fejllæsninger. Møder, du selv har tastet ind eller lagt i Excel-arket, bliver aldrig sorteret fra.
+
 ## Menuen
 
 Forsiden ("Spalten") viser kun det daglige: søgning, KultuNaut, rå arrangementer, spalten og de næste syv dage. Resten ligger i menuen øverst:
 
 - **Faste arrangementer** – byrådsmøder, borgermøder og andre faste arrangementer, mødeplanen og Excel-arket.
-- **Steder og URL'er** – de faste steder og de ekstra URL'er.
+- **Kilder og byer** – overblik over alle fem kommuner (hvilke sider der blev læst i nat, hvor mange fund, KultuNaut, og hvilke sider der fejler) samt den valgte kommunes faste steder og ekstra URL'er.
 - **Indstillinger** – adgangskode og forbindelse.
 
 ## Faste arrangementer – i appen eller i Excel
@@ -76,6 +80,9 @@ Forsiden ("Spalten") viser kun det daglige: søgning, KultuNaut, rå arrangement
 **I Excel-arket.** Arket er `opgave/faste-arrangementer.xlsx`, fanen "Faste": Kommune, Type, Titel, Dato (dd-mm-åååå), Start, Slut, Sted, Gentag, Til og med, Aktiv, Note. Ved byrådsmøder må Titel, Start og Sted stå tomme – så bruges kommunens standard. Upload arket på GitHub (Add file → Upload files, samme navn); så læses det automatisk inden for få minutter og lægges i `data/faste.json`. Knappen "Download listen som Excel" i appen giver dig hele den samlede liste som et ark, du kan rette i og uploade igen.
 
 ## KultuNaut
+
+KultuNaut hentes nu automatisk for alle fem kommuner i nattens tjek og ved "Søg uden Claude". Alt fra KultuNaut markeres [TJEK].
+
 
 Tryk "Læs uden Claude" med tomt tekstfelt, så henter appen KultuNaut-listen for kommunen direkte gennem Cloudflare (kun på worker-adressen). Afviser KultuNaut hentningen, står det under knapperne – så kopierer du listen fra "Browse KultuNaut" og sætter den ind som før.
 
