@@ -1,6 +1,6 @@
 {
   "_forklaring": "Kommunernes faste data. Ret her for at ændre steder, faste mødetider, mødekilder eller byer. Appen og de automatiske søgninger læser filen.",
-  "site": "https://red-math-5293.robert-hendel.workers.dev",
+  "site": "https://tidogsted.robert-hendel.workers.dev",
   "repo": "roberthendel-dk/tidogsted",
   "kommuner": [
     {

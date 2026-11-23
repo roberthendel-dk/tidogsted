@@ -21,13 +21,13 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 
 ## Adresse
 
-Appen kører på **https://red-math-5293.robert-hendel.workers.dev** (en Cloudflare Worker). Opsætningen står i `wrangler.jsonc` og `worker.js` i roden af repoet.
+Appen kører på **https://tidogsted.robert-hendel.workers.dev** (en Cloudflare Worker). Opsætningen står i `wrangler.jsonc` og `worker.js` i roden af repoet.
 
 ## Opsætning på Cloudflare (gratis, én gang)
 
-1. **Kobl workeren til repoet.** Gå til Workers & Pages og åbn red-math-5293. Vælg Settings, find Build, og klik Connect. Vælg GitHub og repoet tidogsted, og brug branch main. Lad Build command stå tom, og lad Deploy command være `npx wrangler deploy`. Klik Save. Herefter udgives siden automatisk ved hver ændring i repoet.
+1. **Kobl workeren til repoet** (er gjort). Workeren tidogsted er koblet til repoet, så siden udgives automatisk ved hver ændring.
 2. **Opret lagerpladsen.** Gå til Storage & Databases → Workers KV, klik Create, og kald den tidogsted. Kopiér dens **ID** og indsæt den i `wrangler.jsonc` (eller giv den til Claude).
-3. **Vælg en kode.** Åbn red-math-5293 og gå til Settings → Variables and Secrets → Add. Vælg Type: Secret, skriv navnet `TS_KODE`, og skriv din kode som værdi. Klik Deploy eller Save.
+3. **Vælg en kode.** Åbn workeren tidogsted og gå til Settings → Variables and Secrets → Add. Vælg Type: Secret, skriv navnet `TS_KODE`, og skriv din kode som værdi. Klik Deploy eller Save.
 4. **Skriv koden på siden.** Åbn siden, og skriv koden under Indstillinger. Står der "Data gemmes i Cloudflare. Koden er godkendt.", er du færdig.
 
 Indtil lagerpladsen er sat op, virker siden stadig. OK'er, møder og URL'er gemmes så kun i den browser, du bruger.

@@ -1,6 +1,6 @@
-// Opsætning af Cloudflare-workeren "red-math-5293" (https://red-math-5293.robert-hendel.workers.dev).
+// Opsætning af Cloudflare-workeren "tidogsted" (https://tidogsted.robert-hendel.workers.dev).
 {
-  "name": "red-math-5293",
+  "name": "tidogsted",
   "main": "worker.js",
   "compatibility_date": "2026-11-01",
   "assets": { "directory": "./", "binding": "ASSETS" }
