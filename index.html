@@ -420,14 +420,34 @@ function saml(dates,fd,fundSrc){
 const avisEvents=()=>saml(dageFor(avis),L().brugFund?fundDoc(fundId()):null,'fund');
 const ugeEvents=()=>saml(ugeFor(avis),fundDoc(ugeId()),'uge');
 
+/* samme arrangement flere gange samme dag (fx escape room hver 40. minut) samles til én linje */
+function samlGange(list){
+  const ud=[],grp=new Map();
+  for(const e of list){
+    if(e.fjernet||!e.start){ud.push(e);continue}
+    const k=e.dato+'|'+normT(e.titel)+'|'+normT(e.sted||'');
+    const g=grp.get(k);
+    if(g){g.gange.push({start:e.start,slut:e.slut});g.tids.push(e.tid);g.ok=g.ok&&!!e.ok;g.udsolgt=g.udsolgt&&!!e.udsolgt;g.tjekAlle=g.tjekAlle&&!!e.t;continue}
+    const n={...e,gange:[{start:e.start,slut:e.slut}],tids:[e.tid],ok:!!e.ok,udsolgt:!!e.udsolgt,tjekAlle:!!e.t};grp.set(k,n);ud.push(n);
+  }
+  for(const n of grp.values()){if(n.gange.length<2){delete n.gange;n.tids=[n.tid];continue}
+    n.gange.sort((a,b)=>a.start.localeCompare(b.start));n.start=n.gange[0].start;const sidst=n.gange[n.gange.length-1];n.slut=sidst.slut||sidst.start}
+  return ud;
+}
+function tidFor(e){
+  if(!e.start)return'[TJEK]';
+  if(!e.gange)return ft(e.start)+(e.slut?'–'+ft(e.slut):'');
+  const t=e.gange.map(g=>ft(g.start));
+  return t.length<=4?t.slice(0,-1).join(', ')+' og '+t[t.length-1]:ft(e.start)+'–'+ft(e.slut)+' (flere gange)';
+}
 function linje(e){
-  const tid=e.start?'kl. '+ft(e.start)+(e.slut?'–'+ft(e.slut):''):'kl. [TJEK]';
+  const tid='kl. '+tidFor(e);
   let l=tid+' – '+e.titel+(e.sted?', '+e.sted:'');
   if(e.udsolgt)l+=' [UDSOLGT]';
   if(e.start&&!e.ok)l+=' [TJEK]';
   return l;
 }
-function bygTekst(){const ev=avisEvents().filter(e=>!e.fjernet);return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
+function bygTekst(){const ev=samlGange(avisEvents().filter(e=>!e.fjernet));return dageFor(avis).map(d=>[overskrift(d),...ev.filter(e=>e.dato===d).map(linje)].join('\n')).join('\n\n')}
 const spalteTekst=()=>{const l=L();return l.manuel&&l.spalte?l.spalte:bygTekst()};
 
 /* ---------- formattjek ---------- */
@@ -611,20 +631,20 @@ function fuldUrl(u,base){u=String(u||'');if(/^https?:\/\//i.test(u)||!base)retur
 function kildeLink(e){const k=String(e.kilde||'');if(/^https?:\/\//i.test(k))return k;if(/^kultunaut$/i.test(k))return knUrl(1);return''}
 const srcNavn=s=>({fund:'Søgning',uge:'Søgning',moede:'Møde',raa:'Rå tekst',kn:'KultuNaut',xl:'URL-tjek',app:'Uden Claude'}[s]||s);
 function renderVerif(){
-  const ev=avisEvents(),tb=$('verTabel').tBodies[0];
+  const ev=samlGange(avisEvents()),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="7" class="mut">Ingen arrangementer endnu.</td></tr>';return}
   tb.innerHTML=ev.map(e=>{
     const lk=kildeLink(e),kt=lk?(/^kultunaut$/i.test(e.kilde)?'KultuNaut':lk.replace(/^https?:\/\/(www\.)?/,'').split(/[/?#]/)[0]):'';
     const k=lk?`<a class="kildelink" href="${esc(lk)}" target="_blank" rel="noopener" title="${esc(lk)}">${esc(kt)} ↗</a>`:esc(e.kilde||'–');
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
-    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'<span class="nej">[TJEK]</span>'}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button>`}</div></td></tr>`;
+    const row=`<tr class="${e.fjernet?'fjern':''}"><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>':'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${e.gange?(e.tjekAlle?`<button class="sm" data-fortryd="${e.tids.join(',')}">Fortryd</button>`:`<button class="sm" data-ok="${e.tids.join(',')}">OK</button><button class="sm" data-fjernalle="${e.tids.join(',')}">Fjern</button>`):e.t?`<button class="sm" data-fortryd="${e.tid}">Fortryd</button>`:`<button class="sm" data-ok="${e.tid}">OK</button><button class="sm" data-ret="${e.tid}">Ret</button>`}</div></td></tr>`;
     const ret=retter===e.tid?`<tr><td colspan="7"><div class="retform"><label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label><label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
     return row+ret}).join('');
 }
 function renderUge(){
-  const u=ugeFor(avis),ev=ugeEvents().filter(e=>!e.fjernet),f=fundDoc(ugeId());
+  const u=ugeFor(avis),ev=samlGange(ugeEvents().filter(e=>!e.fjernet)),f=fundDoc(ugeId());
   $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
-  $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.sort((a,b)=>(a.start||'99').localeCompare(b.start||'99')).map(e=>`<li><span class="tid">${e.start?esc(ft(e.start)+(e.slut?'–'+ft(e.slut):'')):'[TJEK]'}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span></li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
+  $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.sort((a,b)=>(a.start||'99').localeCompare(b.start||'99')).map(e=>`<li><span class="tid">${esc(tidFor(e))}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${!e.ok&&e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span></li>`).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
 function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderSpalte();renderNote();renderVerif();renderUge();
   const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
@@ -908,12 +928,13 @@ $('stederListe').onclick=e=>{const id=e.target.dataset.fjernsted;if(id)skriv(()=
 const find=id=>avisEvents().find(e=>e.tid===id);
 const tjekDoc=(e,x)=>({kommune:komId,noegle:e.tid,dato:e.dato,titel:e.titel,af:'mig',tid:new Date().toISOString(),...x});
 $('verTabel').onclick=async ev=>{const b=ev.target.closest('button');if(!b)return;const ds=b.dataset;
-  if(ds.ok){const e=find(ds.ok);if(e)await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,{status:'ok'})),'Markeret som tjekket')}
+  if(ds.ok){const ids=ds.ok.split(',');await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'ok'}))}},'Markeret som tjekket')}
+  else if(ds.fjernalle){const ids=ds.fjernalle.split(',');await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'}))}},'Fjernet fra spalten')}
   else if(ds.ret){retter=ds.ret;renderVerif()}
   else if(ds.annuller){retter=null;renderVerif()}
   else if(ds.gemret){const e=find(ds.gemret);if(!e)return;const x={status:'rettet',start:$('rStart').value,slut:$('rSlut').value,sted:$('rSted').value.trim(),kilde:$('rKilde').value.trim()};retter=null;await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,x)),'Rettet og verificeret')}
   else if(ds.fjernev){const e=find(ds.fjernev);retter=null;if(e)await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'})),'Fjernet fra spalten')}
-  else if(ds.fortryd){await skriv(()=>store.del('tjek',ds.fortryd),'Fortrudt')}
+  else if(ds.fortryd){const ids=ds.fortryd.split(',');await skriv(async()=>{for(const id of ids)await store.del('tjek',id)},'Fortrudt')}
 };
 $('verAlle').onclick=()=>{const ev=avisEvents().filter(e=>!e.fjernet&&!e.ok);if(!ev.length){toast('Ingen [TJEK]-linjer at verificere');return}kopier(verOpgave(ev),ev.length+' [TJEK]-linjer – opgaven er kopieret. Indsæt svaret under "Indsæt et resultat i hånden"')};
 function eksport(){return avisEvents().map(e=>({dato:e.dato,start:e.start,slut:e.slut,titel:e.titel,sted:e.sted,kilde:e.kilde,krydstjekket:e.ok?'ja':'nej',status:e.fjernet?'fjernet':e.t?e.t.status:'',kildetype:srcNavn(e.src),udsolgt:e.udsolgt?'ja':'nej'}))}
