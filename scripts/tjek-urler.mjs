@@ -12,7 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod, udenforKommune, kultunautUrl, kultunautEvents } from '../lib/tjek.js';
+import { tjekUrl, iDag as idag, plus, urlId, fastId, afkod, udenforKommune, kultunautUrl, kultunautEvents, laesTekst, htmlTilLinjer } from '../lib/tjek.js';
 
 const ROD = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const XLSX = path.join(ROD, 'opgave/ekstra-urler.xlsx');
@@ -194,7 +194,9 @@ for (const k of cfg.kommuner) {
       const r = await fetch(kultunautUrl(k.navn, n), { headers: { 'user-agent': 'TidOgSted/1.0 (+https://github.com/roberthendel-dk/tidogsted)', 'accept-language': 'da' }, signal: AbortSignal.timeout(20000) });
       if (!r.ok) { fejl = 'HTTP ' + r.status; break; }
       sider++;
-      const ev = kultunautEvents(await r.text(), { ref: iDag, fra: iDag });
+      const html = await laesTekst(r);
+      if (n === 1 && k.id === 'faxe') fs.writeFileSync(path.join(ROD, 'data/kultunaut-eksempel.txt'), htmlTilLinjer(html).slice(0, 400).join('\n') + '\n');
+      const ev = kultunautEvents(html, { ref: iDag, fra: iDag });
       if (!ev.length) break;
       for (const e of ev) {
         if (e.dato < iDag || e.dato > SLUT || udenforKommune(e.sted, k.id, cfg.kommuner)) continue;

@@ -8,7 +8,7 @@
 //   KV-binding:  TS  -> et KV-navnerum, fx "tidogsted"
 //   Secret:      TS_KODE           (valgfri, men anbefalet) – kode, der kræves for at gemme
 
-import { tjekUrl } from '../../lib/tjek.js';
+import { tjekUrl, laesTekst } from '../../lib/tjek.js';
 
 const SAMLINGER = ['moeder', 'tjek', 'kilder', 'fund', 'urler', 'steder'];
 
@@ -61,7 +61,7 @@ export async function onRequest({ request, env, params }) {
     if (!/^https?:\/\/[^\s]+$/i.test(url)) return svar({ fejl: 'Ugyldig URL' }, 400);
     try {
       const r = await fetch(url, { redirect: 'follow', headers: { 'user-agent': 'Mozilla/5.0 (compatible; TidOgSted/1.0; +https://github.com/roberthendel-dk/tidogsted)', accept: 'text/html,text/calendar,application/xhtml+xml,*/*' }, signal: AbortSignal.timeout(25000) });
-      const tekst = (await r.text()).slice(0, 3000000);
+      const tekst = (await laesTekst(r)).slice(0, 3000000);
       return new Response(tekst, { status: 200, headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-status': String(r.status), 'x-type': r.headers.get('content-type') || '', 'x-url': r.url || url } });
     } catch (e) {
       return svar({ fejl: (e && e.name === 'TimeoutError') ? 'Siden svarede ikke inden for 25 sekunder' : 'Siden kunne ikke hentes' }, 502);

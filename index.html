@@ -234,6 +234,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
         <div class="hel knap" style="margin:0"><button class="pri" type="submit">Tilføj</button></div>
       </form>
       <h3 style="margin-top:18px">Kommende i <span id="fasteKom"></span></h3>
+      <p class="mut" style="margin:4px 0 0">Møder mærket "søgning" er fundet automatisk. Ligger de forkert, så tryk Fjern – eller fjern dem alle og læg de rigtige ind i Excel-arket eller med "Indsæt mødeplan". <button class="sm" id="rydSoegning" type="button">Fjern alle fundne møder i kommunen</button></p>
       <ul id="moedeListe" class="liste"></ul>
       <details><summary>Indsæt mødeplan</summary>
         <p class="mut">Indsæt datoerne for byrådsmøder/kommunalbestyrelsesmøder – fx "26-11-2026" eller "26. november", én pr. linje. Du kan også markere og kopiere hele siden fra dagsordensportalen eller mødeplanen og sætte den ind: står der "Byrådet" eller "Kommunalbestyrelsen", tager appen kun de møder og springer udvalgsmøderne over.</p>
@@ -612,10 +613,12 @@ function renderKildeOverblik(){
   $('kildeOverblikInfo').textContent=U.opdateret?'Nattens tjek kørte '+tidTekst(U.opdateret)+'. Sider uden fund kan stadig være i orden – de har måske bare ingen arrangementer i de næste 10 dage, eller de viser dem på en måde, appen ikke kan læse (så finder "Søg med Claude" dem).':'Nattens tjek har ikke kørt endnu.';
 }
 $('kildeOverblik').onclick=e=>{const b=e.target.closest('[data-viskom]');if(!b)return;komId=b.dataset.viskom;ls.set('ts:kommune',komId);$('kom').value=komId;retter=null;urlRetter=null;stedRetter=null;render();opdater();$('stederTitel').scrollIntoView({behavior:'smooth'})};
+$('rydSoegning').onclick=async()=>{const m=fasteBase().filter(x=>x.af==='søgning');if(!m.length){toast('Ingen automatisk fundne møder i '+kom().navn);return}
+  await skriv(async()=>{for(const x of m){if(x.fil)await store.put('moeder',x.id,{skjult:true,kommune:komId});else await store.del('moeder',x.id)}},m.length+' fundne møder fjernet i '+kom().navn)};
 function renderMoeder(){
   const gl=x=>x.gentag?(x.gentag==='14dage'?'hver 2. uge':'hver uge')+(x.til?' til '+kort(x.til):''):'';
   const m=fasteBase().filter(x=>(x.gentag?(x.til||'9999')>=IDAG:x.dato>=IDAG)).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));
-  $('moedeListe').innerHTML=m.length?m.map(x=>`<li><span><b>${esc(kort(x.dato))}</b> ${normTid(x.start)?'kl. '+esc(ft(normTid(x.start))):'[TJEK]'} – ${esc(x.titel)}${x.sted?', '+esc(x.sted):''}${x.gentag?' <span class="src">'+esc(gl(x))+'</span>':''} ${x.af==='søgning'?'<span class="src">søgning</span>':''}${x.kilde_ark?'<span class="src">Excel</span>':''}</span><button class="sm" data-fjernmoede="${esc(x.id)}" data-fil="${x.fil||x.kilde_ark?1:''}">Fjern</button></li>`).join(''):'<li class="mut">Ingen kommende møder eller faste arrangementer.</li>';
+  $('moedeListe').innerHTML=m.length?m.map(x=>`<li><span><b>${esc(kort(x.dato))}${x.dato.slice(0,4)!==IDAG.slice(0,4)?' '+x.dato.slice(0,4):''}</b> ${normTid(x.start)?'kl. '+esc(ft(normTid(x.start))):'[TJEK]'} – ${esc(x.titel)}${x.sted?', '+esc(x.sted):''}${x.gentag?' <span class="src">'+esc(gl(x))+'</span>':''} ${x.af==='søgning'?'<span class="src">søgning</span>':''}${x.kilde_ark?'<span class="src">Excel</span>':''}</span><button class="sm" data-fjernmoede="${esc(x.id)}" data-fil="${x.fil||x.kilde_ark?1:''}">Fjern</button></li>`).join(''):'<li class="mut">Ingen kommende møder eller faste arrangementer.</li>';
   if($('fasteKom'))$('fasteKom').textContent=kom().navn;
   if($('fasteInfo'))$('fasteInfo').textContent=(S.faste||[]).length?`Excel-arket: ${(S.faste||[]).length} rækker${S.fasteOpdateret?', indlæst '+tidTekst(S.fasteOpdateret):''}.`:'Excel-arket er tomt eller ikke indlæst endnu.';
 }
@@ -840,7 +843,7 @@ $('planGem').onclick=async()=>{
   const tekst=$('planTekst').value.trim();if(!tekst){toast('Indsæt først datoerne');return}
   const L2=await hentLib();let liste=[];
   if(/byr(å|aa)d|kommunalbestyrelse/i.test(tekst)){const html=tekst.split('\n').map(x=>'<div>'+x.replace(/</g,' ')+'</div>').join('');liste=L2.moedeLinks(html,{ref:IDAG})}
-  if(!liste.length)for(const del of tekst.split(/[\n,;]+/)){const d=L2.findDato(del.trim(),IDAG)||((del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/))&&{dato:del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/).slice(1).reverse().map((x,i)=>i?String(x).padStart(2,'0'):x).join('-')});
+  let aar='';if(!liste.length)for(const del of tekst.split(/[\n,;]+/)){const a2=L2.aarILinje(del);const d0=L2.findDatoIAar(del.trim(),IDAG,aar);if(a2&&!d0){aar=a2;continue}const d=d0||((del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/))&&{dato:del.match(/(\d{1,2})-(\d{1,2})-(\d{4})/).slice(1).reverse().map((x,i)=>i?String(x).padStart(2,'0'):x).join('-')});
     if(d&&d.dato&&!d.ugedag){const t=L2.findTid(del.replace(/\d{1,2}-\d{1,2}-\d{4}/,' '));liste.push({dato:d.dato,start:t?t.start:''})}}
   if(!liste.length){toast('Fandt ingen datoer');return}
   try{const n=await gemRaadsmoeder(liste,'manuel');$('planTekst').value='';toast(n+' møder tilføjet ('+(liste.length-n)+' fandtes allerede eller var passeret)');render()}catch(e){toast(e.message)}
