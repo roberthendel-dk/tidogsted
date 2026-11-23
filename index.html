@@ -489,7 +489,7 @@ function saml(dates,fd,fundSrc){
   for(const e of out){const v=new Set(e.kilder.map(vaert));e.krydskilder=v.size>=2?[...v]:null;if(e.krydskilder)e.ok=true;delete e.kilder;
     e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
     e.autoOk=!!e.ok;
-    if(t){if(t.status==='fjernet')e.fjernet=true;else if(t.status==='afvist')e.ok=false;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde}e.ok=true}}}
+    if(t){if(t.status==='fjernet')e.fjernet=true;else if(t.status==='afvist')e.ok=false;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde;if(t.titel)e.titel=t.titel}e.ok=true}}}
   return out.sort((a,b)=>a.dato.localeCompare(b.dato)||(a.start||'99').localeCompare(b.start||'99')||a.titel.localeCompare(b.titel,'da'));
 }
 const avisEvents=()=>saml(dageFor(avis),L().brugFund?fundDoc(fundId()):null,'fund');
@@ -773,7 +773,7 @@ function renderVerif(){
     const st=e.fjernet?'Fjernet':e.t?(e.t.status==='ok'?'OK':'Rettet')+(e.t.af==='claude'?' af Claude':''):'';
     const ids=(e.tids||[e.tid]).join(',');
     const row=`<tr class="${e.fjernet?'fjern':''}${valgt.has(ids)?' valgt':''}"><td class="vk"><input type="checkbox" class="vaelg" data-ids="${esc(ids)}" data-dato="${e.dato}"${valgt.has(ids)?' checked':''} aria-label="Vælg ${esc(e.titel)}"></td><td>${esc(kort(e.dato))}</td><td class="t"${e.gange?' style="white-space:normal"':''}>${e.start?esc(tidFor(e)):'<span class="nej">[TJEK]</span>'}${e.gange&&e.gange.length>4?'<br><span class="mut" style="font-weight:400">'+esc(e.gange.map(g=>ft(g.start)).join(', '))+'</span>':''}</td><td>${esc(e.titel)} <span class="src">${srcNavn(e.src)}</span>${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</td><td>${esc(e.sted)}</td><td>${k}</td><td>${e.ok?'<span class="ja">ja</span>'+(e.krydskilder&&!e.t?'<br><span class="mut">krydskilder: '+esc(e.krydskilder.join(', '))+'</span>':''):'<span class="nej">nej</span>'}${st?' · '+esc(st):''}${e.t&&e.t.note?'<br><span class="mut">'+esc(e.t.note)+'</span>':''}</td><td><div class="handl">${knapper(e)}</div></td></tr>`;
-    const ret=retter===e.tid?`<tr><td colspan="8"><div class="retform">${e.gange?`<label style="grid-column:1/-1">Starttider (adskilt med komma)<input id="rTider" value="${esc(e.gange.map(g=>ft(g.start)).join(', '))}"></label>`:`<label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label>`}<label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
+    const ret=retter===e.tid?`<tr><td colspan="8"><div class="retform"><label style="grid-column:1/-1">Titel<input id="rTitel" value="${esc(e.titel)}"></label>${e.gange?`<label style="grid-column:1/-1">Starttider (adskilt med komma)<input id="rTider" value="${esc(e.gange.map(g=>ft(g.start)).join(', '))}"></label>`:`<label>Tid<input id="rStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="rSlut" type="time" value="${esc(e.slut)}"></label>`}<label>Sted<input id="rSted" value="${esc(e.sted)}"></label><label>Kilde<input id="rKilde" value="${esc(e.kilde)}"></label><div class="knap"><button class="sm pri" data-gemret="${e.tid}">Gem og verificér</button><button class="sm red" data-fjernev="${e.tid}">Fjern fra spalten</button><button class="sm" data-annuller="1">Annullér</button></div></div></td></tr>`:'';
     return hoved+row+ret}).join('');
   const findes=new Set([...tb.querySelectorAll('.vaelg')].map(c=>c.dataset.ids));for(const x of[...valgt])if(!findes.has(x))valgt.delete(x);visMasse();
 }
@@ -1121,11 +1121,11 @@ $('verTabel').onclick=async ev=>{const b=ev.target.closest('button');if(!b)retur
     if($('rTider')){/* samlet række: ret sted/kilde på alle gange og sæt starttiderne */
       const g=samlGange(avisEvents()).find(x=>x.tid===e.tid);const ids=g&&g.tids?g.tids:[e.tid];
       const tider=$('rTider').value.split(/[,;]|\bog\b/).map(x=>normTid(x.trim())).filter(Boolean);
-      const sted=$('rSted').value.trim(),kilde=$('rKilde').value.trim();retter=null;
+      const sted=$('rSted').value.trim(),kilde=$('rKilde').value.trim(),titel=$('rTitel').value.trim();retter=null;
       await skriv(async()=>{for(let i=0;i<ids.length;i++){const x=find(ids[i]);if(!x)continue;
-        if(i<tider.length)await store.put('tjek',x.tid,tjekDoc(x,{status:'rettet',start:tider[i],slut:'',sted,kilde}));
+        if(i<tider.length)await store.put('tjek',x.tid,tjekDoc(x,{status:'rettet',start:tider[i],slut:'',sted,kilde,titel}));
         else await store.put('tjek',x.tid,tjekDoc(x,{status:'fjernet'}))}},'Rettet og verificeret');return}
-    const x={status:'rettet',start:$('rStart').value,slut:$('rSlut').value,sted:$('rSted').value.trim(),kilde:$('rKilde').value.trim()};retter=null;await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,x)),'Rettet og verificeret')}
+    const x={status:'rettet',start:$('rStart').value,slut:$('rSlut').value,sted:$('rSted').value.trim(),kilde:$('rKilde').value.trim(),titel:$('rTitel').value.trim()};retter=null;await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,x)),'Rettet og verificeret')}
   else if(ds.fjernev){const e=find(ds.fjernev);retter=null;if(e)await skriv(()=>store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'})),'Fjernet fra spalten')}
   else if(ds.fortryd){const ids=ds.fortryd.split(',');await skriv(async()=>{for(const id of ids)await store.del('tjek',id)},'Fortrudt')}
 };
