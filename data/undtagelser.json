@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-24T08:38:56.505Z",
+ "opdateret": "2026-11-24T08:41:58.155Z",
  "rows": [
   {
    "id": "xl_nordiskfilmbiografer_sted_alle",
@@ -54,6 +54,22 @@
    "tekst": "Biografen Kanten",
    "felt": "sted",
    "kommune": "faxe",
+   "aktiv": true,
+   "note": "Biograf"
+  },
+  {
+   "id": "xl_moviehouseslagelse_sted_slagelse",
+   "tekst": "MovieHouse Slagelse",
+   "felt": "sted",
+   "kommune": "slagelse",
+   "aktiv": true,
+   "note": "Biograf"
+  },
+  {
+   "id": "xl_bionæstved_sted_naestved",
+   "tekst": "Bio Næstved",
+   "felt": "sted",
+   "kommune": "naestved",
    "aktiv": true,
    "note": "Biograf"
   }
