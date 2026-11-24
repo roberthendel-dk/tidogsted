@@ -1,0 +1,13 @@
+{
+ "opdateret": "2026-11-24T08:30:24.688Z",
+ "rows": [
+  {
+   "id": "xl_nordiskfilmbiografer_sted_alle",
+   "tekst": "Nordisk Film Biografer",
+   "felt": "sted",
+   "kommune": "",
+   "aktiv": true,
+   "note": "Biografer kommer ikke med i spalten"
+  }
+ ]
+}
