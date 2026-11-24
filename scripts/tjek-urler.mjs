@@ -20,6 +20,8 @@ const KOMMUNER = path.join(ROD, 'opgave/kommuner.json');
 const UD = path.join(ROD, 'data/urler.json');
 const FASTE_XLSX = path.join(ROD, 'opgave/faste-arrangementer.xlsx');
 const FASTE_UD = path.join(ROD, 'data/faste.json');
+const UNDTAG_XLSX = path.join(ROD, 'opgave/undtagelser.xlsx');
+const UNDTAG_UD = path.join(ROD, 'data/undtagelser.json');
 const DAGE_FREM = 10;
 
 /* ---------- lille xlsx-læser (zip + XML) ---------- */
@@ -213,7 +215,22 @@ for (const k of cfg.kommuner) {
 
 // Undtagelser (fx Nordisk Film Biografer): standardlisten i kommuner.json + appens liste
 {
-  let undtag = (cfg.undtagelser || []).map((u, i) => ({ ...u, id: 'std_' + i }));
+  // Excel-arket opgave/undtagelser.xlsx → data/undtagelser.json (deles af alle)
+  const rk = fs.existsSync(UNDTAG_XLSX) ? laesArk(UNDTAG_XLSX, 'Undtagelser') : [];
+  const h = (rk[0] || []).map((x) => x.toLowerCase());
+  const col = (n) => h.findIndex((x) => x.startsWith(n));
+  const C = { tekst: col('tekst'), felt: col('se efter'), kom: col('kommune'), aktiv: col('aktiv'), note: col('note') };
+  const arkRows = [];
+  for (const r of rk.slice(1)) {
+    const g = (k) => (C[k] >= 0 ? String(r[C[k]] || '').trim() : '');
+    if (!g('tekst')) continue;
+    const f = g('felt').toLowerCase(), felt = /og|eller|begge/.test(f) ? 'begge' : /titel/.test(f) ? 'titel' : 'sted';
+    const ko = /^alle$|^$/i.test(g('kom')) ? '' : kommuneId(g('kom')) || '';
+    arkRows.push({ id: 'xl_' + g('tekst').toLowerCase().replace(/[^a-zæøå0-9]+/g, '').slice(0, 30) + '_' + felt + '_' + (ko || 'alle'), tekst: g('tekst'), felt, kommune: ko, aktiv: !/^n/i.test(g('aktiv')), note: g('note') });
+  }
+  fs.mkdirSync(path.dirname(UNDTAG_UD), { recursive: true });
+  fs.writeFileSync(UNDTAG_UD, JSON.stringify({ opdateret: new Date().toISOString(), rows: arkRows }, null, 1) + '\n');
+  let undtag = arkRows.filter((u) => u.aktiv);
   try {
     const r = await fetch(cfg.site.replace(/\/$/, '') + '/api/data/undtag', { signal: AbortSignal.timeout(20000) });
     if (r.ok) { const app = await r.json(); undtag = undtag.filter((u) => !(app[u.id] && app[u.id].skjult)); for (const [id, u] of Object.entries(app)) if (!u.skjult && u.tekst) undtag.push({ ...u, id }); }

@@ -287,7 +287,8 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
     </section>
     <section>
       <h2>Undtagelser</h2>
-      <p class="mut">Steder eller ord i titlen, der aldrig skal med – fx biografer. Gælder alle kilder, også KultuNaut.</p>
+      <p class="mut">Steder eller ord i titlen, der aldrig skal med – fx biografer. Gælder alle kilder, også KultuNaut. Undtagelserne i Excel-arket <code>opgave/undtagelser.xlsx</code> gælder for alle, der bruger appen. Dem, du tilføjer her, gælder kun i denne browser, til du henter listen som Excel og uploader den.</p>
+      <p><button class="sm" id="undtagExcel" type="button">Hent listen som Excel</button> <a class="sm" href="https://github.com/roberthendel-dk/tidogsted/upload/main/opgave" target="_blank" rel="noopener">Upload på GitHub ↗</a></p>
       <ul id="undtagListe" class="liste"></ul>
       <form id="undtagForm" class="form">
         <label>Tekst<input id="uTekst" required placeholder="Fx Nordisk Film Biografer"></label>
@@ -382,7 +383,7 @@ const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 
 /* ---------- tilstand ---------- */
 let CFG={site:'',kommuner:[]},OPGAVE='';
-const S={undtag:{},faste:[],fasteOpdateret:'',fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
+const S={undtagArk:[],undtagArkTid:'',undtag:{},faste:[],fasteOpdateret:'',fil:{},filMoeder:{},fund:{},moeder:{},tjek:{},kilder:{},steder:{},urlApp:{},urler:{urler:[],arrangementer:[]}};
 const nKey=c=>c==='urler'?'urlApp':c;
 let redigerer=false,retter=null,API={kv:false,kode:false,godkendt:true,svar:false};
 const AVISER=aviser(IDAG);
@@ -413,6 +414,7 @@ async function hentFiler(){
   const ids=[fundId(),ugeId()];
   const [a,b,m,u,f]=await Promise.all([hentJson('data/fund/'+ids[0]+'.json'),hentJson('data/fund/'+ids[1]+'.json'),hentJson('data/moeder/'+komId+'.json'),hentJson('data/urler.json'),hentJson('data/faste.json')]);
   if(f&&Array.isArray(f.rows)){S.faste=f.rows;S.fasteOpdateret=f.opdateret||''}
+  const ux=await hentJson('data/undtagelser.json');if(ux&&Array.isArray(ux.rows)){S.undtagArk=ux.rows;S.undtagArkTid=ux.opdateret||''}
   S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
   if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],kultunaut:Array.isArray(u.kultunaut)?u.kultunaut:[],opdateret:u.opdateret||''};
 }
@@ -458,7 +460,7 @@ function parseSpalte(txt,dates){
 const fundEvents=(f,dates)=>Array.isArray(f.arrangementer)&&f.arrangementer.length?f.arrangementer:parseSpalte(f.spalte,dates);
 /* ---------- undtagelser: steder eller titler, der aldrig skal med (fx Nordisk Film Biografer) ---------- */
 function undtagelser(){
-  const ud=[];(CFG.undtagelser||[]).forEach((u,i)=>{const id='std_'+i,o=S.undtag[id];if(!(o&&o.skjult))ud.push({...u,id,standard:true})});
+  const ud=[];for(const u of S.undtagArk||[]){if(u.aktiv===false)continue;const o=S.undtag[u.id];if(!(o&&o.skjult))ud.push({...u,ark:true})}
   for(const[id,u]of Object.entries(S.undtag||{}))if(!u.skjult&&u.tekst)ud.push({...u,id});
   return ud;
 }
@@ -712,12 +714,17 @@ function renderUndtag(){
   const el=$('undtagListe');if(!el)return;const u=undtagelser();
   if($('uKom').options.length<2)CFG.kommuner.forEach(k=>$('uKom').add(new Option(k.navn,k.id)));
   const felt={sted:'stedet',titel:'titlen',begge:'sted eller titel'};
-  el.innerHTML=u.length?u.map(x=>`<li><span><b>${esc(x.tekst)}</b> <span class="mut">– i ${felt[x.felt]||'stedet'}, ${x.kommune?esc((CFG.kommuner.find(k=>k.id===x.kommune)||{}).navn||x.kommune):'alle kommuner'}</span>${x.standard?' <span class="src">standard</span>':''}</span><button class="sm" data-fjernundtag="${esc(x.id)}">Fjern</button></li>`).join(''):'<li class="mut">Ingen undtagelser.</li>';
+  el.innerHTML=u.length?u.map(x=>`<li><span><b>${esc(x.tekst)}</b> <span class="mut">– i ${felt[x.felt]||'stedet'}, ${x.kommune?esc((CFG.kommuner.find(k=>k.id===x.kommune)||{}).navn||x.kommune):'alle kommuner'}</span>${x.ark?' <span class="src">Excel</span>':' <span class="src">kun i appen</span>'}</span><button class="sm" data-fjernundtag="${esc(x.id)}">Fjern</button></li>`).join(''):'<li class="mut">Ingen undtagelser.</li>';
 }
 $('undtagForm').onsubmit=async e=>{e.preventDefault();const tekst=$('uTekst').value.trim();if(!tekst)return;
   if(await skriv(()=>store.put('undtag','u_'+nytId(),{tekst,felt:$('uFelt').value,kommune:$('uKom').value,oprettet:new Date().toISOString()}),'"'+tekst+'" kommer ikke længere med'))$('uTekst').value=''};
 $('undtagListe').onclick=async e=>{const b=e.target.closest('[data-fjernundtag]');if(!b)return;const id=b.dataset.fjernundtag;
-  await skriv(()=>id.startsWith('std_')?store.put('undtag',id,{skjult:true}):store.del('undtag',id),'Undtagelsen er fjernet')};
+  await skriv(()=>id.startsWith('xl_')?store.put('undtag',id,{skjult:true}):store.del('undtag',id),'Undtagelsen er fjernet')};
+$('undtagExcel').onclick=()=>{
+  const navn=id=>id?((CFG.kommuner.find(k=>k.id===id)||{}).navn||id):'Alle',felt={sted:'Stedet',titel:'Titlen',begge:'Sted eller titel'};
+  const rk=[['Tekst','Se efter i','Kommune','Aktiv','Note'],...undtagelser().map(u=>[u.tekst,felt[u.felt]||'Stedet',navn(u.kommune),'ja',u.note||''])];
+  const a=document.createElement('a');a.href=URL.createObjectURL(lavXlsx(rk,[40,18,16,8,50]));a.download='undtagelser.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+  toast(rk.length-1+' undtagelser hentet som Excel – upload arket som opgave/undtagelser.xlsx på GitHub, så gælder de for alle')};
 function renderMoeder(){
   const gl=x=>x.gentag?(x.gentag==='14dage'?'hver 2. uge':'hver uge')+(x.til?' til '+kort(x.til):''):'';
   const m=fasteBase().filter(x=>(x.gentag?(x.til||'9999')>=IDAG:x.dato>=IDAG)).sort((a,b)=>(a.dato+(a.start||'')).localeCompare(b.dato+(b.start||'')));

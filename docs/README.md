@@ -11,6 +11,7 @@ Siden opdaterer sig selv: hver morgen mandag–lørdag kører en planlagt Claude
 | `docs/README.md` | Denne vejledning |
 | `index.html` | Selve appen – ligger i roden, så den åbnes direkte på repoets adresse |
 | `opgave/soegning.md` | Søgeopgaven. Bruges af de automatiske søgninger og af knappen "Søg nu". **Ret her for at ændre, hvordan der søges.** |
+| `opgave/undtagelser.xlsx` | Steder og ord i titlen, der aldrig skal med (fx Nordisk Film Biografer). Deles af alle. |
 | `opgave/faste-arrangementer.xlsx` | Excel-arket med byrådsmøder og andre faste arrangementer (kan gentages hver uge eller hver 2. uge). Lægges sammen med listen under menupunktet "Faste arrangementer". |
 | `opgave/ekstra-urler.xlsx` | Excel-arket med ekstra URL'er. Det supplerer de faste steder og lægges sammen med listen, du retter i appen. |
 | `scripts/tjek-urler.mjs` + `lib/tjek.js` + `.github/workflows/tjek-urler.yml` | Gratis tjek uden Claude. Kører hver morgen kl. ca. 03.40 og med det samme, når du uploader et nyt ark. Resultatet står i `data/urler.json`. |
@@ -67,7 +68,9 @@ I `opgave/kommuner.json` kan hver kommune have `"raadDag"` (fx `"torsdag"` for F
 
 ## Undtagelser
 
-Under Kilder og byer → Undtagelser kan du skrive steder eller ord i titlen, der aldrig skal med (fx Nordisk Film Biografer). De gælder alle kilder. Standardlisten står i `opgave/kommuner.json` under `"undtagelser"`.
+Undtagelserne ligger i Excel-arket `opgave/undtagelser.xlsx` (fanen "Undtagelser": Tekst, Se efter i, Kommune, Aktiv, Note) og gælder for alle, der bruger appen. Arket læses automatisk, når det uploades på GitHub, og i nattens tjek.
+
+I appen (Kilder og byer → Undtagelser) kan du også tilføje undtagelser – de gælder dog kun i din egen browser, indtil du trykker "Hent listen som Excel" og uploader arket som `opgave/undtagelser.xlsx`.
 
 ## Søg med AI
 
