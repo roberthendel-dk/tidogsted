@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-24T08:37:06.630Z",
+ "opdateret": "2026-11-24T08:38:56.505Z",
  "rows": [
   {
    "id": "xl_nordiskfilmbiografer_sted_alle",
@@ -44,6 +44,14 @@
   {
    "id": "xl_haslevbio_sted_faxe",
    "tekst": "Haslev Bio",
+   "felt": "sted",
+   "kommune": "faxe",
+   "aktiv": true,
+   "note": "Biograf"
+  },
+  {
+   "id": "xl_biografenkanten_sted_faxe",
+   "tekst": "Biografen Kanten",
    "felt": "sted",
    "kommune": "faxe",
    "aktiv": true,
