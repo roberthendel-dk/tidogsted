@@ -1,5 +1,5 @@
 {
- "opdateret": "2026-11-24T08:30:24.688Z",
+ "opdateret": "2026-11-24T08:37:06.630Z",
  "rows": [
   {
    "id": "xl_nordiskfilmbiografer_sted_alle",
@@ -8,6 +8,46 @@
    "kommune": "",
    "aktiv": true,
    "note": "Biografer kommer ikke med i spalten"
+  },
+  {
+   "id": "xl_kosmoramaskælskør_sted_slagelse",
+   "tekst": "Kosmorama Skælskør",
+   "felt": "sted",
+   "kommune": "slagelse",
+   "aktiv": true,
+   "note": "Biograf"
+  },
+  {
+   "id": "xl_korsørbiografteater_sted_slagelse",
+   "tekst": "Korsør Biograf Teater",
+   "felt": "sted",
+   "kommune": "slagelse",
+   "aktiv": true,
+   "note": "Biograf"
+  },
+  {
+   "id": "xl_victoriateatret_sted_soroe",
+   "tekst": "Victoria Teatret",
+   "felt": "sted",
+   "kommune": "soroe",
+   "aktiv": true,
+   "note": "Biograf i Sorø"
+  },
+  {
+   "id": "xl_biografcafen_sted_vordingborg",
+   "tekst": "Biograf Caféen",
+   "felt": "sted",
+   "kommune": "vordingborg",
+   "aktiv": true,
+   "note": "Biograf i Vordingborg"
+  },
+  {
+   "id": "xl_haslevbio_sted_faxe",
+   "tekst": "Haslev Bio",
+   "felt": "sted",
+   "kommune": "faxe",
+   "aktiv": true,
+   "note": "Biograf"
   }
  ]
 }
