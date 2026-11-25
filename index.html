@@ -422,7 +422,12 @@ async function hentFiler(){
   S.fil[ids[0]]=a;S.fil[ids[1]]=b;S.filMoeder[komId]=m&&Array.isArray(m.moeder)?m.moeder:[];
   if(u&&Array.isArray(u.urler))S.urler={urler:u.urler,arrangementer:Array.isArray(u.arrangementer)?u.arrangementer:[],kultunaut:Array.isArray(u.kultunaut)?u.kultunaut:[],opdateret:u.opdateret||''};
 }
-async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','urler','steder','undtag']){try{S[nKey(c)]=await store.alle(c)}catch(e){dbNote(e.message)}}}
+async function hentSamlinger(){for(const c of['fund','moeder','tjek','kilder','urler','steder','undtag']){try{S[nKey(c)]=await store.alle(c)}catch(e){dbNote(e.message)}}
+  /* første gang den fælles lagerplads er der: flyt det, der kun lå i denne browser, derop */
+  if(API.kv&&!ls.get('ts:flyttet',false)){let n=0;
+    try{for(const c of['fund','moeder','tjek','kilder','urler','steder','undtag']){const lokal=ls.get('ts:db:'+c,{}),server=S[nKey(c)]||{};
+      for(const[id,v]of Object.entries(lokal))if(!(id in server)){await store.put(c,id,v);server[id]=v;n++}S[nKey(c)]=server}
+      ls.set('ts:flyttet',true);if(n)toast(n+' ting, der kun var gemt i denne browser, er nu gemt fælles')}catch(e){/* fx forkert kode – prøv igen næste gang */}}}
 async function opdater(besked){await Promise.all([hentFiler(),hentSamlinger()]);render();if(besked)toast(besked)}
 /* nyeste af fil (automatisk søgning) og indsat resultat */
 function fundDoc(id){const a=S.fil[id],b=S.fund[id];if(a&&b)return String(b.opdateret||'')>String(a.opdateret||'')?b:a;return a||b||null}
