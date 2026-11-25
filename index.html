@@ -56,6 +56,7 @@ button.red{background:var(--red);border-color:var(--red);color:#fff}
 button.sm{min-height:36px;padding:4px 10px;font-size:14px}
 button:disabled{opacity:.4;cursor:default}
 .notefold>summary{cursor:pointer}
+.ugekilder{grid-column:1/-1;margin-top:6px;font-size:13px}.ugekilder a{font-weight:650}
 .ugeret{display:grid;gap:6px;width:100%}.ugeret label{display:grid;gap:2px;font-size:12px;color:var(--mut)}.ugeret input{font-size:14px;padding:6px 8px;min-height:36px}
 .fjernede{margin-top:10px}.fjernede>summary{cursor:pointer;font-weight:650}
 .ugedag li[data-aaben]{cursor:pointer}.ugedag li[data-aaben]:hover .txt{text-decoration:underline;text-decoration-color:var(--rule)}
@@ -503,7 +504,7 @@ function saml(dates,fd,fundSrc){
   const appDoc=S.fund[appId()];if(appDoc&&Array.isArray(appDoc.arrangementer))appDoc.arrangementer.flatMap(delTider).forEach(e=>push(norm(e,'app')));
   (lok.raa||[]).forEach(e=>push(norm(e,'raa')));
   (lok.kn||[]).forEach(e=>push(norm(e,'kn')));
-  for(const e of out){const v=new Set(e.kilder.map(vaert));e.krydskilder=v.size>=2?[...v]:null;if(e.krydskilder)e.ok=true;delete e.kilder;
+  for(const e of out){const v=new Set(e.kilder.map(vaert));e.krydskilder=v.size>=2?[...v]:null;if(e.krydskilder)e.ok=true;e.links=[...new Set(e.kilder.map(x=>kildeLink(x)).filter(Boolean))];delete e.kilder;
     e.tid=komId+'_'+hash(noegle(e));const t=S.tjek[e.tid];e.t=t||null;e.fjernet=false;
     e.autoOk=!!e.ok;
     if(t){if(t.status==='fjernet')e.fjernet=true;else if(t.status==='afvist')e.ok=false;else{if(t.status==='rettet'){if('start'in t)e.start=normTid(t.start);if('slut'in t)e.slut=normTid(t.slut);if(t.sted)e.sted=t.sted;if(t.kilde)e.kilde=t.kilde;if(t.titel)e.titel=t.titel}e.ok=true}}}
@@ -519,7 +520,7 @@ function samlGange(list){
     if(e.fjernet||!e.start){ud.push(e);continue}
     const k=e.dato+'|'+normT(e.titel)+'|'+normT(e.sted||'');
     const g=grp.get(k);
-    if(g){g.gange.push({start:e.start,slut:e.slut});g.tids.push(e.tid);g.ok=g.ok&&!!e.ok;g.autoOk=g.autoOk&&!!e.autoOk;g.rettet=g.rettet||!!(e.t&&e.t.status==='rettet');g.udsolgt=g.udsolgt&&!!e.udsolgt;g.tjekAlle=g.tjekAlle&&!!e.t;continue}
+    if(g){g.gange.push({start:e.start,slut:e.slut});g.tids.push(e.tid);g.links=[...new Set([...(g.links||[]),...(e.links||[])])];g.ok=g.ok&&!!e.ok;g.autoOk=g.autoOk&&!!e.autoOk;g.rettet=g.rettet||!!(e.t&&e.t.status==='rettet');g.udsolgt=g.udsolgt&&!!e.udsolgt;g.tjekAlle=g.tjekAlle&&!!e.t;continue}
     const n={...e,gange:[{start:e.start,slut:e.slut}],tids:[e.tid],ok:!!e.ok,autoOk:!!e.autoOk,rettet:!!(e.t&&e.t.status==='rettet'),udsolgt:!!e.udsolgt,tjekAlle:!!e.t};grp.set(k,n);ud.push(n);
   }
   for(const n of grp.values()){if(n.gange.length<2){delete n.gange;n.tids=[n.tid];continue}
@@ -811,7 +812,7 @@ function renderUge(){
   const retk=`<button class="sm" data-retuge="${ids}">Ret</button>`;
   const handl=retUge===ids?`<div class="ugeret"><label>Titel<input id="uTitel" value="${esc(e.titel)}"></label>${e.gange?`<label>Starttider<input id="uTider" value="${esc(e.gange.map(g=>ft(g.start)).join(', '))}"></label>`:`<label>Start<input id="uStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="uSlut" type="time" value="${esc(e.slut)}"></label>`}<label>Sted<input id="uSted" value="${esc(e.sted)}"></label><div class="knap" style="margin:0"><button class="sm pri" data-gemuge="${ids}">Gem</button><button class="sm" data-annuller="1">Annullér</button></div></div>`
     :e.fjernet?`<button class="sm" data-fortryd="${ids}">Fortryd</button>${retk}`:e.ok?`<button class="sm pri" aria-pressed="true" data-okaf="${ids}">OK ✓</button>${retk}<button class="sm" data-fjernalle="${ids}">Fjern</button>`:`<button class="sm" data-ok="${ids}">OK</button>${retk}<button class="sm" data-fjernalle="${ids}">Fjern</button>`;
-  return`<li class="${e.fjernet?'ugefjern':''}${aaben?' aaben':''}" data-aaben="${esc(ids)}" tabindex="0" title="Klik for at godkende eller fjerne"><span class="tid">${esc(tidFor(e))}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${e.fjernet?' <span class="tag">FJERNET</span>':e.ok?' <span class="tag okt">✓</span>':e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span>${aaben?`<div class="ugehandl">${handl}</div>`:''}</li>`}).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
+  return`<li class="${e.fjernet?'ugefjern':''}${aaben?' aaben':''}" data-aaben="${esc(ids)}" tabindex="0" title="Klik for at godkende eller fjerne"><span class="tid">${esc(tidFor(e))}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${e.fjernet?' <span class="tag">FJERNET</span>':e.ok?' <span class="tag okt">✓</span>':e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span>${aaben?`<div class="ugehandl">${handl}</div>${retUge!==ids?kildeLinks(e):''}`:''}</li>`}).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
 function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderKildeOverblik();renderUndtag();renderSpalte();renderNote();renderVerif();renderUge();
   const l=L();$('knInfo').textContent=l.kn.length?l.kn.length+' KultuNaut-fund gemt for denne avis.':'';$('raaInfo').textContent=l.raa.length?l.raa.length+' arrangementer fra rå tekst i spalten.':'';
@@ -1140,6 +1141,10 @@ $('masseFjern').onclick=()=>masse(async id=>{const e=find(id);if(e)await store.p
 $('masseFortryd').onclick=()=>masse(async id=>{if(S.tjek[id])await store.del('tjek',id)},'Fortrudt');
 $('masseRyd').onclick=()=>{valgt.clear();render();visMasse()};
 let aabenUge='',retUge='';
+/* kildelinks under knapperne: Kilde 1, Kilde 2 … */
+function kildeLinks(e){const set=new Map();for(const u of(e.links&&e.links.length?e.links:[kildeLink(e)]).filter(Boolean)){let k;try{k=new URL(u).hostname.replace(/^www\./,'')}catch{k=u}/* én pr. kilde, også når arrangementet kører flere gange */if(!set.has(k))set.set(k,u)}const l=[...set.values()];
+  const navn=u=>{if(/kultunaut\.dk/i.test(u))return'KultuNaut';try{return new URL(u).hostname.replace(/^www\./,'')}catch{return u}};
+  return l.length?`<div class="ugekilder">${l.map((u,i)=>`<a href="${esc(u)}" target="_blank" rel="noopener" title="${esc(u)}">Kilde ${i+1}</a> <span class="mut">(${esc(navn(u))})</span>`).join(' · ')}</div>`:'<div class="ugekilder mut">Ingen kildelink</div>'}
 $('ugeGrid').onclick=async ev=>{if(ev.target.closest('.ugeret')&&!ev.target.closest('button'))return;const b=ev.target.closest('button');const li=ev.target.closest('[data-aaben]');
   if(!b){if(li){aabenUge=aabenUge===li.dataset.aaben?'':li.dataset.aaben;retUge='';render()}return}
   if(b.dataset.retuge){retUge=b.dataset.retuge;render();setTimeout(()=>{const i=$('uTitel');if(i)i.focus()},0);return}
