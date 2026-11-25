@@ -56,6 +56,7 @@ button.red{background:var(--red);border-color:var(--red);color:#fff}
 button.sm{min-height:36px;padding:4px 10px;font-size:14px}
 button:disabled{opacity:.4;cursor:default}
 .notefold>summary{cursor:pointer}
+.fjernede{margin-top:10px}.fjernede>summary{cursor:pointer;font-weight:650}
 .ugedag li[data-aaben]{cursor:pointer}.ugedag li[data-aaben]:hover .txt{text-decoration:underline;text-decoration-color:var(--rule)}
 .ugedag li.aaben{background:var(--panel)}.ugedag li.ugefjern{opacity:.45}.ugedag li.ugefjern .txt{text-decoration:line-through}
 .ugehandl{grid-column:1/-1;display:flex;gap:6px;margin-top:6px}.tag.okt{background:none;color:var(--ok,#2a7a3b);font-weight:800}
@@ -218,6 +219,7 @@ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-bl
           <button id="csv" class="sm">CSV</button><button id="json" class="sm">JSON</button>
         </div>
       </div>
+      <details id="fjernedeBoks" class="fjernede"><summary>Fjernede arrangementer (<span id="fjernedeAntal">0</span>)</summary><ul id="fjernedeListe" class="liste"></ul></details>
       <div id="masse" class="masse" hidden><b id="masseAntal"></b><button class="sm pri" id="masseOk">OK</button><button class="sm" id="masseFjern">Fjern</button><button class="sm" id="masseFortryd">Fortryd</button><button class="sm" id="masseRyd">Fravælg</button></div>
       <div class="scroll"><table class="stack" id="verTabel"><thead><tr><th class="vk"><input type="checkbox" id="vaelgAlle" aria-label="Vælg alle"></th><th>Dato</th><th>Tid</th><th>Arrangement</th><th>Sted</th><th>Kilde</th><th>Krydstjekket</th><th>Handling</th></tr></thead><tbody></tbody></table></div>
     </section>
@@ -781,7 +783,12 @@ function knapper(e){const ids=(e.tids||[e.tid]).join(','),rettet=e.gange?e.rette
   if(rettet)return`<button class="sm" data-fortryd="${ids}">Fortryd</button>${ret}${fjern}`;
   if(e.ok)return`<button class="sm pri" aria-pressed="true" data-okaf="${ids}" title="${e.autoOk?'Verificeret automatisk – tryk for at fjerne markeringen':'Tryk for at fortryde'}">OK ✓</button>${ret}${fjern}`;
   return`<button class="sm" data-ok="${ids}">OK</button>${ret}${fjern}`}
-function renderVerif(){
+/* alle fjernede arrangementer i kommunen – kan hentes tilbage, også dem uden for avisens dage */
+function renderFjernede(){const l=Object.entries(S.tjek||{}).filter(([,t])=>t&&t.status==='fjernet'&&t.kommune===komId&&(t.dato||'')>=add(IDAG,-1)).sort((a,b)=>(a[1].dato||'').localeCompare(b[1].dato||''));
+  $('fjernedeAntal').textContent=l.length;
+  $('fjernedeListe').innerHTML=l.length?l.map(([id,t])=>`<li><span><b>${esc(kort(t.dato||''))}</b> ${esc(t.titel||'(uden titel)')}</span><button class="sm" data-hentind="${esc(id)}">Hent ind igen</button></li>`).join(''):'<li class="mut">Ingen fjernede arrangementer.</li>'}
+$('fjernedeListe').onclick=async e=>{const b=e.target.closest('[data-hentind]');if(!b)return;await skriv(()=>store.del('tjek',b.dataset.hentind),'Hentet ind igen')};
+function renderVerif(){renderFjernede();
   const ev=samlGange(avisEvents()),tb=$('verTabel').tBodies[0];
   if(!ev.length){tb.innerHTML='<tr><td colspan="8" class="mut">Ingen arrangementer endnu.</td></tr>';return}
   let forrige='';
