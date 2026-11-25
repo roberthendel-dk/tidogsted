@@ -3,7 +3,8 @@
   "name": "tidogsted",
   "main": "worker.js",
   "compatibility_date": "2026-11-01",
-  "assets": { "directory": "./", "binding": "ASSETS" }
-  // Lagerpladsen (KV) tilføjes her, når dens id kendes:
-  // "kv_namespaces": [{ "binding": "TS", "id": "<id>" }]
+  "assets": { "directory": "./", "binding": "ASSETS" },
+  // Fælles lagerplads (KV), så OK'er, rettelser, URL'er m.m. huskes på alle enheder.
+  // Uden id opretter Cloudflare den selv ved næste udrulning (automatic provisioning).
+  "kv_namespaces": [{ "binding": "TS" }]
 }

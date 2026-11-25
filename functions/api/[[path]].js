@@ -4,8 +4,8 @@
 // /api/tjek?url=… tjekker én URL med det samme ("Tjek nu" i appen).
 // /api/hent?url=… henter en side til "Søg uden Claude", som appen selv læser.
 //
-// Opsætning i Cloudflare (Pages-projektet > Settings):
-//   KV-binding:  TS  -> et KV-navnerum, fx "tidogsted"
+// KV-bindingen TS oprettes automatisk af wrangler.jsonc.
+// Dage, der er passeret, ryddes automatisk ud af tjek og fund.
 //   Secret:      TS_KODE           (valgfri, men anbefalet) – kode, der kræves for at gemme
 
 import { tjekUrl, laesTekst } from '../../lib/tjek.js';
@@ -33,6 +33,17 @@ export async function onRequest({ request, env, params }) {
     if (!SAMLINGER.includes(samling)) return svar({ fejl: 'Ukendt samling' }, 404);
     const noegle = 'samling:' + samling;
     const alle = JSON.parse((await env.TS.get(noegle)) || '{}');
+    // Ryd op: OK'er, rettelser og fund for dage, der er passeret, slettes (der gemmes højst ~9 dage frem)
+    if (samling === 'tjek' || samling === 'fund') {
+      const igaar = new Date(Date.now() - 864e5).toLocaleDateString('sv-SE', { timeZone: 'Europe/Copenhagen' });
+      let ryddet = 0;
+      for (const [k, d] of Object.entries(alle)) {
+        const liste = d && Array.isArray(d.arrangementer) ? d.arrangementer : null;
+        const gammel = d && ((d.dato && d.dato < igaar) || (liste && liste.length && liste.every((e) => (e.dato || '') < igaar)) || (liste && !liste.length && d.til && d.til < igaar));
+        if (gammel) { delete alle[k]; ryddet++; }
+      }
+      if (ryddet) await env.TS.put(noegle, JSON.stringify(alle));
+    }
     if (metode === 'GET') return svar(alle);
     if (!godkendt) return svar({ fejl: 'Forkert kode' }, 401);
     const id = dele[2];
