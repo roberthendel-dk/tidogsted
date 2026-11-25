@@ -56,6 +56,7 @@ button.red{background:var(--red);border-color:var(--red);color:#fff}
 button.sm{min-height:36px;padding:4px 10px;font-size:14px}
 button:disabled{opacity:.4;cursor:default}
 .notefold>summary{cursor:pointer}
+.ugeret{display:grid;gap:6px;width:100%}.ugeret label{display:grid;gap:2px;font-size:12px;color:var(--mut)}.ugeret input{font-size:14px;padding:6px 8px;min-height:36px}
 .fjernede{margin-top:10px}.fjernede>summary{cursor:pointer;font-weight:650}
 .ugedag li[data-aaben]{cursor:pointer}.ugedag li[data-aaben]:hover .txt{text-decoration:underline;text-decoration-color:var(--rule)}
 .ugedag li.aaben{background:var(--panel)}.ugedag li.ugefjern{opacity:.45}.ugedag li.ugefjern .txt{text-decoration:line-through}
@@ -807,7 +808,9 @@ function renderUge(){
   const u=ugeFor(avis),ev=samlGange(ugeEvents()),f=fundDoc(ugeId());
   $('ugeInfo').textContent=`${kort(u[0])} – ${kort(u[6])}. Ikke til tryk.`+(f&&f.opdateret?' Søgning gemt '+tidTekst(f.opdateret)+'.':' Ingen ugesøgning gemt endnu.');
   $('ugeGrid').innerHTML=u.map(d=>{const x=ev.filter(e=>e.dato===d);return`<div class="ugedag"><h3>${esc(kort(d))}</h3><ul class="liste" style="margin:0">${x.length?x.sort((a,b)=>(a.fjernet-b.fjernet)||(a.start||'99').localeCompare(b.start||'99')).map(e=>{const ids=(e.tids||[e.tid]).join(','),aaben=aabenUge===ids;
-  const handl=e.fjernet?`<button class="sm" data-fortryd="${ids}">Fortryd</button>`:e.ok?`<button class="sm pri" aria-pressed="true" data-okaf="${ids}">OK ✓</button><button class="sm" data-fjernalle="${ids}">Fjern</button>`:`<button class="sm" data-ok="${ids}">OK</button><button class="sm" data-fjernalle="${ids}">Fjern</button>`;
+  const retk=`<button class="sm" data-retuge="${ids}">Ret</button>`;
+  const handl=retUge===ids?`<div class="ugeret"><label>Titel<input id="uTitel" value="${esc(e.titel)}"></label>${e.gange?`<label>Starttider<input id="uTider" value="${esc(e.gange.map(g=>ft(g.start)).join(', '))}"></label>`:`<label>Start<input id="uStart" type="time" value="${esc(e.start)}"></label><label>Slut<input id="uSlut" type="time" value="${esc(e.slut)}"></label>`}<label>Sted<input id="uSted" value="${esc(e.sted)}"></label><div class="knap" style="margin:0"><button class="sm pri" data-gemuge="${ids}">Gem</button><button class="sm" data-annuller="1">Annullér</button></div></div>`
+    :e.fjernet?`<button class="sm" data-fortryd="${ids}">Fortryd</button>${retk}`:e.ok?`<button class="sm pri" aria-pressed="true" data-okaf="${ids}">OK ✓</button>${retk}<button class="sm" data-fjernalle="${ids}">Fjern</button>`:`<button class="sm" data-ok="${ids}">OK</button>${retk}<button class="sm" data-fjernalle="${ids}">Fjern</button>`;
   return`<li class="${e.fjernet?'ugefjern':''}${aaben?' aaben':''}" data-aaben="${esc(ids)}" tabindex="0" title="Klik for at godkende eller fjerne"><span class="tid">${esc(tidFor(e))}</span><span class="txt">${esc(e.titel)}${e.sted?'<br><span class="sted">'+esc(e.sted)+'</span>':''}${e.fjernet?' <span class="tag">FJERNET</span>':e.ok?' <span class="tag okt">✓</span>':e.start?' <span class="tag tjek">TJEK</span>':''}${e.udsolgt?' <span class="tag uds">UDSOLGT</span>':''}</span>${aaben?`<div class="ugehandl">${handl}</div>`:''}</li>`}).join(''):'<li class="mut">Intet fundet endnu</li>'}</ul></div>`}).join('');
 }
 function render(){if(!CFG.kommuner.length)return;renderHoved();renderStatus();renderAppStatus();renderApi();renderSteder();renderUrler();renderMoeder();renderKildeOverblik();renderUndtag();renderSpalte();renderNote();renderVerif();renderUge();
@@ -1136,10 +1139,18 @@ $('masseOk').onclick=()=>masse(async id=>{const e=find(id);if(e)await store.put(
 $('masseFjern').onclick=()=>masse(async id=>{const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'}))},'Fjernet fra spalten');
 $('masseFortryd').onclick=()=>masse(async id=>{if(S.tjek[id])await store.del('tjek',id)},'Fortrudt');
 $('masseRyd').onclick=()=>{valgt.clear();render();visMasse()};
-let aabenUge='';
-$('ugeGrid').onclick=async ev=>{const b=ev.target.closest('button');const li=ev.target.closest('[data-aaben]');
-  if(!b){if(li){aabenUge=aabenUge===li.dataset.aaben?'':li.dataset.aaben;render()}return}
-  const ds=b.dataset,ids=(ds.ok||ds.okaf||ds.fjernalle||ds.fortryd||'').split(',').filter(Boolean);if(!ids.length)return;aabenUge='';
+let aabenUge='',retUge='';
+$('ugeGrid').onclick=async ev=>{if(ev.target.closest('.ugeret')&&!ev.target.closest('button'))return;const b=ev.target.closest('button');const li=ev.target.closest('[data-aaben]');
+  if(!b){if(li){aabenUge=aabenUge===li.dataset.aaben?'':li.dataset.aaben;retUge='';render()}return}
+  if(b.dataset.retuge){retUge=b.dataset.retuge;render();setTimeout(()=>{const i=$('uTitel');if(i)i.focus()},0);return}
+  if(b.dataset.annuller){retUge='';render();return}
+  if(b.dataset.gemuge){const ids=b.dataset.gemuge.split(','),titel=$('uTitel').value.trim(),sted=$('uSted').value.trim();
+    const tider=$('uTider')?$('uTider').value.split(/[,;]|\bog\b/).map(x=>normTid(x.trim())).filter(Boolean):null;
+    const start=$('uStart')?$('uStart').value:'',slut=$('uSlut')?$('uSlut').value:'';retUge='';aabenUge='';
+    await skriv(async()=>{for(let i=0;i<ids.length;i++){const x=find(ids[i]);if(!x)continue;
+      if(tider&&i>=tider.length){await store.put('tjek',x.tid,tjekDoc(x,{status:'fjernet'}));continue}
+      await store.put('tjek',x.tid,tjekDoc(x,{status:'rettet',titel,sted,kilde:x.kilde||'',start:tider?tider[i]:start,slut:tider?'':slut}))}},'Rettet og godkendt');return}
+  const ds=b.dataset,ids=(ds.ok||ds.okaf||ds.fjernalle||ds.fortryd||'').split(',').filter(Boolean);if(!ids.length)return;aabenUge='';retUge='';
   if(ds.ok)await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'ok'}))}},'Godkendt');
   else if(ds.okaf)await skriv(async()=>{for(const id of ids){const e=find(id);if(!e)continue;if(e.autoOk)await store.put('tjek',e.tid,tjekDoc(e,{status:'afvist'}));else if(S.tjek[e.tid])await store.del('tjek',e.tid)}},'Ikke længere godkendt');
   else if(ds.fjernalle)await skriv(async()=>{for(const id of ids){const e=find(id);if(e)await store.put('tjek',e.tid,tjekDoc(e,{status:'fjernet'}))}},'Fjernet – tryk på det for at fortryde');
