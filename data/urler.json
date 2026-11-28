@@ -1,7 +1,7 @@
 {
- "opdateret": "2026-11-27T03:38:01.140Z",
- "fra": "2026-11-27",
- "til": "2026-12-07",
+ "opdateret": "2026-11-28T03:31:01.926Z",
+ "fra": "2026-11-28",
+ "til": "2026-12-08",
  "urler": [
   {
    "id": "naestved_1ca2xv0",
@@ -16,11 +16,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "a4bb0f403291b7d9",
-   "aendret": false,
-   "sidstAendret": "2026-11-23T18:27:15.337Z",
+   "hash": "ab1560fe2de14719",
+   "aendret": true,
+   "sidstAendret": "2026-11-28T03:29:20.241Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:36.827Z"
+   "tjekket": "2026-11-28T03:29:20.241Z"
   },
   {
    "id": "naestved_806eku",
@@ -34,11 +34,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "fe16e2aa99810bc1",
-   "aendret": false,
-   "sidstAendret": "2026-11-26T03:34:29.096Z",
-   "antal": 24,
-   "tjekket": "2026-11-27T03:36:36.827Z"
+   "hash": "d342b8487cecc99c",
+   "aendret": true,
+   "sidstAendret": "2026-11-28T03:29:20.242Z",
+   "antal": 25,
+   "tjekket": "2026-11-28T03:29:20.242Z"
   },
   {
    "id": "naestved_bil89z",
@@ -56,7 +56,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:36.831Z"
+   "tjekket": "2026-11-28T03:29:20.244Z"
   },
   {
    "id": "naestved_1myv3w9",
@@ -70,11 +70,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "76ab20465490e948",
+   "hash": "4124f2ce11a3816d",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:36.831Z",
+   "sidstAendret": "2026-11-28T03:29:20.244Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:36.831Z"
+   "tjekket": "2026-11-28T03:29:20.244Z"
   },
   {
    "id": "naestved_oa8pzz",
@@ -92,7 +92,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:38.781Z"
+   "tjekket": "2026-11-28T03:29:23.027Z"
   },
   {
    "id": "naestved_1uicdw1",
@@ -106,11 +106,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "20fb18cd52a96bc6",
+   "hash": "ab1560fe2de14719",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:38.782Z",
+   "sidstAendret": "2026-11-28T03:29:23.027Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:38.782Z"
+   "tjekket": "2026-11-28T03:29:23.027Z"
   },
   {
    "id": "naestved_1cz9p7l",
@@ -125,10 +125,10 @@
    "ok": true,
    "fejl": "",
    "hash": "b4dcc6f8249a4806",
-   "aendret": true,
+   "aendret": false,
    "sidstAendret": "2026-11-27T03:36:38.782Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:38.782Z"
+   "tjekket": "2026-11-28T03:29:23.027Z"
   },
   {
    "id": "naestved_17ewm19",
@@ -146,7 +146,7 @@
    "aendret": false,
    "sidstAendret": "2026-11-25T03:36:02.132Z",
    "antal": 4,
-   "tjekket": "2026-11-27T03:36:38.782Z"
+   "tjekket": "2026-11-28T03:29:23.027Z"
   },
   {
    "id": "naestved_1wm588w",
@@ -161,10 +161,10 @@
    "ok": true,
    "fejl": "",
    "hash": "d1f5c409b174fff5",
-   "aendret": true,
+   "aendret": false,
    "sidstAendret": "2026-11-27T03:36:42.625Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:42.625Z"
+   "tjekket": "2026-11-28T03:29:28.373Z"
   },
   {
    "id": "naestved_1bo6ins",
@@ -182,7 +182,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:42.625Z"
+   "tjekket": "2026-11-28T03:29:28.373Z"
   },
   {
    "id": "naestved_1emls8i",
@@ -200,7 +200,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:42.625Z"
+   "tjekket": "2026-11-28T03:29:28.373Z"
   },
   {
    "id": "faxe_1yu12ib",
@@ -215,10 +215,10 @@
    "ok": true,
    "fejl": "",
    "hash": "3863d65e4f18486d",
-   "aendret": true,
+   "aendret": false,
    "sidstAendret": "2026-11-27T03:36:42.625Z",
    "antal": 7,
-   "tjekket": "2026-11-27T03:36:42.626Z"
+   "tjekket": "2026-11-28T03:29:28.374Z"
   },
   {
    "id": "faxe_8refl1",
@@ -236,7 +236,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:46.738Z"
+   "tjekket": "2026-11-28T03:29:33.399Z"
   },
   {
    "id": "faxe_19l4vqx",
@@ -251,10 +251,10 @@
    "ok": true,
    "fejl": "",
    "hash": "d315e4ef5efaa64a",
-   "aendret": true,
+   "aendret": false,
    "sidstAendret": "2026-11-27T03:36:46.738Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:46.738Z"
+   "tjekket": "2026-11-28T03:29:33.399Z"
   },
   {
    "id": "faxe_1veuu7s",
@@ -272,7 +272,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:46.738Z"
+   "tjekket": "2026-11-28T03:29:33.399Z"
   },
   {
    "id": "faxe_equgnm",
@@ -290,7 +290,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:46.738Z"
+   "tjekket": "2026-11-28T03:29:33.399Z"
   },
   {
    "id": "faxe_h5n9po",
@@ -308,7 +308,7 @@
    "aendret": false,
    "sidstAendret": "2026-11-24T08:28:45.719Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:47.996Z"
+   "tjekket": "2026-11-28T03:29:34.726Z"
   },
   {
    "id": "vordingborg_d91am4",
@@ -326,7 +326,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:47.996Z"
+   "tjekket": "2026-11-28T03:29:34.726Z"
   },
   {
    "id": "vordingborg_7qi1h8",
@@ -340,11 +340,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "f38e8ae701efa934",
+   "hash": "926abeb9dc40d5fd",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:47.996Z",
-   "antal": 18,
-   "tjekket": "2026-11-27T03:36:47.996Z"
+   "sidstAendret": "2026-11-28T03:29:34.726Z",
+   "antal": 17,
+   "tjekket": "2026-11-28T03:29:34.726Z"
   },
   {
    "id": "vordingborg_7m2ptm",
@@ -362,7 +362,7 @@
    "aendret": false,
    "sidstAendret": "2026-11-26T03:34:37.988Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:47.999Z"
+   "tjekket": "2026-11-28T03:29:34.727Z"
   },
   {
    "id": "vordingborg_14t7x06",
@@ -380,7 +380,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:51.801Z"
+   "tjekket": "2026-11-28T03:29:40.440Z"
   },
   {
    "id": "vordingborg_1et7dsg",
@@ -398,7 +398,7 @@
    "aendret": false,
    "sidstAendret": "2026-11-26T03:34:41.063Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:51.801Z"
+   "tjekket": "2026-11-28T03:29:40.441Z"
   },
   {
    "id": "slagelse_x7p192",
@@ -412,11 +412,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "d08b0d1a47131d39",
+   "hash": "c34f860c7e03a60f",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:51.801Z",
+   "sidstAendret": "2026-11-28T03:29:40.441Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:51.801Z"
+   "tjekket": "2026-11-28T03:29:40.441Z"
   },
   {
    "id": "slagelse_10o9j",
@@ -430,11 +430,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "4dfb3cd3a6555194",
+   "hash": "a2a1432f795a8781",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:51.801Z",
-   "antal": 11,
-   "tjekket": "2026-11-27T03:36:51.801Z"
+   "sidstAendret": "2026-11-28T03:29:40.441Z",
+   "antal": 10,
+   "tjekket": "2026-11-28T03:29:40.441Z"
   },
   {
    "id": "slagelse_scfcpq",
@@ -448,11 +448,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "690c7b1ece3b4a04",
+   "hash": "4d14a62eb5eb47e4",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:55.465Z",
-   "antal": 0,
-   "tjekket": "2026-11-27T03:36:55.465Z"
+   "sidstAendret": "2026-11-28T03:29:45.288Z",
+   "antal": 2,
+   "tjekket": "2026-11-28T03:29:45.288Z"
   },
   {
    "id": "slagelse_1airovc",
@@ -470,7 +470,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:55.465Z"
+   "tjekket": "2026-11-28T03:29:45.288Z"
   },
   {
    "id": "slagelse_dh66xn",
@@ -488,7 +488,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:55.465Z"
+   "tjekket": "2026-11-28T03:29:45.288Z"
   },
   {
    "id": "soroe_v5r7qa",
@@ -506,7 +506,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:55.465Z"
+   "tjekket": "2026-11-28T03:29:45.288Z"
   },
   {
    "id": "soroe_juwbdg",
@@ -520,11 +520,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "3c8bb5bb3b1ff7c8",
-   "aendret": false,
-   "sidstAendret": "2026-11-24T03:30:39.916Z",
+   "hash": "11ebf401d84df659",
+   "aendret": true,
+   "sidstAendret": "2026-11-28T03:29:50.536Z",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:59.253Z"
+   "tjekket": "2026-11-28T03:29:50.536Z"
   },
   {
    "id": "soroe_1kmk3rj",
@@ -538,11 +538,11 @@
    "status": 200,
    "ok": true,
    "fejl": "",
-   "hash": "639b5cee7c6bcef2",
+   "hash": "35f4a7f0c4a669b9",
    "aendret": true,
-   "sidstAendret": "2026-11-27T03:36:59.253Z",
-   "antal": 14,
-   "tjekket": "2026-11-27T03:36:59.253Z"
+   "sidstAendret": "2026-11-28T03:29:50.536Z",
+   "antal": 15,
+   "tjekket": "2026-11-28T03:29:50.536Z"
   },
   {
    "id": "soroe_dw8wow",
@@ -560,7 +560,7 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:59.254Z"
+   "tjekket": "2026-11-28T03:29:50.537Z"
   },
   {
    "id": "soroe_1ip3rlx",
@@ -578,65 +578,52 @@
    "aendret": false,
    "sidstAendret": "",
    "antal": 0,
-   "tjekket": "2026-11-27T03:36:59.254Z"
+   "tjekket": "2026-11-28T03:29:50.537Z"
   }
  ],
  "kultunaut": [
   {
    "kommune": "naestved",
    "ok": true,
-   "sider": 28,
-   "antal": 388,
+   "sider": 26,
+   "antal": 355,
    "fejl": "",
-   "tjekket": "2026-11-27T03:37:17.330Z"
+   "tjekket": "2026-11-28T03:30:10.469Z"
   },
   {
    "kommune": "faxe",
    "ok": true,
-   "sider": 15,
-   "antal": 152,
+   "sider": 16,
+   "antal": 156,
    "fejl": "",
-   "tjekket": "2026-11-27T03:37:26.999Z"
+   "tjekket": "2026-11-28T03:30:22.024Z"
   },
   {
    "kommune": "vordingborg",
    "ok": true,
-   "sider": 16,
-   "antal": 139,
+   "sider": 15,
+   "antal": 126,
    "fejl": "",
-   "tjekket": "2026-11-27T03:37:36.805Z"
+   "tjekket": "2026-11-28T03:30:32.204Z"
   },
   {
    "kommune": "slagelse",
    "ok": true,
-   "sider": 31,
-   "antal": 352,
+   "sider": 32,
+   "antal": 351,
    "fejl": "",
-   "tjekket": "2026-11-27T03:37:54.674Z"
+   "tjekket": "2026-11-28T03:30:54.943Z"
   },
   {
    "kommune": "soroe",
    "ok": true,
    "sider": 10,
-   "antal": 76,
+   "antal": 75,
    "fejl": "",
-   "tjekket": "2026-11-27T03:38:00.768Z"
+   "tjekket": "2026-11-28T03:31:01.654Z"
   }
  ],
  "arrangementer": [
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "10:10",
-   "slut": "10:45",
-   "titel": "Fællessang på Næstved Bibliotek",
-   "sted": "Næstved Bibliotek",
-   "kilde": "https://www.naesbib.dk/naestved-bibliotek/arrangementer/musik-og-lyd/faellessang-pa-naestved-bibliotek/2026-11-27",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "Næstved Bibliotek",
-   "urlId": "naestved_806eku"
-  },
   {
    "kommune": "naestved",
    "dato": "2026-11-28",
@@ -938,6 +925,32 @@
   },
   {
    "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "14:00",
+   "slut": "16:00",
+   "titel": "Kom og få hjælp til bibliotekets nye apps",
+   "sted": "Næstved Bibliotek",
+   "kilde": "https://www.naesbib.dk/naestved-bibliotek/arrangementer/it-og-teknologi/kom-og-fa-hjaelp-til-bibliotekets-nye-apps/2026-0",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "Næstved Bibliotek",
+   "urlId": "naestved_806eku"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "21:00",
+   "titel": "Større trivsel med mindre forbrug",
+   "sted": "Næstved Bibliotek",
+   "kilde": "https://www.naesbib.dk/naestved-bibliotek/arrangementer/foredrag/storre-trivsel-med-mindre-forbrug",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "Næstved Bibliotek",
+   "urlId": "naestved_806eku"
+  },
+  {
+   "kommune": "naestved",
    "dato": "2026-11-28",
    "start": "12:00",
    "slut": "13:30",
@@ -1100,45 +1113,6 @@
    "titel": "Art-Jaco",
    "sted": "Vordingborg Bibliotek",
    "kilde": "https://www.vordingborgbibliotekerne.dk/stoberihallerne-praesto-bibliotek-og-borgerservice/arrangementer/udstilling/art-jaco",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "Vordingborg Bibliotek",
-   "urlId": "vordingborg_7qi1h8"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "10:00",
-   "slut": "13:00",
-   "titel": "Upcyclingscafé",
-   "sted": "Vordingborg Bibliotek",
-   "kilde": "https://www.vordingborgbibliotekerne.dk/vordingborg-bibliotek/arrangementer/faellesskab/upcyclingscafe/2026-11-27",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "Vordingborg Bibliotek",
-   "urlId": "vordingborg_7qi1h8"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "16:00",
-   "slut": "16:40",
-   "titel": "Et juleeventyr",
-   "sted": "Vordingborg Bibliotek",
-   "kilde": "https://www.vordingborgbibliotekerne.dk/stoberihallerne-praesto-bibliotek-og-borgerservice/arrangementer/born-unge/et-juleeventyr-0",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "Vordingborg Bibliotek",
-   "urlId": "vordingborg_7qi1h8"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "19:30",
-   "slut": "21:00",
-   "titel": "Amusement Park",
-   "sted": "Åbent hus",
-   "kilde": "https://www.vordingborgbibliotekerne.dk/vordingborg-bibliotek/arrangementer/abent-hus/amusement-park-4",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "Vordingborg Bibliotek",
@@ -1314,6 +1288,32 @@
    "urlId": "vordingborg_7qi1h8"
   },
   {
+   "kommune": "vordingborg",
+   "dato": "2026-12-08",
+   "start": "09:00",
+   "slut": "10:15",
+   "titel": "Morgendans",
+   "sted": "Vordingborg Bibliotek",
+   "kilde": "https://www.vordingborgbibliotekerne.dk/vordingborg-bibliotek/arrangementer/faellesskab/morgendans/2026-12-08",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "Vordingborg Bibliotek",
+   "urlId": "vordingborg_7qi1h8"
+  },
+  {
+   "kommune": "vordingborg",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "21:00",
+   "titel": "Onshape/3D-tegning",
+   "sted": "Vordingborg Bibliotek",
+   "kilde": "https://www.vordingborgbibliotekerne.dk/vordingborg-bibliotek/arrangementer/makerspace/onshape/3d-tegning/2026-12-08",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "Vordingborg Bibliotek",
+   "urlId": "vordingborg_7qi1h8"
+  },
+  {
    "kommune": "slagelse",
    "dato": "2026-11-30",
    "start": "",
@@ -1321,19 +1321,6 @@
    "titel": "NovemberKrea: Drømmefangere",
    "sted": "Børnebibliotekerne",
    "kilde": "https://www.slagelsebib.dk/bornebibliotekerne/arrangementer/born/novemberkrea-drommefangere-0",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "Slagelse Bibliotek",
-   "urlId": "slagelse_10o9j"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "10:30",
-   "slut": "12:30",
-   "titel": "Biblio Bio",
-   "sted": "Biblioteket Skælskør",
-   "kilde": "https://www.slagelsebib.dk/biblioteket-skaelskor/arrangementer/voksne/biblio-bio-14",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "Slagelse Bibliotek",
@@ -1464,19 +1451,6 @@
    "titel": "Novembers udstilling: Jette Kring",
    "sted": "Sorø Bibliotek",
    "kilde": "https://www.soroebib.dk/soro-bibliotek/arrangementer/alle/novembers-udstilling-jette-kring",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "Sorø Bibliotek",
-   "urlId": "soroe_1kmk3rj"
-  },
-  {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "13:00",
-   "slut": "15:00",
-   "titel": "Hjælp os med at pynte Sorø Bibliotek op til jul",
-   "sted": "Sorø Bibliotek",
-   "kilde": "https://www.soroebib.dk/soro-bykontor/arrangementer/alle/hjaelp-os-med-pynte-soro-bibliotek-op-til-jul",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "Sorø Bibliotek",
@@ -1639,136 +1613,30 @@
    "urlId": "soroe_1kmk3rj"
   },
   {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "10:10",
-   "slut": "10:45",
-   "titel": "Fællessang på Næstved Bibliotek",
-   "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "10:00",
+   "slut": "13:00",
+   "titel": "Kreaworkshop",
+   "sted": "Dianalund Bibliotek",
+   "kilde": "https://www.soroebib.dk/dianalund-bibliotek/arrangementer/born/kreaworkshop/2026-12-08",
    "udsolgt": false,
    "krydstjekket": false,
-   "fra": "KultuNaut"
+   "fra": "Sorø Bibliotek",
+   "urlId": "soroe_1kmk3rj"
   },
   {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "13:00",
-   "slut": "15:00",
-   "titel": "At være menneske - Kan et menneske begynde forfra?",
-   "sted": "Smedjen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "17:30",
+   "slut": "19:00",
+   "titel": "Forfatterforedrag: Kollega Persson",
+   "sted": "Sorø Bibliotek",
+   "kilde": "https://www.soroebib.dk/soro-bibliotek/arrangementer/litteratur/forfatterforedrag-kollega-persson-0",
    "udsolgt": false,
    "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "14:30",
-   "slut": "",
-   "titel": "Sangcafe",
-   "sted": "Skt. Jørgens Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "16:00",
-   "slut": "21:00",
-   "titel": "Julemarked i Næstved City",
-   "sted": "Næstved Bymidte",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "17:00",
-   "slut": "22:00",
-   "titel": "Fest for mennesker med særlige behov",
-   "sted": "Crazy Daisy",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "18:00",
-   "slut": "",
-   "titel": "Julekomedien: Hvordan det alligevel blev Jul",
-   "sted": "Holmegaard Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "19:00",
-   "slut": "",
-   "titel": "Nul Stjerner - Det store rejseshow 2",
-   "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "19:00",
-   "slut": "22:00",
-   "titel": "Vinsmagning på vingården: Black Friday Sort Lagune Aften",
-   "sted": "Vesterhave Vingaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "19:00",
-   "slut": "22:00",
-   "titel": "Black Friday på vingården - Sort Lagune Aften",
-   "sted": "Vesterhave Vingaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "21:00",
-   "slut": "",
-   "titel": "Baest",
-   "sted": "Vershuset",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-27",
-   "start": "19:30",
-   "slut": "",
-   "titel": "Wild Horse Nine",
-   "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
+   "fra": "Sorø Bibliotek",
+   "urlId": "soroe_1kmk3rj"
   },
   {
    "kommune": "naestved",
@@ -1777,7 +1645,7 @@
    "slut": "14:00",
    "titel": "Torvedag på Axeltorv",
    "sted": "Axeltorv",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1789,7 +1657,7 @@
    "slut": "20:00",
    "titel": "Jul i Den Gamle By i Aarhus",
    "sted": "Rådmandshavens P-plads",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1801,7 +1669,7 @@
    "slut": "15:00",
    "titel": "Pølseteknik: en modellerings workshop // 28.11.26",
    "sted": "Holmegaard Værk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1813,7 +1681,7 @@
    "slut": "10:40",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1825,7 +1693,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1837,7 +1705,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1849,7 +1717,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1861,7 +1729,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1873,7 +1741,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1885,7 +1753,7 @@
    "slut": "11:30",
    "titel": "Lørdagsaktivitet i Børnebiblioteket",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1897,7 +1765,7 @@
    "slut": "12:00",
    "titel": "Særomvisning: Juleglas og samlerier",
    "sted": "Holmegaard Værk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1909,7 +1777,7 @@
    "slut": "13:00",
    "titel": "Orange Dage. Stop Vold mod Kvinder",
    "sted": "Hjultorv",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1921,7 +1789,7 @@
    "slut": "",
    "titel": "Julekoncert 2026",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1933,7 +1801,7 @@
    "slut": "",
    "titel": "Julekomedien: Hvordan det alligevel blev Jul",
    "sted": "Holmegaard Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1945,7 +1813,7 @@
    "slut": "",
    "titel": "Adventskoncert",
    "sted": "Holsted Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1957,7 +1825,7 @@
    "slut": "",
    "titel": "Adventskoncert i Holsted Kirke",
    "sted": "Holsted Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1969,7 +1837,7 @@
    "slut": "",
    "titel": "Peter Sommer alene med Palle alene i verden",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1981,7 +1849,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -1993,7 +1861,7 @@
    "slut": "",
    "titel": "Medborgerhuset julemarked",
    "sted": "Medborgerhus Næstved",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2005,55 +1873,7 @@
    "slut": "12:40",
    "titel": "Cykelmotion",
    "sted": "Næstved Kommune",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-29",
-   "start": "10:00",
-   "slut": "",
-   "titel": "Søn.",
-   "sted": "Holsted Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-29",
-   "start": "10:00",
-   "slut": "11:00",
-   "titel": "Søn.",
-   "sted": "Sct. Peders Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-29",
-   "start": "",
-   "slut": "",
-   "titel": "1.",
-   "sted": "Advent Gudstjeneste ved Thomas Horneman-Thielcke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-11-29",
-   "start": "10:00",
-   "slut": "11:00",
-   "titel": "Søn.",
-   "sted": "Herlufsholm Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2065,7 +1885,7 @@
    "slut": "11:00",
    "titel": "Søn.",
    "sted": "Hammer Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2077,7 +1897,7 @@
    "slut": "11:00",
    "titel": "Søn.",
    "sted": "Hammer Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2089,7 +1909,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Ting Jellinge Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2101,7 +1921,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Glumsø Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2113,7 +1933,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Marvede Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2125,7 +1945,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Herlufmagle Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2137,7 +1957,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Vejlø Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2149,7 +1969,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Holme Olstrup Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2161,7 +1981,67 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Fensmark Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-11-29",
+   "start": "10:30",
+   "slut": "11:30",
+   "titel": "Søn. , Skt Peders Kapel",
+   "sted": "Gudstjeneste i Mogenstrup Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-11-29",
+   "start": "",
+   "slut": "",
+   "titel": "Ved Mette Hougaard Lund 1. i advent.",
+   "sted": "",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-11-29",
+   "start": "10:30",
+   "slut": "11:30",
+   "titel": "Søn.",
+   "sted": "Mogenstrup Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-11-29",
+   "start": "",
+   "slut": "",
+   "titel": "1. i advent Maria Spillemose.",
+   "sted": "",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-11-29",
+   "start": "10:30",
+   "slut": "11:30",
+   "titel": "Søn.",
+   "sted": "Fuglebjerg Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2173,7 +2053,7 @@
    "slut": "",
    "titel": "Mustafas kiosk - en Strid teaterkoncert",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2185,7 +2065,7 @@
    "slut": "",
    "titel": "OperaKino 26/27 - DON GIOVANNI fra Vinzenca 2025",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2197,7 +2077,7 @@
    "slut": "",
    "titel": "Julekomedien: Hvordan det alligevel blev Jul",
    "sted": "Holmegaard Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2209,7 +2089,7 @@
    "slut": "",
    "titel": "Børn",
    "sted": "Herlufmagle Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2221,7 +2101,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2233,7 +2113,7 @@
    "slut": "15:00",
    "titel": "Julemarked i Nordlængen",
    "sted": "Nordlængen Bistrup",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2245,7 +2125,7 @@
    "slut": "14:45",
    "titel": "Strik og lyt",
    "sted": "Glumsø Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2257,7 +2137,7 @@
    "slut": "",
    "titel": "Stilhedsmeditation",
    "sted": "Skt. Jørgens Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2269,7 +2149,7 @@
    "slut": "",
    "titel": "Phillip Faber - Rør blot ikke ved min gamle jul",
    "sted": "Herlufsholm Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2281,7 +2161,7 @@
    "slut": "14:45",
    "titel": "Lyt til et digt og tal om det",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2293,7 +2173,7 @@
    "slut": "16:00",
    "titel": "Kom og få hjælp til bibliotekets nye apps",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2305,7 +2185,7 @@
    "slut": "16:30",
    "titel": "Konfirmandklub",
    "sted": "Herlufsholm Sognehus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2317,7 +2197,7 @@
    "slut": "",
    "titel": "ORD med fællesspisning",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2329,7 +2209,7 @@
    "slut": "20:30",
    "titel": "Kun for sjov - kreativt fællesskab med plads til alle",
    "sted": "Samlingshuset Birkevang",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2341,7 +2221,7 @@
    "slut": "",
    "titel": "Focker In-Law",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2353,7 +2233,7 @@
    "slut": "",
    "titel": "Sjov og Sjusser December 2026",
    "sted": "Høgh's Cocktailbar",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2365,7 +2245,7 @@
    "slut": "14:00",
    "titel": "Torvedag på Axeltorv",
    "sted": "Axeltorv",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2377,7 +2257,7 @@
    "slut": "10:00",
    "titel": "Sangkuffert for de mindste",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2389,7 +2269,7 @@
    "slut": "",
    "titel": "Babysalmesang",
    "sted": "Holsted Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2401,7 +2281,7 @@
    "slut": "",
    "titel": "Sognekoret",
    "sted": "Skt. Jørgens Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2413,7 +2293,7 @@
    "slut": "17:15",
    "titel": "Bliv en del af vores nye slægtsforskningsgruppe",
    "sted": "Samlingshuset Farimagsvej",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2425,7 +2305,7 @@
    "slut": "18:30",
    "titel": "Pubquiz",
    "sted": "Underhuset",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2437,7 +2317,7 @@
    "slut": "21:00",
    "titel": "Juleforedrag",
    "sted": "Aversi Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2449,7 +2329,19 @@
    "slut": "21:00",
    "titel": "Sangarrangement",
    "sted": "Everdrup Præstegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-02",
+   "start": "19:30",
+   "slut": "",
+   "titel": "Julekoncert med Kammerkoret Musica",
+   "sted": "Fodby Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2461,7 +2353,7 @@
    "slut": "20:30",
    "titel": "Julekoncert med Pro Cantu koret i Skelby Kirke",
    "sted": "Skelby Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2473,7 +2365,7 @@
    "slut": "",
    "titel": "Focker In-Law",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2485,7 +2377,7 @@
    "slut": "",
    "titel": "Morgensang",
    "sted": "Sct. Mortens Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2497,7 +2389,7 @@
    "slut": "10:30",
    "titel": "Film og fortælling: Jule-edition",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2509,7 +2401,7 @@
    "slut": "",
    "titel": "Hyggeklub",
    "sted": "Sct. Mortens Sognegaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2521,7 +2413,7 @@
    "slut": "16:00",
    "titel": "Julehygge i præstegården",
    "sted": "Marvede Præstegaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2533,7 +2425,7 @@
    "slut": "16:00",
    "titel": "Kirke-Café - julehygge, Stalden",
    "sted": "Skelby Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2545,7 +2437,7 @@
    "slut": "",
    "titel": "Mark le Fêvre - \"Det fejler ik' en skid\"",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2557,7 +2449,7 @@
    "slut": "20:00",
    "titel": "Træning på racercykel",
    "sted": "Rådmandshavens P-plads",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2569,7 +2461,7 @@
    "slut": "20:00",
    "titel": "Cykelmotion",
    "sted": "Rådmandshaven",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2581,7 +2473,7 @@
    "slut": "",
    "titel": "Danmark - Spanien",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2593,7 +2485,7 @@
    "slut": "",
    "titel": "Julekoncert med Præstøkoret",
    "sted": "Hammer Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2605,7 +2497,7 @@
    "slut": "",
    "titel": "Udsolgt! Julekoncert med Jane & Shane",
    "sted": "Fuglebjerg",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=N%C3%A6stved-storkommune&",
    "udsolgt": true,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2617,7 +2509,7 @@
    "slut": "10:45",
    "titel": "Fællessang på Næstved Bibliotek",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2629,7 +2521,7 @@
    "slut": "15:30",
    "titel": "Nato, norden, Arktis og præsident Vladimir Putin i det seneste årti",
    "sted": "Grønnegades Kaserne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2641,7 +2533,7 @@
    "slut": "14:45",
    "titel": "Tid til noveller",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2653,7 +2545,7 @@
    "slut": "",
    "titel": "Trines Mor",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2665,7 +2557,7 @@
    "slut": "",
    "titel": "Trines Mor",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2677,7 +2569,7 @@
    "slut": "",
    "titel": "November 1963",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2689,7 +2581,7 @@
    "slut": "14:00",
    "titel": "Torvedag på Axeltorv",
    "sted": "Axeltorv",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2701,7 +2593,7 @@
    "slut": "12:00",
    "titel": "Lær at lave lækre lakridser!",
    "sted": "Kobberbakkeskolen afd. Sjølund",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2713,7 +2605,7 @@
    "slut": "10:40",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2725,7 +2617,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2737,7 +2629,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2749,7 +2641,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2761,7 +2653,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2773,7 +2665,7 @@
    "slut": "",
    "titel": "Escape Room (fra 13 år)",
    "sted": "GL. RIDEHUS v. Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2785,7 +2677,7 @@
    "slut": "13:15",
    "titel": "Skab med Kählers kreative arv",
    "sted": "Holmegaard Værk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2797,7 +2689,7 @@
    "slut": "",
    "titel": "Faster Lizzies Jul",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2809,7 +2701,7 @@
    "slut": "",
    "titel": "Faster Lizzies Jul",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2821,7 +2713,7 @@
    "slut": "11:30",
    "titel": "Lørdagsaktivitet i Børnebiblioteket",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2833,7 +2725,7 @@
    "slut": "13:30",
    "titel": "Makeup workshop - Lær at lægge naturlig makeup",
    "sted": "AFO Næstved & Susålandet",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2845,7 +2737,7 @@
    "slut": "15:00",
    "titel": "Vingummi - For voksne og børn fra 6 år",
    "sted": "Kobberbakkeskolen afd. Sjølund",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2857,7 +2749,7 @@
    "slut": "",
    "titel": "Julekomedien: Hvordan det alligevel blev Jul",
    "sted": "Holmegaard Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2869,7 +2761,7 @@
    "slut": "",
    "titel": "Julekoncert med kammerkoret Cantemus",
    "sted": "Sct. Peders Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2881,7 +2773,7 @@
    "slut": "18:30",
    "titel": "Macarons - For voksne og børn fra 6 år",
    "sted": "Kobberbakkeskolen afd. Sjølund",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2893,7 +2785,7 @@
    "slut": "",
    "titel": "Danmark - Tyrkiet",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2905,7 +2797,7 @@
    "slut": "",
    "titel": "Hexe - Med dansk tale",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2917,7 +2809,7 @@
    "slut": "12:40",
    "titel": "Cykelmotion",
    "sted": "Næstved Kommune",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2929,31 +2821,7 @@
    "slut": "13:00",
    "titel": "Fyldte chokolader - Kom og lære at lave dem selv!",
    "sted": "Kobberbakkeskolen afd. Sjølund",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-12-06",
-   "start": "10:00",
-   "slut": "",
-   "titel": "Søn.",
-   "sted": "Sct. Peders Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "naestved",
-   "dato": "2026-12-06",
-   "start": "10:00",
-   "slut": "",
-   "titel": "Søn.",
-   "sted": "Holsted Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2965,7 +2833,7 @@
    "slut": "11:00",
    "titel": "Søn.",
    "sted": "Sct. Peders Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2977,7 +2845,7 @@
    "slut": "",
    "titel": "2.",
    "sted": "Advent Gudstjeneste med krybbespil ved Laura Daphne Jensen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -2989,7 +2857,7 @@
    "slut": "11:00",
    "titel": "Søn.",
    "sted": "Herlufsholm Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3001,7 +2869,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Fyrendal Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3013,7 +2881,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Herlufmagle Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3025,7 +2893,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Vallensved Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3037,7 +2905,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Glumsø Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3049,7 +2917,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Toksværd Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3061,7 +2929,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Vejlø Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3073,7 +2941,7 @@
    "slut": "",
    "titel": "Søn.",
    "sted": "Fensmark Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3085,7 +2953,43 @@
    "slut": "11:30",
    "titel": "Søn.",
    "sted": "Haldagerlille Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-06",
+   "start": "10:30",
+   "slut": "11:30",
+   "titel": "Søn.",
+   "sted": "Skelby Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-11-29",
+   "start": "",
+   "slut": "",
+   "titel": "Ved Helene Borgman Hansen 2. i advent.",
+   "sted": "",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-06",
+   "start": "10:30",
+   "slut": "11:30",
+   "titel": "Søn.",
+   "sted": "Næstelsø Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3097,7 +3001,7 @@
    "slut": "",
    "titel": "Fast Lizzies Jul",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3109,7 +3013,7 @@
    "slut": "",
    "titel": "Fast Lizzies Jul",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3121,7 +3025,7 @@
    "slut": "17:30",
    "titel": "Surdej kursus",
    "sted": "Kobberbakkeskolen afd. Sjølund",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3133,7 +3037,7 @@
    "slut": "",
    "titel": "Julekomedien: Hvordan det alligevel blev Jul",
    "sted": "Holmegaard Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3145,7 +3049,7 @@
    "slut": "18:00",
    "titel": "Team fog - pokalkvartfinale i ARENA Næstved",
    "sted": "Arena Næstved",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3157,7 +3061,7 @@
    "slut": "",
    "titel": "November 1963",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3169,7 +3073,7 @@
    "slut": "",
    "titel": "Jul i Grønnegade",
    "sted": "Grønnegades Kaserne Kulturcenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3181,7 +3085,7 @@
    "slut": "",
    "titel": "Banko & Bjældeklang",
    "sted": "Café Vivaldi",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3193,7 +3097,7 @@
    "slut": "15:00",
    "titel": "Magtudøvelse og politiske idealer - Europas folkelige kulturarv",
    "sted": "AFO Næstved & Susålandet",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3205,7 +3109,7 @@
    "slut": "",
    "titel": "Seniorsang",
    "sted": "Holsted Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3217,7 +3121,7 @@
    "slut": "",
    "titel": "Danmark - Grækenland",
    "sted": "Glumsø Biograf & Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3229,7 +3133,7 @@
    "slut": "20:30",
    "titel": "Vær med til at vælge årets bedste danske roman!",
    "sted": "Næstved Bibliotek og Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3241,43 +3145,127 @@
    "slut": "21:00",
    "titel": "Den litterære cocktail",
    "sted": "Fuglebjerg Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=325&Area=N%C3%A6stved-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "faxe",
-   "dato": "2026-11-27",
-   "start": "",
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "10:00",
+   "slut": "11:00",
+   "titel": "Juletræf 0-3 årige i Herlufsholm Sognehus",
+   "sted": "Herlufsholm Sognehus",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "11:00",
+   "slut": "12:00",
+   "titel": "Juletræf 3-6 årige",
+   "sted": "Herlufsholm Sognehus",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "14:00",
+   "slut": "16:00",
+   "titel": "Kom og få hjælp til bibliotekets nye apps",
+   "sted": "Næstved Bibliotek og Borgerservice",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "16:15",
    "slut": "",
-   "titel": "Julemarked hos Udsigten Faxe",
-   "sted": "Danhostel Udsigten - Faxe",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
+   "titel": "Ind under jul",
+   "sted": "Sct. Mortens Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "faxe",
-   "dato": "2026-11-27",
-   "start": "13:00",
-   "slut": "14:15",
-   "titel": "Yin Yoga - hver fredag",
-   "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "18:30",
+   "slut": "20:30",
+   "titel": "Kun for sjov - kreativt fællesskab med plads til alle",
+   "sted": "Samlingshuset Birkevang",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "faxe",
-   "dato": "2026-11-27",
-   "start": "18:00",
-   "slut": "01:00",
-   "titel": "Julefrokost 27.11.2026",
-   "sted": "B&W Live",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "",
+   "titel": "Original Talks: Teorier om stort og småt",
+   "sted": "Grønnegades Kaserne Kulturcenter",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "21:00",
+   "titel": "Klarsynsaften eksklusiv på holmegaard gods i skovriddersalen v /marianne larsen",
+   "sted": "Holmegaard Gods",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "21:00",
+   "titel": "Større trivsel med mindre forbrug",
+   "sted": "Næstved Bibliotek og Borgerservice",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "19:30",
+   "slut": "21:30",
+   "titel": "Händels Messias",
+   "sted": "Sct. Peders Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=N%C3%A6stved-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "naestved",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "",
+   "titel": "Pusher (Ny-restaureret 2024)",
+   "sted": "Glumsø Biograf & Kulturhus",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=N%C3%A6stved-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3313,7 +3301,7 @@
    "slut": "13:15",
    "titel": "Makeup kursus - Lær at lægge en naturlig makeup",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3325,7 +3313,7 @@
    "slut": "16:00",
    "titel": "Makeup kursus - Lær at lægge en naturlig makeup",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3337,7 +3325,7 @@
    "slut": "17:00",
    "titel": "Gospelkoncert",
    "sted": "Spjellerup Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3349,7 +3337,7 @@
    "slut": "18:00",
    "titel": "Juletræstænding",
    "sted": "Roholte Aktivitetscenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3361,7 +3349,7 @@
    "slut": "01:00",
    "titel": "Julefrokost 28.11.2026",
    "sted": "B&W Live",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3373,7 +3361,7 @@
    "slut": "13:00",
    "titel": "Julemarked i Faxe Sognehus",
    "sted": "Faxe Sognehus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3385,7 +3373,7 @@
    "slut": "16:00",
    "titel": "Julemarked i Leestrup",
    "sted": "Magasinet Leestrup",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3397,7 +3385,7 @@
    "slut": "16:00",
    "titel": "Leestrup Julemarked",
    "sted": "Magasinet Leestrup",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3409,7 +3397,7 @@
    "slut": "",
    "titel": "Gisselfeld Juletorv",
    "sted": "Gisselfeld Kloster",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3421,19 +3409,7 @@
    "slut": "",
    "titel": "Weekends-pizza på Roholtegaard",
    "sted": "Roholtegaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "faxe",
-   "dato": "2026-11-30",
-   "start": "10:00",
-   "slut": "10:30",
-   "titel": "Film for de små",
-   "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3445,7 +3421,7 @@
    "slut": "16:30",
    "titel": "Yin yoga - mandage",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3457,7 +3433,7 @@
    "slut": "19:00",
    "titel": "Cirkus Baldoni: Haslev",
    "sted": "Sofiendalskolen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3469,7 +3445,7 @@
    "slut": "18:30",
    "titel": "Flow yoga - hver mandag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3481,7 +3457,7 @@
    "slut": "18:30",
    "titel": "Hayha Yoga - hver tirsdag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3493,7 +3469,7 @@
    "slut": "21:00",
    "titel": "Spilcafé",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3505,7 +3481,7 @@
    "slut": "21:30",
    "titel": "'Året der gik i billeder' med julehygge",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3517,7 +3493,7 @@
    "slut": "20:30",
    "titel": "Yoga mod stress - hver tirsdag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3529,7 +3505,7 @@
    "slut": "17:00",
    "titel": "Åbent Makerspace - mest for børn",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3541,7 +3517,7 @@
    "slut": "17:30",
    "titel": "Mindfulness/Meditation",
    "sted": "Hylleholt Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3553,7 +3529,7 @@
    "slut": "21:00",
    "titel": "Åbent Makerspace - mest for voksne",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3565,7 +3541,7 @@
    "slut": "",
    "titel": "Julekoncert med Jesper Lundgaard",
    "sted": "Faxe Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3577,7 +3553,19 @@
    "slut": "20:00",
    "titel": "Julekoncert med Simone Egeris og Mads Granum",
    "sted": "Karise Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "faxe",
+   "dato": "2026-12-02",
+   "start": "19:00",
+   "slut": "20:00",
+   "titel": "Meditation v. Solveig Ståhl-Nielsen",
+   "sted": "Førslev Præstegård",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3589,7 +3577,7 @@
    "slut": "11:45",
    "titel": "Blid Yoga - hver torsdag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3601,7 +3589,7 @@
    "slut": "11:45",
    "titel": "Blid Yoga",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3625,7 +3613,7 @@
    "slut": "16:00",
    "titel": "IT-cafe med Ældre Sagen",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3637,7 +3625,7 @@
    "slut": "21:00",
    "titel": "Procescirkel med Jimmi",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3649,7 +3637,7 @@
    "slut": "10:15",
    "titel": "Blid Yoga",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3661,7 +3649,7 @@
    "slut": "10:15",
    "titel": "Blid Yoga - hver torsdag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3673,7 +3661,7 @@
    "slut": "11:30",
    "titel": "Fars Tumlehjørne",
    "sted": "Haslev Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3685,7 +3673,7 @@
    "slut": "14:15",
    "titel": "Yin Yoga - hver fredag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3697,7 +3685,7 @@
    "slut": "15:00",
    "titel": "Litterær vandring",
    "sted": "Faxe Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3709,7 +3697,7 @@
    "slut": "18:00",
    "titel": "Deluxe Restorativ Yoga",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3721,7 +3709,7 @@
    "slut": "15:00",
    "titel": "SLOW JUL - Permatopias Julemarked",
    "sted": "Karise Permatopia",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3733,7 +3721,7 @@
    "slut": "01:00",
    "titel": "Julefrokost 05.12.2026",
    "sted": "B&W Live",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3745,7 +3733,7 @@
    "slut": "11:30",
    "titel": "Deluxe Yin Yoga",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3757,7 +3745,31 @@
    "slut": "",
    "titel": "Banko spil",
    "sted": "Faxe Sognehus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Faxe-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "faxe",
+   "dato": "2026-12-06",
+   "start": "14:00",
+   "slut": "15:30",
+   "titel": "Julehygge",
+   "sted": "Café & Restaurant Klinker",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Faxe-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "faxe",
+   "dato": "2026-12-06",
+   "start": "15:30",
+   "slut": "17:00",
+   "titel": "Shop amok",
+   "sted": "Haslev",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3769,7 +3781,7 @@
    "slut": "10:35",
    "titel": "Lotte og Nissen: Julebørneteater (3-7 år)",
    "sted": "Faxe Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3781,7 +3793,7 @@
    "slut": "16:30",
    "titel": "Yin yoga - mandage",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3793,7 +3805,7 @@
    "slut": "18:30",
    "titel": "Flow yoga - hver mandag",
    "sted": "HJERTERUMMET YOGA",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3805,7 +3817,7 @@
    "slut": "21:00",
    "titel": "Læsekreds",
    "sted": "Hylleholt Sognehus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3817,7 +3829,7 @@
    "slut": "20:30",
    "titel": "Julekoncert",
    "sted": "Freerslev Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Faxe-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3835,145 +3847,61 @@
    "fra": "KultuNaut"
   },
   {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "",
-   "slut": "",
-   "titel": "Julefrokost og \"Dem du Elsker\"",
-   "sted": "H.C. Olsens Pakhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "10:00",
-   "slut": "13:00",
-   "titel": "Upcyclingscafé",
-   "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "14:00",
-   "slut": "17:30",
-   "titel": "Jule-pynt-træ",
-   "sted": "Skovstedgård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
+   "kommune": "faxe",
+   "dato": "2026-12-08",
    "start": "16:00",
-   "slut": "16:40",
-   "titel": "Et juleeventyr",
-   "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
+   "slut": "19:00",
+   "titel": "Mandeklub Juleafslutning",
+   "sted": "Karise-Alslev Sognegård",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "18:00",
-   "slut": "01:00",
-   "titel": "Årets Julefrokost",
-   "sted": "Café Mocca",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
+   "kommune": "faxe",
+   "dato": "2026-12-08",
+   "start": "17:15",
+   "slut": "18:30",
+   "titel": "Hatha Yoga - hver tirsdag",
+   "sted": "HJERTERUMMET YOGA",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
+   "kommune": "faxe",
+   "dato": "2026-12-08",
    "start": "19:00",
-   "slut": "",
-   "titel": "Musikbaren #49",
-   "sted": "STARS",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
+   "slut": "20:00",
+   "titel": "Julekoncert i Spjellerup Kirke",
+   "sted": "Spjellerup Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "19:30",
-   "slut": "",
-   "titel": "Kammerkoret Camerata",
-   "sted": "Vordingborg Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "19:30",
+   "kommune": "faxe",
+   "dato": "2026-12-08",
+   "start": "19:00",
    "slut": "21:00",
-   "titel": "Amusement Park",
-   "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
+   "titel": "Foredrag. Besættelse og efterkrig",
+   "sted": "Kultursnedkeriet hos Kit & Claus",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "20:00",
-   "slut": "",
-   "titel": "Die Herren",
-   "sted": "STARS",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "16:00",
-   "slut": "",
-   "titel": "Hexe - Med dansk tale",
-   "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "19:00",
-   "slut": "",
-   "titel": "De Gaulle: Frihedens stemme",
-   "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-11-27",
-   "start": "19:00",
-   "slut": "",
-   "titel": "Wild Horse Nine",
-   "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kommune": "faxe",
+   "dato": "2026-12-08",
+   "start": "19:15",
+   "slut": "20:30",
+   "titel": "Yoga mod stress - hver tirsdag",
+   "sted": "HJERTERUMMET YOGA",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Faxe-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3985,7 +3913,7 @@
    "slut": "11:00",
    "titel": "Honninghjerter med Farmor på Vordingborg Bibliotek",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -3997,7 +3925,7 @@
    "slut": "",
    "titel": "Honninghjerter med Farmor på Vordingborg Bibliotek",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4009,7 +3937,7 @@
    "slut": "12:00",
    "titel": "Orange dage \"Stop vold mod kvinder\"",
    "sted": "Irma Passagen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4021,7 +3949,7 @@
    "slut": "13:30",
    "titel": "Jul på den gamle skole",
    "sted": "Vordingborg Fri Fagskole",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4033,7 +3961,7 @@
    "slut": "",
    "titel": "Marie Carmen Koppel - Julekoncert 2026",
    "sted": "Stege Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4045,7 +3973,7 @@
    "slut": "18:30",
    "titel": "Amusement Park",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4057,7 +3985,7 @@
    "slut": "",
    "titel": "Aura Dione",
    "sted": "STARS",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4069,7 +3997,7 @@
    "slut": "",
    "titel": "Hexe - Med dansk tale",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4081,7 +4009,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4093,7 +4021,7 @@
    "slut": "12:00",
    "titel": "Grantræet // Børn, Teater, Bøger & Brunch",
    "sted": "Pavillon K",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4105,7 +4033,7 @@
    "slut": "16:00",
    "titel": "Julemarked på Museumsgården - jul som i gamle dage",
    "sted": "Museumsgården",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4117,7 +4045,7 @@
    "slut": "18:00",
    "titel": "Syng med & Tip et Hit julespecial",
    "sted": "Café Mocca",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4129,7 +4057,7 @@
    "slut": "",
    "titel": "Rysager&Islington Juleshow - i Bio Bernhard",
    "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4141,7 +4069,7 @@
    "slut": "",
    "titel": "Koncert med Selandia Brass Band",
    "sted": "Mern Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4153,7 +4081,7 @@
    "slut": "",
    "titel": "Juletræstænding",
    "sted": "Cafe Den Gule Stald",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4165,7 +4093,7 @@
    "slut": "",
    "titel": "Adventskoncert med Stine Grøn",
    "sted": "Ørslev Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4177,7 +4105,7 @@
    "slut": "",
    "titel": "Rose",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4189,7 +4117,7 @@
    "slut": "",
    "titel": "Hexe - Med dansk tale",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4201,7 +4129,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4213,7 +4141,7 @@
    "slut": "15:00",
    "titel": "Julemarked på Tubæk Møllegård",
    "sted": "Tubæk Møllegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4225,7 +4153,7 @@
    "slut": "16:00",
    "titel": "Julemarkedet",
    "sted": "Fauergaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4237,7 +4165,7 @@
    "slut": "",
    "titel": "Jul i Viemose Egnshus",
    "sted": "Viemose Forsamlingshus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4249,7 +4177,7 @@
    "slut": "",
    "titel": "Julemarked i Viemose Egnshus",
    "sted": "Viemose Egnshus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4261,7 +4189,7 @@
    "slut": "16:00",
    "titel": "Køng Museums julemarked",
    "sted": "Køng Museum",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4273,7 +4201,7 @@
    "slut": "12:00",
    "titel": "Nyplantet skov og gamle historier i Ornebjerg skov",
    "sted": "P-plads ved Vordingborg Vandværk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4285,7 +4213,7 @@
    "slut": "",
    "titel": "Psykisk robusthed - debatskabende arrangement",
    "sted": "DGI Huset Vordingborg",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4297,7 +4225,7 @@
    "slut": "",
    "titel": "Sang aften",
    "sted": "Stensby Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4309,7 +4237,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4321,7 +4249,7 @@
    "slut": "23:00",
    "titel": "Colours by Bruun",
    "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4333,7 +4261,7 @@
    "slut": "23:00",
    "titel": "Art-Jaco",
    "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4345,7 +4273,7 @@
    "slut": "",
    "titel": "Rundvisning",
    "sted": "Idrætshøjskolen Bosei",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4357,7 +4285,7 @@
    "slut": "16:00",
    "titel": "Julefortællinger for voksne",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4369,7 +4297,7 @@
    "slut": "",
    "titel": "Simone synger julen ind!",
    "sted": "Køng kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4381,7 +4309,7 @@
    "slut": "21:00",
    "titel": "Lav skilte eller tryk på tøj med folieskærer & sublimationsprinter",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4393,7 +4321,7 @@
    "slut": "21:30",
    "titel": "Familien Hassan - turné",
    "sted": "Vordingborg Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4405,7 +4333,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4417,7 +4345,7 @@
    "slut": "",
    "titel": "Babysalmesang - Decemberforløb på 4 gange",
    "sted": "Fanefjord Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4429,7 +4357,7 @@
    "slut": "",
    "titel": "Sangcafé",
    "sted": "Morten Reenbergs Gård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4441,7 +4369,7 @@
    "slut": "",
    "titel": "Strikke/hækleklub",
    "sted": "Morten Reenbergs Gård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4453,7 +4381,7 @@
    "slut": "",
    "titel": "Fortælleværksted Julehygge",
    "sted": "Damsholte Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4465,7 +4393,7 @@
    "slut": "",
    "titel": "The Hunger Games: Sunrise on the Reaping",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4477,7 +4405,7 @@
    "slut": "",
    "titel": "De Gaulle: Frihedens stemme",
    "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4489,7 +4417,7 @@
    "slut": "",
    "titel": "Siri Hustvedt - Dance Around the Self",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4501,7 +4429,7 @@
    "slut": "",
    "titel": "Samværs cafe for pårørende til demensramte",
    "sted": "Stensved Sognegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4513,7 +4441,7 @@
    "slut": "17:30",
    "titel": "MiniTon - badminton for børn mellem 3-6 år",
    "sted": "Vordingborg Hallen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4525,7 +4453,7 @@
    "slut": "21:30",
    "titel": "Møn - sikke en tur. dialog med universet - on the road / open mic",
    "sted": "High Vibrations",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4537,7 +4465,7 @@
    "slut": "",
    "titel": "Chris Minh Doky - duo - \"Julens Sange\"",
    "sted": "Præstø Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4549,7 +4477,7 @@
    "slut": "",
    "titel": "DR Big Band - A Jazzy Christmas",
    "sted": "STARS",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4561,7 +4489,7 @@
    "slut": "",
    "titel": "Wild Horse Nine",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4573,7 +4501,7 @@
    "slut": "",
    "titel": "Over stregen",
    "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4585,7 +4513,7 @@
    "slut": "",
    "titel": "You Can See Everything",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4597,19 +4525,7 @@
    "slut": "",
    "titel": "Den Store Julefrokost 2026",
    "sted": "DGI Huset Vordingborg",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "vordingborg",
-   "dato": "2026-12-04",
-   "start": "09:30",
-   "slut": "",
-   "titel": "Babyrytmik",
-   "sted": "Sværdborg Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4621,7 +4537,7 @@
    "slut": "",
    "titel": "Grantræet",
    "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4633,7 +4549,7 @@
    "slut": "23:30",
    "titel": "Kyllingedart December 2026",
    "sted": "Vordingborg Dartklub",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4645,7 +4561,7 @@
    "slut": "",
    "titel": "Søren Huss",
    "sted": "STARS",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4657,7 +4573,7 @@
    "slut": "",
    "titel": "Hexe - Med dansk tale",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4669,7 +4585,7 @@
    "slut": "",
    "titel": "You Can See Everything",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4681,7 +4597,7 @@
    "slut": "",
    "titel": "Julefrokost og Grassolin'",
    "sted": "H.C. Olsens Pakhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4693,7 +4609,7 @@
    "slut": "11:00",
    "titel": "Honninghjerter med Farmor på Præstø Bibliotek",
    "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4705,7 +4621,7 @@
    "slut": "",
    "titel": "Honninghjerter med Farmor på Præstø Bibliotek",
    "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4717,7 +4633,7 @@
    "slut": "12:00",
    "titel": "Repair Café Præstø",
    "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4729,7 +4645,19 @@
    "slut": "14:00",
    "titel": "Julens Bondemarked på godset",
    "sted": "Oremandsgaard Gods",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "vordingborg",
+   "dato": "2026-12-05",
+   "start": "11:00",
+   "slut": "14:00",
+   "titel": "Bondemarked på Oremandsgaard Gods",
+   "sted": "Oremandsgaard Gods",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4741,7 +4669,7 @@
    "slut": "",
    "titel": "Grantræet",
    "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4753,7 +4681,19 @@
    "slut": "",
    "titel": "Møde for ukrainere",
    "sted": "Stege Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "vordingborg",
+   "dato": "2026-12-05",
+   "start": "16:00",
+   "slut": "",
+   "titel": "Borre Juletræ tændes",
+   "sted": "Café Borre",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4765,7 +4705,7 @@
    "slut": "",
    "titel": "Lokal Lyd #4 - Bondo's Kvartet",
    "sted": "STARS",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4777,7 +4717,7 @@
    "slut": "",
    "titel": "Hexe - Med dansk tale",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4789,7 +4729,7 @@
    "slut": "",
    "titel": "Den bedste tid",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4801,7 +4741,7 @@
    "slut": "",
    "titel": "Julefrokost og The Pass",
    "sted": "H.C. Olsens Pakhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4813,7 +4753,7 @@
    "slut": "16:00",
    "titel": "Biosfære Julebazar i Stege",
    "sted": "Den Bøhmiske Hal",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4825,7 +4765,7 @@
    "slut": "17:00",
    "titel": "Julejazzkoncert med Mathias Heise, Thomas Fonnesbæk og Pelle von Bülow",
    "sted": "SCENE1",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4837,7 +4777,7 @@
    "slut": "",
    "titel": "Julejazzkoncert på Scene1",
    "sted": "Møns kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4849,7 +4789,7 @@
    "slut": "17:00",
    "titel": "Julekoncert med mandskoret i Jungshoved kirke",
    "sted": "Jungshoved Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4861,7 +4801,7 @@
    "slut": "",
    "titel": "Musikskolens Julekoncert i Vordingborg Kirke",
    "sted": "Vordingborg Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4873,7 +4813,7 @@
    "slut": "",
    "titel": "Hexe - Med dansk tale",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4885,7 +4825,7 @@
    "slut": "",
    "titel": "Den bedste tid",
    "sted": "Bio Møn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4897,7 +4837,7 @@
    "slut": "14:00",
    "titel": "Julemarked Fanefjord Torv",
    "sted": "Fanefjord Torv",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4909,7 +4849,7 @@
    "slut": "16:00",
    "titel": "Julemarked på Svinningegaard i Vordingborg",
    "sted": "Svinningegaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4921,7 +4861,19 @@
    "slut": "",
    "titel": "Fanefjord Torvs julemarked på Møn",
    "sted": "Fanefjord Torv",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "vordingborg",
+   "dato": "2026-12-07",
+   "start": "10:00",
+   "slut": "12:00",
+   "titel": "Udby Skov under overfladen",
+   "sted": "Mosehældgård shelterplads",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4933,7 +4885,7 @@
    "slut": "11:30",
    "titel": "Litteraturcafé",
    "sted": "Støberihallerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4945,7 +4897,7 @@
    "slut": "",
    "titel": "Julehygge med Thopper",
    "sted": "Kirkehuset i Præstø",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4957,7 +4909,7 @@
    "slut": "18:00",
    "titel": "Repair Café Vordingborg",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4969,7 +4921,7 @@
    "slut": "17:30",
    "titel": "Fællessang Møn Skole Stege",
    "sted": "Møn Skole",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4981,7 +4933,7 @@
    "slut": "",
    "titel": "Sang aften",
    "sted": "Stensby Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -4993,7 +4945,7 @@
    "slut": "",
    "titel": "Julekoncert",
    "sted": "Magleby Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5005,7 +4957,7 @@
    "slut": "21:00",
    "titel": "Murakami og japansk litteratur",
    "sted": "Vordingborg Bibliotekerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5017,7 +4969,7 @@
    "slut": "",
    "titel": "Over stregen",
    "sted": "Kulturhus Bernhard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5029,103 +4981,19 @@
    "slut": "",
    "titel": "Den bedste tid",
    "sted": "Bio Møn",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Vordingborg-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "vordingborg",
+   "dato": "2026-12-08",
+   "start": "14:00",
+   "slut": "",
+   "titel": "Sangcafé Nyraad",
+   "sted": "Nyråd Præstegård",
    "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Vordingborg-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "10:00",
-   "slut": "",
-   "titel": "BOKS",
-   "sted": "Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "10:00",
-   "slut": "",
-   "titel": "De vise mænd - mandeklub",
-   "sted": "Sankt Povls Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "18:00",
-   "slut": "23:59",
-   "titel": "Julefrokost",
-   "sted": "Det Røde Pakhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "18:00",
-   "slut": "",
-   "titel": "Jule-Ølsmagning efterfulgt af fredagsbar og Karaoke",
-   "sted": "Salonen4xk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "18:30",
-   "slut": "",
-   "titel": "Læsekredsen",
-   "sted": "Sogneladen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "19:00",
-   "slut": "",
-   "titel": "Svanesøen - Symphony of Lights",
-   "sted": "Slagelse Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "19:30",
-   "slut": "",
-   "titel": "Snedronningen",
-   "sted": "Krabasken - Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "slagelse",
-   "dato": "2026-11-27",
-   "start": "10:30",
-   "slut": "12:30",
-   "titel": "Biblio Bio",
-   "sted": "Skælskør Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5137,7 +5005,7 @@
    "slut": "",
    "titel": "Jule stue i Sognegården",
    "sted": "Skælskør-Eggeslevmagle sognegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5149,7 +5017,7 @@
    "slut": "11:00",
    "titel": "Nordisk skovbad - mindfulness i naturen",
    "sted": "P-pladserne v. toiletbygningen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5161,7 +5029,7 @@
    "slut": "",
    "titel": "Julemarked",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5173,7 +5041,7 @@
    "slut": "",
    "titel": "Oplev Sprogø",
    "sted": "Caspar Brands Plads",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5185,7 +5053,7 @@
    "slut": "14:00",
    "titel": "Åben brætspilscafé",
    "sted": "Slagelse Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5197,7 +5065,7 @@
    "slut": "14:00",
    "titel": "Juleværksted",
    "sted": "Nytorv i Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5209,7 +5077,7 @@
    "slut": "12:30",
    "titel": "Julepynt af genbrug",
    "sted": "Korsør Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5221,7 +5089,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5233,7 +5101,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5245,7 +5113,7 @@
    "slut": "",
    "titel": "Artist talk - Svend Høgh",
    "sted": "Salonen4xk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5257,7 +5125,7 @@
    "slut": "",
    "titel": "Café Livas julecabaret",
    "sted": "Slagelse Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5269,7 +5137,7 @@
    "slut": "",
    "titel": "Endnu Et Vintermareridt",
    "sted": "Slagelse Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5281,7 +5149,7 @@
    "slut": "",
    "titel": "Snedronningen",
    "sted": "Krabasken - Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5293,7 +5161,7 @@
    "slut": "",
    "titel": "Slagelse Gospelchoir - Julekoncert",
    "sted": "Korsør Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5305,7 +5173,7 @@
    "slut": "",
    "titel": "Pubbens Julefrokost",
    "sted": "The Upper Hill",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5317,7 +5185,7 @@
    "slut": "",
    "titel": "Juletræstænding i Skælskør",
    "sted": "Turbåden Skjelskør V",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5329,7 +5197,7 @@
    "slut": "",
    "titel": "Julefrokost",
    "sted": "Storebælt Camping- og Feriecenter I/S",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5341,7 +5209,7 @@
    "slut": "16:00",
    "titel": "Billedkunst ved Hedda Hondon Raa",
    "sted": "Røde Tårn",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5353,7 +5221,7 @@
    "slut": "15:00",
    "titel": "Hyggeligt julemarked",
    "sted": "Aktivitetshuset Midgård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5365,7 +5233,7 @@
    "slut": "16:00",
    "titel": "Julemarked på Gården ved By Nygaard",
    "sted": "By Nygaard",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5377,7 +5245,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5389,7 +5257,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5401,7 +5269,7 @@
    "slut": "16:00",
    "titel": "Julemarked og Cafe i Bisserup Forsamlingshus",
    "sted": "Bisserup Forsamlingshus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5413,7 +5281,7 @@
    "slut": "",
    "titel": "Flying Superkids: Slagelse",
    "sted": "Spar Nord Arena Slagelse (tidligere Antvorskovhallen)",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5425,7 +5293,7 @@
    "slut": "",
    "titel": "Snedronningen",
    "sted": "Krabasken - Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5437,7 +5305,7 @@
    "slut": "17:00",
    "titel": "Julejazz i Helligåndskirken",
    "sted": "Slagelse Gammel Kloster",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5449,7 +5317,7 @@
    "slut": "16:00",
    "titel": "Jul i atelieret",
    "sted": "Gallerikunst.dk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5461,7 +5329,7 @@
    "slut": "15:00",
    "titel": "Strikkeklub",
    "sted": "Sognelokaler",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5473,7 +5341,7 @@
    "slut": "",
    "titel": "Hyggeklub",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5485,7 +5353,7 @@
    "slut": "",
    "titel": "Husker du, så spiller jeg. Demensvenlig fællessang",
    "sted": "Sogneladen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5497,7 +5365,7 @@
    "slut": "",
    "titel": "Musikalsk Legestue",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5509,7 +5377,7 @@
    "slut": "",
    "titel": "Sct. Peders Kor øver i Sogneladen",
    "sted": "Sogneladen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5521,7 +5389,7 @@
    "slut": "23:59",
    "titel": "NovemberKrea: Drømmefangere",
    "sted": "Slagelse Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5533,7 +5401,7 @@
    "slut": "16:30",
    "titel": "Højtlæsning: Julehistorier",
    "sted": "Skælskør Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5545,7 +5413,7 @@
    "slut": "",
    "titel": "Børnekor",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5557,7 +5425,7 @@
    "slut": "",
    "titel": "God jul, Cirkeline",
    "sted": "Slagelse Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5569,7 +5437,7 @@
    "slut": "19:00",
    "titel": "Kom med ud at ro",
    "sted": "Skelskør Roklub",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=109&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5581,7 +5449,7 @@
    "slut": "19:00",
    "titel": "Coastal er med til OL i '28. Vil du prøve?",
    "sted": "Skelskør Roklub",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5593,7 +5461,7 @@
    "slut": "",
    "titel": "Pigekor",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=133&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5605,7 +5473,7 @@
    "slut": "",
    "titel": "Julemusikbanko i Slagelse Musikhus",
    "sted": "Slagelse Musikhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5617,7 +5485,7 @@
    "slut": "20:00",
    "titel": "Borgermøde om fremtidens idrætsfaciliteter",
    "sted": "Slagelse bibliotek store sal",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=121&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5629,7 +5497,7 @@
    "slut": "",
    "titel": "Babysalmesang",
    "sted": "Sct. Peders Kirke og Sognegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5641,7 +5509,7 @@
    "slut": "15:30",
    "titel": "Fra Købstad Til Mødestad: Inspirationsoplæg om attraktive bymidter",
    "sted": "Slagelse Erhvervscenter",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5653,7 +5521,7 @@
    "slut": "",
    "titel": "Syng-dig-glad med julehygge",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5665,7 +5533,7 @@
    "slut": "20:30",
    "titel": "Infomøde om beredskab ved stormflod og kursus i \"klimaklar\"",
    "sted": "Slagelse Brand og Redning",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5677,7 +5545,7 @@
    "slut": "21:00",
    "titel": "Onsdagsjam på Badeanstalten",
    "sted": "Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5689,7 +5557,7 @@
    "slut": "20:00",
    "titel": "Amerikansk Fodbold for alle niveauer (16+ årige)",
    "sted": "Nordhallen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5701,7 +5569,7 @@
    "slut": "",
    "titel": "Voksenkor",
    "sted": "Nørrevangskirken",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5713,7 +5581,7 @@
    "slut": "21:00",
    "titel": "Sangaften",
    "sted": "Halskov Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=145&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5725,7 +5593,7 @@
    "slut": "21:00",
    "titel": "Koncertfortælling: Babettes Gæstebud med Stine Michel Trio",
    "sted": "Skælskør Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5737,7 +5605,7 @@
    "slut": "21:30",
    "titel": "Viktoria Søndergaard Trio Koncert",
    "sted": "Liselund Højskole",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=157&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5749,7 +5617,7 @@
    "slut": "",
    "titel": "Årets Julekoncert med Casper Phillipson",
    "sted": "Sankt Povls Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5761,7 +5629,7 @@
    "slut": "",
    "titel": "Åben sognegård Madam Blå",
    "sted": "Skælskør-Eggeslevmagle sognegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5773,7 +5641,7 @@
    "slut": "",
    "titel": "Juleklip i Sognehuset",
    "sted": "Boeslunde Sognehus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=169&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5785,7 +5653,7 @@
    "slut": "18:00",
    "titel": "Repair Café: Broderiværksted",
    "sted": "Slagelse Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5797,7 +5665,7 @@
    "slut": "18:00",
    "titel": "Kunstnersamtale med Theis Wendt",
    "sted": "Kunsthal Kongegaarden",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5809,7 +5677,7 @@
    "slut": "19:00",
    "titel": "Amerikansk Fodbold for alle niveauer (7-16 årige)",
    "sted": "U.V. Hallen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5821,7 +5689,7 @@
    "slut": "",
    "titel": "Bodil Jørgensen og Lisbeth Wulff: Trines mor",
    "sted": "Slagelse Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5833,7 +5701,7 @@
    "slut": "",
    "titel": "Flakkebjerg koret",
    "sted": "Flakkebjerg Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5845,7 +5713,7 @@
    "slut": "",
    "titel": "Musik Quiz",
    "sted": "The Upper Hill",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=181&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5857,7 +5725,7 @@
    "slut": "21:00",
    "titel": "Biblio Bio 19",
    "sted": "Slagelse Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=217&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=193&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5869,7 +5737,7 @@
    "slut": "",
    "titel": "Fællessang og fælleskab",
    "sted": "Boeslunde Sognehus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5881,7 +5749,7 @@
    "slut": "",
    "titel": "De vise mænd - mandeklub",
    "sted": "Sankt Povls Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5893,7 +5761,7 @@
    "slut": "23:59",
    "titel": "Julefrokost",
    "sted": "Det Røde Pakhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5905,7 +5773,7 @@
    "slut": "",
    "titel": "Anders Blichfeldt Christmas Gospel",
    "sted": "Slagelse Teater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5917,7 +5785,7 @@
    "slut": "",
    "titel": "Snedronningen",
    "sted": "Krabasken - Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=205&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5929,7 +5797,7 @@
    "slut": "13:00",
    "titel": "Kursus i førstehjælp ved hjertestop, 4 timer - Slagelse",
    "sted": "Stenstuegade 3",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5941,7 +5809,7 @@
    "slut": "17:00",
    "titel": "Færdselsrelateret førstehjælpskursus - Slagelse",
    "sted": "Stenstuegade 3",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=241&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5953,7 +5821,7 @@
    "slut": "16:00",
    "titel": "Syng julen ind med erik sommer. heldags arrangement",
    "sted": "Liselund Højskole",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5965,7 +5833,7 @@
    "slut": "11:30",
    "titel": "Juletræsfest og julemand på Slagelse Bibliotek",
    "sted": "Slagelse Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5977,7 +5845,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -5989,7 +5857,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6001,7 +5869,7 @@
    "slut": "14:00",
    "titel": "Slagelse Gospel Choir skaber julestemning",
    "sted": "Nytorv i Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6013,7 +5881,7 @@
    "slut": "16:00",
    "titel": "Fællessang med erik sommer",
    "sted": "Liselund Højskole",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6025,7 +5893,7 @@
    "slut": "",
    "titel": "Snedronningen",
    "sted": "Krabasken - Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6037,7 +5905,7 @@
    "slut": "",
    "titel": "Trio Salonen - Vi spiller til fordel for Salonen",
    "sted": "Salonen4xk",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=253&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=229&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6049,7 +5917,7 @@
    "slut": "23:59",
    "titel": "Bogsalg",
    "sted": "Korsør Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=265&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6061,7 +5929,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6073,7 +5941,7 @@
    "slut": "",
    "titel": "Flødebollekursus hos Frellsen Chokolade",
    "sted": "Frellsen Slagelse",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=289&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6085,7 +5953,7 @@
    "slut": "",
    "titel": "Snedronningen",
    "sted": "Krabasken - Amatørteater",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6097,7 +5965,7 @@
    "slut": "",
    "titel": "Kristine Thorup: Skumringskoncert - Når lyset langsomt viger for mørket",
    "sted": "Sct. Peders Kirke og Sognegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6109,7 +5977,7 @@
    "slut": "17:00",
    "titel": "Julekoncert med sopran Signe Asmussen",
    "sted": "Korsør Kulturhus",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=301&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=277&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6121,7 +5989,7 @@
    "slut": "15:00",
    "titel": "Julegave workshops med KIT kunstnere",
    "sted": "Kunstnerværkstederne Lotz Gård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=325&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6133,7 +6001,7 @@
    "slut": "19:00",
    "titel": "Julemarked på Torvet i Korsør",
    "sted": "Torvet i Korsør",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6145,7 +6013,7 @@
    "slut": "",
    "titel": "Julemiddag i Sognegården - Kræver tilmelding",
    "sted": "Skælskør-Eggeslevmagle sognegård",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": true,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6157,7 +6025,7 @@
    "slut": "16:00",
    "titel": "Klub Kontakt",
    "sted": "Halskov Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6169,7 +6037,7 @@
    "slut": "",
    "titel": "Husker du, så spiller jeg. Demensvenlig fællessang",
    "sted": "Sogneladen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6181,7 +6049,7 @@
    "slut": "16:00",
    "titel": "Fællessang og kaffe",
    "sted": "Slagelse Bibliotek & Borgerservice",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6193,7 +6061,7 @@
    "slut": "17:00",
    "titel": "Tal med demenskonsulent",
    "sted": "Korsør Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=313&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6205,79 +6073,91 @@
    "slut": "",
    "titel": "Koncert med Slagelse Kulturskole og Sct. Peders Kor",
    "sted": "Sct. Peders Kirke og Sognegård",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=325&Area=Slagelse-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "14:00",
+   "slut": "",
+   "titel": "Julehygge med Mikkels Muntre Præster",
+   "sted": "Pakhuset v. Sct. Mikkels Kirke",
    "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "10:00",
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "16:30",
+   "slut": "20:00",
+   "titel": "Måltidet Slagelse",
+   "sted": "Antvorskov Skole",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "17:00",
+   "slut": "19:00",
+   "titel": "Coastal er med til OL i '28. Vil du prøve?",
+   "sted": "Skelskør Roklub",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "17:00",
+   "slut": "19:00",
+   "titel": "Kom med ud at ro",
+   "sted": "Skelskør Roklub",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "17:00",
+   "slut": "21:00",
+   "titel": "Slagelse gratis - Beredskab - Førstehjælp ved større hændelser",
+   "sted": "Stenstuegade 3",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "17:45",
    "slut": "",
-   "titel": "Julemarked på Sorø Museum",
-   "sted": "en del af Museum Vestsjælland",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
+   "titel": "Pigekor",
+   "sted": "Nørrevangskirken",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=337&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
   },
   {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "14:00",
+   "kommune": "slagelse",
+   "dato": "2026-12-08",
+   "start": "19:00",
    "slut": "",
-   "titel": "Julemarked på Sorø Museum",
-   "sted": "en del af Museum Vestsjælland",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "10:00",
-   "slut": "13:00",
-   "titel": "Julehygge omkring bålet",
-   "sted": "Faery Meadows",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "11:00",
-   "slut": "12:30",
-   "titel": "Billleder med baby: Hanne Nielsen & Birgit Johnsen - A Matter of Balance",
-   "sted": "Sorø Kunstmuseum",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "13:00",
-   "slut": "15:00",
-   "titel": "Hjælp os med at pynte Sorø Bibliotek op til jul",
-   "sted": "Sorø Bykontor",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
-   "udsolgt": false,
-   "krydstjekket": false,
-   "fra": "KultuNaut"
-  },
-  {
-   "kommune": "soroe",
-   "dato": "2026-11-27",
-   "start": "20:00",
-   "slut": "",
-   "titel": "Juleroadshow",
-   "sted": "Kulturcafe Ludvig",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
+   "titel": "Vi synger julen ind",
+   "sted": "Nørrevangskirken",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=349&Area=Slagelse-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6313,7 +6193,7 @@
    "slut": "",
    "titel": "Vesthhusets forrygende juleshow - 29-11-2026",
    "sted": "Vesth huset",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6325,7 +6205,7 @@
    "slut": "17:00",
    "titel": "Færdselsrelateret førstehjælpskursus - Sorø",
    "sted": "Sorø Kultur- og Fritidscenter - Værkerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=1&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6337,7 +6217,7 @@
    "slut": "12:45",
    "titel": "Familiesøndag: Juleklip og koncert med Sorø Musiske Skole! Gratis adgang",
    "sted": "Sorø Kunstmuseum",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6349,7 +6229,7 @@
    "slut": "15:00",
    "titel": "Offentlig omvisning: Hanne Nielsen & Birgit Johnsen - A Matter of Balance",
    "sted": "Sorø Kunstmuseum",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=13&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6397,7 +6277,7 @@
    "slut": "18:00",
    "titel": "Ungdomstræning 12-18 år",
    "sted": "Sorø Roklub",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6409,7 +6289,7 @@
    "slut": "19:00",
    "titel": "Når tanker fylder FOR meget",
    "sted": "Sorø Bykontor",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6421,7 +6301,7 @@
    "slut": "23:59",
    "titel": "Novembers udstilling: Jette Kring",
    "sted": "Sorø Bykontor",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6433,7 +6313,7 @@
    "slut": "",
    "titel": "Hør om Ældrerådets arbejde og giv dem dine idéer",
    "sted": "Sorø Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6445,7 +6325,7 @@
    "slut": "",
    "titel": "Den levende julekalender",
    "sted": "Tersløse Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=25&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6469,7 +6349,7 @@
    "slut": "",
    "titel": "Morgensang",
    "sted": "Ruds Vedby Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6481,7 +6361,7 @@
    "slut": "10:00",
    "titel": "Kuffert Fuld af Fortællinger - Ruds Vedby",
    "sted": "Ruds Vedbys Bibliotekspunkt",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6493,7 +6373,7 @@
    "slut": "",
    "titel": "Onsdagstræf og Sangaften - fælles juleafslutning",
    "sted": "Gamsts Minde",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6505,7 +6385,7 @@
    "slut": "",
    "titel": "Den levende julekalender",
    "sted": "Tersløse Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6517,7 +6397,7 @@
    "slut": "",
    "titel": "FDF pustumlinge",
    "sted": "Gamsts Minde",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6529,7 +6409,7 @@
    "slut": "18:00",
    "titel": "Ungdomstræning 12-18 år",
    "sted": "Sorø Roklub",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6541,7 +6421,7 @@
    "slut": "19:00",
    "titel": "Borgerdrevet fællesskab: Studiegruppe omkring værket \"Et kursus i mirakler\"",
    "sted": "Dianalund Bibliotek",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=37&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6553,6 +6433,18 @@
    "slut": "19:30",
    "titel": "Onsdags Otter / En åres roning",
    "sted": "Sorø Roklub",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "soroe",
+   "dato": "2026-12-02",
+   "start": "19:00",
+   "slut": "21:00",
+   "titel": "Bueskydning lær og oplev det at skyde med bue",
+   "sted": "Sorø Hallen",
    "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
@@ -6589,7 +6481,7 @@
    "slut": "13:30",
    "titel": "Sangarrangement",
    "sted": "Bjernede Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6601,7 +6493,7 @@
    "slut": "16:00",
    "titel": "It-café",
    "sted": "Sorø Bykontor",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6613,7 +6505,7 @@
    "slut": "",
    "titel": "Den levende julekalender",
    "sted": "Tersløse Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6625,7 +6517,7 @@
    "slut": "11:30",
    "titel": "Strik & Lyt",
    "sted": "Masker Med Mere",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=49&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6661,7 +6553,7 @@
    "slut": "12:30",
    "titel": "Workshop: Fold julepynt af gamle bøger",
    "sted": "Sorø Bykontor",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6673,7 +6565,7 @@
    "slut": "14:00",
    "titel": "Julehygge omkring bålet",
    "sted": "Faery Meadows",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6685,7 +6577,7 @@
    "slut": "",
    "titel": "Lions Sorø Julefrokost 2026",
    "sted": "Sorø Hallen",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6697,7 +6589,7 @@
    "slut": "",
    "titel": "Brætspilsaften",
    "sted": "Gamsts Minde",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=73&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=61&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6745,7 +6637,7 @@
    "slut": "13:00",
    "titel": "Sorø gratis - Beredskab - Førstehjælp ved større hændelser",
    "sted": "Sorø Kultur- og Fritidscenter - Værkerne",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6757,7 +6649,7 @@
    "slut": "",
    "titel": "Hyggeklub",
    "sted": "Gamsts Minde",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6769,7 +6661,7 @@
    "slut": "11:30",
    "titel": "Babysalmesang",
    "sted": "Pedersborg Kirke",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6781,7 +6673,7 @@
    "slut": "18:00",
    "titel": "Unges Litteraturrum",
    "sted": "Sorø Bykontor",
-   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=85&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
    "fra": "KultuNaut"
@@ -6817,6 +6709,66 @@
    "slut": "20:30",
    "titel": "Julehygge i SIND-klubben Dianalund",
    "sted": "Dianalund Borgerhuset",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "10:00",
+   "slut": "13:00",
+   "titel": "Kreaworkshop",
+   "sted": "Dianalund Bibliotek",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "16:24",
+   "slut": "",
+   "titel": "Den levende julekalender",
+   "sted": "Tersløse Kirke",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "16:30",
+   "slut": "",
+   "titel": "Familie FDF",
+   "sted": "Gamsts Minde",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "17:30",
+   "slut": "19:00",
+   "titel": "Forfatterforedrag: Kollega Persson",
+   "sted": "Sorø Bykontor",
+   "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
+   "udsolgt": false,
+   "krydstjekket": false,
+   "fra": "KultuNaut"
+  },
+  {
+   "kommune": "soroe",
+   "dato": "2026-12-08",
+   "start": "19:00",
+   "slut": "",
+   "titel": "Julekoncert med Roskilde Domkirkes pigekor",
+   "sted": "Stenmagle Kirke",
    "kilde": "https://www.kultunaut.dk/perl/arrlist2/type-nynaut?startnr=97&Area=Sor%C3%B8-storkommune&",
    "udsolgt": false,
    "krydstjekket": false,
